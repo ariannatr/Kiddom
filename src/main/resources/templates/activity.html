@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>activity</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="../layout/styles/jquery-ui.css" rel="stylesheet" type="text/css" media="all">
+    <link href="../layout/styles/jquery-ui.structure.css" rel="stylesheet" type="text/css" media="all">
+    <link href="../layout/styles/jquery-ui.theme.css" rel="stylesheet" type="text/css" media="all">
+
+
+
+</head>
+<body>
+
+
+    <style>
+        body{
+            background-color: lightgray;
+        }
+
+        #activity{
+            position: relative;
+            max-width:1200px;
+            margin: 0 auto;
+        }
+
+        .content{
+            position:relative;
+            display: inline-block;
+            *display: inline;
+            zoom: 1;
+            vertical-align: text-top;
+        }
+
+        #main-content{
+            width:70%;
+            margin-left:2%;
+            float: left;
+        }
+
+        #side-content {
+            width: 24%;
+            margin-right: 2%;
+            float: right;
+            box-shadow: 0px 0px 40px 5px darkgray ;
+        }
+
+
+        .group:after {
+           clear: both;
+        }
+        .group {
+            clear: both;
+            *zoom: 1;
+        }
+
+
+        #activity h1{
+            text-align: center;
+            font-size: x-large;
+            color: #cc834f;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .act-imgs{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1%;
+        }
+
+        .act-img {
+            clear: both;
+            *zoom: 1;
+        }
+
+        .act-img{
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        .act-img:after{
+            clear: both;
+        }
+
+
+        .act-img-lg{
+            width:49.5%;
+        }
+
+        .act-img-sm{
+            width: 32.6%;
+        }
+
+
+        div.act-imgs:last-child{
+            margin-bot:0;
+        }
+
+        div.act-imgs div:last-child {
+            float: right;
+        }
+        /*div.act-imgs div:last-child {
+            float: right;
+        }*/
+
+        img:hover {
+            color: #424242;
+            -webkit-transition: all .3s ease-in;
+            -moz-transition: all .3s ease-in;
+            -ms-transition: all .3s ease-in;
+            -o-transition: all .3s ease-in;
+            transition: all .3s ease-in;
+            opacity: 1;
+            transform: scale(1.15);
+            -ms-transform: scale(1.15); /* IE 9 */
+            -webkit-transform: scale(1.15); /* Safari and Chrome */
+            overflow: hidden;
+        }
+
+
+        .navbar {
+            margin: 3% 0 0 5px;
+
+        }
+        .navbar ul {
+            list-style-type: none; /*to remove bullets*/
+        }
+        .navbar li{
+            display: inline-block;
+            margin-left: 15%;
+            margin-right: auto ;
+        }
+
+        .navbar ul li:first-child{
+            margin-left:0px;
+        }
+
+
+        #description{
+            height: 200px;
+            overflow: auto;
+            margin-bottom: 10%;
+        }
+
+
+
+    </style>
+
+    <div class="bgded overlay" >
+        <div class="wrapper row0" >
+            <div id="topbar" class="hoc clear">
+                <!-- ################################################################################################ -->
+                <div class="fl_left">
+                    <ul>
+                        <li><i class="fa fa-phone"></i> +00 (123) 456 7890</li>
+                        <li><i class="fa fa-envelope-o"></i> info@domain.com</li>
+                    </ul>
+                </div>
+                <div class="fl_right">
+                    <ul>
+                        <li><a href="#"><i class="fa fa-lg fa-home"></i></a></li>
+                        <li><a href="#">Συνδεση</a></li>
+                        <li><a href="#">Εγγραφη</a></li>
+                    </ul>
+                </div>
+                <!-- ################################################################################################ -->
+            </div>
+        </div>
+        <!-- ################################################################################################ -->
+        <!-- ################################################################################################ -->
+        <!-- ################################################################################################ -->
+        <div class="wrapper row1">
+            <header id="header" class="hoc clear">
+                <!-- ################################################################################################ -->
+                <div id="logo" class="fl_left">
+                    <h1><a href="../index.html">Kiddom</a></h1>
+                </div>
+                <nav id="mainav" class="fl_right">
+                    <ul class="clear">
+                        <li class="active"><a href="index.html">Αρχικη</a></li>
+                        <li><a class="drop" href="#">Δραστηριοτητες</a>
+                            <ul>
+                                <li><a href="gallery.html">Ενεργές Δραστηριότητες</a></li>
+                                <li><a href="full-width.html">Παλαιότερες Δραστηριότητες</a></li>
+                                <!--<li><a href="pages/sidebar-left.html">Sidebar Left</a></li>
+                                <li><a href="pages/sidebar-right.html">Sidebar Right</a></li>
+                                <li><a href="pages/basic-grid.html">Basic Grid</a></li>-->
+                            </ul>
+                        </li>
+                        <!-- <li><a class="drop" href="#">Προφιλ</a>
+                           <ul>
+                             <li><a href="#">Δημιουργία Δραστηριότητας</a></li>
+                             <li><a class="drop" href="#">Επεξεργασία Προφίλ</a>
+                               <ul>
+                                 <li><a href="#">Αγορά Πόντων</a></li>
+                                 <li><a href="#">Επεξεργασία Στοιχείων</a></li>
+                                 <!--<li><a href="#">Level 3</a></li>
+                               </ul>
+                             </li>
+                             <li><a href="#">Level 2</a></li>
+                           </ul>
+                         </li>-->
+                        <li><a href="#">Σχετικα με εμας</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </nav>
+                <!-- ################################################################################################ -->
+            </header>
+        </div>
+    </div>
+
+
+
+    <div id="activity">
+        <h1> Super Duper Fun Acitivity</h1>
+        <div class="group">
+           
+            <div id="main-content" class="content">
+                <div>
+
+                    <div class="act-imgs">
+                        <div class="act-img-lg act-img"><img style="width: auto" src="../images/activitiy/no_upload_image.jpg" alt="img here"></div>
+                        <div class="act-img-lg act-img"><img style="width: auto" src="../images/activitiy/no_upload_image.jpg" alt="img here"></div>
+                    </div>
+                    <div class="act-imgs">
+                        <div class="act-img-sm act-img"><img style="width: auto" src="../images/activitiy/no_upload_image.jpg" alt="img here"></div>
+                        <div class="act-img-sm act-img"><img style="width: auto" src="../images/activitiy/no_upload_image.jpg" alt="img here"></div>
+                        <div class="act-img-sm act-img"><img style="width: auto" src="../images/activitiy/no_upload_image.jpg" alt="img here"></div>
+                    </div>
+                </div>
+                <nav class="navbar">
+                    <div>
+                    <ul>
+                        <li class="active"><a href="#description">Γενικά</a></li>
+                        <li class=""><a href="#services" id="services-link">Υπηρεσίες</a></li>
+                        <li class=""><a href="#ratings" id="ratings-link">Αξιολογήσεις</a></li>
+                    </ul>
+                    </div>
+                </nav>
+
+                <p id="description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque consequat est sit amet metus dignissim, non malesuada felis luctus.
+                    Praesent sed nibh eu libero lobortis gravida vitae posuere risus.
+                    bibendum imperdiet nulla, id tempor dui posuere ut. Praesent laoreet, ex sed consequat facilisis, dolor felis convallis urna, sed convallis turpis ex id quam.
+                    Nullam tincidunt hendrerit lorem non rhoncus. Curabitur quis efficitur arcu, bibendum blandit odio. Donec iaculis nisl nulla, a accumsan erat commodo vitae.
+                    Suspendisse tellus arcu, tempus at magna vitae, dictum aliquet lacus. Suspendisse accumsan eu nisl quis vulputate.
+
+                    Cras at nunc tincidunt ante consectetur dapibus non sit amet tellus.
+                    Vestibulum sit amet ex risus. Vivamus eleifend tempor porttitor.
+                    Aenean id massa id enim mollis consequat. Aliquam erat volutpat.
+                    Phasellus tincidunt lorem vel lacus rutrum vulputate. Quisque eros elit, finibus ut orci et, molestie congue felis.
+                    Phasellus commodo laoreet dolor eu aliquet.
+
+                    Sed vitae massa pretium, lacinia ex a, lacinia arcu. Etiam convallis, ipsum ac suscipit placerat, lorem ligula elementum nisi, ut pretium eros odio nec lorem.
+                    Aenean pretium in eros nec rutrum. Nullam sodales tristique mattis. Fusce aliquam rutrum lacus ut accumsan. Aliquam hendrerit posuere arcu ut auctor.
+                    Etiam nisi erat, porttitor at nibh varius, iaculis euismod ligula. Nullam vel porttitor orci, sed tincidunt eros.
+                    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec eget erat in lorem euismod lacinia nec eleifend turpis.
+                </p>
+
+
+
+            </div>
+            <div id="side-content" class="content">
+                <div style="width:90%;margin: 5% 5%">
+                    <div class="act-imgs">
+                        <div class="act-img"><img src="../images/activitiy/Untitled.png" alt="img here"></div>
+                    </div>
+                    <h2 style="padding:2%;text-align: center; text-transform:none;border-radius: 0 0 2px 2px;    border-top: 1px solid rgba(160,160,160,0.2);">
+                        Σούπερ Οδός, 13 <br>
+                        16345, Γλυφαδα
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+<script src="../layout/scripts/jquery.min.js"></script>
+<script src="../layout/scripts/jquery.backtotop.js"></script>
+<script src="../layout/scripts/jquery.mobilemenu.js"></script>
+<script src="../layout/scripts/jquery.flexslider-min.js"></script>
+<script src="../layout/scripts/jquery-ui.js"></script>
+</body>
+</html>

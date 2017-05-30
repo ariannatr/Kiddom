@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html  xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Kiddom-Register</title>
+<link th:href="@{css/register.css}" rel="stylesheet" type="text/css" media="all">
+<link th:href="@{css/layout.css}" rel="stylesheet" type="text/css" media="all">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <title>Εγγραφή Χρήστη</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="Login and Registration Form with HTML5 and CSS3" />
+        <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
+        <meta name="author" content="Codrops" />
+        <link rel="shortcut icon" href="../favicon.ico"> 
+        <link rel="stylesheet" type="text/css" th:href="@{css/demo.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{css/animate-custom.css}" />
+</head>
+<body id="top">
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- Top Background Image Wrapper -->
+<div class="bgded overlay" >	
+	<div class="wrapper row0">
+    	<div id="topbar" class="hoc clear"> 
+      <!-- ################################################################################################ -->
+	      <!--	<div class="fl_left">
+	        	<ul>
+		          <li><i class="fa fa-phone"></i> +00 (123) 456 7890</li>
+		          <li><i class="fa fa-envelope-o"></i> info@domain.com</li>
+		        </ul>
+		    </div>-->
+		    <div class="fl_right">
+		        <ul>
+		          <li><a href="index.html"><i class="fa fa-lg fa-home"></i></a></li>
+		          <li><a href="#">Συνδεση</a></li>
+		          <li class="active"><a href="#">Εγγραφη</a></li>
+		        </ul>
+		    </div>
+	      <!-- ################################################################################################ -->
+	    </div>
+	  </div>
+	  <div class="wrapper row1">
+	    <header id="header" class="hoc clear"> 
+	      <!-- ################################################################################################ -->
+	      <div id="logo" class="fl_left">
+	        <h1><a href="index.html">Kiddom</a></h1>
+	      </div>
+	      <nav id="mainav" class="fl_right">
+	        <ul class="clear">
+	          <li><a href="index.html">Αρχικη</a></li>
+	          <li><a class="drop" href="#">Δραστηριοτητες</a>
+	            <ul>
+	              <li><a href="gallery.html">Ενεργές Δραστηριότητες</a></li>
+	              <li><a href="full-width.html">Παλαιότερες Δραστηριότητες</a></li>
+	            </ul>
+	          </li>
+	          <li><a href="about.html">Σχετικα με εμας</a></li>
+	          <li><a href="#">FAQ</a></li>
+	        </ul>
+	      </nav>
+	      <!-- ################################################################################################ -->
+	    </header>
+	</div>
+	</div>
+	<div class="wrapper row3" style="background-color:#b7c1ae" >
+  <main class="hoc container clear" > 
+	<div id="pageintro" class="hoc clear" style="padding:1% 0 1% 0 "> 
+	                <div id="container_demo"  >
+	                    <div id="wrapper">
+	                        <div id="login" class="animate form">
+	                           <form  action="#" autocomplete="on"> 
+	                                <h1> Εγγραφη </h1> 
+	                                <p> 
+	                                    <label for="name" class="name" data-icon="o">Όνομα</label>
+	                                    <input id="name" name="name" required="required" type="text" placeholder="πχ .Κώστας" />
+	                                </p>
+	                                 <p> 
+	                                    <label for="surname" class="surname" data-icon="ε">Επώνυμο</label>
+	                                    <input id="surname" name="surname" required="required" type="text" placeholder="πχ .Κώστας" />
+	                                </p>
+	                                <p> 
+	                                    <label for="usernamesignup" class="uname" data-icon="χ">Όνομα χρήστη</label>
+	                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
+	                                </p>
+	                                <p> 
+	                                    <label for="emailsignup" class="youmail" data-icon=" &#x2709;" > Εmail</label>
+	                                    <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"/> 
+	                                </p>
+	                                <p> 
+	                                    <label  class="fa"  data-icon="π">Περιοχή Διαμονής</label>
+	                                    <input id="leaving_area" name="leaving_area" required="required" type="text" placeholder="πχ. Αργυρούπολη"/>
+	                                </p>
+	                                <p> 
+	                                    <label for="tel" class="tel" data-icon="&#9743;">Τηλέφωνο</label>
+	                                    <input id="tel" name="tel" required="required" type="text" placeholder="πχ .6975649578" />
+	                                </p>     
+	                                
+	                                <p> 
+	                                    <label for="passwordsignup" class="youpasswd" data-icon="κ">Κωδικός </label>
+	                                    <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="πχ X8df!90EO"/>
+	                                </p>
+	                                <p> 
+	                                    <label for="passwordsignup_confirm" class="youpasswd" data-icon="κ">Παρακαλώ επιβεβαιώστε τον κωδικό !</label>
+	                                    <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="πχ. X8df!90EO"/>
+	                                </p>
+	                                <p> 
+	                                    <label  class="photo_upload" >Θα θέλατε να ανεβάσετε μια Φωτογραφία Προφιλ ;</label>
+	     								<input name="image" type="file" accept="image/*" id="menu_images" style="color: black;">
+	     								<img id="menu_image" class="preview_img" />
+	                                </p>
+	                                <p class="signin button"> 
+										<input type="submit" value="Εγγραφή"/> 
+									</p>
+	                                <p class="change_link">  
+										Είστε ήδη μέλος ;
+										<a href="#tologin" class="to_register"> Σύνδεση </a>
+									</p>
+	                            </form>
+	                        </div>	
+	                    </div>
+	                </div>  
+	</div>
+</main>
+</div>
+
+  <!-- ################################################################################################ -->
+	<div class="wrapper row4 bgded overlay" >
+	  <footer id="footer" class="hoc clear"> 
+	    <!-- ################################################################################################ -->
+	    <div class="one_half first">
+	      <h6 class="title">Social Media</h6>
+	      <p>Ακολουθείστε μας στα social media για να μαθαίνετε πρώτοι τα νέα του Kiddom.</p>
+	    <!--  <p class="btmspace-15">Malesuada non sem quisque vulputate velit et nisi ullamcorper aliquet tincidunt ut id magna leo mattis in quam dapibus.</p>-->
+	      <ul class="faico clear">
+	        <li><a class="faicon-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+	        <li><a class="faicon-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+	      </ul>
+	    </div>
+	    <div class="one_half">
+	      <h6 class="title">Στοιχεια Επικοινωνιας</h6>
+	      <ul class="nospace linklist contact">
+	        <li><i class="fa fa-map-marker"></i>
+	          <address>
+	          Οδός &amp; Αριθμός, Πόλη, Τ.Κ.
+	          </address>
+	        </li>
+	        <li><i class="fa fa-phone"></i> +00 (123) 456 7890</li>
+	        <li><i class="fa fa-fax"></i> +00 (123) 456 7890</li>
+	        <li><i class="fa fa-envelope-o"></i> info@kiddom.com</li>
+	      </ul>
+	    </div>
+	  </footer>
+	</div>
+	<!-- ################################################################################################ -->
+	<div class="wrapper row5">
+	  	<div id="copyright" class="hoc clear"> 
+	    <!-- ################################################################################################ -->
+	    	<p class="fl_left">Copyright &copy; 2016 - All Rights Reserved - <a href="#">Domain Name</a></p>
+	  	<!--  <p class="fl_right">Template by <a target="_blank" href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>-->
+	    <!-- ################################################################################################ -->
+		</div>
+	</div>
+
+
+
+<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
+<script th:href="@{scripts/jquery.min.js}"></script>
+<script th:href="@{scripts/jquery.backtotop.js}"></script>
+<script th:href="@{scripts/jquery.mobilemenu.js}"></script>
+<script th:href="@{scripts/jquery.flexslider-min.js}"></script>
+<script th:href="@{scripts/jquery-ui.js}"></script>
+
+</body>
+
+</html>
