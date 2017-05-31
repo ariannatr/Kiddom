@@ -1,22 +1,26 @@
 package kiddom.controller;
 
-//import com.example.model.User;
-//import com.example.service.UserService;
-import kiddom.model.UserEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import kiddom.repository.UserRepository;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
+import java.awt.*;
+import kiddom.model.ParentEntity;
+import kiddom.model.UserEntity;
+import kiddom.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import javax.validation.Valid;
 
 @Controller
 public class LoginController {
 	
-//	@Autowired
-//	private UserService userService;
+	@Autowired
+	private UserRepository userService;
 
 	/*@RequestMapping(value={"/login"}, method = RequestMethod.GET)
 	public ModelAndView login(){
@@ -87,25 +91,28 @@ public class LoginController {
         modelAndView.setViewName("profileProvider");
         return modelAndView;
     }
-	/*@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ModelAndView createNewUser(@Valid UserEntity user, BindingResult bindingResult) {
+
+
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public ModelAndView createNewUser(@ModelAttribute @Valid UserEntity user,@ModelAttribute @Valid ParentEntity parent, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-		UserEntity userExists = userService.findUserByEmail(user.getUsername());
+		UserEntity userExists = userService.findByUsername(user.getUsername());
 		if (userExists != null) {
 			bindingResult
-					.rejectValue("email", "error.user",
-							"There is already a user registered with the email provided");
+					.rejectValue("username", "error.user",
+							"There is already a user registered with the username provided");
 		}
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("registration");
 		} else {
-			userService.saveUser(user);
+			userService.saveUser(user,parent);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new UserEntity());
-			modelAndView.setViewName("registration");
+            modelAndView.addObject("parent", new ParentEntity());
+			modelAndView.setViewName("index");
 			
 		}
 		return modelAndView;
-	}*/
+	}
 
 }

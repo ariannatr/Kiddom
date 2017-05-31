@@ -2,6 +2,8 @@
 
 <html  xmlns="http://www.w3.org/1999/xhtml"
 	   xmlns:th="http://www.thymeleaf.org">
+
+<!--/*@thymesVar id="user" type="model.UserEntity"*/-->
 <head>
 <title>Kiddom-Register</title>
 <link th:href="@{css/register.css}" rel="stylesheet" type="text/css" media="all">
@@ -71,7 +73,9 @@
 	                <div id="container_demo"  >
 	                    <div id="wrapper">
 	                        <div id="login" class="animate form">
-	                           <form  action="#" autocomplete="on"> 
+	                           <form  autocomplete="off" action="#" th:action="@{/register}"
+									  th:object="${user}" method="post"
+									  >
 	                                <h1> Εγγραφη </h1> 
 	                                <p> 
 	                                    <label for="name" class="name" data-icon="o">Όνομα</label>
