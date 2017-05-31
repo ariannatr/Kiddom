@@ -1,24 +1,23 @@
 package kiddom.service;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 import kiddom.model.ParentEntity;
+import kiddom.repository.UserRepository;
+import kiddom.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 //import com.example.model.Role;
-import kiddom.model.UserEntity;
-//import com.example.repository.RoleRepository;
-import kiddom.repository.UserRepository;
 
-import javax.transaction.Transactional;
+//import com.example.repository.RoleRepository;
+
 
 @Service("userService")
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
-	@Autowired
+    @Qualifier("userRepository")
+    @Autowired
 	private UserRepository userRepository;
 	//@Autowired
     //private RoleRepository roleRepository;

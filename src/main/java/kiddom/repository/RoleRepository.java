@@ -1,6 +1,6 @@
 package kiddom.repository;
 
-/*import kiddom.model.Role;
+/*import kiddom.kid.controller.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

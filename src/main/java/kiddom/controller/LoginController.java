@@ -1,18 +1,15 @@
 package kiddom.controller;
 
 
-import kiddom.repository.UserRepository;
-import org.springframework.http.MediaType;
+import kiddom.service.UserService;
+import kiddom.model.ParentEntity;
+import kiddom.model.UserEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import java.awt.*;
-import kiddom.model.ParentEntity;
-import kiddom.model.UserEntity;
-import kiddom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import javax.validation.Valid;
 
@@ -20,7 +17,7 @@ import javax.validation.Valid;
 public class LoginController {
 	
 	@Autowired
-	private UserRepository userService;
+	private UserService userService;
 
 	/*@RequestMapping(value={"/login"}, method = RequestMethod.GET)
 	public ModelAndView login(){
@@ -94,7 +91,7 @@ public class LoginController {
 
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ModelAndView createNewUser(@ModelAttribute @Valid UserEntity user,@ModelAttribute @Valid ParentEntity parent, BindingResult bindingResult) {
+	public ModelAndView createNewUser(@ModelAttribute @Valid UserEntity user, @ModelAttribute @Valid ParentEntity parent, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		UserEntity userExists = userService.findByUsername(user.getUsername());
 		if (userExists != null) {
@@ -106,9 +103,10 @@ public class LoginController {
 			modelAndView.setViewName("registration");
 		} else {
 			userService.saveUser(user,parent);
-			modelAndView.addObject("successMessage", "User has been registered successfully");
+			//userRepository.saveUser(user);
+            modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new UserEntity());
-            modelAndView.addObject("parent", new ParentEntity());
+           // modelAndView.addObject("parent", new ParentEntity());
 			modelAndView.setViewName("index");
 			
 		}

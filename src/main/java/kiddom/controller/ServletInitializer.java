@@ -1,6 +1,6 @@
 package kiddom.controller;
 
-import kiddom.controller.WarApplication;
+import kiddom.WarApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
