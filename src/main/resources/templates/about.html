@@ -8,10 +8,20 @@ Licence URI: http://www.os-templates.com/template-terms
 -->
 <html>
 <head>
-<title>Kiddom</title>
+<title>Kiddom-About</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <link th:href="@{css/layout.css}" rel="stylesheet" type="text/css" media="all">
+
+  <link th:href="@{styles/jquery-ui.css}" rel="stylesheet" type="text/css" media="all">
+  <link th:href="@{styles/jquery-ui.structure.css}" rel="stylesheet" type="text/css" media="all">
+  <link th:href="@{styles/jquery-ui.theme.css}" rel="stylesheet" type="text/css" media="all">
 </head>
 <body id="top">
 <!-- ################################################################################################ -->
@@ -27,9 +37,10 @@ Licence URI: http://www.os-templates.com/template-terms
       
       <div class="fl_right">
         <ul>
-          <li><a href="../index.html"><i class="fa fa-lg fa-home"></i></a></li>
+          <li><a href="index"><i class="fa fa-lg fa-home"></i></a></li>
           <li><a data-toggle="modal" href="#login_overlay">Σύνδεση</a> </li>
-          <li><a href="register.html">Εγγραφη</a></li>
+          <li><a href="register">Εγγραφη</a></li>
+          <li><a href="register_prov">Πaροχοι</a></li>
         </ul>
       </div>
       <!-- ################################################################################################ -->
@@ -44,24 +55,34 @@ Licence URI: http://www.os-templates.com/template-terms
     <header id="header" class="hoc clear"> 
       <!-- ################################################################################################ -->
       <div id="logo" class="fl_left">
-        <h1><a href="../index.html">Kiddom</a></h1>
+        <h1><a href="index">Kiddom</a></h1>
       </div>
       <nav id="mainav" class="fl_right">
         <ul class="clear">
-          <li><a href="../index.html">Αρχικη</a></li>
+          <li><a href="index">Αρχικη</a></li>
           <li><a class="drop" href="#">Δραστηριοτητες</a>
             <ul>
-              <li><a href="pages/gallery.html">Ενεργές Δραστηριότητες</a></li>
-              <li><a href="pages/full-width.html">Παλαιότερες Δραστηριότητες</a></li>
+              <li><a href="gallery">Ενεργές Δραστηριότητες</a></li>
+              <li><a href="full-width">Παλαιότερες Δραστηριότητες</a></li>
               
             </ul>
           </li>
-          <li class="active"><a href="pages/about.html">Σχετικα με εμας</a></li>
+          <li class="active"><a href="about">Σχετικα με εμας</a></li>
           <li><a href="#">FAQ</a></li>
         </ul>
       </nav>
       <!-- ################################################################################################ -->
     </header>
+    <div >
+      <div id="breadcrumb" class="hoc clear">
+        <!-- ################################################################################################ -->
+        <ul>
+          <li><a href="index">Αρχικη</a></li>
+          <li>Σχετικα με εμας</li>
+        </ul>
+        <!-- ################################################################################################ -->
+      </div>
+    </div>
   </div>
   <!-- ################################################################################################ -->
   <!-- ################################################################################################ -->
@@ -70,16 +91,7 @@ Licence URI: http://www.os-templates.com/template-terms
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
-<div class="wrapper row2">
-  <div id="breadcrumb" class="hoc clear"> 
-    <!-- ################################################################################################ -->
-    <ul>
-      <li><a href="../index.html">Αρχικη</a></li>
-      <li>Σχετικα με εμας</li>
-    </ul>
-    <!-- ################################################################################################ -->
-  </div>
-</div>
+<!--edw htn--!>
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
