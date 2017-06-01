@@ -1,8 +1,8 @@
 package kiddom.service;
 
-import kiddom.model.ParentEntity;
-import kiddom.model.UserEntity;
 import org.springframework.stereotype.Service;
+import kiddom.model.UserEntity;
+import kiddom.model.ParentEntity;
 
 @Service("userService")
 public interface UserService {

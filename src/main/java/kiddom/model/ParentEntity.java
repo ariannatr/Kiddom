@@ -20,9 +20,9 @@ public class ParentEntity {
     private int availPoints;
     private int restrPoints;
     private int totalPoints;
-    private Collection<CookiesEntity> cookiesByParentId;
+   // private Collection<CookiesEntity> cookiesByParentId;
     private UserEntity userByParentId;
-    private Collection<ParentReportsEntity> parentReportsByParentId;
+   // private Collection<ParentReportsEntity> parentReportsByParentId;
 
     @Id
     @Column(name = "parent_id")
@@ -172,14 +172,14 @@ public class ParentEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "parentByParentId")
-    public Collection<CookiesEntity> getCookiesByParentId() {
-        return cookiesByParentId;
-    }
+    //@OneToMany(mappedBy = "parentByParentId")
+    //public Collection<CookiesEntity> getCookiesByParentId() {
+    //    return cookiesByParentId;
+    //}
 
-    public void setCookiesByParentId(Collection<CookiesEntity> cookiesByParentId) {
-        this.cookiesByParentId = cookiesByParentId;
-    }
+   // public void setCookiesByParentId(Collection<CookiesEntity> cookiesByParentId) {
+    //    this.cookiesByParentId = cookiesByParentId;
+   // }
 
     @OneToOne
     @JoinColumn(name = "parent_id", referencedColumnName = "user_id", nullable = false)
@@ -191,12 +191,12 @@ public class ParentEntity {
         this.userByParentId = userByParentId;
     }
 
-    @OneToMany(mappedBy = "parentByParentId")
-    public Collection<ParentReportsEntity> getParentReportsByParentId() {
-        return parentReportsByParentId;
-    }
+   // @OneToMany(mappedBy = "parentByParentId")
+    //public Collection<ParentReportsEntity> getParentReportsByParentId() {
+    //    return parentReportsByParentId;
+    //}
 
-    public void setParentReportsByParentId(Collection<ParentReportsEntity> parentReportsByParentId) {
-        this.parentReportsByParentId = parentReportsByParentId;
-    }
+    //public void setParentReportsByParentId(Collection<ParentReportsEntity> parentReportsByParentId) {
+    //    this.parentReportsByParentId = parentReportsByParentId;
+   // }
 }

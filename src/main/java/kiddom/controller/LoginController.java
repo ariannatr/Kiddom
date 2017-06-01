@@ -2,8 +2,6 @@ package kiddom.controller;
 
 
 import kiddom.service.UserService;
-import kiddom.model.ParentEntity;
-import kiddom.model.UserEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
 import javax.validation.Valid;
+import kiddom.model.UserEntity;
+import kiddom.model.ParentEntity;
 
 @Controller
 public class LoginController {

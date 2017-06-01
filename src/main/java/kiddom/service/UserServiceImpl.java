@@ -1,13 +1,11 @@
 package kiddom.service;
 
-import kiddom.model.ParentEntity;
 import kiddom.repository.UserRepository;
-import kiddom.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
+import kiddom.model.*;
 //import com.example.model.Role;
 
 //import com.example.repository.RoleRepository;

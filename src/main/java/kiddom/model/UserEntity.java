@@ -13,7 +13,7 @@ public class UserEntity {
     private String password;
     private int type;
     private ParentEntity parentByUserId;
-    private ProviderEntity providerByUserId;
+   // private ProviderEntity providerByUserId;
 
     @Id
     @Column(name = "user_id")
@@ -88,12 +88,12 @@ public class UserEntity {
         this.parentByUserId = parentByUserId;
     }
 
-    @OneToOne(mappedBy = "userByProviderId")
-    public ProviderEntity getProviderByUserId() {
-        return providerByUserId;
-    }
+    //@OneToOne(mappedBy = "userByProviderId")
+   // public ProviderEntity getProviderByUserId() {
+    //    return providerByUserId;
+   // }
 
-    public void setProviderByUserId(ProviderEntity providerByUserId) {
-        this.providerByUserId = providerByUserId;
-    }
+   // public void setProviderByUserId(ProviderEntity providerByUserId) {
+   //     this.providerByUserId = providerByUserId;
+   // }
 }
