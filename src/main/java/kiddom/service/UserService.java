@@ -8,4 +8,5 @@ import kiddom.model.ParentEntity;
 public interface UserService {
 	public UserEntity findByUsername(String username);
 	public void saveUser(UserEntity user, ParentEntity parent);
+	public UserEntity findByUsernamePassword(String username,String Password);
 }

@@ -25,7 +25,8 @@ public class ParentEntity {
    // private Collection<ParentReportsEntity> parentReportsByParentId;
 
     @Id
-    @Column(name = "username")
+    //@OneToOne
+    @PrimaryKeyJoinColumn(name = "username", referencedColumnName = "username")
     public String getUsername() {
         return username;
     }
@@ -166,7 +167,7 @@ public class ParentEntity {
    // }
 
     @OneToOne
-    @JoinColumn(name = "username", referencedColumnName = "username", nullable = false)
+    @PrimaryKeyJoinColumn(name = "username", referencedColumnName = "username")
     public UserEntity getUserByParentId() {
         return userByParentId;
     }

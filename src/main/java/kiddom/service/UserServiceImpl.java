@@ -18,6 +18,7 @@ public class UserServiceImpl implements UserService {
     @Qualifier("userRepository")
     @Autowired
 	private UserRepository userRepository;
+
     @Qualifier("parentRepository")
 	@Autowired
     private ParentRepository parentRepository;
@@ -30,6 +31,20 @@ public class UserServiceImpl implements UserService {
 		//return null;
 	}
 
+	@Override
+    public UserEntity findByUsernamePassword(String username,String password){
+        UserEntity userExists = findByUsername(username);
+        if(userExists.getPassword().equals(password))
+        {
+            System.out.println("Same password");
+            return userExists;
+        }
+        else
+        {
+            System.out.print("Username "+userExists.getUsername()+" pass in base "+userExists.getPassword()+" pass given "+password);
+            return null;
+        }
+    }
 
 	@Override
 	public void saveUser(UserEntity user, ParentEntity parent) {
@@ -41,7 +56,7 @@ public class UserServiceImpl implements UserService {
 		//user.setPassword(request.getParameter("passwordsignup"));
 		user.setType(1);
 		//user.setUserId(user.getUserId());
-		user.setUsername(user.getUsername());
+		//user.setUsername(user.getUsername());
 
 
 
@@ -53,27 +68,28 @@ public class UserServiceImpl implements UserService {
 //		pdd.insert(parent);
         //Role userRole = roleRepository.findByRole("ADMIN");
         //user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-		userRepository.save(user);
+      //  parent.setUsername(user.getUsername());
         user.setParentByUserId(parent);
+        userRepository.save(user);
+
         System.out.println("Creating parent user...");
         //parent = new ParentEntity();
         parent.setName(parent.getName());
         parent.setSurname(parent.getSurname());
-        parent.setEmail(parent.getEmail());//parent.getEmail()
+        parent.setEmail(parent.getEmail());
         parent.setTelephone(parent.getTelephone());
         parent.setTown(parent.getTown());
         parent.setArea(parent.getArea());
-        parent.setUsername(user.getUsername());
+        System.out.println("Trying to add "+parent.getName()+" "+parent.getSurname()+"  "+parent.getEmail());
+
 
         parent.setAvailPoints(0);
         parent.setRestrPoints(0);
         parent.setTotalPoints(0);
         parent.setUsername(user.getUsername());
-
         parent.setUserByParentId(user);
 		parentRepository.save(parent);
 
-//		parentRepository.save(parent);
 	}
 
 }

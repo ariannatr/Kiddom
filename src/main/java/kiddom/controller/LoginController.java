@@ -1,18 +1,18 @@
 package kiddom.controller;
 
 
+import kiddom.model.ParentEntity;
+import kiddom.model.UserEntity;
 import kiddom.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.validation.Valid;
-import kiddom.model.UserEntity;
-import kiddom.model.ParentEntity;
-import sun.security.krb5.internal.PAData;
 
 @Controller
 public class LoginController {
@@ -20,12 +20,24 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
-	/*@RequestMapping(value={"/login"}, method = RequestMethod.GET)
-	public ModelAndView login(){
+	@RequestMapping(value={"/login"}, method = RequestMethod.POST)
+	public ModelAndView login(@ModelAttribute @Valid UserEntity user, BindingResult bindingResult){
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("login");
+		UserEntity userExists = userService.findByUsernamePassword(user.getUsername(),user.getPassword());
+
+		if (userExists != null) {
+            modelAndView.setViewName("register");
+		}
+		else
+        {
+            modelAndView.setViewName("about");
+        }
+		if (bindingResult.hasErrors()) {
+			modelAndView.setViewName("register_prov");
+		}
+//		modelAndView.setViewName("register");
 		return modelAndView;
-	}*/
+	}
 
 
 	@RequestMapping(value={"/", "/index"}, method = RequestMethod.GET, produces= "application/javascript")

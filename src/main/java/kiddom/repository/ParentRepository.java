@@ -6,7 +6,6 @@ import kiddom.model.ParentEntity;
 
 @Repository("parentRepository")
 public interface ParentRepository extends JpaRepository<ParentEntity, Long> {
-    //ParentEntity findByUsername(String username);
-
-//	void saveUser(UserEntity user, ParentEntity parent);
+    // ParentEntity findByUsername(String username);
+   // void save(String user, ParentEntity parent)
 }
