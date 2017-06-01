@@ -9,7 +9,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "parent", schema = "mydb")
 public class ParentEntity {
-    private int parentId;
+    private String username;
     private String name;
     private String surname;
     private String email;
@@ -25,13 +25,13 @@ public class ParentEntity {
    // private Collection<ParentReportsEntity> parentReportsByParentId;
 
     @Id
-    @Column(name = "parent_id")
-    public int getParentId() {
-        return parentId;
+    @Column(name = "username")
+    public String getUsername() {
+        return username;
     }
 
-    public void setParentId(int parentId) {
-        this.parentId = parentId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Basic
@@ -141,7 +141,7 @@ public class ParentEntity {
 
         ParentEntity that = (ParentEntity) o;
 
-        if (parentId != that.parentId) return false;
+        if (username != that.username) return false;
         if (availPoints != that.availPoints) return false;
         if (restrPoints != that.restrPoints) return false;
         if (totalPoints != that.totalPoints) return false;
@@ -156,22 +156,6 @@ public class ParentEntity {
         return true;
     }
 
-    @Override
-    public int hashCode() {
-        int result = parentId;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (surname != null ? surname.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (telephone != null ? telephone.hashCode() : 0);
-        result = 31 * result + (town != null ? town.hashCode() : 0);
-        result = 31 * result + (area != null ? area.hashCode() : 0);
-        result = 31 * result + (photo != null ? photo.hashCode() : 0);
-        result = 31 * result + availPoints;
-        result = 31 * result + restrPoints;
-        result = 31 * result + totalPoints;
-        return result;
-    }
-
     //@OneToMany(mappedBy = "parentByParentId")
     //public Collection<CookiesEntity> getCookiesByParentId() {
     //    return cookiesByParentId;
@@ -182,7 +166,7 @@ public class ParentEntity {
    // }
 
     @OneToOne
-    @JoinColumn(name = "parent_id", referencedColumnName = "user_id", nullable = false)
+    @JoinColumn(name = "username", referencedColumnName = "username", nullable = false)
     public UserEntity getUserByParentId() {
         return userByParentId;
     }

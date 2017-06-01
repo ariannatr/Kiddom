@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.validation.Valid;
 import kiddom.model.UserEntity;
 import kiddom.model.ParentEntity;
+import sun.security.krb5.internal.PAData;
 
 @Controller
 public class LoginController {
@@ -39,7 +40,9 @@ public class LoginController {
 	public ModelAndView register(){
 		ModelAndView modelAndView = new ModelAndView();
 		UserEntity user = new UserEntity();
+		ParentEntity parent=new ParentEntity();
 		modelAndView.addObject("user", user);
+		modelAndView.addObject("parent",parent);
 		modelAndView.setViewName("register");
 		return modelAndView;
 	}
@@ -106,7 +109,7 @@ public class LoginController {
 			//userRepository.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new UserEntity());
-           // modelAndView.addObject("parent", new ParentEntity());
+            modelAndView.addObject("parent", new ParentEntity());
 			modelAndView.setViewName("index");
 			
 		}

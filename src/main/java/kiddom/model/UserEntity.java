@@ -8,24 +8,14 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user", schema = "mydb")
 public class UserEntity {
-    private int userId;
+    //private int userId;
     private String username;
     private String password;
     private int type;
     private ParentEntity parentByUserId;
-   // private ProviderEntity providerByUserId;
+   // private ProviderEntity providerByUserId
 
     @Id
-    @Column(name = "user_id")
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    @Basic
     @Column(name = "username")
     public String getUsername() {
         return username;
@@ -62,21 +52,11 @@ public class UserEntity {
 
         UserEntity that = (UserEntity) o;
 
-        if (userId != that.userId) return false;
         if (type != that.type) return false;
         if (username != null ? !username.equals(that.username) : that.username != null) return false;
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
 
         return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = userId;
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + type;
-        return result;
     }
 
     @OneToOne(mappedBy = "userByParentId")

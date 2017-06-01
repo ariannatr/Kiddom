@@ -7,6 +7,7 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.2'
 	}
 }
 
@@ -14,9 +15,11 @@ apply plugin: 'java'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'war'
+apply plugin: 'idea'
 
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
@@ -36,5 +39,24 @@ dependencies {
 	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 //	providedRuntime('se')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-	compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
+//	compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework:spring-webmvc:4.3.8.RELEASE'
+    //compile 'org.springframework.boot:spring-boot-starter-parent:1.3.5.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-tomcat'
+    compile 'org.apache.tomcat.embed:tomcat-embed-jasper'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa:1.4.6.RELEASE'
+    //compile 'org.springframework.data:spring-data-jpa:1.11.3.RELEASE'
+    compile 'org.springframework:spring-aop:4.3.8.RELEASE'
+    //compile 'org.springframework:spring-context:4.3.8.RELEASE'
+    //testCompile('org.springframework.boot:spring-boot-starter-test')
+    //compile 'org.hibernate:hibernate-core:5.2.10.Final'
+
+    compile 'mysql:mysql-connector-java'
+    compile 'javax.servlet:jstl:1.2'
+
+    //compile 'org.hibernate:hibernate-search-orm:5.2.10.Final'
+    //compile 'org.hibernate:hibernate-entitymanager:5.2.10.Final'
+    compile 'cglib:cglib:2.2.2'
+    compile 'org.springframework.boot:spring-boot-autoconfigure:1.5.3.RELEASE'
 }
