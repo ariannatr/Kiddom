@@ -44,20 +44,7 @@ public class UserServiceImpl implements UserService {
 		user.setUsername(user.getUsername());
 
 
-		System.out.println("Creating parent user...");
-		//parent = new ParentEntity();
-		parent.setName(parent.getName());
-		parent.setSurname(parent.getSurname());
-		parent.setEmail(parent.getEmail());//parent.getEmail()
-		parent.setTelephone(parent.getTelephone());
-		parent.setTown(parent.getTown());
-		parent.setArea(parent.getArea());
-        parent.setUsername(user.getUsername());
-		parent.setUserByParentId(user);
-        parent.setAvailPoints(0);
-        parent.setRestrPoints(0);
-        parent.setTotalPoints(0);
-        user.setParentByUserId(parent);
+
 		/*if (request.getParameter("image") != null) {
 			parent.setPhoto(request.getParameter("image"));
 		}*/
@@ -67,6 +54,23 @@ public class UserServiceImpl implements UserService {
         //Role userRole = roleRepository.findByRole("ADMIN");
         //user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		userRepository.save(user);
+        user.setParentByUserId(parent);
+        System.out.println("Creating parent user...");
+        //parent = new ParentEntity();
+        parent.setName(parent.getName());
+        parent.setSurname(parent.getSurname());
+        parent.setEmail(parent.getEmail());//parent.getEmail()
+        parent.setTelephone(parent.getTelephone());
+        parent.setTown(parent.getTown());
+        parent.setArea(parent.getArea());
+        parent.setUsername(user.getUsername());
+
+        parent.setAvailPoints(0);
+        parent.setRestrPoints(0);
+        parent.setTotalPoints(0);
+        parent.setUsername(user.getUsername());
+
+        parent.setUserByParentId(user);
 		parentRepository.save(parent);
 
 //		parentRepository.save(parent);
