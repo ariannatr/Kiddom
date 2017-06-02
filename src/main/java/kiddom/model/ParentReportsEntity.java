@@ -1,15 +1,15 @@
-package kiddom.model;
+/*package kiddom.model;
 
 /**
  * Created by eleni on 02-Jun-17.
- */
+
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "parent_reports", schema = "mydb", catalog = "")
+@Table(name = "parent_reports", schema = "mydb")
 public class ParentReportsEntity {
-    private int reportId;
+ /*   private int reportId;
     private String report;
     private String provider;
     private String parent_username;
@@ -64,4 +64,4 @@ public class ParentReportsEntity {
     public void setParentByParentId(ParentEntity parentByParentId) {
         this.parentByParentId = parentByParentId;
     }
-}
+}*/

@@ -1,16 +1,16 @@
-package kiddom.model;
+/*package kiddom.model;
 
 /**
  * Created by eleni on 02-Jun-17.
- */
+
 
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "towns", schema = "mydb", catalog = "")
+@Table(name = "towns", schema = "mydb")
 public class TownsEntity {
-    private int townId;
+  /*  private int townId;
     private String name;
     private Collection<AreasEntity> areasByTownId;
 
@@ -55,4 +55,4 @@ public class TownsEntity {
     public void setAreasByTownId(Collection<AreasEntity> areasByTownId) {
         this.areasByTownId = areasByTownId;
     }
-}
+}*/

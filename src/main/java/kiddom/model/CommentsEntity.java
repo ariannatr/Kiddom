@@ -1,15 +1,15 @@
-package kiddom.model;
+/*package kiddom.model;
 
 /**
  * Created by eleni on 02-Jun-17.
- */
+
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "comments", schema = "mydb", catalog = "")
+@Table(name = "comments", schema = "mydb")
 public class CommentsEntity {
-    private int commentId;
+   /* private int commentId;
     private String comment;
     private String reply;
     private float rating;
@@ -58,4 +58,4 @@ public class CommentsEntity {
     public void setRating(float rating) {
         this.rating = rating;
     }
-}
+}*/

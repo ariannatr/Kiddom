@@ -1,15 +1,15 @@
-package kiddom.model;
+/*package kiddom.model;
 
 /**
  * Created by eleni on 02-Jun-17.
- */
+
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "cookies", schema = "mydb", catalog = "")
+@Table(name = "cookies", schema = "mydb")
 public class CookiesEntity {
-    private int cookieId;
+    /*private int cookieId;
     private String parent_username;
     private String category;
     private String subcat1;
@@ -97,4 +97,4 @@ public class CookiesEntity {
     public void setParentByParentId(ParentEntity parentByParentId) {
         this.parentByParentId = parentByParentId;
     }
-}
+}*/

@@ -1,15 +1,15 @@
-package kiddom.model;
+/*package kiddom.model;
 
 /**
  * Created by eleni on 02-Jun-17.
- */
+
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "provider_reports", schema = "mydb", catalog = "")
+@Table(name = "provider_reports", schema = "mydb")
 public class ProviderReportsEntity {
-    private int reportId;
+  /*  private int reportId;
     private String report;
     private String provider_username;
     private String user_username;
@@ -65,3 +65,4 @@ public class ProviderReportsEntity {
         this.providerByProviderId = providerByProviderId;
     }
 }
+*/

@@ -1,16 +1,16 @@
-package kiddom.model;
+/*package kiddom.model;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 /**
  * Created by eleni on 01-Jun-17.
- */
+
 
 @Entity
-@Table(name = "provider", schema = "mydb", catalog = "")
+@Table(name = "provider", schema = "mydb")
 public class ProviderEntity {
-    private String username;
+ /*   private String username;
     private String name;
     private String surname;
     private String email;
@@ -173,3 +173,4 @@ public class ProviderEntity {
     //}
 
 }
+*/

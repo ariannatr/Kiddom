@@ -1,7 +1,5 @@
 package kiddom.model;
-
 import javax.persistence.*;
-
 
 /**
  * Created by Arianna on 26/5/2017.
@@ -9,11 +7,12 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user", schema = "mydb")
 public class UserEntity {
+    //private int userId;
     private String username;
     private String password;
     private int type;
     private ParentEntity parentByUserId;
-    private ProviderEntity providerByUserId;
+    // private ProviderEntity providerByUserId
 
     @Id
     @Column(name = "username")
@@ -68,12 +67,12 @@ public class UserEntity {
         this.parentByUserId = parentByUserId;
     }
 
-    @OneToOne(mappedBy = "userByProviderId")
-    public ProviderEntity getProviderByUserId() {
-        return providerByUserId;
-    }
+    //@OneToOne(mappedBy = "userByProviderId")
+    // public ProviderEntity getProviderByUserId() {
+    //    return providerByUserId;
+    // }
 
-   public void setProviderByUserId(ProviderEntity providerByUserId) {
-      this.providerByUserId = providerByUserId;
-   }
+    // public void setProviderByUserId(ProviderEntity providerByUserId) {
+    //     this.providerByUserId = providerByUserId;
+    // }
 }

@@ -1,15 +1,15 @@
-package kiddom.model;
+/*package kiddom.model;
 
 /**
  * Created by eleni on 02-Jun-17.
- */
+
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "subcategories", schema = "mydb", catalog = "")
+@Table(name = "subcategories", schema = "mydb")
 public class SubcategoriesEntity {
-    private int subId;
+/*    private int subId;
     private String name;
     private int catId;
     private CategoriesEntity categoriesByCatId;
@@ -67,4 +67,4 @@ public class SubcategoriesEntity {
     public void setCategoriesByCatId(CategoriesEntity categoriesByCatId) {
         this.categoriesByCatId = categoriesByCatId;
     }
-}
+}*/

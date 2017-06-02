@@ -1,15 +1,15 @@
-package kiddom.model;
+/*package kiddom.model;
 
 /**
  * Created by eleni on 02-Jun-17.
- */
+
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "reservations", schema = "mydb", catalog = "")
+@Table(name = "reservations", schema = "mydb")
 public class ReservationsEntity {
-    private int reservationId;
+ /*   private int reservationId;
     private String parent_username;
     private int eventId;
 
@@ -44,3 +44,4 @@ public class ReservationsEntity {
     }
 
 }
+*/

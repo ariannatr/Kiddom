@@ -1,8 +1,8 @@
-package kiddom.model;
+/*package kiddom.model;
 
-/**
- * Created by eleni on 02-Jun-17.
- */
+
+  Created by eleni on 02-Jun-17.
+
 
 import javax.persistence.*;
 
@@ -58,7 +58,7 @@ public class AreasEntity {
         return true;
     }
 
-    @ManyToOne
+//    @ManyToOne
     @JoinColumn(name = "town_id", referencedColumnName = "town_id", nullable = false)
     public TownsEntity getTownsByTownId() {
         return townsByTownId;
@@ -69,4 +69,4 @@ public class AreasEntity {
     }
 
 
-}
+}*/

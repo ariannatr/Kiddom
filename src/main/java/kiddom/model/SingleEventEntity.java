@@ -2,14 +2,14 @@ package kiddom.model;
 
 /**
  * Created by eleni on 02-Jun-17.
- */
+
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "single_event", schema = "mydb", catalog = "")
+@Table(name = "single_event", schema = "mydb")
 public class SingleEventEntity {
-    private String provider_username;
+/*    private String provider_username;
     private int eventId;
     private String name;
     private String description;
@@ -250,3 +250,4 @@ public class SingleEventEntity {
         this.commentsByEventId = commentsByEventId;
     }
 }
+*/
