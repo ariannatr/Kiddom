@@ -13,28 +13,12 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<link th:href="@{css/layout.css}" rel="stylesheet" type="text/css" media="all">
-
+	<link th:href="@{css/register_new.css}" rel="stylesheet" type="text/css" media="all">
+	<script th:href="@{scripts/register_new.css}"></script>
 	<link th:href="@{styles/jquery-ui.css}" rel="stylesheet" type="text/css" media="all">
 	<link th:href="@{styles/jquery-ui.structure.css}" rel="stylesheet" type="text/css" media="all">
 	<link th:href="@{styles/jquery-ui.theme.css}" rel="stylesheet" type="text/css" media="all">
 
-	<!--meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-	<link th:href="@{css/layout.css}" rel="stylesheet" type="text/css" media="all">
-
-	<link th:href="@{styles/jquery-ui.css}" rel="stylesheet" type="text/css" media="all">
-	<link th:href="@{styles/jquery-ui.structure.css}" rel="stylesheet" type="text/css" media="all">
-	<link th:href="@{styles/jquery-ui.theme.css}" rel="stylesheet" type="text/css" media="all">
-
-	<link th:href="@{css/register.css}" rel="stylesheet" type="text/css" media="all">
-	<link rel="shortcut icon" href="../favicon.ico">
-	<link th:href="@{css/demo.css}" rel="stylesheet" type="text/css" media="all">
-	<link th:href="@{css//animate-custom.css.css}" rel="stylesheet" type="text/css" -->
 
 
 
@@ -69,8 +53,8 @@
 					<li><a href="index">Αρχικη</a></li>
 					<li><a class="drop" href="#">Δραστηριοτητες</a>
 						<ul>
-							<li><a href="pages/gallery">Ενεργές Δραστηριότητες</a></li>
-							<li><a href="pages/full-width">Παλαιότερες Δραστηριότητες</a></li>
+							<li><a href="gallery.html">Ενεργές Δραστηριότητες</a></li>
+							<li><a href="full-width.html">Παλαιότερες Δραστηριότητες</a></li>
 						</ul>
 					</li>
 					<li><a href="about">Σχετικα με εμας</a></li>
@@ -83,8 +67,7 @@
 			<div id="breadcrumb" class="hoc clear">
 				<!-- ################################################################################################ -->
 				<ul>
-					<li><a href="index">Αρχικη</a></li>
-					<li>Σχετικα με εμας</li>
+					<li>Εγγραφη παροχου</li>
 				</ul>
 				<!-- ################################################################################################ -->
 			</div>
@@ -96,74 +79,99 @@
 	<main class="hoc container clear" >
 		<div id="pageintro" class="hoc clear" style="padding:1% 0 1% 0 ">
 			<div id="container_demo"  >
-				<div id="wrapper">
-					<div id="login" class="animate form">
-						<form  action="#" autocomplete="on">
-							<h1> Εγγραφη </h1>
-							<table class="table">
-								<tr>
-									<td>
-										<h3>Στοιχεία Χρήστη</h3>
-										<p>
-											<label for="name" class="name" data-icon="o">Όνομα</label>
-											<input id="name" name="name" required="required" type="text" placeholder="πχ .Κώστας" />
-										</p>
-										<p>
-											<label for="surname" class="surname" data-icon="ε">Επώνυμο</label>
-											<input id="surname" name="surname" required="required" type="text" placeholder="πχ .Κώστας"  />
-										</p>
-										<p>
-											<label for="area" class="fa"  data-icon="π">Χώρος/Χώροι</label>
-											<input id="leaving_area" name="leaving_area" required="required" type="text" placeholder="πχ. Αργυρούπολη"/>
-										</p>
-										<p>
-											<label for="tel" class="tel" data-icon="&#9743;">Τηλέφωνο</label>
-											<input id="tel" name="tel" required="required" type="text" placeholder="πχ .6975649578" />
-										</p>
-										<p>
-											<label for="afm" class="afm" data-icon="α"> ΑΦΜ </label>
-											<input id="afm" name="afm" required="required" type="text" placeholder="πχ 1234567898"/>
-										</p>
-										<p>
-											<label for="photo" class="photo_upload" >Θα θέλατε να ανεβάσετε μια Φωτογραφία Προφιλ ;</label>
-											<input name="image" type="file" accept="image/*" id="menu_images"/ style="color: black;">
-											<img id="menu_image" class="preview_img" />
-										</p>
-									</td>
-									<td>
-										<h3>Στοιχεία Λογαριασμού</h3>
-										<p>
-											<label for="usernamesignup" class="uname" data-icon="χ">Όνομα χρήστη</label>
-											<input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
-										</p>
-										<p>
-											<label for="emailsignup" class="youmail" data-icon=" &#x2709;" > Εmail</label>
-											<input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"/>
-										</p>
-										<p>
-											<label for="passwordsignup" class="youpasswd" data-icon="κ">Κωδικός </label>
-											<input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="πχ X8df!90EO"/>
-										</p>
-										<p>
-											<label for="passwordsignup_confirm" class="youpasswd" data-icon="κ">Επιβεβαίωση κωδικού</label>
-											<input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="πχ. X8df!90EO"/>
-										</p>
+				<div id="wrapper stepwizard">
+					<div class="stepwizard-row setup-panel ">
+						<div class="stepwizard-step">
+							<a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+						</div>
+						<div class="stepwizard-step">
+							<a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+						</div>
+					</div>
+					<br>
 
-									</td>
-								</tr>
-							</table>
-							<table>
-								<tr>
-									<p class="signin button">
-										<input type="submit" value="Εγγραφή"/>
-									</p>
-								</tr>
-							</table>
+					<div id="login" >
+						<form  class="group" id="loginForm" method="POST" th:action="@{/register_prov}" autocomplete="on">
+
+							<div class="row setup-content" id="step-1">
+
+								<div class="col-md-10">
+									<h4>Βήμα 1 :Συμπληρώστε τα στοιχεία σας</h4>
+									<div class="form-group">
+										<label for="name" class="name" data-icon="o">Όνομα</label>
+										<input id="name" name="name" required="required" class="form-control" type="text" placeholder="πχ .Κώστας" />
+										<span class="help-block"></span>
+									</div>
+									<div class="form-group">
+										<label for="surname" class="surname" data-icon="ε">Επώνυμο</label>
+										<input id="surname" name="surname" required="required" class="form-control" type="text" placeholder="πχ .Κώστας"  />
+										<span class="help-block"></span>
+									</div>
+									<div class="form-group">
+										<label for="area" class="fa"  data-icon="π">Χώρος/Χώροι</label>
+										<input id="area" name="area" required="required" class="form-control" type="text"  placeholder="πχ. Αργυρούπολη"/>
+										<span class="help-block"></span>
+									</div>
+									<div class="form-group">
+										<label  for ="town" class="fa"  data-icon="π">Πόλη Διαμονής</label>
+										<input id="town" name="town" required="required" class="form-control" type="text"  placeholder="πχ. Αθήνα"/>
+										<span class="help-block"></span>
+									</div>
+									<div class="form-group">
+										<label for="telephone" class="tel" data-icon="&#9743;">Τηλέφωνο</label>
+										<input id="telephone" name="tel" required="required" class="form-control" type="text" placeholder="πχ .6975649578" />
+										<span class="help-block"></span>
+									</div>
+
+									<div class="form-group">
+										<label for="TR" class="afm" data-icon="α"> ΑΦΜ </label>
+										<input id="TR" name="TR" required="required" type="text" class="form-control" placeholder="πχ 1234567898"/>
+										<span class="help-block"></span>
+									</div>
+									<div class="form-group">
+										<label for="image" class="photo_upload" >Θα θέλατε να ανεβάσετε μια Φωτογραφία Προφιλ ;</label>
+										<input name="image" id="image" type="file" accept="image/*" id="menu_images" style="color: black;"/>
+										<!--img id="menu_image" class="preview_img" /-->
+										<span class="help-block"></span>
+									</div>
+									<button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Επόμενο</button>
+								</div>
+
+							</div>
+							<div class="row setup-content" id="step-2">
+								<div class="col-md-10">
+									<h4>Βήμα 2 :Στοιχεία Λογιαρισμού</h4>
+									<div class="form-group">
+										<label for="username" class="uname" data-icon="χ">Όνομα χρήστη</label>
+										<input id="username" name="username" required="required" class="form-control" type="text" placeholder="mysuperusername690" />
+										<span class="help-block"></span>
+									</div>
+									<div class="form-group">
+										<label for="email" class="youmail" data-icon=" &#x2709;" > Εmail</label>
+										<input id="email" name="email" required="required" class="form-control" type="email" placeholder="mysupermail@mail.com"/>
+										<span class="help-block"></span>
+									</div>
+									<div class="form-group">
+										<label for="password" class="youpasswd" data-icon="κ">Κωδικός </label>
+										<input id="password" name="password" required="required" class="form-control" type="password" placeholder="πχ X8df!90EO"/>
+										<span class="help-block"></span>
+									</div>
+									<div class="form-group">
+										<label for="passwordsignup_confirm" class="youpasswd" data-icon="κ">Επιβεβαίωση κωδικού</label>
+										<input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" class="form-control" type="password" placeholder="πχ. X8df!90EO"/>
+										<span class="help-block"></span>
+									</div>
+
+									<button class="btn btn-success btn-lg pull-right" type="submit">Εγγραφη</button>
+								</div>
+							</div>
+
+						</form>
 							<p class="change_link" style="position: relative;">
 								Είστε ήδη μέλος ;
-								<a href="#tologin" class="to_register"> Σύνδεση </a>
+								<a href="index#login_overlay" class="to_register"> Σύνδεση </a>
 							</p>
-						</form>
+
 					</div>
 				</div>
 			</div>
@@ -217,7 +225,7 @@
 <script src="../layout/scripts/jquery.mobilemenu.js"></script>
 <script src="../layout/scripts/jquery.flexslider-min.js"></script>
 <script src="../layout/scripts/jquery-ui.js"></script>
-
+<script src="../scripts/register_new.js"></script>
 </body>
 
 </html>
