@@ -24,6 +24,7 @@ public class ParentEntity {
     private CookiesEntity cookiesByParentId;
     private UserEntity userByParentId;
     private Collection<ParentReportsEntity> parentReportsByParentId;
+    private Collection<ReservationsEntity> parentReservationsByParentId;
 
     @Id
     //@OneToOne
@@ -184,5 +185,14 @@ public class ParentEntity {
 
     public void setParentReportsByParentId(Collection<ParentReportsEntity> parentReportsByParentId) {
         this.parentReportsByParentId = parentReportsByParentId;
+    }
+
+    @OneToMany(mappedBy = "parentByParentId")
+    public Collection<ReservationsEntity> getParentReservationsByParentId() {
+        return parentReservationsByParentId;
+    }
+
+    public void setParentReservationsByParentId(Collection<ReservationsEntity> parentReservationsByParentId) {
+        this.parentReservationsByParentId = parentReservationsByParentId;
     }
 }

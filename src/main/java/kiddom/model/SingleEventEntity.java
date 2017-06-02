@@ -33,7 +33,7 @@ public class SingleEventEntity implements Serializable {
     private int postcode;
     private float rating;
     private ProviderEntity providerByProviderId;
-    //private ReservationsEntity reservationsByEventId;
+    private Collection<ReservationsEntity> reservationsByEventId;
     private Collection<CommentsEntity> commentsByEventId;
 
     @Id
@@ -301,6 +301,14 @@ public class SingleEventEntity implements Serializable {
         this.providerByProviderId = providerByProviderId;
     }
 
+    @OneToMany(mappedBy = "singleEventBySingleEventId")
+    public Collection<ReservationsEntity> getReservationsByEventId() {
+        return reservationsByEventId;
+    }
+
+    public void setReservationsByEventId(Collection<ReservationsEntity> reservationsByEventId) {
+        this.reservationsByEventId = reservationsByEventId;
+    }
 
     /*@ManyToOne
     @JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false)
