@@ -1,10 +1,12 @@
 package kiddom.model;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
  * Created by Arianna on 26/5/2017.
  */
+
 @Entity
 @Table(name = "parent", schema = "mydb")
 public class ParentEntity {
@@ -19,9 +21,9 @@ public class ParentEntity {
     private int availPoints;
     private int restrPoints;
     private int totalPoints;
-    // private Collection<CookiesEntity> cookiesByParentId;
+    private CookiesEntity cookiesByParentId;
     private UserEntity userByParentId;
-    // private Collection<ParentReportsEntity> parentReportsByParentId;
+    private Collection<ParentReportsEntity> parentReportsByParentId;
 
     @Id
     //@OneToOne
@@ -156,14 +158,14 @@ public class ParentEntity {
         return true;
     }
 
-    //@OneToMany(mappedBy = "parentByParentId")
-    //public Collection<CookiesEntity> getCookiesByParentId() {
-    //    return cookiesByParentId;
-    //}
+    @OneToOne(mappedBy = "parentByParentId")
+    public CookiesEntity getCookiesByParentId() {
+        return cookiesByParentId;
+    }
 
-    // public void setCookiesByParentId(Collection<CookiesEntity> cookiesByParentId) {
-    //    this.cookiesByParentId = cookiesByParentId;
-    // }
+    public void setCookiesByParentId(CookiesEntity cookiesByParentId) {
+        this.cookiesByParentId = cookiesByParentId;
+    }
 
     @OneToOne
     @PrimaryKeyJoinColumn(name = "username", referencedColumnName = "username")
@@ -175,12 +177,12 @@ public class ParentEntity {
         this.userByParentId = userByParentId;
     }
 
-    // @OneToMany(mappedBy = "parentByParentId")
-    //public Collection<ParentReportsEntity> getParentReportsByParentId() {
-    //    return parentReportsByParentId;
-    //}
+    @OneToMany(mappedBy = "parentByParentId")
+    public Collection<ParentReportsEntity> getParentReportsByParentId() {
+        return parentReportsByParentId;
+    }
 
-    //public void setParentReportsByParentId(Collection<ParentReportsEntity> parentReportsByParentId) {
-    //    this.parentReportsByParentId = parentReportsByParentId;
-    // }
+    public void setParentReportsByParentId(Collection<ParentReportsEntity> parentReportsByParentId) {
+        this.parentReportsByParentId = parentReportsByParentId;
+    }
 }

@@ -1,8 +1,8 @@
-/*package kiddom.model;
+package kiddom.model;
 
 /**
  * Created by eleni on 02-Jun-17.
-
+**/
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -10,21 +10,10 @@ import java.util.Collection;
 @Entity
 @Table(name = "categories", schema = "mydb")
 public class CategoriesEntity {
-   /* private int catId;
     private String name;
     private Collection<SubcategoriesEntity> subcategoriesByCatId;
 
     @Id
-    @Column(name = "cat_id")
-    public int getCatId() {
-        return catId;
-    }
-
-    public void setCatId(int catId) {
-        this.catId = catId;
-    }
-
-    @Basic
     @Column(name = "name")
     public String getName() {
         return name;
@@ -38,12 +27,8 @@ public class CategoriesEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         CategoriesEntity that = (CategoriesEntity) o;
-
-        if (catId != that.catId) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
-
         return true;
     }
 
@@ -55,4 +40,4 @@ public class CategoriesEntity {
     public void setSubcategoriesByCatId(Collection<SubcategoriesEntity> subcategoriesByCatId) {
         this.subcategoriesByCatId = subcategoriesByCatId;
     }
-}*/
+}

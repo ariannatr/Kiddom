@@ -67,11 +67,11 @@ public class UserEntity {
     }
 
     @OneToOne(mappedBy = "userByProviderId")
-     public ProviderEntity getProviderByUserId() {
+    public ProviderEntity getProviderByUserId() {
         return providerByUserId;
      }
 
-     public void setProviderByUserId(ProviderEntity providerByUserId) {
+    public void setProviderByUserId(ProviderEntity providerByUserId) {
          this.providerByUserId = providerByUserId;
      }
 }

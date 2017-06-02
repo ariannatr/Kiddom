@@ -1,8 +1,8 @@
-/*package kiddom.model;
+package kiddom.model;
 
-
+/**
   Created by eleni on 02-Jun-17.
-
+**/
 
 import javax.persistence.*;
 
@@ -11,10 +11,10 @@ import javax.persistence.*;
 public class AreasEntity {
     private int areaId;
     private String name;
-    private int townId;
     private TownsEntity townsByTownId;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "area_id")
     public int getAreaId() {
         return areaId;
@@ -34,32 +34,19 @@ public class AreasEntity {
         this.name = name;
     }
 
-    @Id
-    @Column(name = "town_id")
-    public int getTownId() {
-        return townId;
-    }
-
-    public void setTownId(int townId) {
-        this.townId = townId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         AreasEntity that = (AreasEntity) o;
-
         if (areaId != that.areaId) return false;
-        if (townId != that.townId) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
         return true;
     }
 
-//    @ManyToOne
-    @JoinColumn(name = "town_id", referencedColumnName = "town_id", nullable = false)
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name = "towns_name", referencedColumnName = "name")
     public TownsEntity getTownsByTownId() {
         return townsByTownId;
     }
@@ -69,4 +56,4 @@ public class AreasEntity {
     }
 
 
-}*/
+}
