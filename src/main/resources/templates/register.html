@@ -6,19 +6,21 @@
 <!--/*@thymesVar id="user" type="model.UserEntity"*/-->
 <!--/*@thymesVar id="parent" type="model.ParentEntity"*/-->
 <head>
-<title>Kiddom-Register</title>
-<link th:href="@{css/register.css}" rel="stylesheet" type="text/css" media="all">
-<link th:href="@{css/layout.css}" rel="stylesheet" type="text/css" media="all">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Kiddom-Register</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        <title>Εγγραφή Χρήστη</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <meta name="description" content="Login and Registration Form with HTML5 and CSS3" />
-        <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
-        <meta name="author" content="Codrops" />
-        <link rel="shortcut icon" href="../favicon.ico"> 
-        <link rel="stylesheet" type="text/css" th:href="@{css/demo.css}" />
-		<link rel="stylesheet" type="text/css" th:href="@{css/animate-custom.css}" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<link th:href="@{css/layout.css}" rel="stylesheet" type="text/css" media="all">
+	<link th:href="@{css/register_new.css}" rel="stylesheet" type="text/css" media="all">
+	<script th:src="@{scripts/register_new.js}"></script>
+	<link th:href="@{styles/jquery-ui.css}" rel="stylesheet" type="text/css" media="all">
+	<link th:href="@{styles/jquery-ui.structure.css}" rel="stylesheet" type="text/css" media="all">
+	<link th:href="@{styles/jquery-ui.theme.css}" rel="stylesheet" type="text/css" media="all">
 </head>
 <body id="top">
 <!-- ################################################################################################ -->
@@ -66,68 +68,110 @@
 	      </nav>
 	      <!-- ################################################################################################ -->
 	    </header>
+		  <div class="wrapper row1">
+			  <div id="breadcrumb" class="hoc clear">
+				  <!-- ################################################################################################ -->
+				  <ul>
+					  <li>Εγγραφη χρήστη</li>
+				  </ul>
+				  <!-- ################################################################################################ -->
+			  </div>
+		  </div>
 	</div>
 	</div>
 	<div class="wrapper row3" style="background-color:#b7c1ae" >
-  <main class="hoc container clear" > 
-	<div id="pageintro" class="hoc clear" style="padding:1% 0 1% 0 "> 
-	                <div id="container_demo"  >
-	                    <div id="wrapper">
-	                        <div id="login" class="animate form">
-	                           <form  autocomplete="off" th:action="@{/register}"
-									  th:object="${parent}" method="post"
-									  >
-	                                <h1> Εγγραφη </h1> 
-	                                <p> 
-	                                   <!-- <label for="name" class="name" data-icon="o" >Όνομα</label>-->
-	                                    <input id="name" name="name" required="required"  type="text"  placeholder="πχ .Κώστας" />
-	                                </p>
-								    <p>
-	                                  <!--  <label for="surname" class="surname" data-icon="ε">Επώνυμο</label>-->
-	                                    <input id="surname"  name="surname" required="required"  type="text" placeholder="πχ .Κώστας" />
-	                                </p>
-	                                <p> 
-	                                   <!-- <label for="username" class="uname" data-icon="χ">Όνομα χρήστη</label>-->
-	                                    <input id="username"  name="username" required="required" type="text"  placeholder="mysuperusername690" />
-	                                </p>
-	                                <p> 
-	                                 <!--   <label for="emailsignup" class="youmail" data-icon=" &#x2709;" > Εmail</label>-->
-	                                    <input id="email" name="email"  required="required" type="email"  placeholder="mysupermail@mail.com"/>
-	                                </p>
-	                                <p> 
-	                                  <!--  <label  class="fa"  data-icon="π">Περιοχή Διαμονής</label>-->
-	                                    <input id="area" name="area" required="required" type="text"  placeholder="πχ. Αργυρούπολη"/>
-	                                </p>
-								   <p>
-									   <!--  <label  class="fa"  data-icon="π">Πόλη Διαμονής</label>-->
-									   <input id="town" name="town" required="required" type="text"  placeholder="πχ. Αθήνα"/>
-								   </p>
-	                                <p> 
-	                                  <!--  <label for="tel" class="tel" data-icon="&#9743;">Τηλέφωνο</label>-->
-	                                    <input id="telephone" name="telephone" required="required" type="text"  placeholder="πχ .6975649578" />
-	                                </p>
-	                                
-	                                <p> 
-	                                  <!--  <label for="password" class="youpasswd" data-icon="κ">Κωδικός </label>-->
-	                                    <input id="password" name="password" required="required" type="password"  placeholder="πχ X8df!90EO"/>
-	                                </p>
-	                                <p> 
-	                                   <!-- <label for="passwordsignup_confirm" class="youpasswd" data-icon="κ">Παρακαλώ επιβεβαιώστε τον κωδικό !</label>-->
-	                                    <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="πχ. X8df!90EO"/>
-	                                </p>
-	                                <p> 
-	                                  <!--  <label  class="photo_upload" >Θα θέλατε να ανεβάσετε μια Φωτογραφία Προφιλ ;</label>-->
-	     								<input name="image" type="file" accept="image/*" id="menu_images" style="color: black;">
-	     								<img id="menu_image" class="preview_img" />
-	                                </p>
-	                                <p class="signin button"> 
-										<input type="submit" value="Εγγραφή"/> 
-									</p>
-	                                <p class="change_link">  
-										Είστε ήδη μέλος ;
-										<a href="#tologin" class="to_register"> Σύνδεση </a>
-									</p>
-	                            </form>
+  		<main class="hoc container clear" >
+			<div id="pageintro" class="hoc clear" style="padding:1% 0 1% 0 ">
+				<div id="container"  >
+	                    <div id="wrapper stepwizard">
+							<div class="stepwizard-row setup-panel ">
+								<div class="stepwizard-step">
+									<a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+								</div>
+								<div class="stepwizard-step">
+									<a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+								</div>
+							</div>
+							<br>
+	                        <div id="login" >
+								<form  class="group" id="loginForm" method="POST" th:action="@{/register_prov}" autocomplete="on">
+
+									<div class="row setup-content" id="step-1">
+
+										<div class="col-md-10">
+											<h4>Βήμα 1 :Συμπληρώστε τα στοιχεία σας</h4>
+											<div class="form-group">
+												<label for="name" class="name" data-icon="o">Όνομα</label>
+												<input id="name" name="name" required="required" class="form-control" type="text" placeholder="πχ .Κώστας" />
+												<span class="help-block"></span>
+											</div>
+											<div class="form-group">
+												<label for="surname" class="surname" data-icon="ε">Επώνυμο</label>
+												<input id="surname" name="surname" required="required" class="form-control" type="text" placeholder="πχ .Κώστας"  />
+												<span class="help-block"></span>
+											</div>
+
+											<div class="form-group">
+												<label  for ="town" class="fa"  data-icon="π">Πόλη Διαμονής</label>
+												<input id="town" name="town" required="required" class="form-control" type="text"  placeholder="πχ. Αθήνα"/>
+												<span class="help-block"></span>
+											</div>
+
+											<div class="form-group">
+												<label for="area" class="fa"  data-icon="π">Περιοχή</label>
+												<input id="area" name="area" required="required" class="form-control" type="text"  placeholder="πχ. Αργυρούπολη"/>
+												<span class="help-block"></span>
+											</div>
+
+											<div class="form-group">
+												<label for="telephone" class="tel" data-icon="&#9743;">Τηλέφωνο</label>
+												<input id="telephone" name="tel" required="required" class="form-control" type="text" placeholder="πχ .6975649578" />
+												<span class="help-block"></span>
+											</div>
+
+											<div class="form-group">
+												<label for="image" class="photo_upload" >Θα θέλατε να ανεβάσετε μια Φωτογραφία Προφιλ ;</label>
+												<input name="image" id="image" type="file" accept="image/*" id="menu_images" style="color: black;"/>
+												<!--img id="menu_image" class="preview_img" /-->
+												<span class="help-block"></span>
+											</div>
+											<button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Επόμενο</button>
+										</div>
+
+									</div>
+									<div class="row setup-content" id="step-2">
+										<div class="col-md-10">
+											<h4>Βήμα 2 :Στοιχεία Λογιαρισμού</h4>
+											<div class="form-group">
+												<label for="username" class="uname" data-icon="χ">Όνομα χρήστη</label>
+												<input id="username" name="username" required="required" class="form-control" type="text" placeholder="mysuperusername690" />
+												<span class="help-block"></span>
+											</div>
+											<div class="form-group">
+												<label for="email" class="youmail" data-icon=" &#x2709;" > Εmail</label>
+												<input id="email" name="email" required="required" class="form-control" type="email" placeholder="mysupermail@mail.com"/>
+												<span class="help-block"></span>
+											</div>
+											<div class="form-group">
+												<label for="password" class="youpasswd" data-icon="κ">Κωδικός </label>
+												<input id="password" name="password" required="required" class="form-control" type="password" placeholder="πχ X8df!90EO"/>
+												<span class="help-block"></span>
+											</div>
+											<div class="form-group">
+												<label for="passwordsignup_confirm" class="youpasswd" data-icon="κ">Επιβεβαίωση κωδικού</label>
+												<input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" class="form-control" type="password" placeholder="πχ. X8df!90EO"/>
+												<span class="help-block"></span>
+											</div>
+
+											<button class="btn btn-success btn-lg pull-right" type="submit">Εγγραφη</button>
+										</div>
+									</div>
+
+								</form>
+								<p class="change_link" style="position: relative;">
+									Είστε ήδη μέλος ;
+									<a href="index#login_overlay" class="to_register"> Σύνδεση </a>
+								</p>
 	                        </div>	
 	                    </div>
 	                </div>  

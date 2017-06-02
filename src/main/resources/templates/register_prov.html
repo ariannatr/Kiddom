@@ -14,7 +14,7 @@
 
 	<link th:href="@{css/layout.css}" rel="stylesheet" type="text/css" media="all">
 	<link th:href="@{css/register_new.css}" rel="stylesheet" type="text/css" media="all">
-	<script th:href="@{scripts/register_new.css}"></script>
+	<script th:src="@{scripts/register_new.js}"></script>
 	<link th:href="@{styles/jquery-ui.css}" rel="stylesheet" type="text/css" media="all">
 	<link th:href="@{styles/jquery-ui.structure.css}" rel="stylesheet" type="text/css" media="all">
 	<link th:href="@{styles/jquery-ui.theme.css}" rel="stylesheet" type="text/css" media="all">
@@ -107,16 +107,18 @@
 										<input id="surname" name="surname" required="required" class="form-control" type="text" placeholder="πχ .Κώστας"  />
 										<span class="help-block"></span>
 									</div>
-									<div class="form-group">
-										<label for="area" class="fa"  data-icon="π">Χώρος/Χώροι</label>
-										<input id="area" name="area" required="required" class="form-control" type="text"  placeholder="πχ. Αργυρούπολη"/>
-										<span class="help-block"></span>
-									</div>
+
 									<div class="form-group">
 										<label  for ="town" class="fa"  data-icon="π">Πόλη Διαμονής</label>
 										<input id="town" name="town" required="required" class="form-control" type="text"  placeholder="πχ. Αθήνα"/>
 										<span class="help-block"></span>
 									</div>
+									<div class="form-group">
+										<label for="area" class="fa"  data-icon="π">Περιοχή</label>
+										<input id="area" name="area" required="required" class="form-control" type="text"  placeholder="πχ. Αργυρούπολη"/>
+										<span class="help-block"></span>
+									</div>
+
 									<div class="form-group">
 										<label for="telephone" class="tel" data-icon="&#9743;">Τηλέφωνο</label>
 										<input id="telephone" name="tel" required="required" class="form-control" type="text" placeholder="πχ .6975649578" />
