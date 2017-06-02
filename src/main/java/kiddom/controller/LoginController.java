@@ -2,6 +2,7 @@ package kiddom.controller;
 
 
 import kiddom.model.ParentEntity;
+import kiddom.model.ProviderEntity;
 import kiddom.model.UserEntity;
 import kiddom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,4 +129,26 @@ public class LoginController {
 		return modelAndView;
 	}
 
+	@RequestMapping(value = "/register_prov", method = RequestMethod.POST)
+	public ModelAndView createNewUserProvider(@ModelAttribute @Valid UserEntity user, @ModelAttribute @Valid ProviderEntity provider, BindingResult bindingResult) {
+		ModelAndView modelAndView = new ModelAndView();
+		UserEntity userExists = userService.findByUsername(user.getUsername());
+		if (userExists != null) {
+			bindingResult
+					.rejectValue("username", "error.user",
+							"There is already a user registered with the username provided");
+		}
+		if (bindingResult.hasErrors()) {
+			modelAndView.setViewName("registration");
+		} else {
+			userService.saveUserProvider(user,provider);
+			//userRepository.saveUser(user);
+			modelAndView.addObject("successMessage", "User has been registered successfully");
+			modelAndView.addObject("user", new UserEntity());
+			modelAndView.addObject("parent", new ProviderEntity());
+			modelAndView.setViewName("index");
+
+		}
+		return modelAndView;
+	}
 }

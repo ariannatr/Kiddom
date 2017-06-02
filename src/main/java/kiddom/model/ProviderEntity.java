@@ -1,16 +1,16 @@
-/*package kiddom.model;
+package kiddom.model;
 
 import javax.persistence.*;
 import java.util.Collection;
 
-/**
+/*
  * Created by eleni on 01-Jun-17.
-
+*/
 
 @Entity
 @Table(name = "provider", schema = "mydb")
 public class ProviderEntity {
- /*   private String username;
+    private String username;
     private String name;
     private String surname;
     private String email;
@@ -131,7 +131,7 @@ public class ProviderEntity {
 
         ProviderEntity that = (ProviderEntity) o;
 
-        if (username != that.username) return false;
+        if (!username.equals(that.username)) return false;
         if (owedPoints != that.owedPoints) return false;
         if (gottenPoints != that.gottenPoints) return false;
         if (totalPoints != that.totalPoints) return false;
@@ -145,7 +145,7 @@ public class ProviderEntity {
     }
 
     @OneToOne
-    @JoinColumn(name = "provider_id", referencedColumnName = "user_id", nullable = false)
+    @PrimaryKeyJoinColumn(name = "username", referencedColumnName = "username")
     public UserEntity getUserByProviderId() {
         return userByProviderId;
     }
@@ -173,4 +173,3 @@ public class ProviderEntity {
     //}
 
 }
-*/
