@@ -1,15 +1,16 @@
-/*package kiddom.model;
+package kiddom.model;
 
 /**
  * Created by eleni on 02-Jun-17.
-
+**/
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "provider_reports", schema = "mydb")
-public class ProviderReportsEntity {
-  /*  private int reportId;
+public class ProviderReportsEntity implements Serializable {
+    private int reportId;
     private String report;
     private String provider_username;
     private String user_username;
@@ -55,6 +56,26 @@ public class ProviderReportsEntity {
         this.user_username = user_username;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ProviderReportsEntity that = (ProviderReportsEntity) o;
+
+        if (reportId != that.reportId) return false;
+        if (report != null ? !report.equals(that.report) : that.report != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = reportId;
+        result = 31 * result + (report != null ? report.hashCode() : 0);
+        return result;
+    }
+
     @ManyToOne
     @JoinColumn(name = "provider_username", referencedColumnName = "username", nullable = false)
     public ProviderEntity getProviderByProviderId() {
@@ -65,4 +86,3 @@ public class ProviderReportsEntity {
         this.providerByProviderId = providerByProviderId;
     }
 }
-*/

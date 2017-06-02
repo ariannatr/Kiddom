@@ -2,14 +2,16 @@ package kiddom.model;
 
 /**
  * Created by eleni on 02-Jun-17.
-
+**/
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
 @Table(name = "single_event", schema = "mydb")
-public class SingleEventEntity {
-/*    private String provider_username;
+public class SingleEventEntity implements Serializable {
+    private String provider_username;
     private int eventId;
     private String name;
     private String description;
@@ -30,10 +32,12 @@ public class SingleEventEntity {
     private int number;
     private int postcode;
     private float rating;
-    private ReservationsEntity reservationsByEventId;
-    private CommentsEntity commentsByEventId;
+    private ProviderEntity providerByProviderId;
+    //private ReservationsEntity reservationsByEventId;
+    private Collection<CommentsEntity> commentsByEventId;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "event_id")
     public int getEventId() {
         return eventId;
@@ -194,6 +198,16 @@ public class SingleEventEntity {
     }
 
     @Basic
+    @Column (name = "town")
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
+    }
+
+    @Basic
     @Column(name = "address")
     public String getAddress() {
         return address;
@@ -233,7 +247,62 @@ public class SingleEventEntity {
         this.rating = rating;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SingleEventEntity that = (SingleEventEntity) o;
+
+        if (eventId != that.eventId) return false;
+        if (capacity != that.capacity) return false;
+        if (price != that.price) return false;
+        if (availability != that.availability) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (photos != null ? !photos.equals(that.photos) : that.photos != null) return false;
+        if (date != null ? !date.equals(that.date) : that.date != null) return false;
+        if (startTime != null ? !startTime.equals(that.startTime) : that.startTime != null) return false;
+        if (endTime != null ? !endTime.equals(that.endTime) : that.endTime != null) return false;
+        if (category != null ? !category.equals(that.category) : that.category != null) return false;
+        if (sub1 != null ? !sub1.equals(that.sub1) : that.sub1 != null) return false;
+        if (sub2 != null ? !sub2.equals(that.sub2) : that.sub2 != null) return false;
+        if (sub3 != null ? !sub3.equals(that.sub3) : that.sub3 != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = eventId;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (photos != null ? photos.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (startTime != null ? startTime.hashCode() : 0);
+        result = 31 * result + (endTime != null ? endTime.hashCode() : 0);
+        result = 31 * result + capacity;
+        result = 31 * result + price;
+        result = 31 * result + availability;
+        result = 31 * result + (category != null ? category.hashCode() : 0);
+        result = 31 * result + (sub1 != null ? sub1.hashCode() : 0);
+        result = 31 * result + (sub2 != null ? sub2.hashCode() : 0);
+        result = 31 * result + (sub3 != null ? sub3.hashCode() : 0);
+        return result;
+    }
+
     @ManyToOne
+    @PrimaryKeyJoinColumn(name = "provider_username", referencedColumnName = "username")
+    public ProviderEntity getProviderByProviderId() {
+        return providerByProviderId;
+    }
+
+    public void setProviderByProviderId(ProviderEntity providerByProviderId) {
+        this.providerByProviderId = providerByProviderId;
+    }
+
+
+    /*@ManyToOne
     @JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false)
     public ReservationsEntity getReservationsByEventId() {
         return reservationsByEventId;
@@ -241,13 +310,14 @@ public class SingleEventEntity {
 
     public void setReservationsByEventId(ReservationsEntity reservationsByEventId) {
         this.reservationsByEventId = reservationsByEventId;
+    }*/
+
+    @OneToMany(mappedBy = "eventByEventId")
+    public Collection<CommentsEntity> getCommentsByEventId() {
+        return commentsByEventId;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false)
-
-    public void setCommentsByEventId(CommentsEntity commentsByEventId) {
+    public void setCommentsByEventId(Collection<CommentsEntity> commentsByEventId) {
         this.commentsByEventId = commentsByEventId;
     }
 }
-*/

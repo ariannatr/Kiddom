@@ -21,7 +21,8 @@ public class ProviderEntity {
     private int totalPoints;
     private int approved;
     private UserEntity userByProviderId;
-    //private Collection<ProviderReportsEntity> providerReportsByProviderId;
+    private Collection<ProviderReportsEntity> providerReportsByProviderId;
+    private Collection<SingleEventEntity> singleEventByProviderId;
     //private Collection<SpotEntity> spotsByProviderId;
 
     @Id
@@ -154,22 +155,24 @@ public class ProviderEntity {
         this.userByProviderId = userByProviderId;
     }
 
-    //@OneToMany(mappedBy = "providerByProviderId")
-    //public Collection<ProviderReportsEntity> getProviderReportsByProviderId() {
-    //    return providerReportsByProviderId;
-    //}
+    @OneToMany(mappedBy = "providerByProviderId")
+    public Collection<ProviderReportsEntity> getProviderReportsByProviderId() {
+        return providerReportsByProviderId;
+    }
 
-    //public void setProviderReportsByProviderId(Collection<ProviderReportsEntity> providerReportsByProviderId) {
-    //    this.providerReportsByProviderId = providerReportsByProviderId;
-    //}
+    public void setProviderReportsByProviderId(Collection<ProviderReportsEntity> providerReportsByProviderId) {
+        this.providerReportsByProviderId = providerReportsByProviderId;
+    }
 
-    //@OneToMany(mappedBy = "providerByProviderId")
-    //public Collection<SpotEntity> getSpotsByProviderId() {
-    //   return spotsByProviderId;
-    //}
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //public void setSpotsByProviderId(Collection<SpotEntity> spotsByProviderId) {
-    //    this.spotsByProviderId = spotsByProviderId;
-    //}
+    @OneToMany(mappedBy = "providerByProviderId")
+    public Collection<SingleEventEntity> getSingleEventByProviderId() {
+        return singleEventByProviderId;
+    }
+
+    public void setSingleEventByProviderId(Collection<SingleEventEntity> providerReportsByProviderId) {
+        this.singleEventByProviderId = singleEventByProviderId;
+    }
 
 }
