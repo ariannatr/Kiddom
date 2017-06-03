@@ -1,5 +1,6 @@
 package kiddom.service;
 
+import kiddom.repository.CookieRepository;
 import kiddom.repository.ParentRepository;
 import kiddom.repository.ProviderRepository;
 import kiddom.repository.UserRepository;
@@ -26,6 +27,9 @@ public class UserServiceImpl implements UserService {
     @Qualifier("providerRepository")
     @Autowired
     private ProviderRepository providerRepository;
+    @Qualifier("cookieRepository")
+    @Autowired
+    private CookieRepository cookieRepository;
   //  @Autowired
     //private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
@@ -75,7 +79,7 @@ public class UserServiceImpl implements UserService {
       //  parent.setUsername(user.getUsername());
         user.setParentByUserId(parent);
         userRepository.save(user);
-
+        CookiesEntity cookie = new CookiesEntity();
         System.out.println("Creating parent user...");
         //parent = new ParentEntity();
         parent.setName(parent.getName());
@@ -92,7 +96,11 @@ public class UserServiceImpl implements UserService {
         parent.setTotalPoints(0);
         parent.setUsername(user.getUsername());
         parent.setUserByParentId(user);
+        cookie.setCategory("none");
+        cookie.setParentByParentId(parent);
+        cookie.setUsername(user.getUsername());
 		parentRepository.save(parent);
+        cookieRepository.save(cookie);
 
 	}
 
@@ -106,23 +114,11 @@ public class UserServiceImpl implements UserService {
        /*if (request.getParameter("image") != null) {
 			parent.setPhoto(request.getParameter("image"));
 		}*/
-
-//		dd.insert(user);
-//		pdd.insert(parent);
-        //Role userRole = roleRepository.findByRole("ADMIN");
-        //user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-        //  parent.setUsername(user.getUsername());
         user.setProviderByUserId(provider);
         userRepository.save(user);
 
         System.out.println("Creating provider user...");
-        //parent = new ParentEntity();
-       // provider.setName(provider.getName());//maybe not
-       // provider.setSurname(provider.getSurname());//maybe not
-       // provider.setEmail(provider.getEmail());//maybe not
-       // provider.setTelephone(provider.getTelephone());//maybe not
         System.out.println("Trying to add "+provider.getName()+" "+provider.getSurname()+"  "+provider.getEmail());
-     //   provider.setTr(provider.getTr());//maybe not
         provider.setApproved(0);
         provider.setGottenPoints(0);
         provider.setOwedPoints(0);
@@ -131,6 +127,7 @@ public class UserServiceImpl implements UserService {
         System.out.println("Trying to add "+provider.getName()+" "+provider.getSurname()+"  "+provider.getEmail());
 
         providerRepository.save(provider);
+
 
     }
 
