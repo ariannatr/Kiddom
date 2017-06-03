@@ -69,6 +69,17 @@ public class LoginController {
 		return modelAndView;
 	}
 
+    @RequestMapping(value="/activity_reg", method = RequestMethod.GET)
+    public ModelAndView activity_register(@ModelAttribute @Valid ProviderEntity provider,@ModelAttribute @Valid UserEntity user){
+        ModelAndView modelAndView = new ModelAndView();
+        //UserEntity user = new UserEntity();
+        //ParentEntity parent=new ParentEntity();
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("provider",provider);
+        modelAndView.setViewName("/activity_reg");
+        return modelAndView;
+    }
+
 	@RequestMapping(value="/register_prov", method = RequestMethod.GET)
 	public ModelAndView register_prov(){
 		ModelAndView modelAndView = new ModelAndView();
