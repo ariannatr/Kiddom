@@ -1,9 +1,6 @@
 package kiddom.service;
 
-import kiddom.repository.CookieRepository;
-import kiddom.repository.ParentRepository;
-import kiddom.repository.ProviderRepository;
-import kiddom.repository.UserRepository;
+import kiddom.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,6 +17,10 @@ public class UserServiceImpl implements UserService {
     @Qualifier("userRepository")
     @Autowired
 	private UserRepository userRepository;
+
+    @Qualifier("activityRepository")
+    @Autowired
+    private ActivityRepository activityRepository;
 
     @Qualifier("parentRepository")
 	@Autowired
@@ -138,4 +139,11 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public void saveActivity(UserEntity user,ProviderEntity provider,SingleEventEntity event)
+    {
+        event.setProviderByProviderId(provider);
+        System.out.print("Trying to save event at :"+event.getAddress()+" Starts "+event.getStartTime()+" Ends "+event.getEndTime());
+        activityRepository.save(event);
+    }
 }

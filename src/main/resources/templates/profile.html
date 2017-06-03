@@ -6,7 +6,9 @@ Author URI: http://www.os-templates.com/
 Licence: Free to use under our free template licence terms
 Licence URI: http://www.os-templates.com/template-terms
 -->
-<html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <style>
         .profileHeadings {
@@ -22,17 +24,18 @@ Licence URI: http://www.os-templates.com/template-terms
     </style>
     <title>My profile</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <meta charset="utf-8">
 
-    <link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
-    <link rel="stylesheet" href="../layout/styles/user_prof.css">
-    <link href="layout/styles/jquery-ui.css" rel="stylesheet" type="text/css" media="all">
-    <link href="layout/styles/jquery-ui.structure.css" rel="stylesheet" type="text/css" media="all">
-    <link href="layout/styles/jquery-ui.theme.css" rel="stylesheet" type="text/css" media="all">
+    <link th:href="@{css/layout.css}" rel="stylesheet" type="text/css" media="all">
+    <link rel="stylesheet" th:href="@{css/user_prof.css}">
+    <link th:href="@{styles/jquery-ui.css}" rel="stylesheet" type="text/css" media="all">
+    <link th:href="@{styles/jquery-ui.structure.css}" rel="stylesheet" type="text/css" media="all">
+    <link th:href="@{styles/jquery-ui.theme.css}" rel="stylesheet" type="text/css" media="all">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
 </head>
 
@@ -50,6 +53,8 @@ Licence URI: http://www.os-templates.com/template-terms
             <div class="fl_right">
                 <ul>
                     <li><a href="#"><i class="fa fa-lg fa-home"></i></a></li>
+                    <!--/*@thymesVar id="user" type="model.UserEntity"*/-->
+                    <li><a href="#" th:text="${name}">Username</a></li>
                     <li><a href="#">Αποσυνδεση</a></li>
                 </ul>
             </div>
@@ -63,19 +68,19 @@ Licence URI: http://www.os-templates.com/template-terms
         <header id="header" class="hoc clear">
             <!-- ################################################################################################ -->
             <div id="logo" class="fl_left">
-                <h1><a href="index.html">Kiddom</a></h1>
+                <h1><a href="index">Kiddom</a></h1>
             </div>
             <nav id="mainav" class="fl_right">
                 <ul class="clear">
-                    <li class="active"><a href="index.html">Αρχικη</a></li>
+                    <li class="active"><a href="index">Αρχικη</a></li>
                     <li><a class="drop" href="#">Δραστηριοτητες</a>
                         <ul>
-                            <li><a href="./gallery.html">Ενεργές Δραστηριότητες</a></li>
-                            <li><a href="./full-width.html">Παλαιότερες Δραστηριότητες</a></li>
+                            <li><a href="#">Ενεργές Δραστηριότητες</a></li>
+                            <li><a href="#">Παλαιότερες Δραστηριότητες</a></li>
 
                         </ul>
                     </li>
-                    <li><a href="./about.html">Σχετικα με εμας</a></li>
+                    <li><a href="about">Σχετικα με εμας</a></li>
                     <li><a href="#">FAQ</a></li>
                 </ul>
             </nav>
@@ -707,11 +712,11 @@ Licence URI: http://www.os-templates.com/template-terms
 <a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
 <!-- JAVASCRIPTS -->
 
-<script src="layout/scripts/jquery.min.js"></script>
-<script src="layout/scripts/jquery.backtotop.js"></script>
-<script src="layout/scripts/jquery.mobilemenu.js"></script>
-<script src="layout/scripts/jquery.flexslider-min.js"></script>
-<script src="layout/scripts/jquery-ui.js"></script>
+<script th:src="@{scripts/jquery.min.js}"></script>
+<script th:src="@{scripts/jquery.backtotop.js}"></script>
+<script th:src="@{scripts/jquery.mobilemenu.js}"></script>
+<script th:src="@{scripts/jquery.flexslider-min.js}"></script>
+<script th:src="@{scripts/jquery-ui.js}"></script>
 <script type="text/javascript">
     jQuery(function(){
         jQuery('#datepicker').datepicker({
