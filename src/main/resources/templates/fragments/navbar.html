@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+    <div th:fragment="navbar(module)">
+
+        <div class="bgded overlay" >
+            <!-- ################################################################################################ -->
+            <div class="wrapper row0">
+                <div id="topbar" class="hoc clear">
+                    <!-- ################################################################################################ -->
+
+                    <div class="fl_right">
+                        <ul>
+                            <li><a th:href="index"><i class="fa fa-lg fa-home"></i></a></li>
+                            <li><a data-toggle="modal" href="#login_overlay">Σύνδεση</a> </li>
+                            <li th:classappend="${module == 'register' ? 'active' : ''}">
+                                <a  th:href="register">Εγγραφη</a>
+                            </li>
+                            <li th:classappend="${module == 'register_prov' ? 'active' : ''}">
+                                <a  th:href="register_prov">Παροχοι</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <!-- ################################################################################################ -->
+                </div>
+            </div>
+            <!-- ################################################################################################ -->
+            <!-- ################################################################################################ -->
+            <!-- ################################################################################################ -->
+
+
+            <div class="wrapper row1">
+                <header id="header" class="hoc clear">
+                    <!-- ################################################################################################ -->
+                    <div id="logo" class="fl_left">
+                        <h1><a th:href="index">Kiddom</a></h1>
+                    </div>
+                    <nav id="mainav" class="fl_right">
+                        <ul class="clear">
+                            <li th:classappend="${module == 'index' ? 'active' : ''}">
+                                <a  th:href="index">Αρχική</a>
+                            </li>
+                            <li><a class="drop" href="#">Δραστηριοτητες</a>
+                                <ul>
+                                    <li><a th:href="gallery">Ενεργές Δραστηριότητες</a></li>
+                                    <li><a th:href="full-width">Παλαιότερες Δραστηριότητες</a></li>
+
+                                </ul>
+                            </li>
+                            <li th:classappend="${module == 'about' ? 'active' : ''}">
+                                <a  th:href="about">Σχετικα με εμας</a>
+                            </li>
+                            <li th:classappend="${module == 'faq' ? 'active' : ''}">
+                                <a  th:href="faq">FAQ</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- ################################################################################################ -->
+                </header>
+                <div >
+                    <div id="breadcrumb" class="hoc clear">
+                        <!-- ################################################################################################ -->
+                        <ul>
+                            <li><a th:href="index">Αρχικη</a></li>
+                            <li>Σχετικα με εμας</li>
+                        </ul>
+                        <!-- ################################################################################################ -->
+                    </div>
+                </div>
+            </div>
+            <!-- ################################################################################################ -->
+            <!-- ################################################################################################ -->
+            <!-- ################################################################################################ -->
+            <!-- End Top Background Image Wrapper -->
+
+        </div>
+        <!--- SYNDESI           .............................................................              -->
+        <div class="modal fade" id="login_overlay">
+            <div  class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Κλείσιμο</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Συνδεση στο KIDDOM</h4>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <div class="logindiv" style="margin:0 auto;">
+                                <div class="well" style="margin-left: 8px; margin-right: 8px">
+                                    <form class="group" id="loginForm" method="POST" th:action="@{/login}" novalidate="novalidate">
+
+                                        <div class="form-group">
+                                            <label for="username" class="control-label">Όνομα Χρήστη</label>
+                                            <input type="text" class="form-control" id="username" name="username" value="" required="required" title="Συμπληρώστε το όνομα χρήστη" placeholder="username">
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password" class="control-label">Κωδικός Χρήστη</label>
+                                            <input type="password" class="form-control" id="password" name="password" value="" required="required" title="Συμπληρώστε τον κωδικό σας">
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <div id="loginErrorMsg" class="alert alert-error hidden">Λάθος όνομα ή κωδικός χρήστη</div>
+
+                                        <div  class="form-group" style="display:inline-block">
+                                            <div   class="checkbox" >
+                                                <label><input type="checkbox" id="remeber" /> Να με θυμάσαι </label>
+
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-success btn-block">Συνδεση</button>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
