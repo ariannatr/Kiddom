@@ -145,7 +145,7 @@ public class LoginController {
 			//userRepository.saveUser(user);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new UserEntity());
-			modelAndView.addObject("parent", new ProviderEntity());
+			modelAndView.addObject("provider", new ProviderEntity());
 			modelAndView.setViewName("index");
 
 		}

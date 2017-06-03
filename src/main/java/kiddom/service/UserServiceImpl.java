@@ -117,11 +117,12 @@ public class UserServiceImpl implements UserService {
 
         System.out.println("Creating provider user...");
         //parent = new ParentEntity();
-        provider.setName(provider.getName());//maybe not
-        provider.setSurname(provider.getSurname());//maybe not
-        provider.setEmail(provider.getEmail());//maybe not
-        provider.setTelephone(provider.getTelephone());//maybe not
-        provider.setTr(provider.getTr());//maybe not
+       // provider.setName(provider.getName());//maybe not
+       // provider.setSurname(provider.getSurname());//maybe not
+       // provider.setEmail(provider.getEmail());//maybe not
+       // provider.setTelephone(provider.getTelephone());//maybe not
+        System.out.println("Trying to add "+provider.getName()+" "+provider.getSurname()+"  "+provider.getEmail());
+     //   provider.setTr(provider.getTr());//maybe not
         provider.setApproved(0);
         provider.setGottenPoints(0);
         provider.setOwedPoints(0);
