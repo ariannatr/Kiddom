@@ -42,14 +42,21 @@ public class UserServiceImpl implements UserService {
 	@Override
     public UserEntity findByUsernamePassword(String username,String password){
         UserEntity userExists = findByUsername(username);
-        if(userExists.getPassword().equals(password))
+        if(userExists != null)
         {
-            System.out.println("Same password");
-            return userExists;
+            if(userExists.getPassword().equals(password))
+            {
+                System.out.println("Same password");
+                return userExists;
+            }
+            else
+            {
+                System.out.print("Username "+userExists.getUsername()+" pass in base "+userExists.getPassword()+" pass given "+password);
+                return null;
+            }
         }
         else
         {
-            System.out.print("Username "+userExists.getUsername()+" pass in base "+userExists.getPassword()+" pass given "+password);
             return null;
         }
     }
