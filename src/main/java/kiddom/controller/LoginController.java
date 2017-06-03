@@ -157,6 +157,15 @@ public class LoginController {
         return modelAndView;
     }
 
+	@RequestMapping(value="/faq", method = RequestMethod.GET)
+	public ModelAndView faq(@ModelAttribute("user") @Valid UserEntity user){
+		ModelAndView modelAndView = new ModelAndView();
+		//UserEntity user = new UserEntity();
+		modelAndView.addObject("user", user);
+		modelAndView.setViewName("faq");
+		return modelAndView;
+	}
+
 	@RequestMapping(value="/google_map", method = RequestMethod.GET)
 	public ModelAndView google_map(@ModelAttribute("user") @Valid UserEntity user){
 		ModelAndView modelAndView = new ModelAndView();
