@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/war2.iml" filepath="$PROJECT_DIR$/.idea/modules/war2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/war2_main.iml" filepath="$PROJECT_DIR$/.idea/modules/war2_main.iml" group="war2" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/war2_test.iml" filepath="$PROJECT_DIR$/.idea/modules/war2_test.iml" group="war2" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/war.iml" filepath="$PROJECT_DIR$/.idea/modules/war.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/war_main.iml" filepath="$PROJECT_DIR$/.idea/modules/war_main.iml" group="war" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/war_test.iml" filepath="$PROJECT_DIR$/.idea/modules/war_test.iml" group="war" />
     </modules>
   </component>
 </project>

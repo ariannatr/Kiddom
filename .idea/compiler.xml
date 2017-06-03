@@ -6,6 +6,8 @@
       <module name="KiddomF_test" target="1.8" />
       <module name="war2_main" target="1.8" />
       <module name="war2_test" target="1.8" />
+      <module name="war_main" target="1.8" />
+      <module name="war_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

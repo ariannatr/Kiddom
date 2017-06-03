@@ -98,6 +98,15 @@ public class LoginController {
         return modelAndView;
     }
 
+	@RequestMapping(value="/google_map", method = RequestMethod.GET)
+	public ModelAndView google_map(){
+		ModelAndView modelAndView = new ModelAndView();
+		//UserEntity user = new UserEntity();
+		//modelAndView.addObject("user", user);
+		modelAndView.setViewName("google_map");
+		return modelAndView;
+	}
+
     @RequestMapping(value="/about", method = RequestMethod.GET)
     public ModelAndView about(){
         ModelAndView modelAndView = new ModelAndView();
