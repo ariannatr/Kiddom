@@ -34,7 +34,7 @@ public class LoginController {
             modelAndView.setViewName("about");
         }
 		if (bindingResult.hasErrors()) {
-			modelAndView.setViewName("register_prov");
+			modelAndView.setViewName("error_page");
 		}
 //		modelAndView.setViewName("register");
 		return modelAndView;
@@ -68,6 +68,15 @@ public class LoginController {
 		modelAndView.setViewName("register_prov");
 		return modelAndView;
 	}
+
+    @RequestMapping(value="/error_page", method = RequestMethod.GET)
+    public ModelAndView error(){
+        ModelAndView modelAndView = new ModelAndView();
+        //UserEntity user = new UserEntity();
+        //modelAndView.addObject("user", user);
+        modelAndView.setViewName("error_page");
+        return modelAndView;
+    }
 
     @RequestMapping(value="/about", method = RequestMethod.GET)
     public ModelAndView about(){
@@ -116,7 +125,7 @@ public class LoginController {
 							"There is already a user registered with the username provided");
 		}
 		if (bindingResult.hasErrors()) {
-			modelAndView.setViewName("registration");
+			modelAndView.setViewName("error_page");
 		} else {
 			userService.saveUser(user,parent);
 			//userRepository.saveUser(user);
@@ -139,7 +148,7 @@ public class LoginController {
 							"There is already a user registered with the username provided");
 		}
 		if (bindingResult.hasErrors()) {
-			modelAndView.setViewName("registration");
+			modelAndView.setViewName("error_page");
 		} else {
 			userService.saveUserProvider(user,provider);
 			//userRepository.saveUser(user);
