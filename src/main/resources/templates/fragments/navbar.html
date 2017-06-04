@@ -46,10 +46,14 @@
                             <li th:classappend="${module == 'index' ? 'active' : ''}">
                                 <a  th:href="index">Αρχική</a>
                             </li>
-                            <li><a class="drop" href="#">Δραστηριοτητες</a>
+                            <li><a class="drop" >Δραστηριοτητες</a>
                                 <ul>
-                                    <li><a th:href="gallery">Ενεργές Δραστηριότητες</a></li>
-                                    <li><a th:href="full-width">Παλαιότερες Δραστηριότητες</a></li>
+                                    <li th:classappend="${module == 'activity' ? 'active' : ''}">
+                                        <a  th:href="activity">Ενεργή Δραστηριότητα</a>
+                                    </li>
+                                    <li th:classappend="${module == 'activity_reg' ? 'active' : ''}">
+                                        <a  th:href="activity_reg">Δημιουργία Δραστηριότητας</a>
+                                    </li>
 
                                 </ul>
                             </li>

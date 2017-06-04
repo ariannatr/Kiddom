@@ -72,17 +72,19 @@ Licence URI: http://www.os-templates.com/template-terms
       <nav id="mainav" class="fl_right">
         <ul class="clear">
           <li class="active"><a href="index">Αρχικη</a></li>
-          <li><a class="drop" href="#">Δραστηριοτητες</a>
+          <li><a class="drop" >Δραστηριοτητες</a>
             <ul>
-              <li><a href="gallery">Ενεργές Δραστηριότητες</a></li>
-              <li><a href="full-width">Παλαιότερες Δραστηριότητες</a></li>
-              <!--<li><a href="pages/sidebar-left.html">Sidebar Left</a></li>
-              <li><a href="pages/sidebar-right.html">Sidebar Right</a></li>
-              <li><a href="pages/basic-grid.html">Basic Grid</a></li>-->
+              <li th:classappend="${module == 'activity' ? 'active' : ''}">
+                <a  th:href="activity">Ενεργή Δραστηριότητα</a>
+              </li>
+              <li th:classappend="${module == 'activity_reg' ? 'active' : ''}">
+                <a  th:href="activity_reg">Δημιουργία Δραστηριότητας</a>
+              </li>
+
             </ul>
           </li>
           <li><a href="about">Σχετικα με εμας</a></li>
-          <li><a href="#">FAQ</a></li>
+          <li><a href="faq">FAQ</a></li>
         </ul>
       </nav>
       <!-- ################################################################################################ -->
