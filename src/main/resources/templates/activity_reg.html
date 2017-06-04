@@ -19,7 +19,7 @@ Licence URI: http://www.os-templates.com/template-terms
 
 <div class="container">
 
-    <form class="well form-horizontal" action="@{/activity_reg}" method="POST"  id="contact_form">
+    <form class="well form-horizontal" th:action="@{/activity_reg}" method="POST"  id="contact_form">
         <fieldset>
 
             <!-- Form Name -->
@@ -31,7 +31,7 @@ Licence URI: http://www.os-templates.com/template-terms
                 <label class="col-md-4 control-label">Όνομα δραστηριότητας</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                         <input  name="name" placeholder="Όνομα δραστηριότητας" class="form-control"  type="text">
                     </div>
                 </div>
@@ -43,7 +43,7 @@ Licence URI: http://www.os-templates.com/template-terms
                 <label class="col-md-4 control-label" >Περιγραφή δραστηριότητας</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
                         <input name="description" placeholder="Περιγραφή δραστηριότητας (μέχρι 300 χαρακτήρες)" class="form-control"  type="text">
                     </div>
                 </div>
@@ -56,7 +56,7 @@ Licence URI: http://www.os-templates.com/template-terms
                 <label class="col-md-4 control-label">Ημερομηνία έναρξης δραστηριότητας</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                         <input name="date" placeholder="Ημερομηνία έναρξης δραστηριότητας" class="form-control"  type="text">
                     </div>
                 </div>
@@ -70,7 +70,7 @@ Licence URI: http://www.os-templates.com/template-terms
                 <label class="col-md-4 control-label">Ώρα έναρξης δραστηριότητας</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
                         <input name="start_time" placeholder="Ώρα έναρξης δραστηριότητας" class="form-control" type="text">
                     </div>
                 </div>
@@ -83,7 +83,7 @@ Licence URI: http://www.os-templates.com/template-terms
                 <label class="col-md-4 control-label">Ώρα λήξης δραστηριότητας</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
                         <input name="end_time" placeholder="Ώρα λήξης δραστηριότητας" class="form-control" type="text">
                     </div>
                 </div>
@@ -96,7 +96,7 @@ Licence URI: http://www.os-templates.com/template-terms
                 <label class="col-md-4 control-label">Διαθέσιμες θέσεις</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <input name="capacity" placeholder="Διαθέσιμες θέσεις" class="form-control"  type="text">
                     </div>
                 </div>
@@ -109,7 +109,7 @@ Licence URI: http://www.os-templates.com/template-terms
                 <label class="col-md-4 control-label">Τιμή ανά άτομο</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
                         <input name="price" placeholder="Τιμή ανά άτομο" class="form-control"  type="text">
                     </div>
                 </div>
@@ -168,7 +168,7 @@ Licence URI: http://www.os-templates.com/template-terms
                 <label class="col-md-4 control-label">Οδός</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
                         <input name="address" placeholder="Οδός" class="form-control"  type="text">
                     </div>
                 </div>
@@ -194,7 +194,7 @@ Licence URI: http://www.os-templates.com/template-terms
                 <label class="col-md-4 control-label">Ταχυδρομικός κώδικας</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                         <input name="postcode" placeholder="Ταχυδρομικός κώδικας" class="form-control"  type="text">
                     </div>
                 </div>
