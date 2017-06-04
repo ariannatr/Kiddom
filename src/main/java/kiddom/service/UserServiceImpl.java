@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import kiddom.model.*;
+
+import java.util.Collection;
 //import com.example.model.Role;
 
 //import com.example.repository.RoleRepository;
@@ -31,6 +33,14 @@ public class UserServiceImpl implements UserService {
     @Qualifier("cookieRepository")
     @Autowired
     private CookieRepository cookieRepository;
+
+    @Qualifier("categoryRepository")
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Qualifier("subcategoryRepository")
+    @Autowired
+    private SubCategoryRepository subcategoryRepository;
   //  @Autowired
     //private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
@@ -145,5 +155,26 @@ public class UserServiceImpl implements UserService {
         event.setProviderByProviderId(provider);
         System.out.print("Trying to save event at :"+event.getAddress()+" Starts "+event.getStartTime()+" Ends "+event.getEndTime());
         activityRepository.save(event);
+    }
+
+    @Override
+    public void saveCategory(CategoriesEntity category)
+    {
+        System.out.print("Trying to save category :"+category.getName());
+        categoryRepository.save(category);
+    }
+
+    @Override
+    public void saveSubCategory(CategoriesEntity category, Collection<SubcategoriesEntity> subcategory)
+    {
+
+       // System.out.print("Trying to save subcategorycategory :"+subcategory.getName());
+        category.setSubcategoriesByCatId(subcategory);
+        categoryRepository.save(category);
+
+        for(SubcategoriesEntity sub :subcategory) {
+            sub.setCategoriesByCatId(category);
+        }
+        subcategoryRepository.save(subcategory);
     }
 }
