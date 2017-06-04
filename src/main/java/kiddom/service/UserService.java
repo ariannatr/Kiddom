@@ -4,6 +4,7 @@ import kiddom.model.*;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service("userService")
 public interface UserService {
@@ -13,5 +14,8 @@ public interface UserService {
 	public UserEntity findByUsernamePassword(String username,String Password);
 	public void saveActivity(UserEntity user,ProviderEntity provider,SingleEventEntity event);
 	public void saveCategory(CategoriesEntity category);
-	public void saveSubCategory(CategoriesEntity category, Collection<SubcategoriesEntity> subcategory);
+	public void saveSubCategory(CategoriesEntity category, List<SubcategoriesEntity> subcategory);
+	public  CategoriesEntity findByName(String name);
+	public void delete(SubcategoriesEntity subcat);
+	public void update(CategoriesEntity category);
 }

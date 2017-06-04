@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kiddom.model.*;
 
 import java.util.Collection;
+import java.util.List;
 //import com.example.model.Role;
 
 //import com.example.repository.RoleRepository;
@@ -49,6 +50,13 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByUsername(username);
 		//return null;
 	}
+
+    @Override
+    public CategoriesEntity findByName(String name) {
+        return categoryRepository.findByName(name);
+        //return null;
+    }
+
 
 	@Override
     public UserEntity findByUsernamePassword(String username,String password){
@@ -165,16 +173,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveSubCategory(CategoriesEntity category, Collection<SubcategoriesEntity> subcategory)
+    public void saveSubCategory(CategoriesEntity category, List<SubcategoriesEntity> subcategory)
     {
-
-       // System.out.print("Trying to save subcategorycategory :"+subcategory.getName());
-        category.setSubcategoriesByCatId(subcategory);
         categoryRepository.save(category);
-
+        System.out.print("Trying to save category :"+category.getName());
         for(SubcategoriesEntity sub :subcategory) {
+           //
+            //sub.setCategory_name(category.getName());
             sub.setCategoriesByCatId(category);
         }
         subcategoryRepository.save(subcategory);
+        category.setSubcategoriesByCatId(subcategory);
+        categoryRepository.saveAndFlush(category);
+    }
+
+    @Override
+    public  void delete(SubcategoriesEntity subcat){
+        subcategoryRepository.delete(subcat);
+    }
+    @Override
+    public void update(CategoriesEntity category)
+    {
+        categoryRepository.save(category);
     }
 }

@@ -5,12 +5,22 @@ package kiddom.model;
 **/
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "subcategories", schema = "mydb")
 public class SubcategoriesEntity {
     private String name;
     private CategoriesEntity categoriesByCatId;
+
+    @Transient // means "not a DB field"
+    private Integer remove; // boolean flag
+    public Integer getRemove()
+    {
+        return remove;
+    }
+    public void setRemove(Integer set){this.remove=set;}
+
 
     @Id
     @Column(name = "name")
@@ -21,6 +31,16 @@ public class SubcategoriesEntity {
     public void setName(String name) {
         this.name = name;
     }
+
+   /* @ManyToOne
+    @PrimaryKeyJoinColumn(name = "category_name",referencedColumnName = "name")
+    public String getCategory_name() {
+        return category_name;
+    }
+
+    public void setCategory_name(String name) {
+        this.category_name = name;
+    }*/
 
     @Override
     public boolean equals(Object o) {

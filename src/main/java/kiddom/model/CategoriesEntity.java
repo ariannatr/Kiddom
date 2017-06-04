@@ -6,12 +6,13 @@ package kiddom.model;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "categories", schema = "mydb")
 public class CategoriesEntity {
     private String name;
-    private Collection<SubcategoriesEntity> subcategoriesByCatId;
+    private List<SubcategoriesEntity> subcategoriesByCatId;
 
     @Id
     @Column(name = "name")
@@ -33,11 +34,11 @@ public class CategoriesEntity {
     }
 
     @OneToMany(mappedBy = "categoriesByCatId")
-    public Collection<SubcategoriesEntity> getSubcategoriesByCatId() {
+    public List<SubcategoriesEntity> getSubcategoriesByCatId() {
         return subcategoriesByCatId;
     }
 
-    public void setSubcategoriesByCatId(Collection<SubcategoriesEntity> subcategoriesByCatId) {
+    public void setSubcategoriesByCatId(List<SubcategoriesEntity> subcategoriesByCatId) {
         this.subcategoriesByCatId = subcategoriesByCatId;
     }
 }
