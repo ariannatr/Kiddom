@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <!--
 Template Name: Maxisonix
 Author: <a href="http://www.os-templates.com/">OS Templates</a>
@@ -6,100 +7,14 @@ Author URI: http://www.os-templates.com/
 Licence: Free to use under our free template licence terms
 Licence URI: http://www.os-templates.com/template-terms
 -->
-<html>
-<head>
-<title>Kiddom</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-  <link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
-   <link href="layout/styles/jquery-ui.css" rel="stylesheet" type="text/css" media="all">
-  <link href="layout/styles/jquery-ui.structure.css" rel="stylesheet" type="text/css" media="all">
-  <link href="layout/styles/jquery-ui.theme.css" rel="stylesheet" type="text/css" media="all">
-
-
+<head th:include="fragments/head :: head">
+  <title>Kiddom-Search</title>
 </head>
+
 <body id="top">
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- Top Background Image Wrapper -->
-<div class="bgded overlay" >
-  <!-- ################################################################################################ -->
-  <div class="wrapper row0">
-    <div id="topbar" class="hoc clear"> 
-      <!-- ################################################################################################ -->
-      
-      <div class="fl_right">
-        <ul>
-          <li><a href="../index.html"><i class="fa fa-lg fa-home"></i></a></li>
-          <li><a data-toggle="modal" href="#login_overlay">Συνδεση</a> </li>
-          <li><a href="./register.html">Εγγραφη</a></li>
-        </ul>
-      </div>
-      <!-- ################################################################################################ -->
-    </div>
-  </div>
-  <!-- ################################################################################################ -->
-  <!-- ################################################################################################ -->
-  <!-- ################################################################################################ -->
 
+<div th:replace="fragments/navbar :: navbar('search')"></div>
 
-  <div class="wrapper row1">
-    <header id="header" class="hoc clear"> 
-      <!-- ################################################################################################ -->
-      <div id="logo" class="fl_left">
-        <h1><a href="index.html">Kiddom</a></h1>
-      </div>
-      <nav id="mainav" class="fl_right">
-        <ul class="clear">
-          <li><a href="../index.html">Αρχικη</a></li>
-          <li><a class="drop" href="#">Δραστηριοτητες</a>
-            <ul>
-              <li><a href="./gallery.html">Ενεργές Δραστηριότητες</a></li>
-              <li><a href="./full-width.html">Παλαιότερες Δραστηριότητες</a></li>
-              
-            </ul>
-          </li>
-          <li><a href="./about.html">Σχετικα με εμας</a></li>
-          <li><a href="#">FAQ</a></li>
-        </ul>
-      </nav>
-      <!-- ################################################################################################ -->
-    </header>
-  </div>
-
-  <!-- ################################################################################################ -->
-  <!-- ################################################################################################ -->
-  <!-- ################################################################################################ -->
-<!-- End Top Background Image Wrapper -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<div class="wrapper row2">
-  <div id="breadcrumb" class="hoc clear"> 
-    <!-- ################################################################################################ -->
-    <ul>
-      <li><a href="../index.html">Αρχικη</a></li>
-      <li>Αναζητηση</li>
-    </ul>
-    <!-- ################################################################################################ -->
-  </div>
-</div>
-</div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-
-
-
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
 <div class="wrapper row3">
   <main class="hoc container clear"> 
     <!-- main body -->
@@ -150,7 +65,7 @@ Licence URI: http://www.os-templates.com/template-terms
 
           <div class="form-group">
             <label for="location1" class="control-label"  style="text-align: left;">Είδος χώρου</label>
-            <select class="form-control" name="" id="location1">
+            <select class="form-control" name="location1" id="location1">
               <option value="0">Οποιοσδήποτε</option>
               <option value="1">Εσωτερικός χώρος</option>
               <option value="2">Εξωτερικός χώρος</option>
@@ -159,11 +74,11 @@ Licence URI: http://www.os-templates.com/template-terms
 
 
           <div class="form-group">
-            <label for="agegroup" class="control-label"  style="text-align: left;">Ηλικίες</label>
-            <label class="inline"><input type="checkbox" autocomplete="off" id="0" value="0"> Βρέφη </label>
-            <label class="inline"><input type="checkbox" autocomplete="off" > Νήπια </label>
-            <label class="inline"><input type="checkbox" autocomplete="off" > Παιδία </label>
-            <label class="inline"><input type="checkbox" autocomplete="off" > Έφηβοι</label>  
+            <label  class="control-label"  style="text-align: left;">Ηλικίες</label>
+            <label class="inline"><input type="checkbox" autocomplete="off" id="0" value="0"/> Βρέφη </label>
+            <label class="inline"><input type="checkbox" autocomplete="off" /> Νήπια </label>
+            <label class="inline"><input type="checkbox" autocomplete="off" /> Παιδία </label>
+            <label class="inline"><input type="checkbox" autocomplete="off" /> Έφηβοι</label>
           </div>
 
           <!--div class="form-group">
@@ -179,11 +94,11 @@ Licence URI: http://www.os-templates.com/template-terms
             <label for="pricerange" class="control-label"  style="text-align: left;">Εύρος τιμής (€)</label>
             <div class="input-group" >
                 <label class="radio-inline">
-              <input type="radio" name="pricerange" id="price"  value="1"> 0-10    </label>  </br>
+              <input type="radio" name="pricerange" id="price1"  value="1"/> 0-10    </label>  </br>
               <label class="radio-inline">
-              <input type="radio" name="pricerange" id="price"  value="2">10-20 </label>  </br>
+              <input type="radio" name="pricerange" id="price2"  value="2"/>10-20 </label>  </br>
               <label class="radio-inline">
-              <input type="radio" name="pricerange" id="price" value="3">20-30 </label> 
+              <input type="radio" name="pricerange" id="price3" value="3"/>20-30 </label>
             </div>
           </div>
 
@@ -282,141 +197,39 @@ Licence URI: http://www.os-templates.com/template-terms
       </article> 
       </div>
     </br>
-    </div>
-
-      <div class="scrollable">
-        
-      </div>
-      
-      </br></br>
-       <nav class="pagination">
-        <ul>
-          <li><a href="#">&laquo; Previous</a></li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><strong>&hellip;</strong></li>
-          <li><a href="#">6</a></li>
-          <li class="current"><strong>7</strong></li>
-          <li><a href="#">8</a></li>
-          <li><a href="#">9</a></li>
-          <li><strong>&hellip;</strong></li>
-          <li><a href="#">14</a></li>
-          <li><a href="#">15</a></li>
-          <li><a href="#">Next &raquo;</a></li>
-        </ul>
-      </nav>
-   
-      <!-- ################################################################################################ -->
-    </div>
-    <!-- ################################################################################################ -->
-    <!-- / main body -->
-    <div class="clear"></div>
-  </main>
-</div>
-
-
-
-<!--- SYNDESI           .............................................................              -->
-  <div class="modal fade" id="login_overlay">  
-    <div  class="modal-dialog">
-      <div class="modal-content">
-          <div class="modal-header">
-             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Κλείσιμο</span></button>
-              <h4 class="modal-title" id="myModalLabel">Συνδεση στο KIDDOM</h4>
-              
-          </div>
-          <div class="modal-body">
-              <div class="row">
-                  
-                  <div class="logindiv" style="margin:0 auto;">
-                      <div class="well" style="margin-left: 8px margin-right: 8px">
-                          <form class="group" id="loginForm" method="POST" novalidate="novalidate">
-                            
-                              <div class="form-group">
-                                  <label for="username" class="control-label">Όνομα Χρήστη</label>
-                                  <input type="text" class="form-control" id="username" name="username" value="" required="" title="Συμπληρώστε το όνομα χρήστη" placeholder="username">
-                                  <span class="help-block"></span>
-                              </div>
-                              <div class="form-group">
-                                  <label for="password" class="control-label">Κωδικός Χρήστη</label>
-                                  <input type="password" class="form-control" id="password" name="password" value="" required="" title="Συμπληρώστε τον κωδικό σας">
-                                  <span class="help-block"></span>
-                              </div>
-                              <div id="loginErrorMsg" class="alert alert-error hidden">Λάθος όνομα ή κωδικός χρήστη</div>
-                              
-                              <div  class="form-group" style="display:inline-block">
-                                <div   class="checkbox" >
-                                  <label><input type="checkbox" id="remeber" /> Να με θυμάσαι </label>
-                                 
-                               </div>
-                             </div>
-                              <button type="submit" class="btn btn-success btn-block">Συνδεση</button>
-                            
-                          </form>
-                    </div>
-                  </div>
             </div>
-        </div>
-      </div>
+
+            <div class="scrollable">
+        
+            </div>
+      
+                </br></br>
+                <nav class="pagination">
+                    <ul>
+                          <li><a href="#">&laquo; Previous</a></li>
+                          <li><a href="#">1</a></li>
+                          <li><a href="#">2</a></li>
+                          <li><strong>&hellip;</strong></li>
+                          <li><a href="#">6</a></li>
+                          <li class="current"><strong>7</strong></li>
+                          <li><a href="#">8</a></li>
+                          <li><a href="#">9</a></li>
+                          <li><strong>&hellip;</strong></li>
+                          <li><a href="#">14</a></li>
+                          <li><a href="#">15</a></li>
+                        <li><a href="#">Next &raquo;</a></li>
+                    </ul>
+                </nav>
+            </div>
+    <!-- / main body -->
+        <div class="clear"></div>
+        </main>
     </div>
-  </div>
-
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<div class="wrapper row4 bgded overlay" style="background-color:#39475e">
-  <footer id="footer" class="hoc clear"> 
-    <!-- ################################################################################################ -->
-    <div class="one_half first">
-      <h6 class="title">Social Media</h6>
-      <p>Ακολουθείστε μας στα social media για να μαθαίνετε πρώτοι τα νέα του Kiddom.</p>
-    <!--  <p class="btmspace-15">Malesuada non sem quisque vulputate velit et nisi ullamcorper aliquet tincidunt ut id magna leo mattis in quam dapibus.</p>-->
-      <ul class="faico clear">
-        <li><a class="faicon-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-        <li><a class="faicon-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-      </ul>
-    </div>
-    <div class="one_half">
-      <h6 class="title">Στοιχεια Επικοινωνιας</h6>
-      <ul class="nospace linklist contact">
-        <li><i class="fa fa-map-marker"></i>
-          <address>
-          Οδός &amp; Αριθμός, Πόλη, Τ.Κ.
-          </address>
-        </li>
-        <li><i class="fa fa-phone"></i> +00 (123) 456 7890</li>
-        <li><i class="fa fa-fax"></i> +00 (123) 456 7890</li>
-        <li><i class="fa fa-envelope-o"></i> info@kiddom.com</li>
-      </ul>
-    </div>
-    <!-- ################################################################################################ -->
-  </footer>
-</div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<div class="wrapper row5">
-  <div id="copyright" class="hoc clear"> 
-    <!-- ################################################################################################ -->
-    <p class="fl_left">Copyright &copy; 2016 - All Rights Reserved - <a href="#">Domain Name</a></p>
-    <p class="fl_right">Template by <a target="_blank" href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
-    <!-- ################################################################################################ -->
-  </div>
-</div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
 
 
+    <div th:replace="fragments/foot :: foot"></div>
 
-<!-- JAVASCRIPTS -->
-<script src="../layout/scripts/jquery.min.js"></script>
-<script src="../layout/scripts/jquery.backtotop.js"></script>
-<script src="../layout/scripts/jquery.mobilemenu.js"></script>
-<script src="layout/scripts/jquery.flexslider-min.js"></script>
-<script src="layout/scripts/jquery-ui.js"></script>
-<script> 
+<script>
 function changeSelect( selectNo ) 
 { 
 var sels = document.getElementById("subcats").getElementsByTagName('SELECT'); 
@@ -426,8 +239,7 @@ sels[j].style.display = "none";
 if ( j===(selectNo-1) ) 
 { sels[j].style.display = ''; } 
 } 
-} 
-
+}
 </script> 
 
 </body>

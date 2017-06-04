@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <!--
 Template Name: Maxisonix
 Author: <a href="http://www.os-templates.com/">OS Templates</a>
@@ -6,83 +7,28 @@ Author URI: http://www.os-templates.com/
 Licence: Free to use under our free template licence terms
 Licence URI: http://www.os-templates.com/template-terms
 -->
-<html>
-<head>
-    <style>
-        .profileHeadings {
-            text-align: center;
-        }
-        .well {
-            color: black;
-            text-align: center;
-        }
-        td {
-            color: black;
-        }
-    </style>
-    <title>My profile</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <meta charset="utf-8">
+<head th:include="fragments/head :: head">
 
-    <link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
-    <link rel="stylesheet" href="../layout/styles/user_prof.css">
-    <link href="layout/styles/jquery-ui.css" rel="stylesheet" type="text/css" media="all">
-    <link href="layout/styles/jquery-ui.structure.css" rel="stylesheet" type="text/css" media="all">
-    <link href="layout/styles/jquery-ui.theme.css" rel="stylesheet" type="text/css" media="all">
+    <title>Kiddom-ProviderProfile</title>
+        <!--style>
+            .profileHeadings {
+                text-align: center;
+            }
+            .well {
+                color: black;
+                text-align: center;
+            }
+            td {
+                color: black;
+            }
+        </style-->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
 </head>
 
 <body id="top">
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- Top Background Image Wrapper -->
-<div class="bgded overlay" >
-    <!-- ################################################################################################ -->
-    <div class="wrapper row0">
-        <div id="topbar" class="hoc clear">
-            <!-- ################################################################################################ -->
 
-            <div class="fl_right">
-                <ul>
-                    <li><a href="#"><i class="fa fa-lg fa-home"></i></a></li>
-                    <li><a href="#">Αποσυνδεση</a></li>
-                </ul>
-            </div>
-            <!-- ################################################################################################ -->
-        </div>
-    </div>
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <div class="wrapper row1">
-        <header id="header" class="hoc clear">
-            <!-- ################################################################################################ -->
-            <div id="logo" class="fl_left">
-                <h1><a href="index.html">Kiddom</a></h1>
-            </div>
-            <nav id="mainav" class="fl_right">
-                <ul class="clear">
-                    <li class="active"><a href="index.html">Αρχικη</a></li>
-                    <li><a class="drop" href="#">Δραστηριοτητες</a>
-                        <ul>
-                            <li><a href="./gallery.html">Ενεργές Δραστηριότητες</a></li>
-                            <li><a href="./full-width.html">Παλαιότερες Δραστηριότητες</a></li>
+    <div th:replace="fragments/navbar :: navbar('profileprovider')"></div>
 
-                        </ul>
-                    </li>
-                    <li><a href="./about.html">Σχετικα με εμας</a></li>
-                    <li><a href="#">FAQ</a></li>
-                </ul>
-            </nav>
-            <!-- ################################################################################################ -->
-        </header>
-    </div>
-</div>
 <div class="wrapper row3" style="background-color:#b7c1ae" >
     <main class="hoc container clear" >
         <div id="pageintro" class="hoc clear" style="padding:1% 0 1% 0 ">
@@ -167,12 +113,8 @@ Licence URI: http://www.os-templates.com/template-terms
                     <div class="container bootstrap snippet">
                         <div class=" panel-body inf-content">
                             <div class="row">
-                                <!--<div class="col-md-3 col-lg-3" align="center" >-->
-                                <!--<img alt="User Pic" class="img-circle img-responsive" src="http://bootdey.com/img/Content/user-453533-fdadfd.png" data-original-title="Usuario">-->
-                                <!--<div class="col-md-3 col-lg-3 "  style='width: 200px;' align="center"> <img alt="User Pic" src="http://bootdey.com/img/Content/user-453533-fdadfd.png" class="img-circle img-responsive"> </div>-->
                                 <div class="col-md-3 col-lg-3 " style='width: 180px' align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
-                                <!--</div>-->
-                                <!--</br>-->
+
                                 <div class=" col-md-9 col-lg-9 ">
                                     <strong>Πληροφορίες</strong><br>
                                     <div class="table-responsive">
@@ -212,17 +154,8 @@ Licence URI: http://www.os-templates.com/template-terms
                                                     ΤheBestProvider
                                                 </td>
                                             </tr>
-                                            <!--<tr>-->
-                                            <!--<td>-->
-                                            <!--<strong>-->
-                                            <!--<span class="glyphicon glyphicon-eye-open text-primary"></span>-->
-                                            <!--Role-->
-                                            <!--</strong>-->
-                                            <!--</td>-->
-                                            <!--<td class="text-primary">-->
-                                            <!--Admin-->
-                                            <!--</td>-->
-                                            </tr>
+
+
                                             <tr>
                                                 <td>
                                                     <strong>
@@ -301,18 +234,7 @@ Licence URI: http://www.os-templates.com/template-terms
                             <button class="btn btn-default"  onclick="openCity(event, 'change_form')"> ΑΛΛΑΓΗ </button>
                         </div>
 
-                        <!--<div class="col-md-6">-->
-                        <!--<h3>Στοιχεια Λογαριασμού</h3>-->
-                        <!--<p class="profileHeadings" >  Όνομα Χρήστη</p>-->
-                        <!--<p class="well" > TheBestParent  </p>-->
-                        <!--<p class="profileHeadings" > Email </p>-->
-                        <!--<p class="well" >  TheBestParent@gmail.com </p>-->
-                        <!--<br>-->
-                        <!--<div style='text-align: center'>-->
-                        <!--<button class="btn btn-default"  onclick="openCity(event, 'change_form2')"> ΑΛΛΑΓΗ </button>-->
-                        <!--</div>-->
 
-                        <!--</div>-->
                     </div>
 
 
@@ -321,23 +243,23 @@ Licence URI: http://www.os-templates.com/template-terms
 
 
                 <div id="change_form" class="tabcontent">
-                    <form class="form-horizontal" action="/action_page.php">
+                    <form class="form-horizontal" action="">
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="name">Όνομα:</label>
                             <div class="col-sm-10">
-                                <input type="name" class="form-control" id="name" placeholder="Μήτσος" name="name">
+                                <input type="text" class="form-control" id="name" placeholder="Μήτσος" name="name">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="surname">Επώνυμο:</label>
                             <div class="col-sm-10">
-                                <input type="name" class="form-control" id="surname" placeholder="Παπαδόπουλος" name="surname">
+                                <input type="text" class="form-control" id="surname" placeholder="Παπαδόπουλος" name="surname">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="username">Username:</label>
                             <div class="col-sm-10">
-                                <input type="username" class="form-control" id="username" placeholder="TheBestUser" name="username">
+                                <input type="text" class="form-control" id="username" placeholder="TheBestUser" name="username">
                             </div>
                             <span class="help-block"></span>
                         </div>
@@ -356,19 +278,19 @@ Licence URI: http://www.os-templates.com/template-terms
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="location1">Xώρος1:</label>
                             <div class="col-sm-10">
-                                <input type="name" class="form-control" id="location1" placeholder="Allou" name="location1">
+                                <input type="text" class="form-control" id="location1" placeholder="Allou" name="location1">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="location2">Xώρος2:</label>
                             <div class="col-sm-10">
-                                <input type="name" class="form-control" id="location2" placeholder="Fun Land" name="location2">
+                                <input type="text" class="form-control" id="location2" placeholder="Fun Land" name="location2">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="location3">Xώρος3:</label>
                             <div class="col-sm-10">
-                                <input type="name" class="form-control" id="location3" placeholder="Kids Heaven" name="location3">
+                                <input type="text" class="form-control" id="location3" placeholder="Kids Heaven" name="location3">
                             </div>
                         </div>
                         <div class="form-group">
@@ -521,19 +443,7 @@ Licence URI: http://www.os-templates.com/template-terms
                     <!-- ################################################################################################ -->
 
                     <h2 align="center">Παλαιότερες Δραστηριότητες</h2>
-                    <!--div class=" borderedbox inspace-5">
-                    <img class="imgl" src="../images/demo/gallery/01.png" width="20" height="20" alt="">
-                    <p>Aliquatjusto quisque nam consequat doloreet vest orna partur scetur portortis nam. Metadipiscing eget facilis elit sagittis felisi eger id justo maurisus convallicitur.</p>
-                    <p>Dapiensociis temper donec auctortortis cumsan et curabitur condis lorem loborttis leo. Ipsumcommodo libero nunc at in velis tincidunt pellentum tincidunt vel lorem.</p>
-                  </div>
-                       <div class=" borderedbox inspace-5">
-                      <img class="imgl borderedbox inspace-5" src="../images/demo/gallery/01.png" alt="">
 
-
-                    <p>This is a W3C compliant free website template from OS Templates</a>. For full terms of use of this template please read our website template licence.</p>
-                    <p>You can use and modify the template for both personal and commercial use. You must keep all copyright information and credit links in the template and associated files. For more website templates visit our <a href="http://www.os-templates.com/">free website templates</a> section.</p>
-
-                    </div-->
 
                     <div class="group results">
                         <!--article class="one_third first"-->
@@ -629,100 +539,10 @@ Licence URI: http://www.os-templates.com/template-terms
     </main>
 </div>
 
-<div class="wrapper row4 bgded overlay" >
-    <footer id="footer" class="hoc clear">
-        <!-- ################################################################################################ -->
-        <div class="one_half first">
-            <h6 class="title">Social Media</h6>
-            <p>Ακολουθείστε μας στα social media για να μαθαίνετε πρώτοι τα νέα του Kiddom.</p>
-            <!--  <p class="btmspace-15">Malesuada non sem quisque vulputate velit et nisi ullamcorper aliquet tincidunt ut id magna leo mattis in quam dapibus.</p>-->
-            <ul class="faico clear">
-                <li><a class="faicon-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a class="faicon-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                <!--     <li><a class="faicon-dribble" href="#"><i class="fa fa-dribbble"></i></a></li>
-                     <li><a class="faicon-linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-                     <li><a class="faicon-google-plus" href="#"><i class="fa fa-google-plus"></i></a></li>
-                     <li><a class="faicon-vk" href="#"><i class="fa fa-vk"></i></a></li>-->
-            </ul>
-        </div>
-        <div class="one_half">
-            <h6 class="title">Στοιχεια Επικοινωνιας</h6>
-            <ul class="nospace linklist contact">
-                <li><i class="fa fa-map-marker"></i>
-                    <address>
-                        Οδός &amp; Αριθμός, Πόλη, Τ.Κ.
-                    </address>
-                </li>
-                <li><i class="fa fa-phone"></i> +00 (123) 456 7890</li>
-                <li><i class="fa fa-fax"></i> +00 (123) 456 7890</li>
-                <li><i class="fa fa-envelope-o"></i> info@domain.com</li>
-            </ul>
-        </div>
-        <!-- ################################################################################################ -->
-    </footer>
-</div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<div class="wrapper row5">
-    <div id="copyright" class="hoc clear">
-        <!-- ################################################################################################ -->
-        <p class="fl_left">Copyright &copy; 2016 - All Rights Reserved - <a href="#">Domain Name</a></p>
-        <!--  <p class="fl_right">Template by <a target="_blank" href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>-->
-        <!-- ################################################################################################ -->
-    </div>
-</div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
-<!-- JAVASCRIPTS -->
+    <div th:replace="fragments/foot :: foot"></div>
 
-<script src="layout/scripts/jquery.min.js"></script>
-<script src="layout/scripts/jquery.backtotop.js"></script>
-<script src="layout/scripts/jquery.mobilemenu.js"></script>
-<script src="layout/scripts/jquery.flexslider-min.js"></script>
-<script src="layout/scripts/jquery-ui.js"></script>
-<script type="text/javascript">
-    jQuery(function(){
-        jQuery('#datepicker').datepicker({
-            inline: true,
-            showOtherMonths: true
-        });
-    });
-</script>
 
-<script type=text/javascript>
-    jQuery( function() {
-        var availableTags = [
-            "ActionScript",
-            "AppleScript",
-            "Asp",
-            "BASIC",
-            "C",
-            "C++",
-            "Clojure",
-            "COBOL",
-            "ColdFusion",
-            "Erlang",
-            "Fortran",
-            "Groovy",
-            "Haskell",
-            "Java",
-            "JavaScript",
-            "Lisp",
-            "Perl",
-            "PHP",
-            "Python",
-            "Ruby",
-            "Scala",
-            "Scheme"
-        ];
-        $( "#location" ).autocomplete({
-            source: availableTags
-        });
-    } );
-</script>
+
 <script type="text/javascript">
     function openCity(evt, cityName) {
         // Declare all variables

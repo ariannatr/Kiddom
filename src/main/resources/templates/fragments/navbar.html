@@ -14,7 +14,9 @@
 
                     <div class="fl_right">
                         <ul>
-                            <li><a th:href="index"><i class="fa fa-lg fa-home"></i></a></li>
+                            <li th:classappend="${module == '' ? 'active' : ''}">
+                                <a  th:href="index"><i class="fa fa-lg fa-home"></i></a>
+                            <!--li><a th:href="index"><i class="fa fa-lg fa-home"></i></a></li-->
                             <li><a data-toggle="modal" href="#login_overlay">Σύνδεση</a> </li>
                             <li th:classappend="${module == 'register' ? 'active' : ''}">
                                 <a  th:href="register">Εγγραφη</a>
