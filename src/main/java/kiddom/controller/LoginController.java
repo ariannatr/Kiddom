@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.jws.soap.SOAPBinding;
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class LoginController {
@@ -59,11 +60,14 @@ public class LoginController {
 
 
 	@RequestMapping(value={"/", "/index"}, method = RequestMethod.GET, produces= "application/javascript")
-	public ModelAndView index(@ModelAttribute("user") UserEntity user){
+	public ModelAndView index(Principal principal,@ModelAttribute("user") UserEntity user){
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("user",user);
-		System.out.println("The one logged in is "+user.getUsername());
+
 		modelAndView.setViewName("index");
+		if(principal != null){
+			modelAndView.addObject("user",user);
+			System.out.println("The one logged in is "+user.getUsername());
+		}
 		return modelAndView;
 	}
 
@@ -134,7 +138,7 @@ public class LoginController {
 			modelAndView.addObject("provider", provider);
 			modelAndView.addObject("single_event", event);
 		}
-		modelAndView.setViewName("/activity");
+		modelAndView.setViewName("redirect:/activity");
 		return modelAndView;
 	}
 
@@ -215,14 +219,14 @@ public class LoginController {
 		}
 		if (bindingResult.hasErrors()) {
 			modelAndView.addObject("user",user);
-			modelAndView.setViewName("error_page");
+			modelAndView.setViewName("redirect:/error_page");
 		} else {
 			userService.saveUser(user,parent);
 			//userRepository.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user",user);
             modelAndView.addObject("parent",parent);
-			modelAndView.setViewName("index");
+			modelAndView.setViewName("redirect:/index");
 			
 		}
 		return modelAndView;
@@ -239,14 +243,14 @@ public class LoginController {
 		}
 		if (bindingResult.hasErrors()) {
 			modelAndView.addObject("user",user);
-			modelAndView.setViewName("error_page");
+			modelAndView.setViewName("redirect:/error_page");
 		} else {
 			userService.saveUserProvider(user,provider);
 			//userRepository.saveUser(user);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user",user);
 			modelAndView.addObject("provider", provider);
-			modelAndView.setViewName("index");
+			modelAndView.setViewName("redirect:/index");
 
 		}
 		return modelAndView;
