@@ -3,7 +3,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <body>
-
     <div th:fragment="navbar(module)">
 
         <div class="bgded overlay" >
@@ -54,6 +53,10 @@
                                     <li th:classappend="${module == 'activity_reg' ? 'active' : ''}">
                                         <a  th:href="activity_reg">Δημιουργια Δραστηριοτητας</a>
                                     </li>
+                                    <li th:classappend="${module == 'activity_reg' ? 'active' : ''}">
+                                        <a  th:href="activity_reg">Παλαιοτερες δραστηριοτητες</a>
+                                    </li>
+
 
                                 </ul>
                             </li>
