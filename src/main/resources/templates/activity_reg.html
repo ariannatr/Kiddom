@@ -19,11 +19,14 @@ Licence URI: http://www.os-templates.com/template-terms
 
 <div class="container" style="background-color:#b7c1ae">
 
+    <!-- Form Name -->
+    <h1 align="center" style="font-weight: bold; color: black;">Δημιουργηστε μια δραστηριοτητα!</h1>
+    <p/>
+    <br/>
+
     <form class="well form-horizontal" th:action="@{/activity_reg}" method="POST"  id="contact_form">
         <fieldset>
 
-            <!-- Form Name -->
-            <legend>Δημιουργήστε μια δραστηριότητα!</legend>
 
             <!-- Text input-->
 
@@ -44,7 +47,7 @@ Licence URI: http://www.os-templates.com/template-terms
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                        <input name="description" placeholder="Περιγραφή δραστηριότητας (μέχρι 300 χαρακτήρες)" class="form-control"  type="text">
+                        <input name="description" placeholder="Περιγραφή δραστηριότητας" class="form-control"  type="text">
                     </div>
                 </div>
             </div>
@@ -277,8 +280,17 @@ Licence URI: http://www.os-templates.com/template-terms
             </div>
             <br/>
 
-            <div class="form-group">
+            <div class="form-group" align="center">
+                <p/>
                 <label for="image" class="photo_upload" >Φωτογραφίες δραστηριότητας</label>
+                <p/>
+                <input name="image" id="image" type="file" accept="image/*" id="menu_images" style="color: black;"/>
+                <p/>
+                <input name="image" id="image" type="file" accept="image/*" id="menu_images" style="color: black;"/>
+                <p/>
+                <input name="image" id="image" type="file" accept="image/*" id="menu_images" style="color: black;"/>
+                <p/>
+                <input name="image" id="image" type="file" accept="image/*" id="menu_images" style="color: black;"/>
                 <p/>
                 <input name="image" id="image" type="file" accept="image/*" id="menu_images" style="color: black;"/>
                 <!--img id="menu_image" class="preview_img" /-->
@@ -290,7 +302,7 @@ Licence URI: http://www.os-templates.com/template-terms
             <div class="form-group">
                 <label class="col-md-4 control-label"></label>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-warning" >Αποθήκευση δραστηριότητας <span class="glyphicon glyphicon-send"></span></button>
+                    <button type="submit" class="btn btn-warning" >Αποθηκευση δραστηριοτητας <span class="glyphicon glyphicon-send"></span></button>
                 </div>
             </div>
 
