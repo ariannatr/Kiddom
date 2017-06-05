@@ -3,7 +3,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <body>
-
     <div th:fragment="navbar(module)">
 
         <div class="bgded overlay" >
@@ -17,7 +16,7 @@
                             <li th:classappend="${module == '' ? 'active' : ''}">
                                 <a  th:href="index"><i class="fa fa-lg fa-home"></i></a>
                             <!--li><a th:href="index"><i class="fa fa-lg fa-home"></i></a></li-->
-                            <li><a data-toggle="modal" href="#login_overlay">Σύνδεση</a> </li>
+                            <li><a data-toggle="modal" href="#login_overlay">Συνδεση</a> </li>
                             <li th:classappend="${module == 'register' ? 'active' : ''}">
                                 <a  th:href="register">Εγγραφη</a>
                             </li>
@@ -44,16 +43,20 @@
                     <nav id="mainav" class="fl_right">
                         <ul class="clear">
                             <li th:classappend="${module == 'index' ? 'active' : ''}">
-                                <a  th:href="index">Αρχική</a>
+                                <a  th:href="index">Αρχικη</a>
                             </li>
                             <li><a class="drop" >Δραστηριοτητες</a>
                                 <ul>
                                     <li th:classappend="${module == 'activity' ? 'active' : ''}">
-                                        <a  th:href="activity">Ενεργή Δραστηριότητα</a>
+                                        <a  th:href="activity">Ενεργη Δραστηριοτητα</a>
                                     </li>
                                     <li th:classappend="${module == 'activity_reg' ? 'active' : ''}">
-                                        <a  th:href="activity_reg">Δημιουργία Δραστηριότητας</a>
+                                        <a  th:href="activity_reg">Δημιουργια Δραστηριοτητας</a>
                                     </li>
+                                    <li th:classappend="${module == 'activity_reg' ? 'active' : ''}">
+                                        <a  th:href="activity_reg">Παλαιοτερες δραστηριοτητες</a>
+                                    </li>
+
 
                                 </ul>
                             </li>
