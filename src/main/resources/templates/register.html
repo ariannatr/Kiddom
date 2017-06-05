@@ -1,126 +1,128 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/XSL/Transform">
+      xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/XSL/Transform">
 
 <head th:include="fragments/head :: head">
-	<title>Kiddom-Register</title>
+    <title>Kiddom-Register</title>
 </head>
 
 <body id="top">
-    <div th:replace="fragments/navbar :: navbar('register')"></div>
+<div th:replace="fragments/navbar :: navbar('register')"></div>
 
-	<c:if test="${success eq true}">
-		<div class="alert alert-success"> Η εγγραφή σας ολοκληρώθηκε !</div>
-	</c:if>
-	<div class="wrapper row3" style="background-color:#b7c1ae" >
-  		<main class="hoc container clear" >
-			<div id="pageintro" class="hoc clear" style="padding:1% 0 1% 0 ">
-				<div id="container"  >
-	                    <div id="wrapper stepwizard">
-							<div class="stepwizard-row setup-panel ">
-								<div class="stepwizard-step">
-									<a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
-								</div>
-								<div class="stepwizard-step">
-									<a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
-								</div>
-							</div>
-							<br>
-	                        <div id="login" >
-								<form  class="group" id="loginForm" method="POST" th:action="@{/register}" autocomplete="on">
 
-									<div class="row setup-content" id="step-1">
+<div class="wrapper row3" style="background-color:#b7c1ae" >
 
-										<div class="col-md-10">
-											<h4>Βήμα 1 :Συμπληρώστε τα στοιχεία σας</h4>
+    <main class="hoc container clear" >
+        <c:if test="${success eq true}">
+            <div class="alert alert-success" style="text-align: center;"> Η εγγραφή σας ολοκληρώθηκε !</div>
+        </c:if>
+        <div id="pageintro" class="hoc clear" style="padding:1% 0 1% 0 ">
+            <div id="container"  >
+                <div id="wrapper stepwizard">
+                    <div class="stepwizard-row setup-panel ">
+                        <div class="stepwizard-step">
+                            <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                        </div>
+                        <div class="stepwizard-step">
+                            <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                        </div>
+                    </div>
+                    <br>
+                    <div id="login" >
+                        <form  class="group" id="loginForm" method="POST" th:action="@{/register}" autocomplete="on">
 
-											<div class="form-group">
-												<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-												<label for="name" class="name" data-icon="o">Όνομα</label>
-												<input id="name" name="name" required="required" class="form-control" type="text" placeholder="πχ .Κώστας" />
-												<span class="help-block"></span>
-											</div>
-											<div class="form-group">
-												<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-												<label for="surname" class="surname" data-icon="ε">Επώνυμο</label>
-												<input id="surname" name="surname" required="required" class="form-control" type="text" placeholder="πχ .Κώστας"  />
-												<span class="help-block"></span>
-											</div>
+                            <div class="row setup-content" id="step-1">
 
-											<div class="form-group">
-												<span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-												<label  for ="town" class="town"  data-icon="π">Πόλη Διαμονής</label>
-												<input id="town" name="town" required="required" class="form-control" type="text"  placeholder="πχ. Αθήνα"/>
-												<span class="help-block"></span>
-											</div>
+                                <div class="col-md-10">
+                                    <h4>Βήμα 1 :Συμπληρώστε τα στοιχεία σας</h4>
 
-											<div class="form-group">
-												<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-												<label for="area" class="area"  data-icon="π">Περιοχή</label>
-												<input id="area" name="area" required="required" class="form-control" type="text"  placeholder="πχ. Αργυρούπολη"/>
-												<span class="help-block"></span>
-											</div>
+                                    <div class="form-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <label for="name" class="name" data-icon="o">Όνομα</label>
+                                        <input id="name" name="name" required="required" class="form-control" type="text" placeholder="πχ .Κώστας" />
+                                        <span class="help-block"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <label for="surname" class="surname" data-icon="ε">Επώνυμο</label>
+                                        <input id="surname" name="surname" required="required" class="form-control" type="text" placeholder="πχ .Κώστας"  />
+                                        <span class="help-block"></span>
+                                    </div>
 
-											<div class="form-group">
-												<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-												<label for="telephone" class="tel" data-icon="&#9743;">Τηλέφωνο</label>
-												<input id="telephone" name="telephone" required="required" class="form-control" type="text" placeholder="πχ .6975649578" />
-												<span class="help-block"></span>
-											</div>
+                                    <div class="form-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                                        <label  for ="town" class="town"  data-icon="π">Πόλη Διαμονής</label>
+                                        <input id="town" name="town" required="required" class="form-control" type="text"  placeholder="πχ. Αθήνα"/>
+                                        <span class="help-block"></span>
+                                    </div>
 
-											<div class="form-group">
-												<span class="input-group-addon"><i class="glyphicon glyphicon-file"></i></span>
-												<label for="image" class="photo_upload" >Θα θέλατε να ανεβάσετε μια Φωτογραφία Προφιλ ;</label>
-												<input name="image" id="image" type="file" accept="image/*" id="menu_images" style="color: black;"/>
-												<!--img id="menu_image" class="preview_img" /-->
-												<span class="help-block"></span>
-											</div>
-											<button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Επόμενο</button>
-										</div>
+                                    <div class="form-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                        <label for="area" class="area"  data-icon="π">Περιοχή</label>
+                                        <input id="area" name="area" required="required" class="form-control" type="text"  placeholder="πχ. Αργυρούπολη"/>
+                                        <span class="help-block"></span>
+                                    </div>
 
-									</div>
-									<div class="row setup-content" id="step-2">
-										<div class="col-md-10">
-											<h4>Βήμα 2 :Στοιχεία Λογιαρισμού</h4>
-											<div class="form-group">
-												<label for="username" class="uname" data-icon="χ">Όνομα χρήστη</label>
-												<input id="username" name="username" required="required" class="form-control" type="text" placeholder="mysuperusername690" />
-												<span class="help-block"></span>
-											</div>
-											<div class="form-group">
-												<label for="email" class="youmail" data-icon=" &#x2709;" > Εmail</label>
-												<input id="email" name="email" required="required" class="form-control" type="email" placeholder="mysupermail@mail.com"/>
-												<span class="help-block"></span>
-											</div>
-											<div class="form-group">
-												<label for="password" class="youpasswd" data-icon="κ">Κωδικός </label>
-												<input id="password" name="password" required="required" class="form-control" type="password" placeholder="πχ X8df!90EO"/>
-												<span class="help-block"></span>
-											</div>
-											<div class="form-group">
-												<label for="passwordsignup_confirm" class="youpasswd" data-icon="κ">Επιβεβαίωση κωδικού</label>
-												<input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" class="form-control" type="password" placeholder="πχ. X8df!90EO"/>
-												<span class="help-block"></span>
-											</div>
+                                    <div class="form-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                        <label for="telephone" class="tel" data-icon="&#9743;">Τηλέφωνο</label>
+                                        <input id="telephone" name="telephone" required="required" class="form-control" type="text" placeholder="πχ .6975649578" />
+                                        <span class="help-block"></span>
+                                    </div>
 
-											<button class="btn btn-success btn-lg pull-right" type="submit">Εγγραφη</button>
-										</div>
-									</div>
+                                    <div class="form-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-file"></i></span>
+                                        <label for="image" class="photo_upload" >Θα θέλατε να ανεβάσετε μια Φωτογραφία Προφιλ ;</label>
+                                        <input name="image" id="image" type="file" accept="image/*" style="color: black;"/>
+                                        <!--img id="menu_image" class="preview_img" /-->
+                                        <span class="help-block"></span>
+                                    </div>
+                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Επόμενο</button>
+                                </div>
 
-								</form>
-								<p class="change_link" style="position: relative;">
-									Είστε ήδη μέλος ;
-									<a data-toggle="modal" href="#login_overlay" class="to_register"> Σύνδεση </a>
-								</p>
-	                        </div>	
-	                    </div>
-	                </div>  
-	</div>
-</main>
+                            </div>
+                            <div class="row setup-content" id="step-2">
+                                <div class="col-md-10">
+                                    <h4>Βήμα 2 :Στοιχεία Λογιαρισμού</h4>
+                                    <div class="form-group">
+                                        <label for="username" class="uname" data-icon="χ">Όνομα χρήστη</label>
+                                        <input id="username" name="username" required="required" class="form-control" type="text" placeholder="mysuperusername690" />
+                                        <span class="help-block"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="youmail" data-icon=" &#x2709;" > Εmail</label>
+                                        <input id="email" name="email" required="required" class="form-control" type="email" placeholder="mysupermail@mail.com"/>
+                                        <span class="help-block"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="youpasswd" data-icon="κ">Κωδικός </label>
+                                        <input id="password" name="password" required="required" class="form-control" type="password" placeholder="πχ X8df!90EO"/>
+                                        <span class="help-block"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="passwordsignup_confirm" class="youpasswd" data-icon="κ">Επιβεβαίωση κωδικού</label>
+                                        <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" class="form-control" type="password" placeholder="πχ. X8df!90EO"/>
+                                        <span class="help-block"></span>
+                                    </div>
+
+                                    <button class="btn btn-success btn-lg pull-right" type="submit">Εγγραφη</button>
+                                </div>
+                            </div>
+
+                        </form>
+                        <p class="change_link" style="position: relative;">
+                            Είστε ήδη μέλος ;
+                            <a data-toggle="modal" href="#login_overlay" class="to_register"> Σύνδεση </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </div>
 
-  <div th:replace="fragments/foot :: foot"></div>
+<div th:replace="fragments/foot :: foot"></div>
 
 </body>
 
