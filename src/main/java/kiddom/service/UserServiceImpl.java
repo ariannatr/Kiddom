@@ -196,4 +196,9 @@ public class UserServiceImpl implements UserService {
     {
         categoryRepository.save(category);
     }
+
+    @Override
+    public List<CategoriesEntity> getCategories(){
+        return categoryRepository.findAll();
+    }
 }

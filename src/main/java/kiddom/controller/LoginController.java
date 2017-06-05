@@ -247,7 +247,7 @@ public class LoginController {
 	}*/
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ModelAndView createNewUser(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("parent") @Valid ParentEntity parent, BindingResult bindingResult) {
+	public ModelAndView createNewUser(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("parent") @Valid ParentEntity parent, BindingResult bindingResult,RedirectAttributes redirectAttributes) {
 		ModelAndView modelAndView = new ModelAndView();
 		UserEntity userExists = userService.findByUsername(user.getUsername());
 		if (userExists != null) {
@@ -261,11 +261,11 @@ public class LoginController {
 		} else {
 			userService.saveUser(user,parent);
 			//userRepository.saveUser(user);
+            redirectAttributes.addFlashAttribute("success",true);
             modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user",user);
             modelAndView.addObject("parent",parent);
-			modelAndView.setViewName("redirect:/index");
-			
+			modelAndView.setViewName("redirect:/register");
 		}
 		return modelAndView;
 	}
@@ -296,7 +296,7 @@ public class LoginController {
 
 
 
-
+/*******************************************May be usefull***************************************************************/
 
     private List<SubcategoriesEntity> manageSubCategories(CategoriesEntity category) {
         // Store the categories which shouldn't be persisted
@@ -322,6 +322,7 @@ public class LoginController {
 
     @RequestMapping(value = "/category_submit", method = RequestMethod.GET)
     public String create(@ModelAttribute CategoriesEntity category, Model model) {
+		model.addAttribute("categories",userService.getCategories());
         // Should init the AutoPopulatingList
         category.setSubcategoriesByCatId(new AutoPopulatingList<SubcategoriesEntity>(SubcategoriesEntity.class));
         //return create(category, model, true);

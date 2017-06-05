@@ -18,4 +18,5 @@ public interface UserService {
 	public  CategoriesEntity findByName(String name);
 	public void delete(SubcategoriesEntity subcat);
 	public void update(CategoriesEntity category);
+	public List<CategoriesEntity> getCategories();
 }

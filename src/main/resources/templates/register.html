@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
-<html  xmlns="http://www.w3.org/1999/xhtml"
-		xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/XSL/Transform">
 
 <head th:include="fragments/head :: head">
 	<title>Kiddom-Register</title>
@@ -10,7 +10,9 @@
 <body id="top">
     <div th:replace="fragments/navbar :: navbar('register')"></div>
 
-
+	<c:if test="${success eq true}">
+		<div class="alert alert-success"> Η εγγραφή σας ολοκληρώθηκε !</div>
+	</c:if>
 	<div class="wrapper row3" style="background-color:#b7c1ae" >
   		<main class="hoc container clear" >
 			<div id="pageintro" class="hoc clear" style="padding:1% 0 1% 0 ">
