@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/XSL/Transform">
+      xmlns:th="http://www.thymeleaf.org" xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <head th:include="fragments/head :: head">
     <title>Kiddom-Register</title>
@@ -14,7 +14,7 @@
 <div class="wrapper row3" style="background-color:#b7c1ae" >
 
     <main class="hoc container clear" >
-        <c:if test="${success eq true}">
+        <c:if test="${param.success eq true}">
             <div class="alert alert-success" style="text-align: center;"> Η εγγραφή σας ολοκληρώθηκε !</div>
         </c:if>
         <div id="pageintro" class="hoc clear" style="padding:1% 0 1% 0 ">
