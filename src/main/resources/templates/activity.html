@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>activity</title>
     <meta charset="utf-8">
@@ -9,13 +9,23 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="../static/css/layout.css" rel="stylesheet" type="text/css" media="all">
 
-    <link href="../static/css/jquery-ui.css" rel="stylesheet" type="text/css" media="all">
-    <link href="../static/css/jquery-ui.structure.css" rel="stylesheet" type="text/css" media="all">
-    <link href="../static/css/jquery-ui.theme.css" rel="stylesheet" type="text/css" media="all">
+    <link th:href="@{../static/css/layout.css}" rel="stylesheet" type="text/css" media="all">
+
+    <link th:href="@{../static/css/jquery-ui.css}" rel="stylesheet" type="text/css" media="all">
+    <link th:href="@{../static/css/jquery-ui.structure.css}" rel="stylesheet" type="text/css" media="all">
+    <link th:href="@{../static/css/jquery-ui.theme.css}" rel="stylesheet" type="text/css" media="all">
+
+    <link th:href="@{../static/css/lightbox.css}" rel="stylesheet" type="text/css" media="all">
 
 
+    <!--<link href="../static/css/layout.css" rel="stylesheet" type="text/css" media="all">-->
+
+    <!--<link href="../static/css/jquery-ui.css" rel="stylesheet" type="text/css" media="all">-->
+    <!--<link href="../static/css/jquery-ui.structure.css" rel="stylesheet" type="text/css" media="all">-->
+    <!--<link href="../static/css/jquery-ui.theme.css" rel="stylesheet" type="text/css" media="all">-->
+
+    <!--<link href="../static/css/lightbox.css" rel="stylesheet" type="text/css" media="all">-->
 
 </head>
 <body>
@@ -97,23 +107,26 @@
                 display: none;
             }
         }
-
-
-        div.act-imgs:last-child{
-            margin-bot:0;
+        .act-img-sm{
+            width:32.6%;
         }
 
-        div.act-imgs div:last-child {
-            float: right;
-        }
+
+        /*div.act-imgs:last-child{*/
+            /*margin-bot:0;*/
+        /*}*/
+
+        /*div.act-imgs div:last-child {*/
+            /*float: right;*/
+        /*}*/
         /*div.act-imgs div:last-child {
             float: right;
         }*/
 
-        #act-imgs{
-            overflow: hidden;
-            width:100%;
-        }
+        /*#act-imgs{*/
+            /*overflow: hidden;*/
+            /*width:100%;*/
+        /*}*/
         #act-imgs:after{
             clear: both;
         }
@@ -184,18 +197,18 @@
         .row:after{
             clear: both;
         }
-        [class^="col-"], [class*=" col-"] {
-            padding-left:0.5%;
-            padding-right: 0.5%;
-        }
+        /*[class^="col-"], [class*=" col-"] {*/
+            /*padding-left:0.5%;*/
+            /*padding-right: 0.5%;*/
+        /*}*/
 
 
-        [class^="col-"]:first-child, [class*=" col-"]:first-child{
-            padding-left:0;
-        }
-        [class^="col-"]:last-child, [class*=" col-"]:last-child{
-            padding-right:0;
-        }
+        /*[class^="col-"]:first-child, [class*=" col-"]:first-child{*/
+            /*padding-left:0;*/
+        /*}*/
+        /*[class^="col-"]:last-child, [class*=" col-"]:last-child{*/
+            /*padding-right:0;*/
+        /*}*/
 
 
         @media(max-width:767px){
@@ -212,114 +225,175 @@
             .col-xs-6:last-child{
                 display: none;
             }
+
+            .ui-datepicker table{
+                font-size: smaller;
+            }
         }
 
-        @media screen and (max-width:450px){
+        @media screen and (max-width:453px){
             .col-xs-6 {
                 width: 100%;
             }
             .col-xs-6:last-child{
                 display: none;
             }
+            .ui-datepicker table{
+                font-size: x-small;
+            }
+            #side-content{
+                height:250px!important;
+            }
+
+
+
         }
-        
+
+        @media screen and (max-width:515px){
+            .act-img-lg{
+                width:49%;
+            }
+
+            .act-img-sm{
+                width:32.1%;
+            }
+        }
+
+        @media screen and (max-width:375px){
+            .ui-datepicker table{
+                font-size:xx-small;
+            }
+        }
+
+
+        .container2 {
+            text-align: justify;
+        }
+        .container2 > div {
+            margin-top:-15px;
+            display: inline-block;
+            vertical-align: top;
+
+            /* IE fix. */
+            *display: inline;
+            zoom: 1;
+        }
+        .container2:after {
+            content: "";
+            width: 100%;
+            display: inline-block;
+        }
+
+
+
+
     </style>
 
-    <div class="bgded overlay" >
-        <div class="wrapper row0" >
-            <div id="topbar" class="hoc clear">
-                <!-- ################################################################################################ -->
-                <div class="fl_left">
-                    <ul>
-                        <li><i class="fa fa-phone"></i> +00 (123) 456 7890</li>
-                        <li><i class="fa fa-envelope-o"></i> info@domain.com</li>
-                    </ul>
-                </div>
-                <div class="fl_right">
-                    <ul>
-                        <li><a href="#"><i class="fa fa-lg fa-home"></i></a></li>
-                        <li><a href="#">Συνδεση</a></li>
-                        <li><a href="#">Εγγραφη</a></li>
-                    </ul>
-                </div>
-                <!-- ################################################################################################ -->
-            </div>
-        </div>
-        <!-- ################################################################################################ -->
-        <!-- ################################################################################################ -->
-        <!-- ################################################################################################ -->
-        <div class="wrapper row1">
-            <header id="header" class="hoc clear">
-                <!-- ################################################################################################ -->
-                <div id="logo" class="fl_left">
-                    <h1><a href="../index.html">Kiddom</a></h1>
-                </div>
-                <nav id="mainav" class="fl_right">
-                    <ul class="clear">
-                        <li class="active"><a href="index.html">Αρχικη</a></li>
-                        <li><a class="drop" href="#">Δραστηριοτητες</a>
-                            <ul>
-                                <li><a href="gallery.html">Ενεργές Δραστηριότητες</a></li>
-                                <li><a href="full-width.html">Παλαιότερες Δραστηριότητες</a></li>
-                                <!--<li><a href="pages/sidebar-left.html">Sidebar Left</a></li>
-                                <li><a href="pages/sidebar-right.html">Sidebar Right</a></li>
-                                <li><a href="pages/basic-grid.html">Basic Grid</a></li>-->
-                            </ul>
-                        </li>
-                        <!-- <li><a class="drop" href="#">Προφιλ</a>
-                           <ul>
-                             <li><a href="#">Δημιουργία Δραστηριότητας</a></li>
-                             <li><a class="drop" href="#">Επεξεργασία Προφίλ</a>
-                               <ul>
-                                 <li><a href="#">Αγορά Πόντων</a></li>
-                                 <li><a href="#">Επεξεργασία Στοιχείων</a></li>
-                                 <!--<li><a href="#">Level 3</a></li>
-                               </ul>
-                             </li>
-                             <li><a href="#">Level 2</a></li>
-                           </ul>
-                         </li>-->
-                        <li><a href="#">Σχετικα με εμας</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </nav>
-                <!-- ################################################################################################ -->
-            </header>
-        </div>
-    </div>
+    <!--<div class="bgded overlay" >-->
+        <!--<div class="wrapper row0" >-->
+            <!--<div id="topbar" class="hoc clear">-->
+                <!--&lt;!&ndash; ################################################################################################ &ndash;&gt;-->
+                <!--<div class="fl_left">-->
+                    <!--<ul>-->
+                        <!--<li><i class="fa fa-phone"></i> +00 (123) 456 7890</li>-->
+                        <!--<li><i class="fa fa-envelope-o"></i> info@domain.com</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+                <!--<div class="fl_right">-->
+                    <!--<ul>-->
+                        <!--<li><a href="#"><i class="fa fa-lg fa-home"></i></a></li>-->
+                        <!--<li><a href="#">Συνδεση</a></li>-->
+                        <!--<li><a href="#">Εγγραφη</a></li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+                <!--&lt;!&ndash; ################################################################################################ &ndash;&gt;-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; ################################################################################################ &ndash;&gt;-->
+        <!--&lt;!&ndash; ################################################################################################ &ndash;&gt;-->
+        <!--&lt;!&ndash; ################################################################################################ &ndash;&gt;-->
+        <!--<div class="wrapper row1">-->
+            <!--<header id="header" class="hoc clear">-->
+                <!--&lt;!&ndash; ################################################################################################ &ndash;&gt;-->
+                <!--<div id="logo" class="fl_left">-->
+                    <!--<h1><a href="../index.html">Kiddom</a></h1>-->
+                <!--</div>-->
+                <!--<nav id="mainav" class="fl_right">-->
+                    <!--<ul class="clear">-->
+                        <!--<li class="active"><a href="index.html">Αρχικη</a></li>-->
+                        <!--<li><a class="drop" href="#">Δραστηριοτητες</a>-->
+                            <!--<ul>-->
+                                <!--<li><a href="gallery.html">Ενεργές Δραστηριότητες</a></li>-->
+                                <!--<li><a href="full-width.html">Παλαιότερες Δραστηριότητες</a></li>-->
+                                <!--&lt;!&ndash;<li><a href="pages/sidebar-left.html">Sidebar Left</a></li>-->
+                                <!--<li><a href="pages/sidebar-right.html">Sidebar Right</a></li>-->
+                                <!--<li><a href="pages/basic-grid.html">Basic Grid</a></li>&ndash;&gt;-->
+                            <!--</ul>-->
+                        <!--</li>-->
+                        <!--&lt;!&ndash; <li><a class="drop" href="#">Προφιλ</a>-->
+                           <!--<ul>-->
+                             <!--<li><a href="#">Δημιουργία Δραστηριότητας</a></li>-->
+                             <!--<li><a class="drop" href="#">Επεξεργασία Προφίλ</a>-->
+                               <!--<ul>-->
+                                 <!--<li><a href="#">Αγορά Πόντων</a></li>-->
+                                 <!--<li><a href="#">Επεξεργασία Στοιχείων</a></li>-->
+                                 <!--&lt;!&ndash;<li><a href="#">Level 3</a></li>-->
+                               <!--</ul>-->
+                             <!--</li>-->
+                             <!--<li><a href="#">Level 2</a></li>-->
+                           <!--</ul>-->
+                         <!--</li>&ndash;&gt;-->
+                        <!--<li><a href="#">Σχετικα με εμας</a></li>-->
+                        <!--<li><a href="#">FAQ</a></li>-->
+                    <!--</ul>-->
+                <!--</nav>-->
+                <!--&lt;!&ndash; ################################################################################################ &ndash;&gt;-->
+            <!--</header>-->
+        <!--</div>-->
+    <!--</div>-->
 
-
+    <div th:replace="fragments/navbar :: navbar('activity_reg')"></div>
 
     <div id="activity">
-<div class="row" style="margin:0 5%">
 
+    <div class="row">
+            <div class="col-lg-12">
+                <h1> The activity</h1>
+            </div>
             <!--Images preview for activity-->
             <div id="act-imgs" class="content col-lg-9 col-md-12 col-sm-12 col-xs-12">
 
 
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <div class="act-img"><img style="width: auto" src="../static/images/activitiy/no_upload_image.jpg" alt="img here"></div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <div class="act-img"><img style="width: auto" src="../static/images/activitiy/no_upload_image.jpg" alt="img here"></div>
-                    </div>
+                <div class="container2" style="width:100%">
+
+                    <div class="act-img act-img-lg"><img style="width: auto" src="@{../static/images/activitiy/no_upload_image.jpg}" alt="img here"></div>
+
+
+                        <div class="act-img act-img-lg"><img style="width: auto" src="@{../static/images/activitiy/no_upload_image.jpg}" alt="img here"></div>
+
                 </div>
-                <div class="row act-img-sm">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <div class="act-img"><img style="width: auto" src="../static/images/activitiy/no_upload_image.jpg" alt="img here"></div>
+                <div class="container2" style="width:100%">
+
+
+                        <div class="act-img act-img-sm"><img style="width: auto" src="@{../static/images/activitiy/no_upload_image.jpg}" alt="img here"></div>
+
+
+                        <div class="act-img act-img-sm"><a class="overlay" href="@{../static/images/activitiy/no_upload_image.jpg}" data-lightbox="roadtrip">Image #2</a><img style="width: auto" src="../static/images/activitiy/no_upload_image.jpg" alt="img here"></div>
+
+
+                    <div class="act-img act-img-sm" style="position: relative"><img style="width: auto" src="@{../static/images/activitiy/no_upload_image.jpg}" alt="img here">
+                        <div class="overlay" style="  position: absolute;bottom: 0%;left: 0;right: 0; background-color: rgba(255, 255, 255, 0.1); overflow: hidden; width: auto;
+                        height:100%; margin:auto;  pointer-events:none;  transition: .5s ease;pointer-events:none;">
+                            <div class="text" style="white-space: nowrap;  color: white;  font-size: 20px;  position: absolute;  overflow: hidden;  top: 50%;  left: 50%; color: #fff;
+                         text-shadow: 2px 2px 3px #000;  transform: translate(-50%, -50%);  -ms-transform: translate(-50%, -50%);">More Photos +
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <div class="act-img"><img style="width: auto" src="../static/images/activitiy/no_upload_image.jpg" alt="img here"></div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <div class="act-img"><img style="width: auto" src="../static/images/activitiy/no_upload_image.jpg" alt="img here"></div>
-                    </div>
+
                 </div>
             </div>
 
-
-            <div class="side-content col-lg-3 col-md-12 ">
+            <div class="side-content col-lg-3 col-md-12 col-xs-12">
 
                 <div id="side-content" style="height: 350px">
                     <div id="googleMap" style="width:100%;height:100%;"></div>
@@ -327,7 +401,6 @@
 
                 </div>
             </div>
-
 
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <nav class="navbar">
@@ -340,10 +413,11 @@
                     </div>
                 </nav>
             </div>
-
-
-
-            <p id="description" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    </div>
+    </div>
+<div class="row">
+<div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <p id="description">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque consequat est sit amet metus dignissim, non malesuada felis luctus.
                 Praesent sed nibh eu libero lobortis gravida vitae posuere risus.
                 bibendum imperdiet nulla, id tempor dui posuere ut. Praesent laoreet, ex sed consequat facilisis, dolor felis convallis urna, sed convallis turpis ex id quam.
@@ -362,8 +436,9 @@
                 Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec eget erat in lorem euismod lacinia nec eleifend turpis.
             </p>
 
-
-            <div id="calendar" class="col-lg-6 col-md-12 col-sm-12 col-xs-12 ">
+</div>
+</div>
+            <div id="calendar" class="col-lg-6 col-md--push-12 col-sm-12 col-xs-12 ">
 
             </div>
 
@@ -373,11 +448,11 @@
     </div>
 
 
-<script src="../static/scripts/jquery.min.js"></script>
-<script src="../static/scripts/jquery.backtotop.js"></script>
-<script src="../static/scripts/jquery.mobilemenu.js"></script>
-<script src="../static/scripts/jquery.flexslider-min.js"></script>
-<script src="../static/scripts/jquery-ui.js"></script>
+<script src="@{../static/scripts/jquery.min.js}"></script>
+<script src="@{../static/scripts/jquery.backtotop.js}"></script>
+<script src="@{../static/scripts/jquery.mobilemenu.js}"></script>
+<script src="@{../static/scripts/jquery.flexslider-min.js}"></script>
+<script src="@{../static/scripts/jquery-ui.js}"></script>
     <script>
         $('#calendar').datepicker({
             inline: true,
@@ -442,7 +517,7 @@
 
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLbijC5kVnnJ5kL_j8zRo-5afCMVrYFdE&callback=myMap"></script>
-
+    <script src="@{../static/scripts/lightbox.js}" ></script>
 
 
 </body>
