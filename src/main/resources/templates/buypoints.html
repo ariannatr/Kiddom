@@ -57,7 +57,7 @@ Licence URI: http://www.os-templates.com/template-terms
             margin: auto;
             padding: 0;
             /*border: 1px solid #888;*/
-            width: 80%;
+            width: 70%;
             /*box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);*/
             -webkit-animation-name: animatetop;
             -webkit-animation-duration: 0.4s;
@@ -78,7 +78,7 @@ Licence URI: http://www.os-templates.com/template-terms
 
         /* The Close Button */
         .close {
-            color: white;
+            color: grey;
             float: right;
             font-size: 28px;
             font-weight: bold;
@@ -265,11 +265,11 @@ Licence URI: http://www.os-templates.com/template-terms
                 <!--<div class="hidden-xs" > <br><br><br> </div>-->
 
                 <h2 class="col-md-offset-1">Total cost</h2>
-                <h3 id="cost" style="position: relative;padding:2em; background:#f1a700; text-align: center"> 0$ </h3>
+                <h3 id="cost" style="position: relative;padding:2em; background:#f1a700; text-align: center"> 0€ </h3>
 
                 <br>
                 <h2 class="col-md-offset-1"> Total Points</h2>
-                <h3 id="points" style="position: relative;padding:2em; background:#f1a700; text-align: center"> 0 </h3>
+                <h3 id="points" style="position: relative;padding:2em; background:#f1a700; text-align: center"> 0€ </h3>
 
 
 
@@ -348,11 +348,11 @@ Licence URI: http://www.os-templates.com/template-terms
                 </div>
             </div>
             <ul class="nav nav-pills nav-stacked">
-                <li style="text-align: center" class="active" ><a href="#"><span class="glyphicon glyphicon-usd" id="points2"></span> Final Payment</a>
+                <li style="text-align: center" class="active" ><a href="#"><span class="glyphicon glyphicon-euro" id="points2"></span> Final Payment</a>
                 </li>
             </ul>
             <br/>
-            <button   id="myBtn" class="btn btn-success btn-lg btn-block" onclick="reset()">Πληρωμη</button>
+            <button   id="myBtn" class="btn btn-success btn-lg btn-block">Πληρωμη</button>
             <!--<button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
             <!--<button id="myBtn">Open Modal</button>-->
             <!--<a href="" id="openUser">Open Modal JS (failed)</a>-->
@@ -364,12 +364,15 @@ Licence URI: http://www.os-templates.com/template-terms
             <!-- Modal content -->
             <div class="modal-content">
                 <div class="modal-header">
-                    <span class="close">&times;</span>
+                    <span class="close" >
+                        <button type="button" class="close"  aria-hidden="true" onclick="reset()" >  X</button>
+                    </span>
                 </div>
                 <div class="modal-body" style="text-align: center">
                     <strong> Η συναλλαγή ολοκληρώθηκε </strong>
                     <br>
-                    <a href="#" class="btn btn-success" role="button">EΠΙΣΤΡΟΦΗ ΣΤΟ ΠΟΡΤΟΦΟΛΙ</a>
+                   <a  class="btn btn-success" role="button" data-dismiss="myModal" onclick="reset()"> EΠΙΣΤΡΟΦΗ ΣΤΟ ΠΟΡΤΟΦΟΛΙ</a>
+
                 </div>
 
             </div>
@@ -505,6 +508,7 @@ Licence URI: http://www.os-templates.com/template-terms
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
+            reset();
             modal.style.display = "none";
         }
     }
