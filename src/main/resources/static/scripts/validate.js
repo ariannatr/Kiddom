@@ -7,9 +7,9 @@ function validate() {
     var password_conf = document.getElementById("passwordsignup_confirm").value;
     if (password != password_conf) {
         document.getElementById("to_koumpi").disabled = true;
-        document.getElementById("to_koumpi").innerHTML = "Wrong password!";
+        document.getElementById("to_koumpi").innerHTML = "Λαθος κωδικος!";
     } else {
         document.getElementById("to_koumpi").disabled = false;
-        document.getElementById("to_koumpi").innerHTML = "Get Started";
+        document.getElementById("to_koumpi").innerHTML = "Εγγραφη";
     }
 }
