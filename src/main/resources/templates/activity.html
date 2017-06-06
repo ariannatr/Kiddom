@@ -12,12 +12,18 @@
             background-color: lightgray;
         }
 
+
         #activity{
             position: relative;
             max-width:1400px;
             margin: 0 auto;
         }
 
+        @media screen and (max-width:1400px) {
+            #activity {
+                margin: 0 30px;
+            }
+        }
         #side-content {
             box-shadow: 0 0 40px 5px darkgray ;
         }
@@ -104,18 +110,16 @@
             margin-left:0px;
         }
 
-        @media(max-width:767px){
-            .col-md-6 .col-sm-6 {
-                width: 100%;
-            }
-            .col-md-6:last-child .col-sm-6:last-child{
+
+        #act-imgs .row [class^='col-'], #act-imgs .row [class*=' col-']{
+            padding:2px;
+        }
+
+        @media(max-width:850px){
+            #act-imgs .row:last-child{
                 display: none;
             }
-
-            .col-xs-6 {
-                width: 100%;
-            }
-            .col-xs-6:last-child{
+            #act-imgs .row:first-child .col-sm-12:last-child{
                 display: none;
             }
 
@@ -125,12 +129,6 @@
         }
 
         @media screen and (max-width:453px){
-            .col-xs-6 {
-                width: 100%;
-            }
-            .col-xs-6:last-child{
-                display: none;
-            }
             .ui-datepicker table{
                 font-size: x-small;
             }
@@ -176,8 +174,14 @@
             content: "";
             width: 100%;
             display: inline-block;
+            font-size: 0;
+            line-height: 0
         }
 
+
+        #datetime{
+            display: none;
+        }
 
 
     /*---------------------Ratings----------------------------------*/
@@ -361,7 +365,6 @@
     <div th:replace="fragments/navbar :: navbar('activity')"></div>
 
     <div id="activity">
-
         <div class="row">
                 <!--Title-->
                 <div class="col-lg-12">
@@ -369,28 +372,31 @@
                 </div>
 
                 <!--Images preview for activity-->
-                <div id="act-imgs" class="content col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                <div id="act-imgs" class="content col-lg-7 col-md-12 col-sm-12 col-xs-12">
 
-                    <div class="container2" style="width:100%">
-                        <div class="act-img act-img-lg"><img style="width: auto" th:src="@{images/activity/no_upload_image.jpg}" alt="img here"></div>
-                        <div class="act-img act-img-lg"><img style="width: auto" th:src="@{images/activity/no_upload_image.jpg}" alt="img here"></div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><div class="act-img"><img style="width: auto" th:src="@{images/activity/no_upload_image.jpg}" alt="img here"></div></div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><div class="act-img"><img style="width: auto" th:src="@{images/activity/no_upload_image.jpg}" alt="img here"></div></div>
                     </div>
-                    <div class="container2" style="width:100%">
-                            <div class="act-img act-img-sm"><img style="width: auto" th:src="@{images/activity/no_upload_image.jpg}" alt="img here"></div>
-                            <div class="act-img act-img-sm"><img style="width: auto" th:src="@{images/activity/no_upload_image.jpg}" alt="img here"></div>
-                            <div class="act-img act-img-sm" style="position: relative"><img style="width: auto" th:src="@{images/activity/no_upload_image.jpg}" alt="img here">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4"><div class="act-img"><img style="width: auto" th:src="@{images/activity/no_upload_image.jpg}" alt="img here"></div></div>
+                        <div class="col-lg-4 col-md-4 col-sm-4"><div class="act-img "><img style="width: auto" th:src="@{images/activity/no_upload_image.jpg}" alt="img here"></div></div>
+                            <div class="col-lg-4 col-md-4 col-sm-4"><div class="act-img" style="position: relative"><img style="width: auto" th:src="@{images/activity/no_upload_image.jpg}" alt="img here">
                             <div class="overlay" style="  position: absolute;bottom: 0%;left: 0;right: 0; background-color: rgba(255, 255, 255, 0.1); overflow: hidden; width: auto;
                             height:100%; margin:auto;  pointer-events:none;  transition: .5s ease;pointer-events:none;">
                                 <div class="text" style="white-space: nowrap;  color: white;  font-size: 20px;  position: absolute;  overflow: hidden;  top: 50%;  left: 50%; color: #fff;
-                             text-shadow: 2px 2px 3px #000;  transform: translate(-50%, -50%);  -ms-transform: translate(-50%, -50%);">More Photos</div>
+                             text-shadow: 2px 2px 3px #000;  transform: translate(-50%, -50%);  -ms-transform: translate(-50%, -50%);">More Photos</div></div>
                             </div>
                         </div>
 
                     </div>
                 </div>
 
+
+
+            
                 <!--Map-->
-                <div class="side-content col-lg-3 col-md-12 col-xs-12">
+                <div class="side-content col-lg-5 col-md-12 col-xs-12">
                     <h1 style="font-size: large; text-decoration: none">Βρείτε μας στον Χάρτη</h1>
                     <div class="row">
                         <div class="col-lg-12 col-md-9">
@@ -400,7 +406,9 @@
                             </div>
                         </div>
                         <div class="col-lg-12 col-md-3">
-                            Παιδοτόπου 1, Αθήνα
+                            Αγ. Νικολαου 5
+                            Ηλιούπολη, ΑΘήνα
+                            Τηλ : 210 12 34 567
                         </div>
                     </div>
                 </div>
@@ -441,15 +449,40 @@
                     Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec eget erat in lorem euismod lacinia nec eleifend turpis.
                 </p>
             </div>
-
-
-
         </div>
+
+
         <div class="row">
             <div id="calendar" class="col-lg-6 col-md-12 col-sm-12 col-xs-12 "></div>
             <div id="datetime" class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                <table style="text-align: center">
+                    <thead>
+                        <tr>
+                            <th>Ώρα έναρξης</th>
+                            <th>Ώρα λήξης</th>
+                            <th>Ελεύθερες θέσεις</th>
+                            <th>Κόστος-Πόντοι</th>
+                            <th></th>
+                        </tr>
 
-
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>9.00</td>
+                            <td>10.00</td>
+                            <td>20</td>
+                            <td>10</td>
+                            <td><button type="button" class="btn btn-default">Κράτηση</button> </td>
+                        </tr>
+                        <tr>
+                            <td>1.00</td>
+                            <td>11.00</td>
+                            <td>17</td>
+                            <td>10</td>
+                            <td><button type="button" class="btn btn-default">Κράτηση</button> </td>
+                        </tr>
+                    </tbody>
+                </table>
 
             </div>
         </div>
@@ -597,7 +630,7 @@
             </div>
             <div style="clear: both;"></div>
         </div>
-        <div style="clear: both;"></div>
+
     </div>
     <div style="clear: both;"></div>
 
@@ -627,7 +660,7 @@
             // The format the user actually sees
             dateFormat: "dd/mm/yy",
             onSelect: function (date) {
-
+                $("#datetime").show();
                 // Your CSS changes, just in case you still need them
             }
         });
