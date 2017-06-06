@@ -241,6 +241,143 @@
         }
     /*----------------------------------------------------------------------------*/
 
+    /*-------------------------------Comments-----------------------*/
+        /*
+    Image credits:
+    uifaces.com (http://uifaces.com/authorized)
+    https://bootsnipp.com/snippets/featured/ui-comments
+*/
+
+        #login { display: none; }
+        .login,
+        .logout {
+            position: absolute;
+            top: -3px;
+            right: 0;
+        }
+        .page-header { position: relative; }
+        .reviews {
+            color: #555;
+            font-weight: bold;
+            margin: 10px auto 20px;
+        }
+        .notes {
+            color: #999;
+            font-size: 12px;
+        }
+        .media .media-object { max-width: 120px; }
+        .media-body { position: relative; }
+        .media-date {
+            position: absolute;
+            right: 25px;
+            top: 25px;
+        }
+        .media-date li { padding: 0; }
+        .media-date li:first-child:before { content: ''; }
+        .media-date li:before {
+            content: '.';
+            margin-left: -2px;
+            margin-right: 2px;
+        }
+        .media-comment { margin-bottom: 20px; }
+        .media-replied { margin: 0 0 20px 50px; }
+        .media-replied .media-heading { padding-left: 6px; }
+
+        .btn-circle {
+            font-weight: bold;
+            font-size: 12px;
+            padding: 6px 15px;
+            border-radius: 20px;
+        }
+        .btn-circle span { padding-right: 6px; }
+        .embed-responsive { margin-bottom: 20px; }
+        .tab-content {
+            padding: 50px 15px;
+            border: 1px solid #ddd;
+            border-top: 0;
+            border-bottom-right-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+        .custom-input-file {
+            overflow: hidden;
+            position: relative;
+            width: 120px;
+            height: 120px;
+            background: #eee url('https://s3.amazonaws.com/uifaces/faces/twitter/walterstephanie/128.jpg');
+            background-size: 120px;
+            border-radius: 120px;
+        }
+        input[type="file"]{
+            z-index: 999;
+            line-height: 0;
+            font-size: 0;
+            position: absolute;
+            opacity: 0;
+            filter: alpha(opacity = 0);-ms-filter: "alpha(opacity=0)";
+            margin: 0;
+            padding:0;
+            left:0;
+        }
+        .uploadPhoto {
+            position: absolute;
+            top: 25%;
+            left: 25%;
+            display: none;
+            width: 50%;
+            height: 50%;
+            color: #fff;
+            text-align: center;
+            line-height: 60px;
+            text-transform: uppercase;
+            background-color: rgba(0,0,0,.3);
+            border-radius: 50px;
+            cursor: pointer;
+        }
+        .custom-input-file:hover .uploadPhoto { display: block; }
+
+
+
+
+        /*Stars*/
+
+
+        .rate {
+            /*border: 1px solid #cccccc;*/
+            /*float: left;*/
+            height: 46px;
+            padding: 0 10px;
+
+            transition: all .03s ease-in-out;
+            transition-property: all;
+            transition-duration: 0.3s;
+            transition-timing-function: ease-in-out;
+            transition-delay: initial;
+        }
+
+        .rate:not(:checked) > input {
+            position: absolute;
+            /*top: -9999px;*/
+            visibility: hidden;
+        }
+
+        .rate:not(:checked) > label {
+            float: right;
+            width: 1em;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 30px;
+            font-side: 4vw;
+            color: #ccc;
+        }
+
+        .rate:not(:checked) > label:before { content: '★ '; }
+
+        .rate > input:checked ~ label { color: #ffc700; }
+
+        .rate:not(:checked) > label:hover, .rate:not(:checked) > label:hover ~ label { color: #deb217; }
+
+        .rate > input:checked + label:hover, .rate > input:checked + label:hover ~ label, .rate > input:checked ~ label:hover, .rate > input:checked ~ label:hover ~ label, .rate > label:hover ~ input:checked ~ label { color: #c59b08; }
 
     </style>
 
@@ -391,30 +528,164 @@
                 </p>
             </div>
 
-            <div id="calendar" class="col-lg-6 col-md--push-12 col-sm-12 col-xs-12 "></div>
 
+
+        </div>
+        <div class="row">
+            <div id="calendar" class="col-lg-6 col-md-12 col-sm-12 col-xs-12 "></div>
+            <div id="datetime" class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+
+
+
+            </div>
         </div>
 
         <!--Ratings-->
+
         <div class="row">
-            <div class="col-lg-12 col-md-12 ">
-                <div class="stars">
-                    <form action="">
-                        <input class="star star-5" id="star-5" type="radio" name="star"/>
-                        <label class="star star-5" for="star-5"></label>
-                        <input class="star star-4" id="star-4" type="radio" name="star"/>
-                        <label class="star star-4" for="star-4"></label>
-                        <input class="star star-3" id="star-3" type="radio" name="star"/>
-                        <label class="star star-3" for="star-3"></label>
-                        <input class="star star-2" id="star-2" type="radio" name="star"/>
-                        <label class="star star-2" for="star-2"></label>
-                        <input class="star star-1" id="star-1" type="radio" name="star"/>
-                        <label class="star star-1" for="star-1"></label>
-                    </form>
+            <div class="col-lg-12 col-md-12 col-sm-12" id="logout">
+                <div class="page-header">
+                    <h3 class="reviews">Πέιτε μας τη γνώμη σας</h3>
+                </div>
+                <div class="comment-tabs">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#comments-logout" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Κριτικές</h4></a></li>
+                        <li><a href="#add-comment" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Προσθήκη Κριτικής</h4></a></li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="comments-logout">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object img-circle" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" alt="profile">
+                                    </a>
+                                    <div class="media-body">
+                                        <div class="well well-lg">
+                                            <h4 class="media-heading text-uppercase reviews">Ιωάννα</h4>
+                                            <ul class="media-date text-uppercase reviews list-inline">
+                                                <li class="dd">06</li>
+                                                <li class="mm">06</li>
+                                                <li class="aaaa">2017</li>
+                                            </ul>
+                                            <p class="media-comment">
+                                                Εξαιρετικός χώρος.
+                                            </p>
+                                            <div class="rate">
+                                                <input type="radio" id="1-star5" name="rate" value="5" checked/>
+                                                <label for="1-star5" title="text">5 stars</label>
+                                                <input type="radio" id="1-star4" name="rate" value="4" />
+                                                <label for="1-star4" title="text">4 stars</label>
+                                                <input type="radio" id="1-star3" name="rate" value="3" />
+                                                <label for="1-star3" title="text">3 stars</label>
+                                                <input type="radio" id="1-star2" name="rate" value="2" />
+                                                <label for="1-star2" title="text">2 stars</label>
+                                                <input type="radio" id="1-star1" name="rate" value="1" />
+                                                <label for="1-star1" title="text">1 star</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="media">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object img-circle" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" alt="profile">
+                                    </a>
+                                    <div class="media-body">
+                                        <div class="well well-lg">
+                                            <h4 class="media-heading text-uppercase reviews">Δήμητρα</h4>
+                                            <ul class="media-date text-uppercase reviews list-inline">
+                                                <li class="dd">03</li>
+                                                <li class="mm">06</li>
+                                                <li class="aaaa">2017</li>
+                                            </ul>
+                                            <p class="media-comment">
+                                                Ιδανικό για τον μικρό μου γιο.
+                                            </p>
+                                            <div class="rate">
+                                                <input type="radio" id="2-star5" name="rate" value="5" checked/>
+                                                <label for="2-star5" title="text">5 stars</label>
+                                                <input type="radio" id="2-star4" name="rate" value="4" />
+                                                <label for="2-star4" title="text">4 stars</label>
+                                                <input type="radio" id="2-star3" name="rate" value="3" />
+                                                <label for="2-star3" title="text">3 stars</label>
+                                                <input type="radio" id="2-star2" name="rate" value="2" />
+                                                <label for="2-star2" title="text">2 stars</label>
+                                                <input type="radio" id="2-star1" name="rate" value="1" />
+                                                <label for="2-star1" title="text">1 star</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="media">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object img-circle" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" alt="profile">
+                                    </a>
+                                    <div class="media-body">
+                                        <div class="well well-lg">
+                                            <h4 class="media-heading text-uppercase reviews">Μαρία</h4>
+                                            <ul class="media-date text-uppercase reviews list-inline">
+                                                <li class="dd">02</li>
+                                                <li class="mm">06</li>
+                                                <li class="aaaa">2017</li>
+                                            </ul>
+                                            <p class="media-comment">
+                                                Υπέροχο για οικογενειακή διασκέδαση!
+                                            </p>
+                                            <div style="position:relative">
+                                                <div class="rate">
+                                                    <input type="radio" id="3-star5" name="rate" value="5" checked/>
+                                                    <label for="3-star5" title="text">5 stars</label>
+                                                    <input type="radio" id="3-star4" name="rate" value="4" />
+                                                    <label for="3-star4" title="text">4 stars</label>
+                                                    <input type="radio" id="3-star3" name="rate" value="3" />
+                                                    <label for="3-star3" title="text">3 stars</label>
+                                                    <input type="radio" id="3-star2" name="rate" value="2" />
+                                                    <label for="3-star2" title="text">2 stars</label>
+                                                    <input type="radio" id="3-star1" name="rate" value="1" />
+                                                    <label for="3-star1" title="text">1 star</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane" id="add-comment">
+                            <form action="#" method="post" class="form-horizontal" id="commentForm" role="form">
+                                <div class="form-group">
+                                    <label for="email" class="col-sm-2 control-label">Σχόλιο</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" name="addComment" id="addComment" rows="5"></textarea>
+                                    </div>
+                                </div>
+                                <p> Αξιολόγηση</p>
+                                <div class="rate">
+                                    <input type="radio" id="star5" name="rate" value="5" checked/>
+                                    <label for="1-star5" title="text">5 stars</label>
+                                    <input type="radio" id="star4" name="rate" value="4" />
+                                    <label for="1-star4" title="text">4 stars</label>
+                                    <input type="radio" id="star3" name="rate" value="3" />
+                                    <label for="1-star3" title="text">3 stars</label>
+                                    <input type="radio" id="star2" name="rate" value="2" />
+                                    <label for="1-star2" title="text">2 stars</label>
+                                    <input type="radio" id="star1" name="rate" value="1" />
+                                    <label for="1-star1" title="text">1 star</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button class="btn btn-success btn-circle text-uppercase" type="submit" id="submitComment"><span class="glyphicon glyphicon-send"></span>Υποβολή</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div style="clear: both;"></div>
         </div>
+        <div style="clear: both;"></div>
     </div>
+    <div style="clear: both;"></div>
 
 
 
@@ -435,11 +706,18 @@
             inline: true,
             firstDay: 1,
             showOtherMonths: true,
-            dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+            dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            altField: "#dateHidden",
+            // The format you want
+            altFormat: "yy-mm-dd",
+            // The format the user actually sees
+            dateFormat: "dd/mm/yy",
+            onSelect: function (date) {
+
+                // Your CSS changes, just in case you still need them
+            }
         });
     </script>
-
-
     <script>
 
         var map = undefined;
