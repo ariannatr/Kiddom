@@ -44,7 +44,19 @@ Licence URI: http://www.os-templates.com/template-terms
 <div class="bgded overlay" >
   <!-- ################################################################################################ -->
   <div class="wrapper row0">
-    <div id="topbar" class="hoc clear"> 
+    <div id="topbar" class="hoc clear">
+      <div class=" fl_left  ">
+        <form class="navbar-form" role="search" th:action="@{/freetext_form}" method="POST"  id="freetextform">
+          <div class=" input-group" >
+            <input type="text" class="form-control " placeholder="Τι θα ψάξουμε σήμερα;" style="opacity: 0.6;">
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-lgrr" style="font-size:22px">
+                    <i class="fa fa-search" ></i>
+                </button>
+            </span>
+          </div>
+        </form>
+      </div>
       <!-- ################################################################################################ -->
       
       <div class="fl_right">
