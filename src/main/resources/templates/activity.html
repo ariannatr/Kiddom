@@ -1,33 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>activity</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <link th:href="@{css/layout.css}" rel="stylesheet" type="text/css" media="all">
-
-    <link th:href="@{css/jquery-ui.css}" rel="stylesheet" type="text/css" media="all">
-    <link th:href="@{css/jquery-ui.structure.css}" rel="stylesheet" type="text/css" media="all">
-    <link th:href="@{css/jquery-ui.theme.css}" rel="stylesheet" type="text/css" media="all">
-
-    <link th:href="@{css/lightbox.css}" rel="stylesheet" type="text/css" media="all">
-
-
-    <!--<link href="../static/css/layout.css" rel="stylesheet" type="text/css" media="all">-->
-
-    <!--<link href="../static/css/jquery-ui.css" rel="stylesheet" type="text/css" media="all">-->
-    <!--<link href="../static/css/jquery-ui.structure.css" rel="stylesheet" type="text/css" media="all">-->
-    <!--<link href="../static/css/jquery-ui.theme.css" rel="stylesheet" type="text/css" media="all">-->
-
-    <!--<link href="../static/css/lightbox.css" rel="stylesheet" type="text/css" media="all">-->
-
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/head :: head">
+    <title>Kiddom-Activity</title>
 </head>
+
 <body>
 
 
@@ -381,70 +357,8 @@
 
     </style>
 
-    <!--<div class="bgded overlay" >-->
-        <!--<div class="wrapper row0" >-->
-            <!--<div id="topbar" class="hoc clear">-->
-                <!--&lt;!&ndash; ################################################################################################ &ndash;&gt;-->
-                <!--<div class="fl_left">-->
-                    <!--<ul>-->
-                        <!--<li><i class="fa fa-phone"></i> +00 (123) 456 7890</li>-->
-                        <!--<li><i class="fa fa-envelope-o"></i> info@domain.com</li>-->
-                    <!--</ul>-->
-                <!--</div>-->
-                <!--<div class="fl_right">-->
-                    <!--<ul>-->
-                        <!--<li><a href="#"><i class="fa fa-lg fa-home"></i></a></li>-->
-                        <!--<li><a href="#">Συνδεση</a></li>-->
-                        <!--<li><a href="#">Εγγραφη</a></li>-->
-                    <!--</ul>-->
-                <!--</div>-->
-                <!--&lt;!&ndash; ################################################################################################ &ndash;&gt;-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--&lt;!&ndash; ################################################################################################ &ndash;&gt;-->
-        <!--&lt;!&ndash; ################################################################################################ &ndash;&gt;-->
-        <!--&lt;!&ndash; ################################################################################################ &ndash;&gt;-->
-        <!--<div class="wrapper row1">-->
-            <!--<header id="header" class="hoc clear">-->
-                <!--&lt;!&ndash; ################################################################################################ &ndash;&gt;-->
-                <!--<div id="logo" class="fl_left">-->
-                    <!--<h1><a href="../index.html">Kiddom</a></h1>-->
-                <!--</div>-->
-                <!--<nav id="mainav" class="fl_right">-->
-                    <!--<ul class="clear">-->
-                        <!--<li class="active"><a href="index.html">Αρχικη</a></li>-->
-                        <!--<li><a class="drop" href="#">Δραστηριοτητες</a>-->
-                            <!--<ul>-->
-                                <!--<li><a href="gallery.html">Ενεργές Δραστηριότητες</a></li>-->
-                                <!--<li><a href="full-width.html">Παλαιότερες Δραστηριότητες</a></li>-->
-                                <!--&lt;!&ndash;<li><a href="pages/sidebar-left.html">Sidebar Left</a></li>-->
-                                <!--<li><a href="pages/sidebar-right.html">Sidebar Right</a></li>-->
-                                <!--<li><a href="pages/basic-grid.html">Basic Grid</a></li>&ndash;&gt;-->
-                            <!--</ul>-->
-                        <!--</li>-->
-                        <!--&lt;!&ndash; <li><a class="drop" href="#">Προφιλ</a>-->
-                           <!--<ul>-->
-                             <!--<li><a href="#">Δημιουργία Δραστηριότητας</a></li>-->
-                             <!--<li><a class="drop" href="#">Επεξεργασία Προφίλ</a>-->
-                               <!--<ul>-->
-                                 <!--<li><a href="#">Αγορά Πόντων</a></li>-->
-                                 <!--<li><a href="#">Επεξεργασία Στοιχείων</a></li>-->
-                                 <!--&lt;!&ndash;<li><a href="#">Level 3</a></li>-->
-                               <!--</ul>-->
-                             <!--</li>-->
-                             <!--<li><a href="#">Level 2</a></li>-->
-                           <!--</ul>-->
-                         <!--</li>&ndash;&gt;-->
-                        <!--<li><a href="#">Σχετικα με εμας</a></li>-->
-                        <!--<li><a href="#">FAQ</a></li>-->
-                    <!--</ul>-->
-                <!--</nav>-->
-                <!--&lt;!&ndash; ################################################################################################ &ndash;&gt;-->
-            <!--</header>-->
-        <!--</div>-->
-    <!--</div>-->
 
-    <div th:replace="fragments/navbar :: navbar('activity_reg')"></div>
+    <div th:replace="fragments/navbar :: navbar('activity')"></div>
 
     <div id="activity">
 
@@ -543,7 +457,7 @@
         <!--Ratings-->
 
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12" id="logout">
+            <div class="col-lg-12 col-md-12 col-sm-12" id="ratings">
                 <div class="page-header">
                     <h3 class="reviews">Πέιτε μας τη γνώμη σας</h3>
                 </div>
