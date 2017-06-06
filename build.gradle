@@ -16,6 +16,7 @@ apply plugin: 'eclipse-wtp'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'war'
 apply plugin: 'idea'
+apply plugin: 'jetty'
 
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
@@ -23,8 +24,7 @@ targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
-	maven { url http:"//repo.maven.apache.org/maven2" }
-}
+	}
 
 configurations {
 	providedRuntime
@@ -51,6 +51,12 @@ dependencies {
     //compile 'org.springframework:spring-context:4.3.8.RELEASE'
     //testCompile('org.springframework.boot:spring-boot-starter-test')
     //compile 'org.hibernate:hibernate-core:5.2.10.Final'
+
+	/* -------------------Spring security-----------------*/
+//	compile 'org.springframework.boot:spring-boot-autoconfigure:1.5.3.RELEASE'
+//	compile 'org.springframework.security:spring-security-web:3.2.3.RELEASE'
+//	compile 'org.springframework.security:spring-security-config:3.2.3.RELEASE'
+
 
     compile 'mysql:mysql-connector-java'
     compile 'javax.servlet:jstl:1.2'
