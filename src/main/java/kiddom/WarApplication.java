@@ -1,5 +1,6 @@
 package kiddom;
 
+//import org.apache.catalina.security.SecurityConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +8,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
+//import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
+//import org.springframework.security.web.context.*;
 
 @SpringBootApplication
 @Configuration
@@ -24,3 +26,9 @@ public class WarApplication  extends SpringBootServletInitializer {
 		SpringApplication.run(WarApplication.class, args);
 	}
 }
+/*import org.springframework.security.web.context.*;
+
+public class SecurityWebApplicationInitializer
+		extends AbstractSecurityWebApplicationInitializer {
+
+}*/
