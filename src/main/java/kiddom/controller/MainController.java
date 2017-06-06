@@ -65,5 +65,12 @@ public class MainController {
         return modelAndView;
     }
 
+    @RequestMapping(value="/freetext_form", method = RequestMethod.POST)
+    public ModelAndView freetext_form(@ModelAttribute("user") @Valid UserEntity user){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("user", user);
+        modelAndView.setViewName("error_page");
+        return modelAndView;
+    }
 
 }
