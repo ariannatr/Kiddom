@@ -73,4 +73,12 @@ public class MainController {
         return modelAndView;
     }
 
+    @RequestMapping(value="/search", method = RequestMethod.POST)
+    public ModelAndView search(@ModelAttribute("user") @Valid UserEntity user){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("user", user);
+        modelAndView.setViewName("search");
+        return modelAndView;
+    }
+
 }

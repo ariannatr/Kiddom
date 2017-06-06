@@ -40,14 +40,5 @@ $(document).ready(function () {
 
     $('div.setup-panel div a.btn-primary').trigger('click');
 
-    $(document).ready(function() {
 
-        // get the current URL
-        var url = $(location).attr('href');
-
-        // if the URL ends with the anchor #portfolioModal93 then we want to open the modal
-        if(url == 'http://localhost:8080/index#login_overlay') {
-            $('#login_overlay').modal('show');
-        }
-    });
 });
