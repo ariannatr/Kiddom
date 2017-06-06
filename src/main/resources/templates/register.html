@@ -5,6 +5,7 @@
 
 <head th:include="fragments/head :: head">
     <title>Kiddom-Register</title>
+    <script th:href="@{scripts/validate.js}"></script>
 </head>
 
 <body id="top">
@@ -100,7 +101,7 @@
 
                                     <div class="form-group" align="center">
                                         <p/>
-                                        <label for="image" class="photo_upload" >Θα θέλατε να ανεβάσετε μια Φωτογραφία Προφίλ;</label>
+                                        <label for="image1" class="photo_upload" >Θα θέλατε να ανεβάσετε μια Φωτογραφία Προφίλ;</label>
                                         <span class="help-block"></span>
                                         <p/>
                                         <input name="image" id="image1" type="file" accept="image/*" id="menu_images1" style="color: black;"/>
@@ -154,13 +155,13 @@
                                         <div class="col-md-4 inputGroupContainer">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-ok"></i></span>
-                                                <input  name="passwordsignup_confirm" id="passwordsignup_confirm" required="required" placeholder="πχ. X8df!90EO" class="form-control"  type="password">
+                                                <input  name="passwordsignup_confirm" id="passwordsignup_confirm" required="required" placeholder="πχ. X8df!90EO" class="form-control"  type="password" oninput="validate()">
                                                 <span class="help-block"></span>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <button class="btn btn-success btn-lg pull-right" type="submit">Εγγραφη <span class="glyphicon glyphicon-send"></span></button>
+                                    <button class="btn btn-success btn-lg pull-right" id="to_koumpi" type="submit">Εγγραφη <span class="glyphicon glyphicon-send"></span></button>
                                 </div>
                             </div>
 
