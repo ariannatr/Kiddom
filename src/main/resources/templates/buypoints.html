@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<!--
+Template Name: Maxisonix
+Author: <a href="http://www.os-templates.com/">OS Templates</a>
+Author URI: http://www.os-templates.com/
+Licence: Free to use under our free template licence terms
+Licence URI: http://www.os-templates.com/template-terms
+-->
+<html>
+<head>
+    <style>
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            /*-webkit-appearance: "Always Show Up/Down Arrows";*/
+            opacity: 1;
+
+        }
+
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 30px;
+            right: 30px;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            /*background-color: rgb(0,0,0); !* Fallback color *!*/
+            /*background-color: rgba(0,0,0,0.4); !* Black w/ opacity *!*/
+        }
+
+        /* Modal Content */
+        .modal-content {
+            position: relative;
+            /*background-color: #fefefe;*/
+            margin: auto;
+            padding: 0;
+            /*border: 1px solid #888;*/
+            width: 80%;
+            /*box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);*/
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s
+        }
+
+        /* Add Animation */
+        /*@-webkit-keyframes animatetop {*/
+        /*from {top:-300px; opacity:0}*/
+        /*to {top:0; opacity:1}*/
+        /*}*/
+
+        /*@keyframes animatetop {*/
+        /*from {top:-300px; opacity:0}*/
+        /*to {top:0; opacity:1}*/
+        /*}*/
+
+        /* The Close Button */
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-header {
+            /*padding: 2px 16px;*/
+            /*background-color: #5cb85c;*/
+            /*color: white;*/
+        }
+
+        /*.modal-body {padding: 2px 16px;}*/
+
+        /*.modal-footer {*/
+        /*padding: 2px 16px;*/
+        /*!*background-color: #5cb85c;*!*/
+        /*!*color: white;*!*/
+        /*}*/
+
+
+        .profileHeadings {
+            text-align: center;
+        }
+        .well {
+            color: black;
+            text-align: center;
+        }
+        td {
+            color: black;
+        }
+        .container2 {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        @media (min-width: 768px) {
+            .container2 {
+                width: 750px;
+            }
+        }
+        @media (min-width: 992px) {
+            .container2 {
+                width: 970px;
+            }
+        }
+        @media (min-width: 1200px) {
+            .container2 {
+                width: 1170px;
+            }
+        }
+        .main h1{
+            text-align:center;
+            color: #1a0438;
+            font-size:2.5em;
+            margin-bottom:1.5em;
+        }
+        .main{
+            margin: 3em auto;
+            position: relative;
+            height: 100%;
+        }
+
+        select:required:invalid {
+            color: gray;
+        }
+        option[value=""][disabled] {
+            display: none;
+        }
+        option {
+            color: black;
+        }
+    </style>
+    <title>My profile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/simpleCart.min.js"> </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta charset="utf-8">
+
+    <link href="../static/css/layout.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="stylesheet" href="../static/css/user_prof.css">
+    <link href="static/css/jquery-ui.css" rel="stylesheet" type="text/css" media="all">
+    <link href="static/css/jquery-ui.structure.css" rel="stylesheet" type="text/css" media="all">
+    <link href="static/css/jquery-ui.theme.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
+</head>
+
+<body id="top">
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- Top Background Image Wrapper -->
+<div class="bgded overlay" >
+    <!-- ################################################################################################ -->
+    <div class="wrapper row0">
+        <div id="topbar" class="hoc clear">
+            <!-- ################################################################################################ -->
+
+            <div class="fl_right">
+                <ul>
+                    <li><a href="#"><i class="fa fa-lg fa-home"></i></a></li>
+                    <li><a href="#">Αποσυνδεση</a></li>
+                </ul>
+            </div>
+            <!-- ################################################################################################ -->
+        </div>
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <div class="wrapper row1">
+        <header id="header" class="hoc clear">
+            <!-- ################################################################################################ -->
+            <div id="logo" class="fl_left">
+                <h1><a href="index.html">Kiddom</a></h1>
+            </div>
+            <nav id="mainav" class="fl_right">
+                <ul class="clear">
+                    <li class="active"><a href="index.html">Αρχικη</a></li>
+                    <li><a class="drop" href="#">Δραστηριοτητες</a>
+                        <ul>
+                            <li><a href="./gallery.html">Ενεργές Δραστηριότητες</a></li>
+                            <li><a href="./full-width.html">Παλαιότερες Δραστηριότητες</a></li>
+
+                        </ul>
+                    </li>
+                    <li><a href="./about.html">Σχετικα με εμας</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </nav>
+            <!-- ################################################################################################ -->
+        </header>
+    </div>
+</div>
+<div  style="background-color:white" >
+    <main class="hoc container clear" >
+        <div class="row">
+
+            <h3 style="text-transform: none;"> Επιλέξτε πακέτο ή πληκτρολογείστε τον επιθυμητό αριθμό πόντων</h3>
+            <!--<div class="w3ls_main_grid_right_grid_form">-->
+            <div class="col-md-4">
+                <form class="form" action="#" method="post">
+                    <!--<div class="w3l_main_grid_right_grid_form1">-->
+
+                    <div class="form-group">
+                        <label class="control-label"> Πακέτο 1 (260 πόντοι - 50$)</label>
+                        <!--<div class="col-sm-8">-->
+                        <input type="number" value="0" id="quantity" min="0" required="" oninput="calculate()"><br>
+                        <!--</div>-->
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"> Πακέτο 2 (530 πόντοι - 100$)</label>
+                        <!--<div class="col-sm-8">-->
+                        <input type="number" value="0" id="quantity2" min="0" required="" oninput="calculate()"><br>
+                        <!--</div>-->
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"> Πακέτο 3 (1070 πόντοι - 200$)</label>
+                        <!--<div class="col-sm-8">-->
+                        <input type="number" value="0" id="quantity3" min="0" required="" oninput="calculate()"><br>
+                        <!--</div>-->
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Πληκτρολογήστε αριθμό πόντων</label>
+                        <input type="text" value="0" name="Points" id="quantity4" min="0"  placeholder="Aριθμός πόντων" required="" oninput="calculate()">
+                    </div>
+                </form>
+
+                <button class="btn" onclick="reset()" > Tέλος </button>
+            </div>
+            <div class="col-md-4 col-md-offset-2">
+                <div class="hidden-xs" > <br><br><br> </div>
+
+                <h2>Total cost</h2>
+                <h3 id="cost" style="position: relative;left: 40px"> 0$ <span>USD</span></h3>
+
+                <br>
+                <h2>Total Points</h2>
+                <h3 id="points" style="position: relative;left: 40px"> 0 </h3>
+
+
+
+            </div>
+        </div>
+        <br>
+        <div class=" col-md-4" >
+            <h2> ΠΛΗΡΩΜΗ </h2>
+            <select id="payment"  onchange="pr()">
+                <option value="1" selected>Πιστωτικη καρτα</option>
+                <option value="2">Paypal</option>
+            </select>
+        </div>
+
+        <div class="col-md-8 " id="credit_payment"  >
+            <!--<div class="row">-->
+            <!--<div class="col-xs-12 col-md-4 col-md-offset-2">-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        ΛΕΠΤΟΜΕΡΕΙΕΣ ΠΛΗΡΩΜΗΣ
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="cardNumber">
+                                Αριθμός Κάρτας</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="cardNumber" placeholder="Valid Card Number"
+                                       required autofocus />
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-7 col-md-7">
+                                <div class="form-group">
+                                    <label >
+                                        Ημερομηνία Λήξης</label>
+                                    <div class="col-xs-6 col-lg-6 pl-ziro">
+                                        <!--<input type="text" class="form-control" id="expityMonth" placeholder="MM" required / >-->
+                                        <select class="form-control" required  >
+                                            <option  value="" disabled selected >Μήνας</option>
+                                            <option value="Ιανουάριος">01</option>
+                                            <option value="Φεβρουάριος">02</option>
+                                            <option value="Μάρτιος">03</option>
+                                            <option value="Απρίλιος">04</option>
+                                            <option value="Μάιος">05</option>
+                                            <option value="Ιούνιος">06</option>
+                                            <option value="Ιούλιος">07</option>
+                                            <option value="Αύγουστος">08</option>
+                                            <option value="Σεπτέμβριος">09</option>
+                                            <option value="Οκτώβριος">10</option>
+                                            <option value="Νοέμβριος">11</option>
+                                            <option value="Δεκέμβριος">12</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-6 col-lg-6 pl-ziro">
+                                        <input type="text" class="form-control" id="expityYear" placeholder="Xρονιά" required /></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-5 col-md-5 pull-right">
+                                <div class="form-group">
+                                    <label for="cvCode">
+                                        CV CODE</label>
+                                    <input type="password" class="form-control" id="cvCode" placeholder="CV" required />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <ul class="nav nav-pills nav-stacked">
+                <li style="text-align: center" class="active" ><a href="#"><span class="glyphicon glyphicon-usd" id="points2"></span> Final Payment</a>
+                </li>
+            </ul>
+            <br/>
+            <button   id="myBtn" class="btn btn-success btn-lg btn-block" onclick="reset()">Πληρωμη</button>
+            <!--<button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
+            <!--<button id="myBtn">Open Modal</button>-->
+            <!--<a href="" id="openUser">Open Modal JS (failed)</a>-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body" style="text-align: center">
+                    <strong> Η συναλλαγή ολοκληρώθηκε </strong>
+                    <br>
+                    <a href="#" class="btn btn-success" role="button">EΠΙΣΤΡΟΦΗ ΣΤΟ ΠΟΡΤΟΦΟΛΙ</a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-8" id="paypal_payment" style="display: none">
+
+            <!--<div class="row">-->
+            <!--<div class="col-xs-12 col-md-4 col-md-offset-2">-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        ΠΛΗΡΩΜΗ ΜΕ PAYPAL
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="username">
+                                Αριθμός Κάρτας</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="username" placeholder="Username"
+                                       required autofocus />
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Email">
+                                Email</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="Email" placeholder="noreply@email.com"
+                                       required autofocus />
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <ul class="nav nav-pills nav-stacked">
+                <li style="text-align: center" class="active"><a href="#"><span class="glyphicon glyphicon-usd" id="points3"></span> Final Payment</a>
+                </li>
+            </ul>
+            <br/>
+            <button  id="myBtn2" class="btn btn-success btn-lg btn-block" onclick="reset()" >Πληρωμη</button>
+        </div>
+    </main>
+</div>
+
+<div class="wrapper row4 bgded overlay" >
+    <footer id="footer" class="hoc clear">
+        <!-- ################################################################################################ -->
+        <div class="one_half first">
+            <h6 class="title">Social Media</h6>
+            <p>Ακολουθείστε μας στα social media για να μαθαίνετε πρώτοι τα νέα του Kiddom.</p>
+            <!--  <p class="btmspace-15">Malesuada non sem quisque vulputate velit et nisi ullamcorper aliquet tincidunt ut id magna leo mattis in quam dapibus.</p>-->
+            <ul class="faico clear">
+                <li><a class="faicon-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a class="faicon-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                <!--     <li><a class="faicon-dribble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                     <li><a class="faicon-linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                     <li><a class="faicon-google-plus" href="#"><i class="fa fa-google-plus"></i></a></li>
+                     <li><a class="faicon-vk" href="#"><i class="fa fa-vk"></i></a></li>-->
+            </ul>
+        </div>
+        <div class="one_half">
+            <h6 class="title">Στοιχεια Επικοινωνιας</h6>
+            <ul class="nospace linklist contact">
+                <li><i class="fa fa-map-marker"></i>
+                    <address>
+                        Οδός &amp; Αριθμός, Πόλη, Τ.Κ.
+                    </address>
+                </li>
+                <li><i class="fa fa-phone"></i> +00 (123) 456 7890</li>
+                <li><i class="fa fa-fax"></i> +00 (123) 456 7890</li>
+                <li><i class="fa fa-envelope-o"></i> info@domain.com</li>
+            </ul>
+        </div>
+        <!-- ################################################################################################ -->
+    </footer>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row5">
+    <div id="copyright" class="hoc clear">
+        <!-- ################################################################################################ -->
+        <p class="fl_left">Copyright &copy; 2016 - All Rights Reserved - <a href="#">Domain Name</a></p>
+        <!--  <p class="fl_right">Template by <a target="_blank" href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>-->
+        <!-- ################################################################################################ -->
+    </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
+<!-- JAVASCRIPTS -->
+
+<script src="layout/scripts/jquery.min.js"></script>
+<script src="layout/scripts/jquery.backtotop.js"></script>
+<script src="layout/scripts/jquery.mobilemenu.js"></script>
+<script src="layout/scripts/jquery.flexslider-min.js"></script>
+<script src="layout/scripts/jquery-ui.js"></script>
+<script type="text/javascript">
+    jQuery(function(){
+        jQuery('#datepicker').datepicker({
+            inline: true,
+            showOtherMonths: true
+        });
+    });
+</script>
+
+<script>
+    // Get the modal
+
+    var modal = document.getElementById('myModal');
+    var btn = document.getElementById("myBtn");
+    var btn2 = document.getElementById("myBtn2");
+    var span = document.getElementsByClassName("close")[0];
+    // When the user clicks on the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+    btn2.onclick = function() {
+        modal.style.display = "block";
+    }
+    //    reset();
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+</script>
+
+<script>
+    function hidediv(id){$('#'+id).css('display','none');}
+    function showdiv(id){$('#'+id).css('display','block');}
+</script>
+<script>
+    function pr() {
+        if (document.getElementById("payment").value == "1") {
+
+            showdiv('credit_payment');
+
+        }
+        else {
+
+            hidediv('credit_payment');
+
+        }
+        if (document.getElementById("payment").value == "2") {
+            showdiv('paypal_payment');
+        }
+        else {
+            hidediv('paypal_payment');
+        }
+    }
+</script>
+<script>
+    function calculate() {
+        var cost = 10;
+        var quantity = parseInt(document.getElementById("quantity").value);
+        var quantity2 = parseInt(document.getElementById("quantity2").value);
+        var quantity3 = parseInt(document.getElementById("quantity3").value);
+        var quantity4 = parseInt(document.getElementById("quantity4").value);
+        if (quantity4 < 0) {
+            alert("Πληκτρολογειστε μια τιμη μεγαλύτερη ή ιση με το 0");
+            return;
+        }
+        var quantity5 = (quantity * 50) + (quantity2 * 100) + (quantity3 * 200) + (quantity4 / 5);
+        var points = (quantity * 260) + (quantity2 * 530) + (quantity3 * 1070) + (quantity4);
+        document.getElementById("cost").innerText = quantity5 + "$";
+        document.getElementById("points").innerText = points;
+        document.getElementById("points2").innerText =quantity5;
+        document.getElementById("points3").innerText =quantity5;
+    }
+
+
+    function reset() {
+//        alert("Πληκτρολογειστε μια τιμη μεγαλύτερη ή ιση με το 0");
+
+        document.getElementById("quantity").value = 0;
+        document.getElementById("quantity2").value = 0;
+        document.getElementById("quantity3").value = 0;
+        document.getElementById("quantity4").value = 0;
+        calculate();
+    }
+</script>
+
+<script type=text/javascript>
+    jQuery( function() {
+        var availableTags = [
+            "ActionScript",
+            "AppleScript",
+            "Asp",
+            "BASIC",
+            "C",
+            "C++",
+            "Clojure",
+            "COBOL",
+            "ColdFusion",
+            "Erlang",
+            "Fortran",
+            "Groovy",
+            "Haskell",
+            "Java",
+            "JavaScript",
+            "Lisp",
+            "Perl",
+            "PHP",
+            "Python",
+            "Ruby",
+            "Scala",
+            "Scheme"
+        ];
+        $( "#location" ).autocomplete({
+            source: availableTags
+        });
+    } );
+</script>
+<script type="text/javascript">
+    function openCity(evt, cityName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the link that opened the tab
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+</body>
+</html>
