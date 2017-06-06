@@ -1,7 +1,6 @@
 <!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
-
 <!--
 Template Name: Maxisonix
 Author: <a href="http://www.os-templates.com/">OS Templates</a>
@@ -9,22 +8,31 @@ Author URI: http://www.os-templates.com/
 Licence: Free to use under our free template licence terms
 Licence URI: http://www.os-templates.com/template-terms
 -->
-
 <head th:include="fragments/head :: head">
-
-    <title>Kiddom-Profile</title>
-    <!--style>
-        .profileHeadings {
-            text-align: center;
+    <style>
+        .container2 {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
         }
-        .well {
-            color: black;
-            text-align: center;
+        @media (min-width: 768px) {
+            .container2 {
+                width: 750px;
+            }
         }
-        td {
-            color: black;
+        @media (min-width: 992px) {
+            .container2 {
+                width: 970px;
+            }
         }
-    </style-->
+        @media (min-width: 1200px) {
+            .container2 {
+                width: 1170px;
+            }
+        }
+    </style>
+    <title>>Kiddom-Profile</title>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
 </head>
 
@@ -32,17 +40,11 @@ Licence URI: http://www.os-templates.com/template-terms
 
 <div th:replace="fragments/navbar :: navbar('profile')"></div>
 
+
 <div class="wrapper row3" style="background-color:#b7c1ae" >
     <main class="hoc container clear" >
         <div id="pageintro" class="hoc clear" style="padding:1% 0 1% 0 ">
             <div class="sidebar one_quarter first">
-
-
-                <!------------------------------------------------------------------>
-
-
-
-
                 <div class="tab">
                     <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'user_elements')"><i class="fa fa-user" style="color:#cc834f "></i> Στοιχεια Χρήστη</button>
                     <button type="button" class="tablinks list-group-item" onclick="openCity(event, 'wallet')"><i class="fa fa-university" style="color:#cc834f"></i> Πορτοφόλι</button>
@@ -62,10 +64,16 @@ Licence URI: http://www.os-templates.com/template-terms
 
                 <div id="user_elements"  class="tabcontent">
 
-                    <div class="container bootstrap snippet">
+
+                    <div class="container2">
                         <div class="panel-body inf-content">
                             <div class="row">
-                               <div class="col-md-3 col-lg-3 " style='width: 180px' align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
+                                <!--<div class="col-md-3 col-lg-3" align="center" >-->
+                                <!--<img alt="User Pic" class="img-circle img-responsive" src="http://bootdey.com/img/Content/user-453533-fdadfd.png" data-original-title="Usuario">-->
+                                <!--<div class="col-md-3 col-lg-3 "  style='width: 200px;' align="center"> <img alt="User Pic" src="http://bootdey.com/img/Content/user-453533-fdadfd.png" class="img-circle img-responsive"> </div>-->
+                                <div class="col-md-3 col-lg-3 " style='width: 180px' align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
+                                <!--</div>-->
+                                <!--</br>-->
                                 <div class=" col-md-9 col-lg-9 ">
                                     <strong>Πληροφορίες</strong><br>
                                     <div class="table-responsive">
@@ -105,7 +113,16 @@ Licence URI: http://www.os-templates.com/template-terms
                                                     ΤheBestUser
                                                 </td>
                                             </tr>
-
+                                            <!--<tr>-->
+                                            <!--<td>-->
+                                            <!--<strong>-->
+                                            <!--<span class="glyphicon glyphicon-eye-open text-primary"></span>-->
+                                            <!--Role-->
+                                            <!--</strong>-->
+                                            <!--</td>-->
+                                            <!--<td class="text-primary">-->
+                                            <!--Admin-->
+                                            <!--</td>-->
                                             </tr>
                                             <tr>
                                                 <td>
@@ -192,7 +209,7 @@ Licence URI: http://www.os-templates.com/template-terms
 
 
                 <div id="change_form" class="tabcontent">
-                    <form class="form-horizontal" action="">
+                    <form class="form-horizontal" action="/action_page.php">
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="name">Όνομα:</label>
                             <div class="col-sm-10">
@@ -254,6 +271,7 @@ Licence URI: http://www.os-templates.com/template-terms
                 </div>
 
 
+
                 <div id="wallet" class="tabcontent">
                     <h3 style='text-align: center' > Πορτοφολι</h3>
                     <div class="table-responsive" >
@@ -262,7 +280,7 @@ Licence URI: http://www.os-templates.com/template-terms
                             <tr>
 
                                 <th > Πληρωθέντες πόντοι </th>
-                                <th> Δεσμευμένοι πόντοι </th>>
+                                <th> Δεσμευμένοι πόντοι </th>
                                 <th> Διαθέσιμοι ποντοι </th>
                             </tr>
                             </thead>
@@ -274,6 +292,9 @@ Licence URI: http://www.os-templates.com/template-terms
                             </tr>
                             </tbody>
                         </table>
+                        <div style='text-align: center'>
+                            <button class="btn btn-default"  onclick="openCity(event, 'change_form')"> ΑΓΟΡΑ ΠΟΝΤΩΝ </button>
+                        </div>
                     </div>
                 </div>
 
@@ -288,7 +309,7 @@ Licence URI: http://www.os-templates.com/template-terms
                         <!--article class="one_third first"-->
                         <div class=" borderedbox inspace-5">
                             <article >
-                                <figure><img  src="../images/demo/event1.jpg"  style=" width:200px; height:190px;float: left; margin: 0px 15px 15px 0px;" alt=""></a>
+                                <figure><img  src="../static/images/demo/event1.jpg"  style=" width:200px; height:190px;float: left; margin: 0px 15px 15px 0px;" alt=""></a>
                                     <figcaption>
                                         <time datetime="2045-04-06T08:15+00:00"><strong>06</strong> <em>Απρ</em></time>
                                     </figcaption>
@@ -312,7 +333,7 @@ Licence URI: http://www.os-templates.com/template-terms
                         <!--article class="one_third"-->
                         <div  class=" borderedbox inspace-5">
                             <article >
-                                <figure><img  src="../images/demo/event2.jpg" style=" width:200px; height:200px;float: left; margin: 0px 15px 15px 0px;"  alt=""></a>
+                                <figure><img  src="../static/images/demo/event2.jpg" style=" width:200px; height:200px;float: left; margin: 0px 15px 15px 0px;"  alt=""></a>
                                     <figcaption>
                                         <time datetime="2045-04-05T08:15+00:00"><strong>05</strong> <em>Απρ</em></time>
                                     </figcaption>
@@ -334,7 +355,7 @@ Licence URI: http://www.os-templates.com/template-terms
 
                         <div  class=" borderedbox inspace-5">
                             <article >
-                                <figure><img src="../images/demo/event3.jpg" style=" width:200px; height:200px;float: left; margin: 0px 15px 15px 0px;"  alt="a1"></a>
+                                <figure><img src="../static/images/demo/event3.jpg" style=" width:200px; height:200px;float: left; margin: 0px 15px 15px 0px;"  alt="a1"></a>
                                     <figcaption>
                                         <time datetime="2045-04-04T08:15+00:00"><strong>04</strong> <em>Απρ</em></time>
                                     </figcaption>
@@ -390,12 +411,25 @@ Licence URI: http://www.os-templates.com/template-terms
                     <!-- ################################################################################################ -->
 
                     <h2 align="center">Παλαιότερες Δραστηριότητες</h2>
+                    <!--div class=" borderedbox inspace-5">
+                    <img class="imgl" src="../images/demo/gallery/01.png" width="20" height="20" alt="">
+                    <p>Aliquatjusto quisque nam consequat doloreet vest orna partur scetur portortis nam. Metadipiscing eget facilis elit sagittis felisi eger id justo maurisus convallicitur.</p>
+                    <p>Dapiensociis temper donec auctortortis cumsan et curabitur condis lorem loborttis leo. Ipsumcommodo libero nunc at in velis tincidunt pellentum tincidunt vel lorem.</p>
+                  </div>
+                       <div class=" borderedbox inspace-5">
+                      <img class="imgl borderedbox inspace-5" src="../images/demo/gallery/01.png" alt="">
+
+
+                    <p>This is a W3C compliant free website template from OS Templates</a>. For full terms of use of this template please read our website template licence.</p>
+                    <p>You can use and modify the template for both personal and commercial use. You must keep all copyright information and credit links in the template and associated files. For more website templates visit our <a href="http://www.os-templates.com/">free website templates</a> section.</p>
+
+                    </div-->
 
                     <div class="group results">
                         <!--article class="one_third first"-->
                         <div class=" borderedbox inspace-5">
                             <article >
-                                <figure><img  src="../images/demo/event1.jpg"  style=" width:200px; height:190px;float: left; margin: 0px 15px 15px 0px;" alt=""></a>
+                                <figure><img  src="../static/images/demo/event1.jpg"  style=" width:200px; height:190px;float: left; margin: 0px 15px 15px 0px;" alt=""></a>
                                     <figcaption>
                                         <time datetime="2045-04-06T08:15+00:00"><strong>06</strong> <em>Απρ</em></time>
                                     </figcaption>
@@ -416,7 +450,7 @@ Licence URI: http://www.os-templates.com/template-terms
                         <!--article class="one_third"-->
                         <div  class=" borderedbox inspace-5">
                             <article >
-                                <figure><img  src="../images/demo/event2.jpg" style=" width:200px; height:200px;float: left; margin: 0px 15px 15px 0px;"  alt=""></a>
+                                <figure><img  src="../static/images/demo/event2.jpg" style=" width:200px; height:200px;float: left; margin: 0px 15px 15px 0px;"  alt=""></a>
                                     <figcaption>
                                         <time datetime="2045-04-05T08:15+00:00"><strong>05</strong> <em>Απρ</em></time>
                                     </figcaption>
@@ -435,7 +469,7 @@ Licence URI: http://www.os-templates.com/template-terms
 
                         <div  class=" borderedbox inspace-5">
                             <article >
-                                <figure><img src="../images/demo/event3.jpg" style=" width:200px; height:200px;float: left; margin: 0px 15px 15px 0px;"  alt="a1"></a>
+                                <figure><img src="../static/images/demo/event3.jpg" style=" width:200px; height:200px;float: left; margin: 0px 15px 15px 0px;"  alt="a1"></a>
                                     <figcaption>
                                         <time datetime="2045-04-04T08:15+00:00"><strong>04</strong> <em>Απρ</em></time>
                                     </figcaption>
@@ -485,7 +519,11 @@ Licence URI: http://www.os-templates.com/template-terms
     </main>
 </div>
 
+
 <div th:replace="fragments/foot :: foot"></div>
+<!-- JAVASCRIPTS -->
+
+
 <script type="text/javascript">
     function openCity(evt, cityName) {
         // Declare all variables
