@@ -1,4 +1,4 @@
-/*package kiddom.configuration;
+package kiddom.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,4 +13,4 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		return bCryptPasswordEncoder;
 	}
-}*/
+}

@@ -4,6 +4,7 @@ import kiddom.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import kiddom.model.*;
 
@@ -42,8 +43,8 @@ public class UserServiceImpl implements UserService {
     @Qualifier("subcategoryRepository")
     @Autowired
     private SubCategoryRepository subcategoryRepository;
-  //  @Autowired
-    //private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Override
 	public UserEntity findByUsername(String username) {
@@ -63,7 +64,7 @@ public class UserServiceImpl implements UserService {
         UserEntity userExists = findByUsername(username);
         if(userExists != null)
         {
-            if(userExists.getPassword().equals(password))
+            if(bCryptPasswordEncoder.matches((password),userExists.getPassword()))//
             {
                 System.out.println("Same password");
                 return userExists;
@@ -76,33 +77,22 @@ public class UserServiceImpl implements UserService {
         }
         else
         {
+            System.out.println("There is no user registered with this uname");
             return null;
         }
     }
 
 	@Override
 	public void saveUser(UserEntity user, ParentEntity parent) {
-		user.setPassword(/*bCryptPasswordEncoder.encode(*/user.getPassword()/*)*/);
-		//user = new UserEntity();
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
-		System.out.println("Creating user...");
-		//user.setUsername(username);
-		//user.setPassword(request.getParameter("passwordsignup"));
+		System.out.println("Creating user..."+user.getPassword());
 		user.setType(1);
-		//user.setUserId(user.getUserId());
-		//user.setUsername(user.getUsername());
-
-
-
 		/*if (request.getParameter("image") != null) {
 			parent.setPhoto(request.getParameter("image"));
 		}*/
-
-//		dd.insert(user);
-//		pdd.insert(parent);
         //Role userRole = roleRepository.findByRole("ADMIN");
         //user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-      //  parent.setUsername(user.getUsername());
         user.setParentByUserId(parent);
         userRepository.save(user);
         CookiesEntity cookie = new CookiesEntity();
@@ -132,7 +122,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUserProvider(UserEntity user, ProviderEntity provider) {
-        user.setPassword(/*bCryptPasswordEncoder.encode(*/user.getPassword()/*)*/);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         //user = new UserEntity();
 
         System.out.println("Creating user...");
