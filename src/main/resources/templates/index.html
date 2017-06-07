@@ -158,14 +158,10 @@ Licence URI: http://www.os-templates.com/template-terms
   </div>
   <!-- ################################################################################################ -->
 </div>
- <!--span th:text="${param.name[0]}" ></span-->
 
 
-    <div class="wrapper row3">
-        <div th:if ="${(param.user != null)} ">
-            <div class="alert alert-success" style="text-align: center;"> Geia soy <span th:text="${param.user[0]}"</span>! <br>  </div>
-        </div >
-    </div>
+
+
 <!-- End Top Background Image Wrapper -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
@@ -173,6 +169,11 @@ Licence URI: http://www.os-templates.com/template-terms
 <div class="wrapper row3">
   <main class="hoc container clear"> 
     <!-- main body -->
+    <div class="center">
+      <div th:if ="${(param.user != null)} ">
+        <div class="alert alert-success" style="text-align: center;"> Γειά σου <span th:text="${param.user[0]}"</span>! <br>  </div>
+      </div >
+    </div>
     <!-- ################################################################################################ -->
     <div class="center btmspace-80">
       <h3 class="heading">H Διασκεδαση ειναι ενα κλικ μακρυα !</h3>
