@@ -31,13 +31,13 @@ public class LoginController {
 		if (userExists != null) {  //found a user with username and password
 			System.out.println("Found the user "+userExists.getUsername());
 			//redirectAttrs.addFlashAttribute("user",userExists);
-            modelAndView.addObject("user",userExists);
+
             modelAndView.addObject("name",userExists.getUsername());
 			//return "redirect:/profile";
 			/*session.addAttribute(Constants.FOO, new Foo();
 			//...
 			Foo foo = (Foo) session.getAttribute(Constants.Foo);*/
-            modelAndView.setViewName("redirect:/profile");
+            modelAndView.setViewName("redirect:/index");
 		}
 		else
         {//didn't find a user with username and password//need to check is user exists to print a "wrong password message"

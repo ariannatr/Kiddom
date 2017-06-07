@@ -161,7 +161,11 @@ Licence URI: http://www.os-templates.com/template-terms
 
 
 
-
+    <div class="wrapper row3">
+        <div th:if ="${(param.name != null)} ">
+            <div class="alert alert-success" style="text-align: center;"> Geia soy <span th:text="${param.name[0]}" ></span>! <br>  </div>
+        </div >
+    </div>
 <!-- End Top Background Image Wrapper -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
@@ -199,6 +203,7 @@ Licence URI: http://www.os-templates.com/template-terms
     <div class="clear"></div>
   </main>
 </div>
+
 
 <div class="wrapper row3">
   <section class="hoc container clear"> 
