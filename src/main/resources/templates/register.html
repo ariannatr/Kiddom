@@ -92,7 +92,7 @@
                                         <div class="col-md-4 inputGroupContainer">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                                                <input  name="telephone" id="telephone" required="required" placeholder="πχ. 6975649578" class="form-control"  type="text">
+                                                <input  name="telephone" id="telephone" required="required" pattern=".{10}" placeholder="πχ. 6975649578" class="form-control"  type="text"  title="Εισάγετε ένα αποδεκτό τηλέφωνο (κινητό ή σταθερό)!" >
                                                 <span class="help-block"></span>
                                             </div>
                                         </div>
@@ -147,7 +147,7 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                                 <input  name="password" id="password" required="required" pattern=".{4,}" placeholder="πχ. X8df!90EO" class="form-control"
-                                                        onchange="form.passwordsignup_confirm.pattern = this.value;" type="password" title="Ο κωδικός χρήστη πρέπει να περιέχει τουλάχιστον 4 χαρακτήρες">
+                                                        onchange="form.passwordsignup_confirm.pattern = this.value;" type="password" title="Ο κωδικός χρήστη πρέπει να περιέχει τουλάχιστον 4 χαρακτήρες !">
                                                 <span class="help-block"></span>
                                             </div>
                                         </div>
@@ -159,7 +159,7 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-ok"></i></span>
                                                 <input  name="passwordsignup_confirm" id="passwordsignup_confirm"  required="required" pattern=".{4,}" placeholder="πχ. X8df!90EO" class="form-control"
-                                                        type="password"  title="Εισάγατε λάθος κωδικό επιβεβαίωσης">
+                                                        type="password"  title="Εισάγατε λάθος κωδικό επιβεβαίωσης !">
                                                 <span class="help-block"></span>
                                             </div>
                                         </div>

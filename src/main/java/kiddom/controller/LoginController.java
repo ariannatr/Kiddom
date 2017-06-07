@@ -10,6 +10,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import sun.security.pkcs11.wrapper.Constants;
+
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
 
@@ -21,7 +24,7 @@ public class LoginController {
 	private UserService userService;
 
 	@RequestMapping(value={"/login"}, method = RequestMethod.POST)
-	public ModelAndView login(@ModelAttribute("user") @Valid UserEntity user, BindingResult bindingResult){
+	public ModelAndView login(HttpSession session, @ModelAttribute("user") @Valid UserEntity user, BindingResult bindingResult){
 		ModelAndView modelAndView = new ModelAndView();
 		UserEntity userExists = userService.findByUsernamePassword(user.getUsername(),user.getPassword());
 
@@ -31,6 +34,9 @@ public class LoginController {
             modelAndView.addObject("user",userExists);
             modelAndView.addObject("name",userExists.getUsername());
 			//return "redirect:/profile";
+			/*session.addAttribute(Constants.FOO, new Foo();
+			//...
+			Foo foo = (Foo) session.getAttribute(Constants.Foo);*/
             modelAndView.setViewName("redirect:/profile");
 		}
 		else

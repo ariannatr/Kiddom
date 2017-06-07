@@ -1,5 +1,8 @@
 package kiddom.model;
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Arianna on 26/5/2017.

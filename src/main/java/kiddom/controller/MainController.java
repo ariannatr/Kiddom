@@ -81,4 +81,19 @@ public class MainController {
         return modelAndView;
     }
 
+    @RequestMapping(value="/buypoints", method = RequestMethod.GET)
+    public ModelAndView buypoints(@ModelAttribute("user") @Valid UserEntity user){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("user", user);
+        modelAndView.setViewName("buypoints");
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/categories_form", method = RequestMethod.GET)
+    public ModelAndView categories(@ModelAttribute("user") @Valid UserEntity user){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("user", user);
+        modelAndView.setViewName("categories_form");
+        return modelAndView;
+    }
 }
