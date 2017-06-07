@@ -12,6 +12,9 @@
 
 <div class="wrapper row3" style="background-color:#b7c1ae" >
 	<main class="hoc container clear" >
+		<div th:if ="${(param.success != null) and (param.success[0] == 'true')}">
+			<div class="alert alert-success" style="text-align: center;"> Η εγγραφή σας ολοκληρώθηκε ! <br>  <a  th:href="index">Πίσω στην Αρχικη</a></div>
+		</div >
 		<div id="pageintro" class="hoc clear" style="padding:1% 0 1% 0 ">
 			<div id="container_demo"  >
 				<div id="wrapper stepwizard">
@@ -85,7 +88,7 @@
 										<div class="col-md-4 inputGroupContainer">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-												<input  name="telephone" id="telephone" required="required" placeholder="πχ. 6975649578" class="form-control"  type="text">
+												<input  name="telephone" id="telephone" required="required" placeholder="πχ. 6975649578" class="form-control"  pattern=".{10}" type="text" title="Εισάγετε παρακαλώ έναν αποδεκτό αριθμό τηλεφώνου(σταθερό ή κινητό)!" >
 												<span class="help-block"></span>
 											</div>
 										</div>
@@ -97,7 +100,7 @@
 										<div class="col-md-4 inputGroupContainer">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-												<input  name="tr" id="tr" required="required" placeholder="πχ. 123456789" class="form-control"  type="text">
+												<input  name="tr" id="tr" required="required" placeholder="πχ. 123456789" class="form-control"  pattern=".{9}"type="text"    title="To ΑΦΜ πρέπει να είναι 9 ψηφία !"  >
 												<span class="help-block"></span>
 											</div>
 										</div>
@@ -124,7 +127,7 @@
 										<div class="col-md-4 inputGroupContainer">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-												<input  name="username" id="username" required="required" placeholder="πχ. mysuperusername" class="form-control"  type="text">
+												<input  name="username" id="username" pattern=".{3,}" required="required" placeholder="πχ. mysuperusername" class="form-control"  type="text"   title="Το όνομα χρήστη πρέπει να περιέχει τουλάχιστον 3 χαρακτήρες !" >
 												<span class="help-block"></span>
 											</div>
 										</div>
@@ -146,7 +149,7 @@
 										<div class="col-md-4 inputGroupContainer">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-												<input  name="password" id="password" required="required" placeholder="πχ. X8df!90EO" class="form-control"  type="password">
+												<input  name="password" id="password" required="required" pattern=".{4,}"placeholder="πχ. X8df!90EO" class="form-control"  type="password" onchange="form.password.pattern = this.value;" type="password" title="Ο κωδικός χρήστη πρέπει να περιέχει τουλάχιστον 4 χαρακτήρες!" >
 												<span class="help-block"></span>
 											</div>
 										</div>
@@ -157,7 +160,7 @@
 										<div class="col-md-4 inputGroupContainer">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="glyphicon glyphicon-ok"></i></span>
-												<input  name="passwordsignup_confirm" id="passwordsignup_confirm" required="required" placeholder="πχ. X8df!90EO" class="form-control"  type="password" oninput="validate()">
+												<input  name="passwordsignup_confirm" id="passwordsignup_confirm" required="required" pattern=".{4,}" placeholder="πχ. X8df!90EO" class="form-control"  type="password" title="Εισάγατε λάθος κωδικό επιβεβαίωσης !">
 												<span class="help-block"></span>
 											</div>
 										</div>

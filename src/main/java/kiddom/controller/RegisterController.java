@@ -90,7 +90,8 @@ public class RegisterController {
             modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("user",user);
             modelAndView.addObject("provider", provider);
-            modelAndView.setViewName("redirect:/index");
+            //modelAndView.setViewName("redirect:/index");
+            modelAndView.setViewName("redirect:/register_prov?success=true");
         }
         return modelAndView;
     }

@@ -1,11 +1,5 @@
 <!DOCTYPE html>
-<!--
-Template Name: Maxisonix
-Author: <a href="http://www.os-templates.com/">OS Templates</a>
-Author URI: http://www.os-templates.com/
-Licence: Free to use under our free template licence terms
-Licence URI: http://www.os-templates.com/template-terms
--->
+
 <html>
 <head>
     <style>
@@ -89,64 +83,6 @@ Licence URI: http://www.os-templates.com/template-terms
             color: #000;
             text-decoration: none;
             cursor: pointer;
-        }
-
-        .modal-header {
-            /*padding: 2px 16px;*/
-            /*background-color: #5cb85c;*/
-            /*color: white;*/
-        }
-
-        /*.modal-body {padding: 2px 16px;}*/
-
-        /*.modal-footer {*/
-        /*padding: 2px 16px;*/
-        /*!*background-color: #5cb85c;*!*/
-        /*!*color: white;*!*/
-        /*}*/
-
-
-        .profileHeadings {
-            text-align: center;
-        }
-        .well {
-            color: black;
-            text-align: center;
-        }
-        td {
-            color: black;
-        }
-        .container2 {
-            padding-right: 15px;
-            padding-left: 15px;
-            margin-right: auto;
-            margin-left: auto;
-        }
-        @media (min-width: 768px) {
-            .container2 {
-                width: 750px;
-            }
-        }
-        @media (min-width: 992px) {
-            .container2 {
-                width: 970px;
-            }
-        }
-        @media (min-width: 1200px) {
-            .container2 {
-                width: 1170px;
-            }
-        }
-        .main h1{
-            text-align:center;
-            color: #1a0438;
-            font-size:2.5em;
-            margin-bottom:1.5em;
-        }
-        .main{
-            margin: 3em auto;
-            position: relative;
-            height: 100%;
         }
 
         select:required:invalid {
@@ -235,19 +171,19 @@ Licence URI: http://www.os-templates.com/template-terms
                     <!--<div class="w3l_main_grid_right_grid_form1">-->
 
                     <div class="form-group">
-                        <label class="control-label" > Πακέτο 1 (260 πόντοι - 50$)</label>
+                        <label class="control-label" > Πακέτο 1 (260 πόντοι - 50€)</label>
                         <!--<div class="col-sm-8">-->
                         <input type="number" value="0" id="quantity" min="0" required="" oninput="calculate()"><br>
                         <!--</div>-->
                     </div>
                     <div class="form-group">
-                        <label class="control-label"> Πακέτο 2 (530 πόντοι - 100$)</label>
+                        <label class="control-label"> Πακέτο 2 (530 πόντοι - 100€)</label>
                         <!--<div class="col-sm-8">-->
                         <input type="number" value="0" id="quantity2" min="0" required="" oninput="calculate()"><br>
                         <!--</div>-->
                     </div>
                     <div class="form-group">
-                        <label class="control-label"> Πακέτο 3 (1070 πόντοι - 200$)</label>
+                        <label class="control-label"> Πακέτο 3 (1070 πόντοι - 200€)</label>
                         <!--<div class="col-sm-8">-->
                         <input type="number" value="0" id="quantity3" min="0" required="" oninput="calculate()"><br>
                         <!--</div>-->
@@ -353,11 +289,6 @@ Licence URI: http://www.os-templates.com/template-terms
             </ul>
             <br/>
             <button   id="myBtn" class="btn btn-success btn-lg btn-block">Πληρωμη</button>
-            <!--<button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
-            <!--<button id="myBtn">Open Modal</button>-->
-            <!--<a href="" id="openUser">Open Modal JS (failed)</a>-->
-            <!--</div>-->
-            <!--</div>-->
         </div>
         <div id="myModal" class="modal">
 
@@ -393,7 +324,7 @@ Licence URI: http://www.os-templates.com/template-terms
                     <form role="form">
                         <div class="form-group">
                             <label for="username">
-                                Αριθμός Κάρτας</label>
+                                Όνομα Χρήστη</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="username" placeholder="Username"
                                        required autofocus />
@@ -413,11 +344,11 @@ Licence URI: http://www.os-templates.com/template-terms
                 </div>
             </div>
             <ul class="nav nav-pills nav-stacked">
-                <li style="text-align: center" class="active"><a href="#"><span class="glyphicon glyphicon-usd" id="points3"></span> Final Payment</a>
+                <li style="text-align: center" class="active"><a href="#"><span class="glyphicon glyphicon-euro" id="points3"></span> Final Payment</a>
                 </li>
             </ul>
             <br/>
-            <button  id="myBtn2" class="btn btn-success btn-lg btn-block" onclick="reset()" >Πληρωμη</button>
+            <button  id="myBtn2" class="btn btn-success btn-lg btn-block" >Πληρωμη</button>
         </div>
     </main>
 </div>
@@ -476,14 +407,7 @@ Licence URI: http://www.os-templates.com/template-terms
 <script src="layout/scripts/jquery.mobilemenu.js"></script>
 <script src="layout/scripts/jquery.flexslider-min.js"></script>
 <script src="layout/scripts/jquery-ui.js"></script>
-<script type="text/javascript">
-    jQuery(function(){
-        jQuery('#datepicker').datepicker({
-            inline: true,
-            showOtherMonths: true
-        });
-    });
-</script>
+
 
 <script>
     // Get the modal
@@ -518,6 +442,22 @@ Licence URI: http://www.os-templates.com/template-terms
 <script>
     function hidediv(id){$('#'+id).css('display','none');}
     function showdiv(id){$('#'+id).css('display','block');}
+</script>
+<script >
+    $('#user_input, #pass_input, #v_pass_input, #email').bind('keyup', function() {
+        if(allFilled()) $('#register').removeAttr('disabled');
+    });
+</script>
+
+<script>
+    function allFilled() {
+        var filled = true;
+        $('body input').each(function() {
+            if($(this).val() == '') filled = false;
+        });
+        return filled;
+    }
+
 </script>
 <script>
     function pr() {
@@ -570,58 +510,5 @@ Licence URI: http://www.os-templates.com/template-terms
     }
 </script>
 
-<script type=text/javascript>
-    jQuery( function() {
-        var availableTags = [
-            "ActionScript",
-            "AppleScript",
-            "Asp",
-            "BASIC",
-            "C",
-            "C++",
-            "Clojure",
-            "COBOL",
-            "ColdFusion",
-            "Erlang",
-            "Fortran",
-            "Groovy",
-            "Haskell",
-            "Java",
-            "JavaScript",
-            "Lisp",
-            "Perl",
-            "PHP",
-            "Python",
-            "Ruby",
-            "Scala",
-            "Scheme"
-        ];
-        $( "#location" ).autocomplete({
-            source: availableTags
-        });
-    } );
-</script>
-<script type="text/javascript">
-    function openCity(evt, cityName) {
-        // Declare all variables
-        var i, tabcontent, tablinks;
-
-        // Get all elements with class="tabcontent" and hide them
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-
-        // Get all elements with class="tablinks" and remove the class "active"
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-
-        // Show the current tab, and add an "active" class to the link that opened the tab
-        document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-</script>
 </body>
 </html>
