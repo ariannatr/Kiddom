@@ -31,12 +31,9 @@ public class LoginController {
 		if (userExists != null) {  //found a user with username and password
 			System.out.println("Found the user "+userExists.getUsername());
 			//redirectAttrs.addFlashAttribute("user",userExists);
+            modelAndView.addObject("user",userExists.getUsername());
+            //modelAndView.addObject("name",userExists.getUsername());
 
-            modelAndView.addObject("name",userExists.getUsername());
-			//return "redirect:/profile";
-			/*session.addAttribute(Constants.FOO, new Foo();
-			//...
-			Foo foo = (Foo) session.getAttribute(Constants.Foo);*/
             modelAndView.setViewName("redirect:/index");
 		}
 		else
