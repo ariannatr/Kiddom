@@ -12,6 +12,9 @@
 
 <div class="wrapper row3" style="background-color:#b7c1ae" >
 	<main class="hoc container clear" >
+		<div th:if ="${(param.success != null) and (param.success[0] == 'true')}">
+			<div class="alert alert-success" style="text-align: center;"> Η εγγραφή σας ολοκληρώθηκε ! <br>  <a  th:href="index">Πίσω στην Αρχικη</a></div>
+		</div >
 		<div id="pageintro" class="hoc clear" style="padding:1% 0 1% 0 ">
 			<div id="container_demo"  >
 				<div id="wrapper stepwizard">
