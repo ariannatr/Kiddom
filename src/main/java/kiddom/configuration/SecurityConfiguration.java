@@ -3,6 +3,7 @@ import javax.servlet.SessionTrackingMode;
 import javax.sql.DataSource;
 
 
+import kiddom.authentication.MyDBAythenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,6 +37,8 @@ import java.util.EnumSet;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private MyDBAythenticationService myDBAauthenticationService;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -51,6 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth
                 .inMemoryAuthentication()
                 .withUser("user").password("password").roles("USER");
+        auth.userDetailsService(myDBAauthenticationService);
     }
 	@Value("${spring.queries.roles-query}")
 	private String rolesQuery;
@@ -84,16 +88,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/activity_reg").permitAll()//will be authorizied
                 .antMatchers("/categories_form").permitAll()//will be authorizied
                 .antMatchers("/category_submit").permitAll()//will be authorizied
-                .antMatchers("/profile").hasAuthority("1")//be a parent
+                .antMatchers("/profile").hasRole("ROLE_1")//hasAuthority("1")//be a parent
                 .antMatchers("/profileProvider").permitAll()//will be authorizied
 				.antMatchers("/admin").hasAuthority("0").anyRequest()//be admin
 				.authenticated().and().csrf().disable()
                 .formLogin()
 				.loginPage("/index")
-                .loginProcessingUrl("/#login_overlay")
+                .loginProcessingUrl("/login")
                 .failureUrl("/error_page")
                 .defaultSuccessUrl("/index")
-				.defaultSuccessUrl("/admin/home")
 				.usernameParameter("username")
 				.passwordParameter("password")
 				.and().logout()
@@ -103,9 +106,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.sessionManagement()//now added
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .maximumSessions(2)
-                .expiredUrl("/sessionExpired.html");
+                .expiredUrl("/index");
         http.sessionManagement()
-                .invalidSessionUrl("/invalidSession.html")
+                .invalidSessionUrl("/index")
                 .sessionFixation().migrateSession();
       //  servletContext.setSessionTrackingModes(EnumSet.of(SessionTrackingMode.COOKIE));*/
 	}
