@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/XSL/Transform" xmlns:th="http://www.thymeleaf.org">
 
 <body>
     <div th:fragment="navbar(module)">
@@ -25,17 +25,26 @@
 
                     <div class="fl_right">
                         <ul>
-                            <li th:classappend="${module == '' ? 'active' : ''}">
-                                <a  th:href="index"><i class="fa fa-lg fa-home"></i></a>
-                            <!--li><a th:href="index"><i class="fa fa-lg fa-home"></i></a></li-->
-                            <li><a data-toggle="modal" href="#login_overlay">Συνδεση</a> </li>
-                            <li th:classappend="${module == 'register' ? 'active' : ''}">
-                                <a  th:href="register">Εγγραφη</a>
-                            </li>
-                            <li th:classappend="${module == 'register_prov' ? 'active' : ''}">
-                                <a  th:href="register_prov">Παροχοι</a>
-                            </li>
-
+                            <div th:if ="${(uname != null)} ">
+                                <li>
+                                    <span th:text="${uname}"></span>!
+                                </li>
+                                <li>
+                                    <a th:href="logout">Αποσύνδεση</a></li>
+                                </li>
+                            </div >
+                            <div th:if ="${(uname == null)} ">
+                                <li th:classappend="${module == '' ? 'active' : ''}">
+                                    <a  th:href="index"><i class="fa fa-lg fa-home"></i></a>
+                                    <!--li><a th:href="index"><i class="fa fa-lg fa-home"></i></a></li-->
+                                <li><a data-toggle="modal" href="#login_overlay">Συνδεση</a> </li>
+                                <li th:classappend="${module == 'register' ? 'active' : ''}">
+                                    <a  th:href="register">Εγγραφη</a>
+                                </li>
+                                <li th:classappend="${module == 'register_prov' ? 'active' : ''}">
+                                    <a  th:href="register_prov">Παροχοι</a>
+                                </li>
+                            </div >
                         </ul>
                     </div>
                     <!-- ################################################################################################ -->

@@ -55,6 +55,7 @@ public class CategoryController {
         model.addAttribute("categories",userService.getCategories());
         // Should init the AutoPopulatingList
         category.setSubcategoriesByCatId(new AutoPopulatingList<SubcategoriesEntity>(SubcategoriesEntity.class));
+
         //return create(category, model, true);
         return "category_submit";
     }

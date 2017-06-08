@@ -42,6 +42,7 @@ public class MyDBAythenticationService implements UserDetailsService {
                             // ROLE_USER, ROLE_ADMIN,..
                 GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + roles);
                 grantList.add(authority);
+                System.out.println("Has role"+roles);
 
         }
 

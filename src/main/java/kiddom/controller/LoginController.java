@@ -1,9 +1,12 @@
 package kiddom.controller;
 
 
+import kiddom.authentication.IAuthenticationFacade;
 import kiddom.model.*;
 import kiddom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,12 +22,14 @@ import java.security.Principal;
 
 @Controller
 public class LoginController {
-	
+    @Autowired
+    private IAuthenticationFacade authenticationFacade;
+
 	@Autowired
 	private UserService userService;
 
 	@RequestMapping(value={"/login"}, method = RequestMethod.POST)
-	public ModelAndView login(HttpSession session, @ModelAttribute("user") @Valid UserEntity user, BindingResult bindingResult){
+	public ModelAndView login(HttpSession session, @ModelAttribute("user") @Valid UserEntity user, BindingResult bindingResult,Principal principal){
 		ModelAndView modelAndView = new ModelAndView();
 		UserEntity userExists = userService.findByUsernamePassword(user.getUsername(),user.getPassword());
 
@@ -32,7 +37,7 @@ public class LoginController {
 			System.out.println("Found the user "+userExists.getUsername());
 			//redirectAttrs.addFlashAttribute("user",userExists);
 			String uname=userExists.getUsername();
-            modelAndView.addObject("user",uname);
+            //modelAndView.addObject("user",uname);
             //modelAndView.addObject("name",userExists.getUsername());
 
             modelAndView.setViewName("redirect:/index");
@@ -48,34 +53,28 @@ public class LoginController {
 			else
 				modelAndView.setViewName("redirect:/error_page");
         }
-		/*if (bindingResult.hasErrors()) {
-			modelAndView.setViewName("error_page");
-		}*/
-//		modelAndView.setViewName("register");
 		return modelAndView;
-		//return "redirect:/index";
 	}
 
 
 	@RequestMapping(value={"/", "/index"}, method = RequestMethod.GET, produces= "application/javascript")
-	public ModelAndView index(Principal principal,@ModelAttribute("user") UserEntity user){
+	public ModelAndView index(@ModelAttribute("user") UserEntity user){
 		ModelAndView modelAndView = new ModelAndView();
-
-		modelAndView.setViewName("index");
-		if(principal != null){
-			modelAndView.addObject("user",user);
-			System.out.println("The one logged in is "+user.getUsername());
-		}
-		return modelAndView;
+        Authentication authentication = authenticationFacade.getAuthentication();
+        System.out.println("Authentication name is"+authentication.getName());
+        if(!authentication.getName().equals("anonymousUser"))
+		    modelAndView.addObject("uname",authentication.getName());
+        return modelAndView;
 	}
 
 
     @RequestMapping(value="/profile", method = RequestMethod.GET)
     public ModelAndView profile(@ModelAttribute("user") @Valid UserEntity user,@ModelAttribute("parent") @Valid ParentEntity parent){
         ModelAndView modelAndView = new ModelAndView();
-        System.out.println("The one seeing his profil is "+user.getUsername());
-        modelAndView.addObject("user", user);
-		modelAndView.addObject("parent", parent);
+        Authentication authentication = authenticationFacade.getAuthentication();
+        System.out.println("Authentication name is"+authentication.getName());
+        if(!authentication.getName().equals("anonymousUser"))
+            modelAndView.addObject("uname",authentication.getName());
         modelAndView.setViewName("profile");
         return modelAndView;
     }
@@ -84,8 +83,10 @@ public class LoginController {
     public ModelAndView profileProvider(@ModelAttribute("provider") @Valid ProviderEntity provider,@ModelAttribute("user") @Valid UserEntity user){
         ModelAndView modelAndView = new ModelAndView();
         //UserEntity user = new UserEntity();
-        modelAndView.addObject("user", user);
-        modelAndView.addObject("provider",provider);
+        Authentication authentication = authenticationFacade.getAuthentication();
+        System.out.println("Authentication name is"+authentication.getName());
+        if(!authentication.getName().equals("anonymousUser"))
+            modelAndView.addObject("uname",authentication.getName());
         modelAndView.setViewName("profileProvider");
         return modelAndView;
     }

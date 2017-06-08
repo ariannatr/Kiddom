@@ -1,10 +1,12 @@
 package kiddom.controller;
 
+import kiddom.authentication.IAuthenticationFacade;
 import kiddom.model.ProviderEntity;
 import kiddom.model.SingleEventEntity;
 import kiddom.model.UserEntity;
 import kiddom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,25 +22,19 @@ import javax.validation.Valid;
 @Controller
 public class ActivityController {
     @Autowired
+    private IAuthenticationFacade authenticationFacade;
+    @Autowired
     private UserService userService;
 
     @RequestMapping(value="/activity_reg", method = RequestMethod.GET)
     public ModelAndView activity_register(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user){
         ModelAndView modelAndView = new ModelAndView();
         UserEntity userExists=userService.findByUsername(user.getUsername());
-		/*if(userExists == null){
-			System.out.println("No one is logged in");
-			modelAndView.setViewName("/error_page");
-			return modelAndView;
-		}
-		else if(userExists.getType()==1) {
-			System.out.println("The one registered is not a provider");
-			modelAndView.setViewName("/provider_req");
-			return modelAndView;
-		}*/
-        modelAndView.addObject("user", user);
-        modelAndView.addObject("provider",provider);
-        modelAndView.setViewName("/activity_reg");
+		modelAndView.setViewName("/activity_reg");
+        Authentication authentication = authenticationFacade.getAuthentication();
+        System.out.println("Authentication name is"+authentication.getName());
+        if(!authentication.getName().equals("anonymousUser"))
+            modelAndView.addObject("uname",authentication.getName());
         return modelAndView;
     }
 
@@ -60,15 +56,19 @@ public class ActivityController {
 			return modelAndView;
 		}*/
         if (bindingResult.hasErrors()) {
-            modelAndView.addObject("user",user);
             modelAndView.setViewName("/error_page");
+            Authentication authentication = authenticationFacade.getAuthentication();
+            System.out.println("Authentication name is"+authentication.getName());
+            if(!authentication.getName().equals("anonymousUser"))
+                modelAndView.addObject("uname",authentication.getName());
             return modelAndView;
         } else {
             userService.saveActivity(user, provider, event);
             modelAndView.addObject("successMessage", "User has been registered successfully");
-            modelAndView.addObject("user", user);
-            modelAndView.addObject("provider", provider);
-            modelAndView.addObject("single_event", event);
+            Authentication authentication = authenticationFacade.getAuthentication();
+            System.out.println("Authentication name is"+authentication.getName());
+            if(!authentication.getName().equals("anonymousUser"))
+                modelAndView.addObject("uname",authentication.getName());
         }
         modelAndView.setViewName("redirect:/activity");
         return modelAndView;

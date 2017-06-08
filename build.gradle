@@ -73,4 +73,5 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.springframework/spring-web
     compile group: 'org.springframework', name: 'spring-web', version: '4.3.4.RELEASE'
+	compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity3")//for display infos
 }

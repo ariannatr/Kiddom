@@ -3,6 +3,7 @@ import javax.servlet.SessionTrackingMode;
 import javax.sql.DataSource;
 
 
+import kiddom.authentication.IAuthenticationFacade;
 import kiddom.authentication.MyDBAythenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,6 +17,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -36,7 +38,8 @@ import java.util.EnumSet;
 //@EnableRedisHttpSession
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
+    @Autowired
+    private IAuthenticationFacade authenticationFacade;
     @Autowired
     private MyDBAythenticationService myDBAauthenticationService;
 	@Autowired
@@ -54,12 +57,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth
                 .inMemoryAuthentication()
                 .withUser("user").password("password").roles("USER");
-        auth.userDetailsService(myDBAauthenticationService);
+        auth.userDetailsService(myDBAauthenticationService).passwordEncoder(bCryptPasswordEncoder);
     }
 	@Value("${spring.queries.roles-query}")
 	private String rolesQuery;
 
-    @Override
+   /* @Override
 	protected void configure(AuthenticationManagerBuilder auth)
 			throws Exception {
 		auth.
@@ -68,38 +71,37 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.authoritiesByUsernameQuery(rolesQuery)
 				.dataSource(dataSource)
 				.passwordEncoder(bCryptPasswordEncoder);
-	}
+	}*/
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.
 			authorizeRequests()
 				.antMatchers("/").permitAll()
-				//.antMatchers("/login").permitAll()
 				.antMatchers("/index").permitAll()
-				.antMatchers("/register").permitAll()
-                .antMatchers("/register_prov").permitAll()
+				.antMatchers("/register").anonymous()
+                .antMatchers("/register_prov").anonymous()
                 .antMatchers("/about").permitAll()
                 .antMatchers("/error_page").permitAll()
                 .antMatchers("/activity").permitAll()
                 .antMatchers("/google_map").permitAll()
                 .antMatchers("/search").permitAll()
                 .antMatchers("/faq").permitAll()
-                .antMatchers("/activity_reg").permitAll()//will be authorizied
-                .antMatchers("/categories_form").permitAll()//will be authorizied
-                .antMatchers("/category_submit").permitAll()//will be authorizied
-                .antMatchers("/profile").hasRole("ROLE_1")//hasAuthority("1")//be a parent
-                .antMatchers("/profileProvider").permitAll()//will be authorizied
-				.antMatchers("/admin").hasAuthority("0").anyRequest()//be admin
+                .antMatchers("/activity_reg").hasRole("2")//be a provider
+                .antMatchers("/categories_form").hasRole("0")//has to be admin
+                .antMatchers("/category_submit").hasRole("0")//has t be admin
+                .antMatchers("/profile").hasRole("1")//hasAuthority("1")//be a parent
+                .antMatchers("/profileProvider").hasRole("2")//be a Provider
+				.antMatchers("/admin").hasRole("0").anyRequest()//be admin
 				.authenticated().and().csrf().disable()
                 .formLogin()
 				.loginPage("/index")
                 .loginProcessingUrl("/login")
                 .failureUrl("/error_page")
                 .defaultSuccessUrl("/index")
-				.usernameParameter("username")
+                .usernameParameter("username")
 				.passwordParameter("password")
-				.and().logout()
+                .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/").and().exceptionHandling()
 				.accessDeniedPage("/error_page");
