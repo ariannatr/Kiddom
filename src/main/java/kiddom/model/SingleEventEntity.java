@@ -16,12 +16,7 @@ public class SingleEventEntity implements Serializable {
     private String name;
     private String description;
     private String photos;
-    private String date;
-    private String startTime;
-    private String endTime;
-    private int capacity;
     private int price;
-    private int availability;
     private String category;
     private String sub1;
     private String sub2;
@@ -35,6 +30,7 @@ public class SingleEventEntity implements Serializable {
     private ProviderEntity providerByProviderId;
     private Collection<ReservationsEntity> reservationsByEventId;
     private Collection<CommentsEntity> commentsByEventId;
+    private Collection<ProgramEntity> programByEventId;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -88,46 +84,6 @@ public class SingleEventEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "date")
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    @Basic
-    @Column(name = "start_time")
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    @Basic
-    @Column(name = "end_time")
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-
-    @Basic
-    @Column(name = "capacity")
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
-    @Basic
     @Column(name = "price")
     public int getPrice() {
         return price;
@@ -135,16 +91,6 @@ public class SingleEventEntity implements Serializable {
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    @Basic
-    @Column(name = "availability")
-    public int getAvailability() {
-        return availability;
-    }
-
-    public void setAvailability(int availability) {
-        this.availability = availability;
     }
 
     @Basic
@@ -255,15 +201,10 @@ public class SingleEventEntity implements Serializable {
         SingleEventEntity that = (SingleEventEntity) o;
 
         if (eventId != that.eventId) return false;
-        if (capacity != that.capacity) return false;
         if (price != that.price) return false;
-        if (availability != that.availability) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (photos != null ? !photos.equals(that.photos) : that.photos != null) return false;
-        if (date != null ? !date.equals(that.date) : that.date != null) return false;
-        if (startTime != null ? !startTime.equals(that.startTime) : that.startTime != null) return false;
-        if (endTime != null ? !endTime.equals(that.endTime) : that.endTime != null) return false;
         if (category != null ? !category.equals(that.category) : that.category != null) return false;
         if (sub1 != null ? !sub1.equals(that.sub1) : that.sub1 != null) return false;
         if (sub2 != null ? !sub2.equals(that.sub2) : that.sub2 != null) return false;
@@ -278,12 +219,7 @@ public class SingleEventEntity implements Serializable {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (photos != null ? photos.hashCode() : 0);
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + (startTime != null ? startTime.hashCode() : 0);
-        result = 31 * result + (endTime != null ? endTime.hashCode() : 0);
-        result = 31 * result + capacity;
         result = 31 * result + price;
-        result = 31 * result + availability;
         result = 31 * result + (category != null ? category.hashCode() : 0);
         result = 31 * result + (sub1 != null ? sub1.hashCode() : 0);
         result = 31 * result + (sub2 != null ? sub2.hashCode() : 0);
@@ -327,5 +263,12 @@ public class SingleEventEntity implements Serializable {
 
     public void setCommentsByEventId(Collection<CommentsEntity> commentsByEventId) {
         this.commentsByEventId = commentsByEventId;
+    }
+
+    @OneToMany(mappedBy = "eventByEventId")
+    public Collection<ProgramEntity> getProgramByEventId() {return programByEventId;}
+
+    public void setProgramByEventId(Collection<ProgramEntity> programByEventId) {
+        this.programByEventId = programByEventId;
     }
 }

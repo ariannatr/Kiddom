@@ -32,16 +32,6 @@ public class SubcategoriesEntity {
         this.name = name;
     }
 
-   /* @ManyToOne
-    @PrimaryKeyJoinColumn(name = "category_name",referencedColumnName = "name")
-    public String getCategory_name() {
-        return category_name;
-    }
-
-    public void setCategory_name(String name) {
-        this.category_name = name;
-    }*/
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
