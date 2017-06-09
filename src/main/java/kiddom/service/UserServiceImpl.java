@@ -151,7 +151,7 @@ public class UserServiceImpl implements UserService {
     public void saveActivity(UserEntity user,ProviderEntity provider,SingleEventEntity event)
     {
         event.setProviderByProviderId(provider);
-        System.out.print("Trying to save event at :"+event.getAddress()+" Starts "+event.getStartTime()+" Ends "+event.getEndTime());
+        System.out.print("Trying to save event at :"+event.getAddress());
         activityRepository.save(event);
     }
 
