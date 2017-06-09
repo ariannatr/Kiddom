@@ -47,6 +47,25 @@ public class ReservationsEntity implements Serializable {
         this.eventId = eventId;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ReservationsEntity that = (ReservationsEntity) o;
+
+        if (eventId != that.eventId) return false;
+        if (reservationId != that.reservationId) return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = eventId;
+        result += 31*reservationId;
+        return result;
+    }
+
     @ManyToOne
     @PrimaryKeyJoinColumn(name = "event_id", referencedColumnName = "event_id")
     public SingleEventEntity getSingleEventBySingleEventId() {
