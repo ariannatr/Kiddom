@@ -17,11 +17,12 @@ Licence URI: http://www.os-templates.com/template-terms
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-  <link th:href="@{css/layout.css}" rel="stylesheet" type="text/css" media="all">
+
 
   <link th:href="@{css/jquery-ui.css}" rel="stylesheet" type="text/css" media="all">
   <link th:href="@{css/jquery-ui.structure.css}" rel="stylesheet" type="text/css" media="all">
   <link th:href="@{css/jquery-ui.theme.css}" rel="stylesheet" type="text/css" media="all">
+  <link th:href="@{css/layout.css}" rel="stylesheet" type="text/css" media="all">
 
 
 
@@ -48,17 +49,17 @@ Licence URI: http://www.os-templates.com/template-terms
       <div class=" fl_left  ">
         <form class="navbar-form" role="search" th:action="@{/freetext_form}" method="POST"  id="freetextform">
           <div class=" input-group" >
-            <input type="text" class="form-control " placeholder="Τι θα ψάξουμε σήμερα;" style="opacity: 0.6; text-align: center;">
-            <button type="submit" title="Αναζήτηση" class="btn btn-default">
-              <i class="fa fa-search">
-                <em>Αναζήτηση</em>
-              </i>
-            </button>
+            <input type="text" class="form-control " placeholder="Τι θα ψάξουμε σήμερα;" style="height:40px; text-align: center">
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-lgrr" style="	right: 0;height: 40px;width: 40px;	border: none;cursor: pointer;border-radius: 0;	font-size : 16px;	margin-left:2px;">
+                    <i class="fa fa-search" ></i>
+                </button>
+            </span>
           </div>
         </form>
       </div>
       <!-- ################################################################################################ -->
-      
+
       <div class="fl_right">
         <ul>
           <div th:if ="${(uname != null)} ">
@@ -93,7 +94,7 @@ Licence URI: http://www.os-templates.com/template-terms
 
 
   <div class="wrapper row1">
-    <header id="header" class="hoc clear"> 
+    <header id="header" class="hoc clear">
       <!-- ################################################################################################ -->
       <div id="logo" class="fl_left">
         <h1><a href="index">Kiddom</a></h1>
@@ -124,7 +125,7 @@ Licence URI: http://www.os-templates.com/template-terms
   <!-- ################################################################################################ -->
   <!-- ################################################################################################ -->
   <!-- ################################################################################################ -->
-  <div id="pageintro" class="hoc clear"> 
+  <div id="pageintro" class="hoc clear">
     <!-- ################################################################################################ -->
     <div class="flexslider basicslider">
       <ul class="slides">
@@ -135,10 +136,10 @@ Licence URI: http://www.os-templates.com/template-terms
             <p>Περάστε χρόνο με το παιδί σας με ένα click !</p>
             <footer>
               <form class="group" method="post" th:action="@{/search}">
-               
-                  
+
+
                   <div class="formdiv">
-					  
+
 							<input type="text" id=location placeholder="Τοποθεσία">
 
 	                  <input  type="text" id="datepicker" placeholder="Ημερομηνία">
@@ -152,6 +153,22 @@ Licence URI: http://www.os-templates.com/template-terms
               </form>
             </footer>
           </article>
+        </li>
+        <li>
+          <!--article>
+            <p>Vulputate</p>
+            <h3 class="heading">Rhoncus nisl non</h3>
+            <p>Interdum erat ipsum quis leo viverra magna</p>
+            <footer><a class="btn inverse" href="#">Fusce efficitur</a></footer>
+          </article-->
+        </li>
+        <li>
+          <!--article>
+            <p>Maecenas</p>
+            <h3 class="heading">Diam feugiat tellus</h3>
+            <p>Aliquam ante odio at condimentum mauris</p>
+            <footer><a class="btn" href="#">Tincidunt etiam</a></footer>
+          </article-->
         </li>
       </ul>
     </div>
