@@ -28,7 +28,7 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value={"/login"}, method = RequestMethod.POST)
+	@RequestMapping(value={"/", "/login"}, method = RequestMethod.POST)
 	public ModelAndView login(HttpSession session, @ModelAttribute("user") @Valid UserEntity user, BindingResult bindingResult,Principal principal){
 		ModelAndView modelAndView = new ModelAndView();
 		UserEntity userExists = userService.findByUsernamePassword(user.getUsername(),user.getPassword());
