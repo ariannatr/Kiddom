@@ -75,11 +75,12 @@ public class CategoryController {
         // Call the private method
         manageSubCategories(category);
         System.out.println("Kalesa tin manage");
-        List<SubcategoriesEntity> subcat= category.getSubcategoriesByCatId();
-        if(subcat==null) {
+        List<SubcategoriesEntity> subcat = category.getSubcategoriesByCatId();
+        if(subcat == null) {
             subcat = new ArrayList<SubcategoriesEntity>();
             System.out.println("The sublist is null,just created one");
         }
+        sub.setCategoriesByCatId(category);
         subcat.add(sub);
        /* for(String sub :mysubcategories)
         {
@@ -88,7 +89,7 @@ public class CategoryController {
             subcategory.setCategoriesByCatId(category);
             subcat.add(subcategory);
         }*/
-        userService.saveSubCategory(category,subcat);
+        userService.saveSubCategory(category, subcat);
         System.out.println("Kalesa tin saveSub");
         //return "redirect:/category_submit" + category.getName();
         return "redirect:/category_submit";

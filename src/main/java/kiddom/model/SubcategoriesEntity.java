@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "subcategories", schema = "mydb")
 public class SubcategoriesEntity {
-    private String name;
+    private String subname;
     private CategoriesEntity categoriesByCatId;
 
     @Transient // means "not a DB field"
@@ -23,13 +23,13 @@ public class SubcategoriesEntity {
 
 
     @Id
-    @Column(name = "name")
+    @Column(name = "subname")
     public String getName() {
-        return name;
+        return subname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String subname) {
+        this.subname = subname;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class SubcategoriesEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SubcategoriesEntity that = (SubcategoriesEntity) o;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (subname != null ? !subname.equals(that.subname) : that.subname != null) return false;
 
         return true;
     }

@@ -88,8 +88,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/search").permitAll()
                 .antMatchers("/faq").permitAll()
                 .antMatchers("/activity_reg").hasRole("2")//be a provider
-                .antMatchers("/categories_form").hasRole("0")//has to be admin
-                .antMatchers("/category_submit").hasRole("0")//has t be admin
+                //
+				.antMatchers("/categories_form").permitAll()//has to be admin
+                //
+				.antMatchers("/category_submit").permitAll()//has t be admin
+				//
                 .antMatchers("/profile").hasRole("1")//hasAuthority("1")//be a parent
                 .antMatchers("/profileProvider").hasRole("2")//be a Provider
 				.antMatchers("/admin").hasRole("0").anyRequest()//be admin

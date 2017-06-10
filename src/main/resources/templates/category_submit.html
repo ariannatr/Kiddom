@@ -14,7 +14,7 @@ Licence URI: http://www.os-templates.com/template-terms
 </head>
 
 <body id="top">
-<div th:replace="fragments/navbar :: navbar('activity_reg')"></div>
+<div th:replace="fragments/navbar :: navbar('category_submit')"></div>
 <div class="container">
 
 
@@ -32,7 +32,7 @@ Licence URI: http://www.os-templates.com/template-terms
         </tr>
 
     </table>-->
-    <table th:if="${not #lists.isEmpty(categories)}">
+    <!--table th:if="${not #lists.isEmpty(categories)}">
         <tr>
             <th>Firstname</th>
             <th>Lastname</th>
@@ -40,7 +40,7 @@ Licence URI: http://www.os-templates.com/template-terms
         <tr th:each="category : ${categories}">
             <td th:text="${categories.name}">The first name</td>
         </tr>
-    </table>
+    </table-->
     <form class="well form-horizontal" th:action="@{/category_submit}" method="POST"  id="contact_form">
         <fieldset>
 

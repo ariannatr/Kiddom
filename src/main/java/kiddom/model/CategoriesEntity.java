@@ -33,7 +33,7 @@ public class CategoriesEntity {
         return true;
     }
 
-    @OneToMany(mappedBy = "categoriesByCatId")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoriesByCatId")
     public List<SubcategoriesEntity> getSubcategoriesByCatId() {
         return subcategoriesByCatId;
     }
