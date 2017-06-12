@@ -36,13 +36,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private CookieRepository cookieRepository;
 
-    @Qualifier("categoryRepository")
-    @Autowired
-    private CategoryRepository categoryRepository;
 
-    @Qualifier("subcategoryRepository")
-    @Autowired
-    private SubCategoryRepository subcategoryRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
@@ -52,11 +46,7 @@ public class UserServiceImpl implements UserService {
 		//return null;
 	}
 
-    @Override
-    public CategoriesEntity findByName(String name) {
-        return categoryRepository.findByName(name);
-        //return null;
-    }
+
 
 
 	@Override
@@ -153,42 +143,5 @@ public class UserServiceImpl implements UserService {
         event.setProviderByProviderId(provider);
         System.out.print("Trying to save event at :"+event.getAddress());
         activityRepository.save(event);
-    }
-
-    @Override
-    public void saveCategory(CategoriesEntity category)
-    {
-        System.out.print("Trying to save category :"+category.getName());
-        categoryRepository.save(category);
-    }
-
-    @Override
-    public void saveSubCategory(CategoriesEntity category, List<SubcategoriesEntity> subcategory)
-    {
-        categoryRepository.save(category);
-        System.out.print("Trying to save category :"+category.getName());
-        for(SubcategoriesEntity sub :subcategory) {
-           //
-            //sub.setCategory_name(category.getName());
-            sub.setCategoriesByCatId(category);
-        }
-        subcategoryRepository.save(subcategory);
-        category.setSubcategoriesByCatId(subcategory);
-        categoryRepository.saveAndFlush(category);
-    }
-
-    @Override
-    public  void delete(SubcategoriesEntity subcat){
-        subcategoryRepository.delete(subcat);
-    }
-    @Override
-    public void update(CategoriesEntity category)
-    {
-        categoryRepository.save(category);
-    }
-
-    @Override
-    public List<CategoriesEntity> getCategories(){
-        return categoryRepository.findAll();
     }
 }

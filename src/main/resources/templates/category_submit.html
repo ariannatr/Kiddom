@@ -48,7 +48,10 @@ Licence URI: http://www.os-templates.com/template-terms
             <legend>Δημιουργήστε μια κατηγορία!</legend>
 
             <!-- Text input-->
+            <div th:if ="${(error != null)} ">
+                    <span th:text="${error}"></span>!
 
+            </div >
             <div class="form-group">
                 <label class="col-md-4 control-label">Όνομα κατηγορίας</label>
                 <div class="col-md-4 inputGroupContainer">
@@ -64,7 +67,7 @@ Licence URI: http://www.os-templates.com/template-terms
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="subname" name="subname" placeholder="Όνομα υποκατηγορίας" class="form-control"  type="text">
+                        <input id="pk.subname" name="pk.subname" placeholder="Όνομα υποκατηγορίας" class="form-control"  type="text">
                     </div>
                 </div>
             </div>

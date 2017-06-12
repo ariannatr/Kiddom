@@ -5,17 +5,20 @@ package kiddom.model;
 **/
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "categories", schema = "mydb")
-public class CategoriesEntity {
-    private String name;
-    private List<SubcategoriesEntity> subcategoriesByCatId;
+public class CategoriesEntity implements Serializable{
+
 
     @Id
     @Column(name = "name")
+    private String name;
     public String getName() {
         return name;
     }
@@ -33,12 +36,14 @@ public class CategoriesEntity {
         return true;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoriesByCatId")
-    public List<SubcategoriesEntity> getSubcategoriesByCatId() {
-        return subcategoriesByCatId;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.category_name", cascade= CascadeType.ALL)
+    private Set<SubcategoriesEntity> subcategoriesByCatId = new HashSet<SubcategoriesEntity>(0);
+
+    public Set<SubcategoriesEntity> getSubcategoriesByCatId() {
+        return this.subcategoriesByCatId;
     }
 
-    public void setSubcategoriesByCatId(List<SubcategoriesEntity> subcategoriesByCatId) {
+    public void setSubcategoriesByCatId(Set<SubcategoriesEntity> subcategoriesByCatId) {
         this.subcategoriesByCatId = subcategoriesByCatId;
     }
 }

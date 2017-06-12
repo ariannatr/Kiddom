@@ -3,19 +3,19 @@ package kiddom.controller;
 import kiddom.model.CategoriesEntity;
 import kiddom.model.SubcategoriesEntity;
 import kiddom.service.UserService;
+import kiddom.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.AutoPopulatingList;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -25,26 +25,26 @@ import java.util.List;
 public class CategoryController {
 
     @Autowired
-    UserService userService;
+    CategoryService categoryService;
     /*******************************************May be usefull***************************************************************/
 
     private List<SubcategoriesEntity> manageSubCategories(CategoriesEntity category) {
         // Store the categories which shouldn't be persisted
         List<SubcategoriesEntity> categories2remove = new ArrayList<SubcategoriesEntity>();
-        if (category.getSubcategoriesByCatId() != null) {
-            for (Iterator<SubcategoriesEntity> i = category.getSubcategoriesByCatId().iterator(); i.hasNext();) {
-                SubcategoriesEntity subcat = i.next();
-                // If the remove flag is true, remove the employee from the list
-                if (subcat.getRemove() == 1) {
-                    categories2remove.add(subcat);
-                    i.remove();
-                    // Otherwise, perform the links
-                } else {
-                    subcat.setCategoriesByCatId(category);
-                    //subcat.setCategory_name(category.getName());
-                }
-            }
-        }
+//        if (category.getSubcategoriesByCatId() != null) {
+//            for (Iterator<SubcategoriesEntity> i = category.getSubcategoriesByCatId().iterator(); i.hasNext();) {
+//                SubcategoriesEntity subcat = i.next();
+//                // If the remove flag is true, remove the employee from the list
+//                if (subcat.getRemove() == 1) {
+//                    categories2remove.add(subcat);
+//                    i.remove();
+//                    // Otherwise, perform the links
+//                } else {
+//                    subcat.setCategoriesByCatId(category);
+//                    //subcat.setCategory_name(category.getName());
+//                }
+//            }
+//        }
         return categories2remove;
     }
 
@@ -52,9 +52,9 @@ public class CategoryController {
 
     @RequestMapping(value = "/category_submit", method = RequestMethod.GET)
     public String create(@ModelAttribute CategoriesEntity category, Model model) {
-        model.addAttribute("categories",userService.getCategories());
+        model.addAttribute("categories",categoryService.getCategories());
         // Should init the AutoPopulatingList
-        category.setSubcategoriesByCatId(new AutoPopulatingList<SubcategoriesEntity>(SubcategoriesEntity.class));
+       // category.setSubcategoriesByCatId(new AutoPopulatingList<SubcategoriesEntity>(SubcategoriesEntity.class));
 
         //return create(category, model, true);
         return "category_submit";
@@ -70,29 +70,26 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "category_submit", method = RequestMethod.POST)
-    public String create(@Valid @ModelAttribute("categories") CategoriesEntity category, @Valid @ModelAttribute("subcategories") SubcategoriesEntity sub, BindingResult bindingResult) {
-        System.out.println("bika edw");
-        // Call the private method
-        manageSubCategories(category);
-        System.out.println("Kalesa tin manage");
-        List<SubcategoriesEntity> subcat = category.getSubcategoriesByCatId();
-        if(subcat == null) {
-            subcat = new ArrayList<SubcategoriesEntity>();
-            System.out.println("The sublist is null,just created one");
+    public ModelAndView create(@Valid @ModelAttribute("categories") CategoriesEntity category, @Valid @ModelAttribute("subcategories") SubcategoriesEntity sub, BindingResult bindingResult) {
+        ModelAndView model = new ModelAndView();
+
+        /* ---------------Dokimastikes ektiposeis ---------------*/
+        System.out.println("Prospathisa na kano eisagogi");
+        System.out.println("Pira thn katigoria : " + category.getName());
+        System.out.println("Pira to subname: " + sub.getSubName());
+        if (sub.getPk().getCategoryName()!=null)
+            System.out.println("H katigoria einai: " + sub.getPk().getCategoryName().getName());
+        else
+            System.out.println("Einai null");
+        /*-----------------------------------------------------------------*/
+
+        if (categoryService.getCategoryByName(category.getName()) == null){
+            model.addObject("error", "Δεν υπάρχει κατηγορια με αυτό το όνομα");
+            return model;
         }
-        sub.setCategoriesByCatId(category);
-        subcat.add(sub);
-       /* for(String sub :mysubcategories)
-        {
-            SubcategoriesEntity subcategory=new SubcategoriesEntity();
-            subcategory.setName(sub);
-            subcategory.setCategoriesByCatId(category);
-            subcat.add(subcategory);
-        }*/
-        userService.saveSubCategory(category, subcat);
-        System.out.println("Kalesa tin saveSub");
-        //return "redirect:/category_submit" + category.getName();
-        return "redirect:/category_submit";
+        categoryService.saveSubCategory(category,sub);
+
+        return model;
     }
 
     // -- Updating an existing employer ----------
@@ -112,13 +109,13 @@ public class CategoryController {
         }
         List<SubcategoriesEntity> subcategories2remove = manageSubCategories(category);
         // First, save the employer
-        userService.update(category);
+        categoryService.update(category);
         // Then, delete the previously linked employees which should be now removed
-        for (SubcategoriesEntity subcat : subcategories2remove) {
-            if (subcat.getName() != null) {
-                userService.delete(subcat);
-            }
-        }
+//        for (SubcategoriesEntity subcat : subcategories2remove) {
+//            if (subcat.getSubName() != null) {
+//                userService.delete(subcat);
+//            }
+//        }
         return "redirect:category_submit" + category.getName();
     }
 
