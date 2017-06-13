@@ -17,13 +17,18 @@ Licence URI: http://www.os-templates.com/template-terms
 <div th:replace="fragments/navbar :: navbar('category_submit')"></div>
 <div class="container">
 
-
-
+    <div th:if ="${(categories!=null)}"></div>
+    <select th:field="*{categories}">
+        <option th:each="categorie : ${categories}"
+                th:value="${categorie}"
+                th:text="${categorie}">Wireframe</option>
+    </select>
+    </div>
     <div th:if ="${(categories!=null)}"></div>
 
     <table>
         <tr>
-            <th>Categories</th>
+            <th>Κατηγορίες</th>
         </tr>
         <tr th:each="category : ${categories}">
             <td th:text="${category}"></td>
