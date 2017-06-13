@@ -81,8 +81,9 @@ public class CategoryController {
         /*-----------------------------------------------------------------*/
 
         if (categoryService.getCategoryByName(category.getName()) == null){
-            model.addObject("error", "Δεν υπάρχει κατηγορια με αυτό το όνομα");
-            return model;
+            categoryService.saveCategory(category);
+            model.addObject("error", "Δεν υπήρχε κατηγορια με αυτό το όνομα");
+            //return model;
         }
         categoryService.saveSubCategory(category,sub);
 
