@@ -12,23 +12,23 @@ public interface CategoryService {
 
     /*-----------------------CRUD methods for categories----------------------*/
 
-    public List<CategoriesEntity> getCategories();
-    public  CategoriesEntity getCategoryByName(String name);
+    List<CategoriesEntity> getCategories();
+    CategoriesEntity getCategoryByName(String name);
 
-    public void saveCategory(CategoriesEntity category);
-    public void saveCategory(List<CategoriesEntity> categories);
+    void saveCategory(CategoriesEntity category);
+    void saveCategory(List<CategoriesEntity> categories);
 
-    public void update(CategoriesEntity category);
+    void update(CategoriesEntity category);
 
 
     /*-----------------------CRUD methods for subcategories----------------------*/
 
-    public SubcategoriesEntity getSubCategoryByCategory(String category, String subcategory);
+    SubcategoriesEntity getSubCategoryByCategory(String category, String subcategory);
 
-    public void saveSubCategory(CategoriesEntity category, List<SubcategoriesEntity> subcategory);
-    public void saveSubCategory(CategoriesEntity category, SubcategoriesEntity subcategory);
+    void saveSubCategory(CategoriesEntity category, List<SubcategoriesEntity> subcategory);
+    void saveSubCategory(CategoriesEntity category, SubcategoriesEntity subcategory);
 
-    public void delete(SubcategoriesEntity subcategory);
+    void delete(SubcategoriesEntity subcategory);
 
 
 

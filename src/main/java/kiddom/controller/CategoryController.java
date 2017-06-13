@@ -2,7 +2,6 @@ package kiddom.controller;
 
 import kiddom.model.CategoriesEntity;
 import kiddom.model.SubcategoriesEntity;
-import kiddom.service.UserService;
 import kiddom.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,14 +17,12 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Arianna on 6/6/2017.
- */
+
 @Controller
 public class CategoryController {
 
     @Autowired
-    CategoryService categoryService;
+    private CategoryService categoryService;
     /*******************************************May be usefull***************************************************************/
 
     private List<SubcategoriesEntity> manageSubCategories(CategoriesEntity category) {
@@ -84,8 +81,9 @@ public class CategoryController {
         /*-----------------------------------------------------------------*/
 
         if (categoryService.getCategoryByName(category.getName()) == null){
-            model.addObject("error", "Δεν υπάρχει κατηγορια με αυτό το όνομα");
-            return model;
+            categoryService.saveCategory(category);
+            model.addObject("error", "Δεν υπήρχε κατηγορια με αυτό το όνομα");
+            //return model;
         }
         categoryService.saveSubCategory(category,sub);
 

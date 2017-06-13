@@ -1,4 +1,4 @@
-insert into categories (subname)
+insert into categories (name)
 values
 ('Αθλητισμός'),
 ('Δημιουργικό Παιχνίδι'),
