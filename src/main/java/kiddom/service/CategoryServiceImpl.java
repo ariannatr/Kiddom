@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import kiddom.model.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.List;
@@ -50,6 +51,17 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void saveCategory(List <CategoriesEntity> categories){
 
+    }
+
+    @Override
+    public List<String> getCategoriesNames() {
+        List<CategoriesEntity> list=categoryRepository.findAll();
+        List<String> cat_return=new ArrayList<String>();
+        for(CategoriesEntity cat:list)
+        {
+            cat_return.add(cat.getName());
+        }
+        return cat_return;
     }
 
     public void update(CategoriesEntity category)

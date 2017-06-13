@@ -49,7 +49,7 @@ public class CategoryController {
 
     @RequestMapping(value = "/category_submit", method = RequestMethod.GET)
     public String create(@ModelAttribute CategoriesEntity category, Model model) {
-        model.addAttribute("categories",categoryService.getCategories());
+        model.addAttribute("categories",categoryService.getCategoriesNames());
         // Should init the AutoPopulatingList
        // category.setSubcategoriesByCatId(new AutoPopulatingList<SubcategoriesEntity>(SubcategoriesEntity.class));
 

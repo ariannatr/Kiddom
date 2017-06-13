@@ -13,6 +13,7 @@ public interface CategoryService {
     /*-----------------------CRUD methods for categories----------------------*/
 
     List<CategoriesEntity> getCategories();
+    List<String> getCategoriesNames();
     CategoriesEntity getCategoryByName(String name);
 
     void saveCategory(CategoriesEntity category);

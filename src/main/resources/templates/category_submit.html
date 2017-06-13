@@ -19,19 +19,18 @@ Licence URI: http://www.os-templates.com/template-terms
 
 
 
-    <!--<p th:object="categories" th:unless="${categories} and ${categories.size()}">No categories yet added in the DataBase</p>
+    <div th:if ="${(categories!=null)}"></div>
 
     <table>
         <tr>
-            <th>Name</th>
-            <th>Email</th>
+            <th>Categories</th>
         </tr>
-        <tr th:each="user : ${user}">
-            <td th:text="${user.name}"></td>
-            <td th:text="${user.email}"></td>
+        <tr th:each="category : ${categories}">
+            <td th:text="${category}"></td>
         </tr>
 
-    </table>-->
+    </table>
+    </div>
     <!--table th:if="${not #lists.isEmpty(categories)}">
         <tr>
             <th>Firstname</th>
