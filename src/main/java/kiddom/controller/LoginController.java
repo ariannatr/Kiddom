@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sun.security.pkcs11.wrapper.Constants;
 
+import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
@@ -28,7 +29,7 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value={"/", "/login"}, method = RequestMethod.POST)
+	@RequestMapping(value={"/login"}, method = RequestMethod.POST)
 	public ModelAndView login(HttpSession session, @ModelAttribute("user") @Valid UserEntity user, BindingResult bindingResult,Principal principal){
 		ModelAndView modelAndView = new ModelAndView();
 		UserEntity userExists = userService.findByUsernamePassword(user.getUsername(),user.getPassword());
@@ -73,8 +74,36 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
-        if(!authentication.getName().equals("anonymousUser"))
-            modelAndView.addObject("uname",authentication.getName());
+        if(!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            ParentEntity useron=userService.findParent(authentication.getName());
+            modelAndView.addObject("user",useron);
+            System.out.println("Avail points are"+useron.getAvailPoints());
+            modelAndView.addObject("total_points",useron.getTotalPoints());
+            modelAndView.addObject("restr_points",useron.getRestrPoints());
+            modelAndView.addObject("avail_points",useron.getAvailPoints());
+        }
+            modelAndView.setViewName("profile");
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/edit", method = RequestMethod.POST)
+    public ModelAndView edit(@ModelAttribute("user") @Valid UserEntity user,@ModelAttribute("parent") @Valid ParentEntity parent){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication authentication = authenticationFacade.getAuthentication();
+        System.out.println("Authentication name is"+authentication.getName());
+        if(!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            ParentEntity parenton=userService.findParent(authentication.getName());
+            UserEntity useron=userService.findByUsername(authentication.getName());
+            userService.updateUserParent(parenton,parent,useron,user);
+            parenton=userService.findParent(authentication.getName());
+            modelAndView.addObject("user",parenton);
+            System.out.println("Avail points are"+parenton.getAvailPoints());
+            modelAndView.addObject("total_points",parenton.getTotalPoints());
+            modelAndView.addObject("restr_points",parenton.getRestrPoints());
+            modelAndView.addObject("avail_points",parenton.getAvailPoints());
+        }
         modelAndView.setViewName("profile");
         return modelAndView;
     }

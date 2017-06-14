@@ -46,6 +46,10 @@ public class UserServiceImpl implements UserService {
 		//return null;
 	}
 
+	@Override
+    public  ParentEntity findParent(String username){
+	    return parentRepository.findByUsername(username);
+    }
 
 
 
@@ -143,5 +147,43 @@ public class UserServiceImpl implements UserService {
         event.setProviderByProviderId(provider);
         System.out.print("Trying to save event at :"+event.getAddress());
         activityRepository.save(event);
+    }
+
+    @Override
+    public void updateUserParent(ParentEntity parenton,ParentEntity parent,UserEntity useron,UserEntity user){
+        if(!parent.getEmail().replaceAll(" ","").equals("")){
+            parenton.setEmail(parent.getEmail());
+        }
+        if(!parent.getName().replaceAll(" ","").equals(""))
+        {
+            parenton.setName(parent.getName());
+        }
+        if(!parent.getSurname().replaceAll(" ","").equals(""))
+        {
+            parenton.setSurname(parent.getSurname());
+        }
+        if(!parent.getArea().replaceAll(" ","").equals(""))
+        {
+            parenton.setArea(parent.getArea());
+        }
+        if(!parent.getTown().replaceAll(" ","").equals(""))
+        {
+            parenton.setTown(parent.getTown());
+        }
+        if(!parent.getArea().replaceAll(" ","").equals(""))
+        {
+            parenton.setArea(parent.getArea());
+        }
+        if(!parent.getTelephone().replaceAll(" ","").equals(""))
+        {
+            parenton.setTelephone(parent.getTelephone());
+        }
+        if(!user.getPassword().replaceAll(" ","").equals(""))
+        {
+            useron.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        }
+        System.out.println("new telephone "+parent.getTelephone());
+        userRepository.save(useron);
+        parentRepository.save(parenton);
     }
 }

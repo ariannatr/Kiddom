@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import kiddom.model.ParentEntity;
 
 @Repository("parentRepository")
-public interface ParentRepository extends JpaRepository<ParentEntity, Long> {
-    // ParentEntity findByUsername(String username);
+public interface ParentRepository extends JpaRepository<ParentEntity, String> {
+     ParentEntity findByUsername(String username);
    // void save(String user, ParentEntity parent)
 }
