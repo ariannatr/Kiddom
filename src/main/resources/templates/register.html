@@ -3,10 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-<head th:include="fragments/head :: head">
+<head >
     <title>Kiddom-Register</title>
-    <!--script th:href="@{scripts/validate.js}"></script-->
+    <meta th:replace="fragments/head :: head">
+    <link th:href="@{css/register_new.css}" rel="stylesheet" type="text/css" media="all">
+        <script th:src="@{scripts/register_new.js}"></script>
 </head>
+
 
 <body id="top">
 <div th:replace="fragments/navbar :: navbar('register')"></div>

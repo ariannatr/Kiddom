@@ -2,8 +2,11 @@
 
 <html  xmlns="http://www.w3.org/1999/xhtml"
 	   xmlns:th="http://www.thymeleaf.org">
-<head th:include="fragments/head :: head">
-	<title>Kiddom-Provider Register</title>
+<head >
+	<title>Kiddom-ProviderRegister</title>
+	<meta th:replace="fragments/head :: head">
+	<link th:href="@{css/register_new.css}" rel="stylesheet" type="text/css" media="all">
+	<script th:src="@{scripts/register_new.js}"></script>
 </head>
 
 <body id="top">

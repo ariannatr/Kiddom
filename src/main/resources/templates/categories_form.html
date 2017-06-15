@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<<head th:include="fragments/head :: head">>
-    <meta charset="UTF-8">
-    <script th:src="@{scripts/categories.js}"></script>
+<head>
     <title>Admin - Επεξεργασία Κατηγοριών Δραστηριοτήτων</title>
+    <meta th:replace="fragments/head :: head">>
+    <script th:src="@{scripts/categories.js}"></script>
+
 </head>
 <body>
 <div th:replace="fragments/navbar :: navbar('activity_reg')"></div>

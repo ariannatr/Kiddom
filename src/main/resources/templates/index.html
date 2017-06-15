@@ -10,36 +10,10 @@ Licence URI: http://www.os-templates.com/template-terms
        xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Kiddom</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-
-  <link th:href="@{css/jquery-ui.css}" rel="stylesheet" type="text/css" media="all">
-  <link th:href="@{css/jquery-ui.structure.css}" rel="stylesheet" type="text/css" media="all">
-  <link th:href="@{css/jquery-ui.theme.css}" rel="stylesheet" type="text/css" media="all">
-  <link th:href="@{css/layout.css}" rel="stylesheet" type="text/css" media="all">
-
-
-
-<!--script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script-->
-
-
-
+  <meta th:replace="fragments/head :: head">
 </head>
 <body id="top">
 
-
-
-
-
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- Top Background Image Wrapper -->
 <div class="bgded overlay" >
@@ -77,10 +51,10 @@ Licence URI: http://www.os-templates.com/template-terms
               <a data-toggle="modal" href="#login_overlay">Συνδεση</a>
             </li>
             <li>
-              <a href="register">Εγγραφη</a></li>
+              <a th:href="register">Εγγραφη</a></li>
             </li>
             <li>
-              <a href="register_prov">Πaροχοι</a>
+              <a th:href="register_prov">Πaροχοι</a>
             </li>
           </div >
         </ul>
