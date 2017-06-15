@@ -91,7 +91,7 @@ public class MainController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/search", method = RequestMethod.POST)
+    @RequestMapping(value="/search", method = RequestMethod.GET)
     public ModelAndView search(@ModelAttribute("user") @Valid UserEntity user){
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
