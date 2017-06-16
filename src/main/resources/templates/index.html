@@ -329,51 +329,12 @@ Licence URI: http://www.os-templates.com/template-terms
 
 
 <!-- JAVASCRIPTS -->
-
 <script th:src="@{scripts/jquery.min.js}"></script>
 <script th:src="@{scripts/jquery.backtotop.js}"></script>
 <script th:src="@{scripts/jquery.mobilemenu.js}"></script>
 <script th:src="@{scripts/jquery.flexslider-min.js}"></script>
 <script th:src="@{scripts/jquery-ui.js}"></script>
-<script type="text/javascript">
-    jQuery(function(){
-        jQuery($(":input[id^='datepicker']")).datepicker({
-            inline: true,
-            showOtherMonths: true
-        });
-    });
-</script>
+<script th:src="@{scripts/datepicker.js}"></script>
 
-<script type=text/javascript>
-   jQuery( function() {
-    var availableTags = [
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
-    ];
-    $(":input[id^='location']").autocomplete({
-      source: availableTags
-    });
-  } );
-  </script>
 </body>
 </html>
