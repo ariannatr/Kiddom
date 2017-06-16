@@ -96,7 +96,41 @@
                         <!-- ################################################################################################ -->
                         <ul>
                             <li><a th:href="index">Αρχικη</a></li>
-                            <li>..</li>
+                            <span th:if ="${(module != null)} ">
+                                <span th:if="${(module=='about')}">
+                                    <li>Σχετικα με εμας</li>
+                                </span>
+                                <span th:if="${(module=='faq')}">
+                                    <li>FAQ</li>
+                                </span>
+                                <span th:if="${(module=='activity_reg')}">
+                                    <li>Δημιουργια Δραστηριοτητας</li>
+                                </span>
+                                <span th:if="${(module=='activity')}">
+                                    <li>Δραστηριοτητα</li>
+                                </span>
+                                <span th:if="${(module=='register')}">
+                                    <li>Εγγραφη γονεα</li>
+                                </span>
+                                <span th:if="${(module=='register_prov')}">
+                                    <li>Εγγραφη παροχου</li>
+                                </span>
+                                <span th:if="${(module=='search')}">
+                                    <li>Αναζητηση</li>
+                                </span>
+                                <span th:if="${(module=='profile')}">
+                                    <li>Προφιλ γονεα</>
+                                </span>
+                                <span th:if="${(module=='profile_prov')}">
+                                    <li>Προφιλ παροχου</li>
+                                </span>
+                                <span th:if="${(module=='buypoints')}">
+                                    <li><a th:href="profile">Προφιλ γονεα</a></li>
+                                    <li>Aγορα ποντων</li>
+                                </span>
+
+                            </span>
+
                         </ul>
                         <!-- ################################################################################################ -->
                     </div>

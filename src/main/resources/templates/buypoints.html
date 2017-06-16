@@ -3,7 +3,7 @@
        xmlns:th="http://www.thymeleaf.org">
 <html>
 <head >
-    <title>>Kiddom-Buy Points</title>
+    <title>Kiddom-Buy Points</title>
     <meta th:replace="fragments/head :: head">
     <style>
 
@@ -98,72 +98,17 @@
             color: black;
         }
     </style>
-    <title>My profile</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/simpleCart.min.js"> </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <meta charset="utf-8">
 
-    <link href="../static/css/layout.css" rel="stylesheet" type="text/css" media="all">
-    <link rel="stylesheet" href="../static/css/user_prof.css">
-    <link href="static/css/jquery-ui.css" rel="stylesheet" type="text/css" media="all">
-    <link href="static/css/jquery-ui.structure.css" rel="stylesheet" type="text/css" media="all">
-    <link href="static/css/jquery-ui.theme.css" rel="stylesheet" type="text/css" media="all">
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
 </head>
 
 <body id="top">
+<div th:replace="fragments/navbar :: navbar('buypoints')"></div>
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- Top Background Image Wrapper -->
-<div class="bgded overlay" >
-    <!-- ################################################################################################ -->
-    <div class="wrapper row0">
-        <div id="topbar" class="hoc clear">
-            <!-- ################################################################################################ -->
 
-            <div class="fl_right">
-                <ul>
-                    <li><a href="#"><i class="fa fa-lg fa-home"></i></a></li>
-                    <li><a href="#">Αποσυνδεση</a></li>
-                </ul>
-            </div>
-            <!-- ################################################################################################ -->
-        </div>
-    </div>
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <div class="wrapper row1">
-        <header id="header" class="hoc clear">
-            <!-- ################################################################################################ -->
-            <div id="logo" class="fl_left">
-                <h1><a href="index.html">Kiddom</a></h1>
-            </div>
-            <nav id="mainav" class="fl_right">
-                <ul class="clear">
-                    <li class="active"><a href="index.html">Αρχικη</a></li>
-                    <li><a class="drop" href="#">Δραστηριοτητες</a>
-                        <ul>
-                            <li><a href="./gallery.html">Ενεργές Δραστηριότητες</a></li>
-                            <li><a href="./full-width.html">Παλαιότερες Δραστηριότητες</a></li>
-
-                        </ul>
-                    </li>
-                    <li><a href="./about.html">Σχετικα με εμας</a></li>
-                    <li><a href="#">FAQ</a></li>
-                </ul>
-            </nav>
-            <!-- ################################################################################################ -->
-        </header>
-    </div>
-</div>
-<div  style="background-color:white" >
+<div  class="wrapper row3" style="background-color:white" >
     <main class="hoc container clear" >
         <div class="row">
 
@@ -356,61 +301,7 @@
     </main>
 </div>
 
-<div class="wrapper row4 bgded overlay" >
-    <footer id="footer" class="hoc clear">
-        <!-- ################################################################################################ -->
-        <div class="one_half first">
-            <h6 class="title">Social Media</h6>
-            <p>Ακολουθείστε μας στα social media για να μαθαίνετε πρώτοι τα νέα του Kiddom.</p>
-            <!--  <p class="btmspace-15">Malesuada non sem quisque vulputate velit et nisi ullamcorper aliquet tincidunt ut id magna leo mattis in quam dapibus.</p>-->
-            <ul class="faico clear">
-                <li><a class="faicon-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a class="faicon-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                <!--     <li><a class="faicon-dribble" href="#"><i class="fa fa-dribbble"></i></a></li>
-                     <li><a class="faicon-linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-                     <li><a class="faicon-google-plus" href="#"><i class="fa fa-google-plus"></i></a></li>
-                     <li><a class="faicon-vk" href="#"><i class="fa fa-vk"></i></a></li>-->
-            </ul>
-        </div>
-        <div class="one_half">
-            <h6 class="title">Στοιχεια Επικοινωνιας</h6>
-            <ul class="nospace linklist contact">
-                <li><i class="fa fa-map-marker"></i>
-                    <address>
-                        Οδός &amp; Αριθμός, Πόλη, Τ.Κ.
-                    </address>
-                </li>
-                <li><i class="fa fa-phone"></i> +00 (123) 456 7890</li>
-                <li><i class="fa fa-fax"></i> +00 (123) 456 7890</li>
-                <li><i class="fa fa-envelope-o"></i> info@domain.com</li>
-            </ul>
-        </div>
-        <!-- ################################################################################################ -->
-    </footer>
-</div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<div class="wrapper row5">
-    <div id="copyright" class="hoc clear">
-        <!-- ################################################################################################ -->
-        <p class="fl_left">Copyright &copy; 2016 - All Rights Reserved - <a href="#">Domain Name</a></p>
-        <!--  <p class="fl_right">Template by <a target="_blank" href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>-->
-        <!-- ################################################################################################ -->
-    </div>
-</div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
-<!-- JAVASCRIPTS -->
-
-<script src="layout/scripts/jquery.min.js"></script>
-<script src="layout/scripts/jquery.backtotop.js"></script>
-<script src="layout/scripts/jquery.mobilemenu.js"></script>
-<script src="layout/scripts/jquery.flexslider-min.js"></script>
-<script src="layout/scripts/jquery-ui.js"></script>
-
+<div th:replace="fragments/foot :: foot"></div>
 
 <script>
     // Get the modal
