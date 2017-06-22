@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/XSL/Transform" xmlns:th="http://www.thymeleaf.org">
-
 <body>
     <div th:fragment="navbar(module)">
 
@@ -22,18 +21,29 @@
                         </form>
                     </div>
                     <!-- ################################################################################################ -->
+                    <div id="topmenu" class="fl_right">
 
-                    <div class="fl_right">
-                        <ul>
                             <div th:if ="${(uname != null)} ">
+                                <ul class="clear">
                                 <li>
-                                    <span th:text="${uname}"></span>!
+                                    <strong><span th:text="${uname}"></span></strong>
                                 </li>
+                                <li class="dropdown">
+			                    <a class="dropdown-toggle" data-toggle="dropdown">Το προφιλ μου <span class="caret"></span></a>
+			                        <ul class="dropdown-menu" role="menu" style=" background-color:rgba(0,0,0,.6); ">
+                                        <li style="border-right: none; '"><a th:href="profile">Στοιχεια Χρήστη</a></li>
+                                        <li  style="border-right: none;"><a th:href="profile">Πορτοφολι</a></li>
+                                        <li  style="border-right: none;"><a th:href="buypoints">Αγορά Πόντων</a></li>
+                                    </ul>
+                                </li>
+
                                 <li>
                                     <a th:href="logout">Αποσύνδεση</a></li>
                                 </li>
+                                </ul>
                             </div >
                             <div th:if ="${(uname == null)} ">
+                                <ul class="clear">
                                 <li th:classappend="${module == '' ? 'active' : ''}">
                                     <a  th:href="index"><i class="fa fa-lg fa-home"></i></a>
                                     <!--li><a th:href="index"><i class="fa fa-lg fa-home"></i></a></li-->
@@ -44,8 +54,9 @@
                                 <li th:classappend="${module == 'register_prov' ? 'active' : ''}">
                                     <a  th:href="register_prov">Παροχοι</a>
                                 </li>
+                                </ul>
                             </div >
-                        </ul>
+
                     </div>
                     <!-- ################################################################################################ -->
                 </div>
