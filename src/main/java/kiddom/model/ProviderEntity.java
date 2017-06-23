@@ -2,6 +2,8 @@ package kiddom.model;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 /*
  * Created by eleni on 01-Jun-17.
@@ -10,117 +12,112 @@ import java.util.Collection;
 @Entity
 @Table(name = "provider", schema = "mydb")
 public class ProviderEntity {
-    private String username;
-    private String name;
-    private String surname;
-    private String email;
-    private String telephone;
-    private String tr;
-    private int owedPoints;
-    private int gottenPoints;
-    private int totalPoints;
-    private int approved;
-    private UserEntity userByProviderId;
-    private Collection<ProviderReportsEntity> providerReportsByProviderId;
-    private Collection<SingleEventEntity> singleEventByProviderId;
-    //private Collection<SpotEntity> spotsByProviderId;
 
-    @Id
-    @Column(name = "username")
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    @Basic
+    /*----------------------------Fields----------------------------*/
+    @EmbeddedId
+    ProviderPK pk = new ProviderPK();
     @Column(name = "name")
+    private String name;
+    @Column(name = "surname")
+    private String surname;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "telephone")
+    private String telephone;
+    @Column(name = "TR")
+    private String tr;
+    @Column(name = "owed_points")
+    private int owedPoints;
+    @Column(name = "gotten_points")
+    private int gottenPoints;
+    @Column(name = "total_points")
+    private int totalPoints;
+    @Column(name = "approved")
+    private int approved;
+
+    /*--------------Relations with other tables--------------*/
+
+    /*--------------One to Many relation from provider to single_event--------------*/
+    @OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+    @JoinColumn(name="provider")
+    private Set<SingleEventEntity> events = new HashSet<SingleEventEntity>(0);
+
+    public Set<SingleEventEntity> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<SingleEventEntity> events) {
+        this.events = events;
+    }
+
+
+    /*--------------Getters - Setters for table fields--------------*/
+    public void setPk(ProviderPK pk) {
+        this.pk = pk;
+    }
+    public ProviderPK getPk() {
+        return pk;
+    }
+
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "surname")
     public String getSurname() {
         return surname;
     }
-
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
-    @Basic
-    @Column(name = "email")
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
 
-    @Basic
-    @Column(name = "telephone")
     public String getTelephone() {
         return telephone;
     }
-
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 
-    @Basic
-    @Column(name = "TR")
     public String getTr() {
         return tr;
     }
-
     public void setTr(String tr) {
         this.tr = tr;
     }
 
-    @Basic
-    @Column(name = "owed_points")
     public int getOwedPoints() {
         return owedPoints;
     }
-
     public void setOwedPoints(int owedPoints) {
         this.owedPoints = owedPoints;
     }
 
-    @Basic
-    @Column(name = "gotten_points")
     public int getGottenPoints() {
         return gottenPoints;
     }
-
     public void setGottenPoints(int gottenPoints) {
         this.gottenPoints = gottenPoints;
     }
 
-    @Basic
-    @Column(name = "total_points")
     public int getTotalPoints() {
         return totalPoints;
     }
-
     public void setTotalPoints(int totalPoints) {
         this.totalPoints = totalPoints;
     }
 
-    @Basic
-    @Column(name = "approved")
     public int getApproved() {
         return approved;
     }
-
     public void setApproved(int approved) {
         this.approved = approved;
     }
@@ -132,7 +129,7 @@ public class ProviderEntity {
 
         ProviderEntity that = (ProviderEntity) o;
 
-        if (!username.equals(that.username)) return false;
+       // if (!username.equals(that.username)) return false;
         if (owedPoints != that.owedPoints) return false;
         if (gottenPoints != that.gottenPoints) return false;
         if (totalPoints != that.totalPoints) return false;
@@ -143,36 +140,6 @@ public class ProviderEntity {
         if (tr != null ? !tr.equals(that.tr) : that.tr != null) return false;
 
         return true;
-    }
-
-    @OneToOne
-    @PrimaryKeyJoinColumn(name = "username", referencedColumnName = "username")
-    public UserEntity getUserByProviderId() {
-        return userByProviderId;
-    }
-
-    public void setUserByProviderId(UserEntity userByProviderId) {
-        this.userByProviderId = userByProviderId;
-    }
-
-    @OneToMany(mappedBy = "providerByProviderId")
-    public Collection<ProviderReportsEntity> getProviderReportsByProviderId() {
-        return providerReportsByProviderId;
-    }
-
-    public void setProviderReportsByProviderId(Collection<ProviderReportsEntity> providerReportsByProviderId) {
-        this.providerReportsByProviderId = providerReportsByProviderId;
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    @OneToMany(mappedBy = "providerByProviderId")
-    public Collection<SingleEventEntity> getSingleEventByProviderId() {
-        return singleEventByProviderId;
-    }
-
-    public void setSingleEventByProviderId(Collection<SingleEventEntity> providerReportsByProviderId) {
-        this.singleEventByProviderId = singleEventByProviderId;
     }
 
 }

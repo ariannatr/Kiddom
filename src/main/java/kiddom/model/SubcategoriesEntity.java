@@ -12,20 +12,20 @@ import java.io.Serializable;
 public class SubcategoriesEntity implements Serializable{
 
 
-
+    /*----------------------------Fields----------------------------*/
     @EmbeddedId
     private SubcategoriesPK pk = new SubcategoriesPK();
-    public SubcategoriesPK getPk(){ return this.pk; }
 
+
+    /*--------------Getters - Setters for table fields--------------*/
+    public SubcategoriesPK getPk(){ return this.pk; }
     public void setPk(SubcategoriesPK pk){ this.pk = pk; }
 
     @Transient
     public String getSubName(){ return getPk().getSubname(); }
-
     public void setSubName(String subname){ getPk().setSubname(subname); }
 
     @Transient
     public CategoriesEntity getCategory(){ return this.pk.getCategoryName();}
-
     public void setCategory(CategoriesEntity category){ getPk().setCategoryName(category);}
 }

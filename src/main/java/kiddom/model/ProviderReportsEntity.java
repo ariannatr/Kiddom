@@ -12,9 +12,7 @@ import java.io.Serializable;
 public class ProviderReportsEntity implements Serializable {
     private int reportId;
     private String report;
-    private String provider_username;
     private String user_username;
-    private ProviderEntity providerByProviderId;
 
     @Id
     @Column(name = "report_id")
@@ -34,16 +32,6 @@ public class ProviderReportsEntity implements Serializable {
 
     public void setReport(String report) {
         this.report = report;
-    }
-
-    @Id
-    @Column(name = "provider_username")
-    public String getProviderUsername() {
-        return provider_username;
-    }
-
-    public void setProviderUsername(String provider_username) {
-        this.provider_username = provider_username;
     }
 
     @Basic
@@ -76,13 +64,4 @@ public class ProviderReportsEntity implements Serializable {
         return result;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "provider_username", referencedColumnName = "username", nullable = false)
-    public ProviderEntity getProviderByProviderId() {
-        return providerByProviderId;
-    }
-
-    public void setProviderByProviderId(ProviderEntity providerByProviderId) {
-        this.providerByProviderId = providerByProviderId;
-    }
 }

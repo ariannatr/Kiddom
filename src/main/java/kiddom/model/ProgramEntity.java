@@ -4,6 +4,8 @@ package kiddom.model;
  * Created by eleni on 10-Jun-17.
  */
 
+import org.springframework.security.access.method.P;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
@@ -11,89 +13,88 @@ import java.util.Collection;
 @Entity
 @Table (name = "program", schema = "mydb")
 public class ProgramEntity implements Serializable{
-    private int id;
-    private int eventId;
-    private String date;
-    private String startTime;
-    private String endTime;
-    private int capacity;
-    private int price;
-    private int availability;
-    private SingleEventEntity eventByEventId;
 
+    /*----------------------------Fields----------------------------*/
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "id")
-    public int getId() {return id;}
-
-    public void setId(int id) {this.id = id;}
-
-    @Id
-    @Column(name = "event_id")
-    public int getEventId() {
-        return  eventId;
-    }
-
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
-    }
-
-    @Basic
+    @Column(name = "id", nullable = false)
+    private int id;
     @Column(name = "date")
+    private String date;
+    @Column(name = "start_time")
+    private String startTime;
+    @Column(name = "end_time")
+    private String endTime;
+    @Column(name = "capacity")
+    private int capacity;
+    @Column(name = "price")
+    private int price;
+    @Column(name = "availability")
+    private int availability;
+
+
+    /*--------------Relations with other tables--------------*/
+
+    /*--------------Many to One relation from event to get event_id--------------*/
+    @ManyToOne
+    @JoinColumn(name="event_id")
+    private SingleEventEntity event;
+
+    public SingleEventEntity getEvent() {
+        return event;
+    }
+    public void setEvent(SingleEventEntity event) {
+        this.event = event;
+    }
+
+
+    /*--------------Getters - Setters for table fields--------------*/
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getDate() {
         return date;
     }
-
     public void setDate(String date) {
         this.date = date;
     }
 
-    @Basic
-    @Column(name = "start_time")
     public String getStartTime() {
         return startTime;
     }
-
     public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    @Basic
-    @Column(name = "end_time")
     public String getEndTime() {
         return endTime;
     }
-
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
-    @Basic
-    @Column(name = "capacity")
     public int getCapacity() {
         return capacity;
     }
-
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
 
-    @Basic
-    @Column(name = "price")
     public int getPrice() {
         return price;
     }
-
     public void setPrice(int price) {
         this.price = price;
     }
 
-    @Basic
-    @Column(name = "availability")
     public int getAvailability() {
         return availability;
     }
-
     public void setAvailability(int availability) {
         this.availability = availability;
     }
@@ -105,7 +106,6 @@ public class ProgramEntity implements Serializable{
 
         ProgramEntity that = (ProgramEntity) o;
 
-        if (eventId != that.eventId) return false;
         if (capacity != that.capacity) return false;
         if (startTime != null ? !startTime.equals(that.startTime) : that.startTime != null) return false;
         if (endTime != null ? !endTime.equals(that.endTime) : that.endTime != null) return false;
@@ -118,18 +118,8 @@ public class ProgramEntity implements Serializable{
 
     @Override
     public int hashCode() {
-        int result = eventId;
-        result += 31*capacity;
+        int result = capacity;
         result += 31*availability;
         return result;
     }
-
-    @ManyToOne
-    @PrimaryKeyJoinColumn(name = "event_id", referencedColumnName = "event_id")
-    public SingleEventEntity getEventByEventId() {return eventByEventId;}
-
-    public void setEventByEventId(SingleEventEntity eventByEventId) {
-        this.eventByEventId = eventByEventId;
-    }
-
 }

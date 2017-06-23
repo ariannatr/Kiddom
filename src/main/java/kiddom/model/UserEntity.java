@@ -10,41 +10,52 @@ import java.util.List;
 @Entity
 @Table(name = "user", schema = "mydb")
 public class UserEntity {
-    private String username;
-    private String password;
-    private int type;
-    private ParentEntity parentByUserId;
-    private ProviderEntity providerByUserId;
 
     @Id
-    @Column(name = "username")
+    @Column(name="username")
+    private String username;
+    @Column(name="password")
+    private String password;
+    @Column(name="type")
+    private int type;
+
+
+    /*--------------One to One relation, mapping username at 'parent' table--------------*/
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "pk.user", cascade= CascadeType.ALL)
+    private ParentEntity parent;
+
+    /*--------------One to One relation, mapping username at 'provider' table--------------*/
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "pk.user", cascade= CascadeType.ALL)
+    private ProviderEntity provider;
+
+    /*--------------Getters - Setters for table fields--------------*/
+
     public String getUsername() {
         return username;
     }
-
     public void setUsername(String username) {
         this.username = username;
     }
 
-    @Basic
-    @Column(name = "password")
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
 
-    @Basic
-    @Column(name = "type")
     public int getType() {
         return type;
     }
-
     public void setType(int type) {
         this.type = type;
     }
+
+    public ParentEntity getParent() { return parent; }
+    public void setParent(ParentEntity parent) { this.parent = parent; }
+
+    public ProviderEntity getProvider() { return provider; }
+    public void setProvider(ProviderEntity provider) { this.provider = provider; }
 
     @Override
     public boolean equals(Object o) {
@@ -60,21 +71,4 @@ public class UserEntity {
         return true;
     }
 
-    @OneToOne(mappedBy = "userByParentId")
-    public ParentEntity getParentByUserId() {
-        return parentByUserId;
-    }
-
-    public void setParentByUserId(ParentEntity parentByUserId) {
-        this.parentByUserId = parentByUserId;
-    }
-
-    @OneToOne(mappedBy = "userByProviderId")
-    public ProviderEntity getProviderByUserId() {
-        return providerByUserId;
-     }
-
-    public void setProviderByUserId(ProviderEntity providerByUserId) {
-         this.providerByUserId = providerByUserId;
-     }
 }

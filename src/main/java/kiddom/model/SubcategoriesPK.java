@@ -9,26 +9,28 @@ import java.io.Serializable;
 
 @Embeddable
 public class SubcategoriesPK implements Serializable {
-   @Column
+
+    /*--------------Primary key: subname--------------*/
+    @Column
     private String subname;
+
+    /*--------------Primary foreign key: category_name, from categories table--------------*/
+    @ManyToOne
+    @JoinColumn(name="category_name")
+    private CategoriesEntity category_name;
+
+    /*--------------Getters - Setters for table fields--------------*/
 
     public String getSubname() {
         return subname;
     }
-
     public void setSubname(String subname) {
         this.subname = subname;
     }
 
-
-//    @Column
-    @ManyToOne
-    @JoinColumn(name="category_name")
-    private CategoriesEntity category_name;
     public CategoriesEntity getCategoryName() {
         return category_name;
     }
-
     public void setCategoryName(CategoriesEntity category_name) {
         this.category_name = category_name;
     }

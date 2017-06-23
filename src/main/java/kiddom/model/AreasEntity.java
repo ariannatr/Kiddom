@@ -5,55 +5,34 @@ package kiddom.model;
 **/
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "areas", schema = "mydb")
 public class AreasEntity {
-    private int areaId;
-    private String name;
-    private TownsEntity townsByTownId;
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "area_id")
-    public int getAreaId() {
-        return areaId;
-    }
+    /*----------------------------Fields----------------------------*/
+    @EmbeddedId
+    AreasPK pk = new AreasPK();
 
-    public void setAreaId(int areaId) {
-        this.areaId = areaId;
-    }
+    /*--------------Getters - Setters for table fields--------------*/
+    public AreasPK getPk() { return pk; }
 
-    @Basic
-    @Column(name = "name")
-    public String getName() {
-        return name;
-    }
+    public void setPk(AreasPK pk) { this.pk = pk; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+
+    public String getName() { return pk.getArea(); }
+    public void setName(String name) { pk.setArea(name); }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AreasEntity that = (AreasEntity) o;
-        if (areaId != that.areaId) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        String name = pk.getArea();
+        if (name != null ? !name.equals(that.pk.getArea()) : that.pk.getArea() != null) return false;
 
         return true;
     }
-
-    @ManyToOne
-    @PrimaryKeyJoinColumn(name = "towns_name", referencedColumnName = "name")
-    public TownsEntity getTownsByTownId() {
-        return townsByTownId;
-    }
-
-    public void setTownsByTownId(TownsEntity townsByTownId) {
-        this.townsByTownId = townsByTownId;
-    }
-
 
 }

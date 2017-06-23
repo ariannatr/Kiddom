@@ -2,6 +2,8 @@ package kiddom.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Arianna on 26/5/2017.
@@ -10,129 +12,127 @@ import java.util.Collection;
 @Entity
 @Table(name = "parent", schema = "mydb")
 public class ParentEntity {
-    private String username;
-    private String name;
-    private String surname;
-    private String email;
-    private String telephone;
-    private String town;
-    private String area;
-    private String photo;
-    private int availPoints;
-    private int restrPoints;
-    private int totalPoints;
-    private CookiesEntity cookiesByParentId;
-    private UserEntity userByParentId;
-    private Collection<ParentReportsEntity> parentReportsByParentId;
-    private Collection<ReservationsEntity> parentReservationsByParentId;
 
-    @Id
-    //@OneToOne
-    @PrimaryKeyJoinColumn(name = "username", referencedColumnName = "username")
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    @Basic
+    /*----------------------------Fields----------------------------*/
+    @EmbeddedId
+    private ParentPK pk = new ParentPK();
     @Column(name = "name")
+    private String name;
+    @Column(name = "surname")
+    private String surname;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "telephone")
+    private String telephone;
+    @Column(name = "town")
+    private String town;
+    @Column(name = "area")
+    private String area;
+    @Column(name = "photo")
+    private String photo;
+    @Column(name = "avail_points")
+    private int availPoints;
+    @Column(name = "restr_points")
+    private int restrPoints;
+    @Column(name = "total_points")
+    private int totalPoints;
+
+    /*--------------Relations with other tables--------------*/
+
+    /*--------------Many to Many relation with parent and event, for the reservations-inverse mapping--------------*/
+    @ManyToMany(mappedBy = "parents")
+    private Set<SingleEventEntity> events = new HashSet<SingleEventEntity>(0);
+
+    public Set<SingleEventEntity> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<SingleEventEntity> events) {
+        this.events = events;
+    }
+
+    /*--------------Many to Many relation with parent and event, for the comments-inverse mapping--------------*/
+    @ManyToMany(mappedBy = "comment_parent")
+    private Set<SingleEventEntity> comment_event = new HashSet<SingleEventEntity>(0);
+
+    public Set<SingleEventEntity> getComment_event() {
+        return comment_event;
+    }
+
+    public void setComment_event(Set<SingleEventEntity> comment_event) {
+        this.comment_event = comment_event;
+    }
+
+    /*--------------Getters - Setters for table fields--------------*/
+
+    @Transient
+    public void setUser(UserEntity user){ this.pk.setUser(user);}
+
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "surname")
     public String getSurname() {
         return surname;
     }
-
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
-    @Basic
-    @Column(name = "email")
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
 
-    @Basic
-    @Column(name = "telephone")
     public String getTelephone() {
         return telephone;
     }
-
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 
-    @Basic
-    @Column(name = "town")
     public String getTown() {
         return town;
     }
-
     public void setTown(String town) {
         this.town = town;
     }
 
-    @Basic
-    @Column(name = "area")
     public String getArea() {
         return area;
     }
-
     public void setArea(String area) {
         this.area = area;
     }
-
-    @Basic
-    @Column(name = "photo")
     public String getPhoto() {
         return photo;
     }
-
     public void setPhoto(String photo) {
         this.photo = photo;
     }
 
-    @Basic
-    @Column(name = "avail_points")
     public int getAvailPoints() {
         return availPoints;
     }
-
     public void setAvailPoints(int availPoints) {
         this.availPoints = availPoints;
     }
 
-    @Basic
-    @Column(name = "restr_points")
     public int getRestrPoints() {
         return restrPoints;
     }
-
     public void setRestrPoints(int restrPoints) {
         this.restrPoints = restrPoints;
     }
 
-    @Basic
-    @Column(name = "total_points")
     public int getTotalPoints() {
         return totalPoints;
     }
-
     public void setTotalPoints(int totalPoints) {
         this.totalPoints = totalPoints;
     }
@@ -144,7 +144,7 @@ public class ParentEntity {
 
         ParentEntity that = (ParentEntity) o;
 
-        if (username != that.username) return false;
+        //if (username != that.username) return false;
         if (availPoints != that.availPoints) return false;
         if (restrPoints != that.restrPoints) return false;
         if (totalPoints != that.totalPoints) return false;
@@ -159,40 +159,4 @@ public class ParentEntity {
         return true;
     }
 
-    @OneToOne(mappedBy = "parentByParentId")
-    public CookiesEntity getCookiesByParentId() {
-        return cookiesByParentId;
-    }
-
-    public void setCookiesByParentId(CookiesEntity cookiesByParentId) {
-        this.cookiesByParentId = cookiesByParentId;
-    }
-
-    @OneToOne
-    @PrimaryKeyJoinColumn(name = "username", referencedColumnName = "username")
-    public UserEntity getUserByParentId() {
-        return userByParentId;
-    }
-
-    public void setUserByParentId(UserEntity userByParentId) {
-        this.userByParentId = userByParentId;
-    }
-
-    @OneToMany(mappedBy = "parentByParentId")
-    public Collection<ParentReportsEntity> getParentReportsByParentId() {
-        return parentReportsByParentId;
-    }
-
-    public void setParentReportsByParentId(Collection<ParentReportsEntity> parentReportsByParentId) {
-        this.parentReportsByParentId = parentReportsByParentId;
-    }
-
-    @OneToMany(mappedBy = "parentByParentId")
-    public Collection<ReservationsEntity> getParentReservationsByParentId() {
-        return parentReservationsByParentId;
-    }
-
-    public void setParentReservationsByParentId(Collection<ReservationsEntity> parentReservationsByParentId) {
-        this.parentReservationsByParentId = parentReservationsByParentId;
-    }
 }

@@ -10,23 +10,20 @@ import javax.persistence.*;
 @Entity
 @Table(name = "cookies", schema = "mydb")
 public class CookiesEntity {
-    private String parent_username;
+
     private String category;
     private String subcat1;
     private String subcat2;
     private String subcat3;
     private String price;
-    private ParentEntity parentByParentId;
+    //private ParentEntity parentByParentId;
 
     @Id
-    @PrimaryKeyJoinColumn(name = "parent_username", referencedColumnName = "username")
-    public String getUsername() {
-        return parent_username;
-    }
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="id")
+    private Integer id;
 
-    public void setUsername(String parent_username) {
-        this.parent_username = parent_username;
-    }
+
 
     @Basic
     @Column(name = "category")
@@ -85,7 +82,7 @@ public class CookiesEntity {
 
         CookiesEntity that = (CookiesEntity) o;
 
-        if (!parent_username.equals(that.parent_username)) return false;
+       // if (!parent_username.equals(that.parent_username)) return false;
         if (category != null ? !category.equals(that.category) : that.category != null) return false;
         if (subcat1 != null ? !subcat1.equals(that.subcat1) : that.subcat1 != null) return false;
         if (subcat2 != null ? !subcat2.equals(that.subcat2) : that.subcat2 != null) return false;
@@ -106,13 +103,5 @@ public class CookiesEntity {
         return result;
     }
 
-    @OneToOne
-    @JoinColumn(name = "parent_username", referencedColumnName = "username")
-    public ParentEntity getParentByParentId() {
-        return parentByParentId;
-    }
 
-    public void setParentByParentId(ParentEntity parentByParentId) {
-        this.parentByParentId = parentByParentId;
-    }
 }

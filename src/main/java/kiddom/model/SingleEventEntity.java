@@ -4,193 +4,227 @@ package kiddom.model;
  * Created by eleni on 02-Jun-17.
 **/
 
+import org.springframework.security.access.method.P;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "single_event", schema = "mydb")
 public class SingleEventEntity implements Serializable {
-    private String provider_username;
-    private int eventId;
-    private String name;
-    private String description;
-    private String photos;
-    private int price;
-    private String category;
-    private String sub1;
-    private String sub2;
-    private String sub3;
-    private String town;
-    private String area;
-    private String address;
-    private int number;
-    private int postcode;
-    private float rating;
-    private ProviderEntity providerByProviderId;
-    private Collection<ReservationsEntity> reservationsByEventId;
-    private Collection<CommentsEntity> commentsByEventId;
-    private Collection<ProgramEntity> programByEventId;
 
+    /*----------------------------Fields----------------------------*/
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "event_id")
-    public int getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
-    }
-
-    @Basic
-    @Column(name = "provider_username")
-    public String getProvider_username() {
-        return provider_username;
-    }
-
-    public void setProvider_username(String provider_username) {
-        this.provider_username = provider_username;
-    }
-
-    @Basic
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="event_id")
+    private Integer id;
     @Column(name = "name")
+    private String name;
+    @Column(name = "description")
+    private String description;
+    @Column(name = "photos")
+    private String photos;
+    @Column(name = "price")
+    private int price;
+    @Column(name = "category")
+    private String category;
+    @Column(name = "sub1")
+    private String sub1;
+    @Column(name = "sub2")
+    private String sub2;
+    @Column(name = "sub3")
+    private String sub3;
+    @Column(name = "area")
+    private String town;
+    @Column (name = "town")
+    private String area;
+    @Column(name = "address")
+    private String address;
+    @Column(name = "number")
+    private int number;
+    @Column(name = "postcode")
+    private int postcode;
+    @Column(name = "ratings_sum")
+    private float ratings_sum;
+    @Column(name = "ratings_number")
+    private float ratings_number;
+
+     /*--------------Relations with other tables--------------*/
+
+    /*--------------Many to One relation from provider, to get username--------------*/
+    @ManyToOne
+    @JoinColumn(name="provider")
+    private ProviderEntity provider;
+
+    public ProviderEntity getProviders() {
+        return provider;
+    }
+
+    public void setProviders(ProviderEntity provider) {
+        this.provider = provider;
+    }
+
+    /*--------------One to Many relation for event_id from event to the program--------------*/
+    @OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+    @JoinColumn(name="event_id")
+    private Set<ProgramEntity> program = new HashSet<ProgramEntity>(0);
+
+    public Set<ProgramEntity> getProgram() {
+        return program;
+    }
+
+    public void setProgram(HashSet<ProgramEntity> program) {
+        this.program = program;
+    }
+
+    /*--------------Many to Many relation with parent->username and event->event_id, for the reservations--------------*/
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "reservations", joinColumns = @JoinColumn(name = "event_id", referencedColumnName = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "parent", referencedColumnName = "user_username"))
+    private Set<ParentEntity> parents = new HashSet<ParentEntity>(0);
+
+    public Set<ParentEntity> getParents() {
+        return parents;
+    }
+
+    public void setParents(Set<ParentEntity> parents) {
+        this.parents = parents;
+    }
+
+    /*--------------Many to Many relation with parent->username and event->event_id, for the comments--------------*/
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "comments", joinColumns = @JoinColumn(name = "event_id", referencedColumnName = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "parent_username", referencedColumnName = "user_username"))
+    private Set<ParentEntity> comment_parent = new HashSet<ParentEntity>(0);
+
+    public Set<ParentEntity> getComment_parent() {
+        return comment_parent;
+    }
+
+    public void setComment_parent(Set<ParentEntity> comment_parent) {
+        this.comment_parent = comment_parent;
+    }
+
+    /*--------------Getters - Setters for table fields--------------*/
+
+    public void setId(Integer id) { this.id = id; }
+    public Integer getId() { return id; }
+
+
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "description")
+
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
 
-    @Basic
-    @Column(name = "photos")
+
     public String getPhotos() {
         return photos;
     }
-
     public void setPhotos(String photos) {
         this.photos = photos;
     }
 
-    @Basic
-    @Column(name = "price")
-    public int getPrice() {
-        return price;
-    }
 
+    public int getPrice() { return price; }
     public void setPrice(int price) {
         this.price = price;
     }
 
-    @Basic
-    @Column(name = "category")
+
     public String getCategory() {
         return category;
     }
-
     public void setCategory(String category) {
         this.category = category;
     }
 
-    @Basic
-    @Column(name = "sub1")
+
     public String getSub1() {
         return sub1;
     }
-
     public void setSub1(String sub1) {
         this.sub1 = sub1;
     }
 
-    @Basic
-    @Column(name = "sub2")
+
     public String getSub2() {
         return sub2;
     }
-
     public void setSub2(String sub2) {
         this.sub2 = sub2;
     }
 
-    @Basic
-    @Column(name = "sub3")
+
     public String getSub3() {
         return sub3;
     }
-
     public void setSub3(String sub3) {
         this.sub3 = sub3;
     }
 
-    @Basic
-    @Column(name = "area")
+
     public String getArea() {
         return area;
     }
-
     public void setArea(String area) {
         this.area = area;
     }
 
-    @Basic
-    @Column (name = "town")
+
     public String getTown() {
         return town;
     }
-
     public void setTown(String town) {
         this.town = town;
     }
 
-    @Basic
-    @Column(name = "address")
+
     public String getAddress() {
         return address;
     }
-
     public void setAddress(String address) {
         this.address = address;
     }
 
-    @Basic
-    @Column(name = "number")
+
     public int getNumber() {
         return number;
     }
-
     public void setNumber(int number) {
         this.number = number;
     }
 
-    @Basic
-    @Column(name = "postcode")
+
     public int getPostcode() {
         return postcode;
     }
-
     public void setPostcode(int postcode) {
         this.postcode = postcode;
     }
 
-    @Basic
-    @Column(name = "rating")
-    public float getRating() {
-        return rating;
-    }
 
+    public float getRatings_sum(){return this.ratings_sum;}
+    public void setRatings_sum(float sum){this.ratings_sum=sum;}
+
+
+    public float getRating() {
+        return ratings_number;
+    }
     public void setRating(float rating) {
-        this.rating = rating;
+        this.ratings_number = rating;
     }
 
     @Override
@@ -200,7 +234,6 @@ public class SingleEventEntity implements Serializable {
 
         SingleEventEntity that = (SingleEventEntity) o;
 
-        if (eventId != that.eventId) return false;
         if (price != that.price) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
@@ -215,8 +248,7 @@ public class SingleEventEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = eventId;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        int result = (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (photos != null ? photos.hashCode() : 0);
         result = 31 * result + price;
@@ -225,50 +257,5 @@ public class SingleEventEntity implements Serializable {
         result = 31 * result + (sub2 != null ? sub2.hashCode() : 0);
         result = 31 * result + (sub3 != null ? sub3.hashCode() : 0);
         return result;
-    }
-
-    @ManyToOne
-    @PrimaryKeyJoinColumn(name = "provider_username", referencedColumnName = "username")
-    public ProviderEntity getProviderByProviderId() {
-        return providerByProviderId;
-    }
-
-    public void setProviderByProviderId(ProviderEntity providerByProviderId) {
-        this.providerByProviderId = providerByProviderId;
-    }
-
-    @OneToMany(mappedBy = "singleEventBySingleEventId")
-    public Collection<ReservationsEntity> getReservationsByEventId() {
-        return reservationsByEventId;
-    }
-
-    public void setReservationsByEventId(Collection<ReservationsEntity> reservationsByEventId) {
-        this.reservationsByEventId = reservationsByEventId;
-    }
-
-    /*@ManyToOne
-    @JoinColumn(name = "event_id", referencedColumnName = "event_id", nullable = false)
-    public ReservationsEntity getReservationsByEventId() {
-        return reservationsByEventId;
-    }
-
-    public void setReservationsByEventId(ReservationsEntity reservationsByEventId) {
-        this.reservationsByEventId = reservationsByEventId;
-    }*/
-
-    @OneToMany(mappedBy = "eventByEventId")
-    public Collection<CommentsEntity> getCommentsByEventId() {
-        return commentsByEventId;
-    }
-
-    public void setCommentsByEventId(Collection<CommentsEntity> commentsByEventId) {
-        this.commentsByEventId = commentsByEventId;
-    }
-
-    @OneToMany(mappedBy = "eventByEventId")
-    public Collection<ProgramEntity> getProgramByEventId() {return programByEventId;}
-
-    public void setProgramByEventId(Collection<ProgramEntity> programByEventId) {
-        this.programByEventId = programByEventId;
     }
 }

@@ -13,8 +13,6 @@ public class ParentReportsEntity implements Serializable {
     private int reportId;
     private String report;
     private String provider;
-    private String parent_username;
-    private ParentEntity parentByParentId;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -47,15 +45,6 @@ public class ParentReportsEntity implements Serializable {
         this.provider = provider;
     }
 
-    @Id
-    @Column(name = "parent_username")
-    public String getParentUsername() {
-        return parent_username;
-    }
-
-    public void setParentUsername(String parent_username) {
-        this.parent_username = parent_username;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -79,13 +68,5 @@ public class ParentReportsEntity implements Serializable {
         return result;
     }
 
-    @ManyToOne
-    @PrimaryKeyJoinColumn(name = "parent_username", referencedColumnName = "username")
-    public ParentEntity getParentByParentId() {
-        return parentByParentId;
-    }
 
-    public void setParentByParentId(ParentEntity parentByParentId) {
-        this.parentByParentId = parentByParentId;
-    }
 }

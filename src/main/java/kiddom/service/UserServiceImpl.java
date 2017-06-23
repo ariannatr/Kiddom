@@ -48,7 +48,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
     public  ParentEntity findParent(String username){
-	    return parentRepository.findByUsername(username);
+	    ParentEntity parent=parentRepository.findOne(username);
+	    return parent;
     }
 
 
@@ -87,30 +88,23 @@ public class UserServiceImpl implements UserService {
 		}*/
         //Role userRole = roleRepository.findByRole("ADMIN");
         //user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-        user.setParentByUserId(parent);
+        //user.setParentByUserId(parent);
         userRepository.save(user);
-        CookiesEntity cookie = new CookiesEntity();
+        //CookiesEntity cookie = new CookiesEntity();
         System.out.println("Creating parent user...");
-        //parent = new ParentEntity();
-        parent.setName(parent.getName());
-        parent.setSurname(parent.getSurname());
-        parent.setEmail(parent.getEmail());
-        parent.setTelephone(parent.getTelephone());
-        parent.setTown(parent.getTown());
-        parent.setArea(parent.getArea());
         System.out.println("Trying to add "+parent.getName()+" "+parent.getSurname()+"  "+parent.getEmail());
 
 
         parent.setAvailPoints(0);
         parent.setRestrPoints(0);
         parent.setTotalPoints(0);
-        parent.setUsername(user.getUsername());
-        parent.setUserByParentId(user);
-        cookie.setCategory("none");
-        cookie.setParentByParentId(parent);
-        cookie.setUsername(user.getUsername());
+        //parent.setUsername(user.getUsername());
+        parent.setUser(user);
+//        cookie.setCategory("none");
+//        cookie.setParentByParentId(parent);
+//        cookie.setUsername(user.getUsername());
 		parentRepository.save(parent);
-        cookieRepository.save(cookie);
+        //cookieRepository.save(cookie);
 
 	}
 
@@ -124,7 +118,7 @@ public class UserServiceImpl implements UserService {
        /*if (request.getParameter("image") != null) {
 			parent.setPhoto(request.getParameter("image"));
 		}*/
-        user.setProviderByUserId(provider);
+      //  user.setProviderByUserId(provider);
         userRepository.save(user);
 
         System.out.println("Creating provider user...");
@@ -132,7 +126,7 @@ public class UserServiceImpl implements UserService {
         provider.setApproved(0);
         provider.setGottenPoints(0);
         provider.setOwedPoints(0);
-        provider.setUserByProviderId(user);
+       // provider.setUserByProviderId(user);
         provider.setTotalPoints(0);
         System.out.println("Trying to add "+provider.getName()+" "+provider.getSurname()+"  "+provider.getEmail());
 
@@ -144,7 +138,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveActivity(UserEntity user,ProviderEntity provider,SingleEventEntity event)
     {
-        event.setProviderByProviderId(provider);
+
+        //event.getPk().setProviderUsername(provider);
         System.out.print("Trying to save event at :"+event.getAddress());
         activityRepository.save(event);
     }

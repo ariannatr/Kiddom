@@ -6,19 +6,26 @@ package kiddom.model;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "towns", schema = "mydb")
 public class TownsEntity {
-    private String name;
-    private Collection<AreasEntity> areasByTownId;
 
+    /*----------------------------Fields----------------------------*/
     @Id
     @Column(name = "name")
+    private String name;
+
+    /*--------------One to Many relation of name from town to area--------------*/
+    @OneToMany(mappedBy = "pk.town_name")
+    Set<AreasEntity> areas = new HashSet<AreasEntity>(0);
+
+    /*--------------Getters - Setters for table fields--------------*/
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -32,12 +39,5 @@ public class TownsEntity {
         return true;
     }
 
-    @OneToMany(mappedBy = "townsByTownId")
-    public Collection<AreasEntity> getAreasByTownId() {
-        return areasByTownId;
-    }
 
-    public void setAreasByTownId(Collection<AreasEntity> areasByTownId) {
-        this.areasByTownId = areasByTownId;
-    }
 }
