@@ -80,19 +80,6 @@ public class SingleEventEntity implements Serializable {
         this.program = program;
     }
 
-    /*--------------Many to Many relation with parent->username and event->event_id, for the reservations--------------*/
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "reservations", joinColumns = @JoinColumn(name = "event_id", referencedColumnName = "event_id"),
-            inverseJoinColumns = @JoinColumn(name = "parent", referencedColumnName = "user_username"))
-    private Set<ParentEntity> parents = new HashSet<ParentEntity>(0);
-
-    public Set<ParentEntity> getParents() {
-        return parents;
-    }
-
-    public void setParents(Set<ParentEntity> parents) {
-        this.parents = parents;
-    }
 
     /*--------------Many to Many relation with parent->username and event->event_id, for the comments--------------*/
     @ManyToMany(cascade = CascadeType.ALL)

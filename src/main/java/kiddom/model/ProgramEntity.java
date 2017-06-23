@@ -9,6 +9,8 @@ import org.springframework.security.access.method.P;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table (name = "program", schema = "mydb")
@@ -45,6 +47,21 @@ public class ProgramEntity implements Serializable{
     }
     public void setEvent(SingleEventEntity event) {
         this.event = event;
+    }
+
+
+    /*--------------Many to Many relation with parent->username and event->event_id, for the reservations--------------*/
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "reservations", joinColumns = @JoinColumn(name = "timeslot_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "parent", referencedColumnName = "user_username"))
+    private Set<ParentEntity> parents = new HashSet<ParentEntity>(0);
+
+    public Set<ParentEntity> getParents() {
+        return parents;
+    }
+
+    public void setParents(Set<ParentEntity> parents) {
+        this.parents = parents;
     }
 
 
