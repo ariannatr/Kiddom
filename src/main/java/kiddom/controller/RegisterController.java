@@ -32,7 +32,7 @@ public class RegisterController {
     @RequestMapping(value="/register", method = RequestMethod.GET)
     public ModelAndView register(RedirectAttributes redirectAttributes){
         ModelAndView modelAndView = new ModelAndView();
-        UserEntity user = new UserEntity();
+        UserEntity user = new UserEntity("");
         ParentEntity parent=new ParentEntity();
         redirectAttributes.addFlashAttribute("success",false);
         Authentication authentication = authenticationFacade.getAuthentication();

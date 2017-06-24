@@ -1,5 +1,7 @@
 package kiddom.model;
 
+import org.apache.catalina.User;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -12,6 +14,14 @@ public class ParentPK implements Serializable {
     /*--------------Primary foreign key: username, from user table--------------*/
     @OneToOne
     private UserEntity user;
+
+    /*--------------Primary foreign key: username, from user table--------------*/
+    public ParentPK(String name){
+        System.out.println("Eimai ston constructor me name " + name);
+        user = new UserEntity(name);
+    }
+    public ParentPK(){}
+
     public UserEntity getUser() {
         return user;
     }

@@ -1,6 +1,8 @@
 package kiddom.model;
 //import org.springframework.security.core.GrantedAuthority;
 
+import org.apache.catalina.User;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -19,7 +21,6 @@ public class UserEntity {
     @Column(name="type")
     private int type;
 
-
     /*--------------One to One relation, mapping username at 'parent' table--------------*/
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "pk.user", cascade= CascadeType.ALL)
     private ParentEntity parent;
@@ -27,6 +28,17 @@ public class UserEntity {
     /*--------------One to One relation, mapping username at 'provider' table--------------*/
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "pk.user", cascade= CascadeType.ALL)
     private ProviderEntity provider;
+
+
+     /*--------------Constructor--------------*/
+
+     public UserEntity(){}
+
+     public UserEntity (String name){
+         System.out.println("Eimai sto userentity me name:" + name);
+        this.username = name;
+     }
+
 
     /*--------------Getters - Setters for table fields--------------*/
 
@@ -51,11 +63,9 @@ public class UserEntity {
         this.type = type;
     }
 
-    public ParentEntity getParent() { return parent; }
-    public void setParent(ParentEntity parent) { this.parent = parent; }
 
-    public ProviderEntity getProvider() { return provider; }
-    public void setProvider(ProviderEntity provider) { this.provider = provider; }
+
+
 
     @Override
     public boolean equals(Object o) {

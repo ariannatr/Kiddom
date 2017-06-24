@@ -113,7 +113,7 @@ Licence URI: http://www.os-templates.com/template-terms
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    <a th:text="${user.username}"></a>
+                                                    <a th:text="${parent.username}"></a>
                                                 </td>
                                             </tr>
                                             <!--<tr>-->
@@ -206,7 +206,7 @@ Licence URI: http://www.os-templates.com/template-terms
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="username">Username:</label>
                             <div class="col-sm-10">
-                                <input type="username" class="form-control" id="username" th:placeholder="${user.username}" name="username">
+                                <input type="username" class="form-control" id="username" th:placeholder="${parent.username}" name="username">
                             </div>
                             <span class="help-block"></span>
                         </div>

@@ -15,7 +15,7 @@ public class ParentEntity {
 
     /*----------------------------Fields----------------------------*/
     @EmbeddedId
-    private ParentPK pk = new ParentPK();
+    private ParentPK pk = new ParentPK("");
     @Column(name = "name")
     private String name;
     @Column(name = "surname")

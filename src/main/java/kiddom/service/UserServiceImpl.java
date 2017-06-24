@@ -47,8 +47,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-    public  ParentEntity findParent(String username){
-	    ParentEntity parent=parentRepository.findOne(username);
+    public  ParentEntity findParent(ParentPK parentPk){
+	    ParentEntity parent=parentRepository.findOne(parentPk);
 	    return parent;
     }
 

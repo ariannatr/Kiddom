@@ -76,7 +76,11 @@ public class LoginController {
         System.out.println("Authentication name is"+authentication.getName());
         if(!authentication.getName().equals("anonymousUser")) {
             modelAndView.addObject("uname", authentication.getName());
-            ParentEntity useron=userService.findParent(authentication.getName());
+            System.out.println("username " + authentication.getName());
+            ParentPK parentPk = new ParentPK(authentication.getName());
+            System.out.println("username in PK is :"+parentPk.getUser().getUsername());
+            ParentEntity useron=userService.findParent(parentPk);
+            modelAndView.addObject("parent", parentPk.getUser());
             modelAndView.addObject("user",useron);
             System.out.println("Avail points are"+useron.getAvailPoints());
             modelAndView.addObject("total_points",useron.getTotalPoints());
@@ -94,10 +98,10 @@ public class LoginController {
         System.out.println("Authentication name is"+authentication.getName());
         if(!authentication.getName().equals("anonymousUser")) {
             modelAndView.addObject("uname", authentication.getName());
-            ParentEntity parenton=userService.findParent(authentication.getName());
+            ParentEntity parenton=userService.findParent(new ParentPK(authentication.getName()));
             UserEntity useron=userService.findByUsername(authentication.getName());
             userService.updateUserParent(parenton,parent,useron,user);
-            parenton=userService.findParent(authentication.getName());
+            parenton=userService.findParent(new ParentPK(authentication.getName()));
             modelAndView.addObject("user",parenton);
             System.out.println("Avail points are"+parenton.getAvailPoints());
             modelAndView.addObject("total_points",parenton.getTotalPoints());
