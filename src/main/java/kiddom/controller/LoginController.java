@@ -101,8 +101,11 @@ public class LoginController {
             ParentEntity parenton=userService.findParent(new ParentPK(authentication.getName()));
             UserEntity useron=userService.findByUsername(authentication.getName());
             userService.updateUserParent(parenton,parent,useron,user);
-            parenton=userService.findParent(new ParentPK(authentication.getName()));
+            ParentPK parentonPK=new ParentPK(authentication.getName());
+            parenton=userService.findParent(parentonPK);
+            modelAndView.addObject("parent", parentonPK.getUser());
             modelAndView.addObject("user",parenton);
+            //modelAndView.addObject("user",parenton);
             System.out.println("Avail points are"+parenton.getAvailPoints());
             modelAndView.addObject("total_points",parenton.getTotalPoints());
             modelAndView.addObject("restr_points",parenton.getRestrPoints());
