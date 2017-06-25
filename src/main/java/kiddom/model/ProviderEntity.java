@@ -35,6 +35,18 @@ public class ProviderEntity {
     @Column(name = "approved")
     private int approved;
 
+    /*--------------Constructor------------------------------*/
+    //ProviderEntity() {
+    //Default constructor
+    //}
+
+    public ProviderEntity () {
+        this.setApproved(0);
+        this.setGottenPoints(0);
+        this.setOwedPoints(0);
+        this.setTotalPoints(0);
+    }
+
     /*--------------Relations with other tables--------------*/
 
     /*--------------One to Many relation from provider to single_event--------------*/
@@ -52,6 +64,9 @@ public class ProviderEntity {
 
 
     /*--------------Getters - Setters for table fields--------------*/
+    @Transient
+    public void setUser(UserEntity user){ this.pk.setUser(user);}
+
     public void setPk(ProviderPK pk) {
         this.pk = pk;
     }
