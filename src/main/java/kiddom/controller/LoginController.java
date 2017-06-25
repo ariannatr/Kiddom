@@ -86,7 +86,7 @@ public class LoginController {
             modelAndView.addObject("total_points",useron.getTotalPoints());
             modelAndView.addObject("restr_points",useron.getRestrPoints());
             modelAndView.addObject("avail_points",useron.getAvailPoints());
-          //  modelAndView.addObject("tab_name","wallet");
+            //modelAndView.addObject("tab","elements");
         }
             modelAndView.setViewName("profile");
         return modelAndView;

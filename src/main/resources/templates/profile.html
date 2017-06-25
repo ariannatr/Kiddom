@@ -37,9 +37,10 @@ Licence URI: http://www.os-templates.com/template-terms
     </style>
 
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <script th:src="@{scripts/profile.js}"> </script>
 </head>
 
-<body id="top">
+<body id="top" >
 
 <div th:replace="fragments/navbar :: navbar('profile')"></div>
 
@@ -50,16 +51,16 @@ Licence URI: http://www.os-templates.com/template-terms
             <div class="sidebar one_quarter first">
                 <div class="tab">
 
-                    <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'user_elements')"  th:id="${param.tab[0] == 'elements' ? 'my_active' : ''}">
+                    <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'user_elements')"  th:id="${((param.tab != null) and (param.tab[0] == 'elements')) ? 'my_active' : ''}">
                         <i class="fa fa-user" style="color:#cc834f "></i> Στοιχεια Χρήστη</button>
-                    <button type="button" class="tablinks list-group-item" onclick="openCity(event, 'wallet')" th:id="${param.tab[0] == 'wallet' ? 'my_active' : ''}">
+                    <button type="button" class="tablinks list-group-item" onclick="openCity(event, 'wallet')" th:id="${((param.tab != null) and (param.tab[0] == 'wallet')) ? 'my_active' : ''}">
                         <i class="fa fa-university" style="color:#cc834f"></i> Πορτοφόλι</button>
-                    <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'reservations')" th:id="${param.tab[0] == 'reservations' ? 'my_active' : ''}">
+                    <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'reservations')" th:id="${((param.tab != null)and (param.tab[0] == 'reservations')) ? 'my_active' : ''}">
                         <i class="fa fa-calendar-check-o" style="color:#cc834f"></i> Kρατήσεις</button>
-                    <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'bookmarks')" th:id="${param.tab[0] == 'bookmarks' ? 'my_active' : ''}">
+                    <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'bookmarks')" th:id="${((param.tab != null) and (param.tab[0] == 'bookmarks')) ? 'my_active' : ''}">
                         <i class="fa fa-heart" style="color:#cc834f;"></i> Aγαπημένα <span class="badge">14</span></button>
 
-                    <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'old_activities')" th:id="${param.tab[0] == 'old_activities' ? 'my_active' : ''}">
+                    <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'old_activities')" th:id="${((param.tab != null) and (param.tab[0] == 'old_activities')) ? 'my_active' : ''}">
                         <i class="fa fa-calendar-minus-o" style="color:#cc834f;"></i> Παλαιότερες Δραστηριότητες </button>
 
                 </div>
@@ -384,23 +385,10 @@ Licence URI: http://www.os-templates.com/template-terms
                     <h3>Αγαπημένα</h3>
                 </div>
 
-                <div id="old activities" class="tabcontent" >
+                <div id="old_activities" class="tabcontent" >
                     <!-- ################################################################################################ -->
 
                     <h2 align="center">Παλαιότερες Δραστηριότητες</h2>
-                    <!--div class=" borderedbox inspace-5">
-                    <img class="imgl" src="../images/demo/gallery/01.png" width="20" height="20" alt="">
-                    <p>Aliquatjusto quisque nam consequat doloreet vest orna partur scetur portortis nam. Metadipiscing eget facilis elit sagittis felisi eger id justo maurisus convallicitur.</p>
-                    <p>Dapiensociis temper donec auctortortis cumsan et curabitur condis lorem loborttis leo. Ipsumcommodo libero nunc at in velis tincidunt pellentum tincidunt vel lorem.</p>
-                  </div>
-                       <div class=" borderedbox inspace-5">
-                      <img class="imgl borderedbox inspace-5" src="../images/demo/gallery/01.png" alt="">
-
-
-                    <p>This is a W3C compliant free website template from OS Templates</a>. For full terms of use of this template please read our website template licence.</p>
-                    <p>You can use and modify the template for both personal and commercial use. You must keep all copyright information and credit links in the template and associated files. For more website templates visit our <a href="http://www.os-templates.com/">free website templates</a> section.</p>
-
-                    </div-->
 
                     <div class="group results">
                         <!--article class="one_third first"-->
@@ -501,30 +489,10 @@ Licence URI: http://www.os-templates.com/template-terms
 <!-- JAVASCRIPTS -->
 
 
+
+
+
 <script type="text/javascript">
-    function openCity(evt, cityName) {
-        // Declare all variables
-        var i, tabcontent, tablinks;
-
-        // Get all elements with class="tabcontent" and hide them
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-
-        // Get all elements with class="tablinks" and remove the class "active"
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-
-        // Show the current tab, and add an "active" class to the link that opened the tab
-        document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " active";
-
-
-    }
-
     document.getElementById("my_active").click();
 </script>
 </body>
