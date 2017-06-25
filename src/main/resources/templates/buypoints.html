@@ -244,13 +244,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <span class="close" >
-                        <button type="button" class="close"  aria-hidden="true" onclick="reset()" >  X</button>
+                        <button type="button" class="close" id="closebutton"  aria-hidden="true"  >  X</button>
                     </span>
                 </div>
                 <div class="modal-body" style="text-align: center">
                     <strong> Η συναλλαγή ολοκληρώθηκε </strong>
                     <br>
-                   <a  class="btn btn-success" role="button" data-dismiss="myModal" onclick="reset()"> EΠΙΣΤΡΟΦΗ ΣΤΟ ΠΟΡΤΟΦΟΛΙ</a>
+                   <a  th:href="profile" class="btn btn-success" role="button" data-dismiss="myModal" onclick="reset()"> EΠΙΣΤΡΟΦΗ ΣΤΟ ΠΟΡΤΟΦΟΛΙ</a>
+
 
                 </div>
 
@@ -309,7 +310,7 @@
     var modal = document.getElementById('myModal');
     var btn = document.getElementById("myBtn");
     var btn2 = document.getElementById("myBtn2");
-    var span = document.getElementsByClassName("close")[0];
+    var closebutton = document.getElementById("closebutton");
     // When the user clicks on the button, open the modal
     btn.onclick = function() {
         modal.style.display = "block";
@@ -319,7 +320,8 @@
     }
     //    reset();
     // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
+    closebutton.onclick = function() {
+        reset();
         modal.style.display = "none";
     }
 
