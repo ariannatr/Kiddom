@@ -36,11 +36,7 @@ public class LoginController {
 
 		if (userExists != null) {  //found a user with username and password
 			System.out.println("Found the user "+userExists.getUsername());
-			//redirectAttrs.addFlashAttribute("user",userExists);
 			String uname=userExists.getUsername();
-            //modelAndView.addObject("user",uname);
-            //modelAndView.addObject("name",userExists.getUsername());
-
             modelAndView.setViewName("redirect:/index");
 		}
 		else
@@ -63,8 +59,13 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
-        if(!authentication.getName().equals("anonymousUser"))
-		    modelAndView.addObject("uname",authentication.getName());
+        if(!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            UserEntity userS = userService.findByUsername(authentication.getName());
+            modelAndView.addObject("type", String.valueOf(userS.getType()));
+            modelAndView.setViewName("index");
+        }
+
         return modelAndView;
 	}
 
@@ -86,7 +87,8 @@ public class LoginController {
             modelAndView.addObject("total_points",useron.getTotalPoints());
             modelAndView.addObject("restr_points",useron.getRestrPoints());
             modelAndView.addObject("avail_points",useron.getAvailPoints());
-            //modelAndView.addObject("tab","elements");
+            UserEntity userS = userService.findByUsername(authentication.getName());
+            modelAndView.addObject("type", String.valueOf(userS.getType()));
         }
             modelAndView.setViewName("profile");
         return modelAndView;
@@ -111,6 +113,7 @@ public class LoginController {
             modelAndView.addObject("total_points",parenton.getTotalPoints());
             modelAndView.addObject("restr_points",parenton.getRestrPoints());
             modelAndView.addObject("avail_points",parenton.getAvailPoints());
+            modelAndView.addObject("type",String.valueOf(useron.getType()));
         }
         modelAndView.setViewName("profile");
         return modelAndView;
@@ -122,8 +125,11 @@ public class LoginController {
         //UserEntity user = new UserEntity();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
-        if(!authentication.getName().equals("anonymousUser"))
-            modelAndView.addObject("uname",authentication.getName());
+        if(!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            UserEntity userS = userService.findByUsername(authentication.getName());
+            modelAndView.addObject("type", String.valueOf(userS.getType()));
+        }
         modelAndView.setViewName("profileProvider");
         return modelAndView;
     }

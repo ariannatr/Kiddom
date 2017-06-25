@@ -64,8 +64,11 @@ public class RegisterController {
             userService.saveUser(user, parent);
             Authentication authentication = authenticationFacade.getAuthentication();
             System.out.println("Authentication name is"+authentication.getName());
-            if (!authentication.getName().equals("anonymousUser"))
-                modelAndView.addObject("uname",authentication.getName());
+            if(!authentication.getName().equals("anonymousUser")) {
+                modelAndView.addObject("uname", authentication.getName());
+                UserEntity userS = userService.findByUsername(authentication.getName());
+                modelAndView.addObject("type", String.valueOf(userS.getType()));
+            }
             modelAndView.setViewName("redirect:/register?success=true");
         }
         return modelAndView;
@@ -106,8 +109,11 @@ public class RegisterController {
             //userRepository.saveUser(user);
             Authentication authentication = authenticationFacade.getAuthentication();
             System.out.println("Authentication name is"+authentication.getName());
-            if(!authentication.getName().equals("anonymousUser"))
-                modelAndView.addObject("uname",authentication.getName());
+            if(!authentication.getName().equals("anonymousUser")) {
+                modelAndView.addObject("uname", authentication.getName());
+                UserEntity userS = userService.findByUsername(authentication.getName());
+                modelAndView.addObject("type", String.valueOf(userS.getType()));
+            }
             modelAndView.setViewName("redirect:/register_prov?success=true");
         }
         return modelAndView;

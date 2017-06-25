@@ -33,8 +33,11 @@ public class ActivityController {
 		modelAndView.setViewName("/activity_reg");
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
-        if(!authentication.getName().equals("anonymousUser"))
-            modelAndView.addObject("uname",authentication.getName());
+        if(!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            UserEntity userS = userService.findByUsername(authentication.getName());
+            modelAndView.addObject("type", String.valueOf(userS.getType()));
+        }
         return modelAndView;
     }
 
@@ -59,16 +62,22 @@ public class ActivityController {
             modelAndView.setViewName("/error_page");
             Authentication authentication = authenticationFacade.getAuthentication();
             System.out.println("Authentication name is"+authentication.getName());
-            if(!authentication.getName().equals("anonymousUser"))
-                modelAndView.addObject("uname",authentication.getName());
+            if(!authentication.getName().equals("anonymousUser")) {
+                modelAndView.addObject("uname", authentication.getName());
+                UserEntity userS = userService.findByUsername(authentication.getName());
+                modelAndView.addObject("type", String.valueOf(userS.getType()));
+            }
             return modelAndView;
         } else {
             userService.saveActivity(user, provider, event);
             modelAndView.addObject("successMessage", "User has been registered successfully");
             Authentication authentication = authenticationFacade.getAuthentication();
             System.out.println("Authentication name is"+authentication.getName());
-            if(!authentication.getName().equals("anonymousUser"))
-                modelAndView.addObject("uname",authentication.getName());
+            if(!authentication.getName().equals("anonymousUser")) {
+                modelAndView.addObject("uname", authentication.getName());
+                UserEntity userS = userService.findByUsername(authentication.getName());
+                modelAndView.addObject("type", String.valueOf(userS.getType()));
+            }
         }
         modelAndView.setViewName("redirect:/activity");
         return modelAndView;
