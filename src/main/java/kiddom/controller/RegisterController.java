@@ -28,22 +28,23 @@ public class RegisterController {
     private IAuthenticationFacade authenticationFacade;
 
 
-    /********************   PARENT REGISTER ********************************/
+    /*---------------------------------Parent Register------------------------------*/
+    /*-- Get --*/
     @RequestMapping(value="/register", method = RequestMethod.GET)
     public ModelAndView register(RedirectAttributes redirectAttributes){
         ModelAndView modelAndView = new ModelAndView();
         UserEntity user = new UserEntity("");
-        ParentEntity parent=new ParentEntity();
+        ParentEntity parent = new ParentEntity();
         redirectAttributes.addFlashAttribute("success",false);
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
-        if(!authentication.getName().equals("anonymousUser"))
+        if (!authentication.getName().equals("anonymousUser"))
             modelAndView.addObject("uname",authentication.getName());
         modelAndView.setViewName("register");
         return modelAndView;
     }
 
-
+    /*-- Post --*/
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView createNewUser(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("parent") @Valid ParentEntity parent, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         ModelAndView modelAndView = new ModelAndView();
@@ -56,14 +57,14 @@ public class RegisterController {
         if (bindingResult.hasErrors()) {
             Authentication authentication = authenticationFacade.getAuthentication();
             System.out.println("Authentication name is"+authentication.getName());
-            if(!authentication.getName().equals("anonymousUser"))
+            if (!authentication.getName().equals("anonymousUser"))
                 modelAndView.addObject("uname",authentication.getName());
             modelAndView.setViewName("redirect:/error_page");
         } else {
-            userService.saveUser(user,parent);
+            userService.saveUser(user, parent);
             Authentication authentication = authenticationFacade.getAuthentication();
             System.out.println("Authentication name is"+authentication.getName());
-            if(!authentication.getName().equals("anonymousUser"))
+            if (!authentication.getName().equals("anonymousUser"))
                 modelAndView.addObject("uname",authentication.getName());
             modelAndView.setViewName("redirect:/register?success=true");
         }
@@ -71,18 +72,23 @@ public class RegisterController {
     }
 
 
-    /***************************** PROVIDER REGISTER ********************************************************/
+    /*------------------------------Provider Register-----------------------------*/
+    /*-- Get --*/
     @RequestMapping(value="/register_prov", method = RequestMethod.GET)
-    public ModelAndView register_prov(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("provider") @Valid ProviderEntity provider){
+    public ModelAndView register_prov(RedirectAttributes redirectAttributes){
         ModelAndView modelAndView = new ModelAndView();
+        UserEntity user = new UserEntity("");
+        ProviderEntity provider = new ProviderEntity();
+        redirectAttributes.addFlashAttribute("success",false);
         Authentication authentication = authenticationFacade.getAuthentication();
-        System.out.println("Authentication name is"+authentication.getName());
+        System.out.println("Authentication name is" + authentication.getName());
         if(!authentication.getName().equals("anonymousUser"))
             modelAndView.addObject("uname",authentication.getName());
         modelAndView.setViewName("register_prov");
         return modelAndView;
     }
 
+    /*-- Post --*/
     @RequestMapping(value = "/register_prov", method = RequestMethod.POST)
     public ModelAndView createNewUserProvider(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("provider") @Valid ProviderEntity provider, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();

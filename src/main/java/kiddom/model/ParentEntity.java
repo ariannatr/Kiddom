@@ -37,6 +37,17 @@ public class ParentEntity {
     @Column(name = "total_points")
     private int totalPoints;
 
+    /*----------------------Constructor----------------------*/
+    //ParentEntity() {
+        //Default constructor
+    //}
+
+    public ParentEntity() {
+        this.setAvailPoints(0);
+        this.setRestrPoints(0);
+        this.setTotalPoints(0);
+    }
+
     /*--------------Relations with other tables--------------*/
 
     /*--------------Many to Many relation with parent and program, for the reservations-inverse mapping--------------*/
@@ -109,6 +120,7 @@ public class ParentEntity {
     public void setArea(String area) {
         this.area = area;
     }
+
     public String getPhoto() {
         return photo;
     }

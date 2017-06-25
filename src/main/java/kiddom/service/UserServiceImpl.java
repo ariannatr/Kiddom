@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
     public  ParentEntity findParent(ParentPK parentPk){
-	    ParentEntity parent=parentRepository.findOne(parentPk);
+	    ParentEntity parent = parentRepository.findOne(parentPk);
 	    return parent;
     }
 
@@ -80,59 +80,40 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void saveUser(UserEntity user, ParentEntity parent) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-
-		System.out.println("Creating user..."+user.getPassword());
+		System.out.println("Creating user..." + user.getPassword());
 		user.setType(1);
-		/*if (request.getParameter("image") != null) {
-			parent.setPhoto(request.getParameter("image"));
-		}*/
-        //Role userRole = roleRepository.findByRole("ADMIN");
-        //user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-        //user.setParentByUserId(parent);
+		//if (request.getParameter("image") != null) {
+		//	parent.setPhoto(request.getParameter("image"));
+		//}
         userRepository.save(user);
         //CookiesEntity cookie = new CookiesEntity();
         System.out.println("Creating parent user...");
-        System.out.println("Trying to add "+parent.getName()+" "+parent.getSurname()+"  "+parent.getEmail());
-
-
-        parent.setAvailPoints(0);
-        parent.setRestrPoints(0);
-        parent.setTotalPoints(0);
+        System.out.println("Trying to add " + parent.getName() + " " + parent.getSurname() + "  " + parent.getEmail());
         //parent.setUsername(user.getUsername());
         parent.setUser(user);
-//        cookie.setCategory("none");
-//        cookie.setParentByParentId(parent);
-//        cookie.setUsername(user.getUsername());
+        //cookie.setCategory("none");
+        //cookie.setParentByParentId(parent);
+        //cookie.setUsername(user.getUsername());
 		parentRepository.save(parent);
         //cookieRepository.save(cookie);
-
-	}
+        System.out.println("Done.");
+    }
 
     @Override
     public void saveUserProvider(UserEntity user, ProviderEntity provider) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        //user = new UserEntity();
-
         System.out.println("Creating user...");
         user.setType(2);
        /*if (request.getParameter("image") != null) {
 			parent.setPhoto(request.getParameter("image"));
 		}*/
-      //  user.setProviderByUserId(provider);
+		//user.setProviderByUserId(provider);
         userRepository.save(user);
-
         System.out.println("Creating provider user...");
-        System.out.println("Trying to add "+provider.getName()+" "+provider.getSurname()+"  "+provider.getEmail());
-        provider.setApproved(0);
-        provider.setGottenPoints(0);
-        provider.setOwedPoints(0);
-       // provider.setUserByProviderId(user);
-        provider.setTotalPoints(0);
-        System.out.println("Trying to add "+provider.getName()+" "+provider.getSurname()+"  "+provider.getEmail());
-
+        System.out.println("Trying to add " + provider.getName() + " " + provider.getSurname() + " " + provider.getEmail());
+        provider.setUser(user);
         providerRepository.save(provider);
-
-
+        System.out.println("Done.");
     }
 
     @Override
