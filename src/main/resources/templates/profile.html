@@ -49,11 +49,17 @@ Licence URI: http://www.os-templates.com/template-terms
         <div id="pageintro" class="hoc clear" style="padding:1% 0 1% 0 ">
             <div class="sidebar one_quarter first">
                 <div class="tab">
-                    <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'user_elements')"><i class="fa fa-user" style="color:#cc834f "></i> Στοιχεια Χρήστη</button>
-                    <button type="button" class="tablinks list-group-item" onclick="openCity(event, 'wallet')"><i class="fa fa-university" style="color:#cc834f"></i> Πορτοφόλι</button>
-                    <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'reservations')"><i class="fa fa-calendar-check-o" style="color:#cc834f"></i> Kρατήσεις</button>
-                    <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'bookmarks')"><i class="fa fa-heart" style="color:#cc834f;"></i> Aγαπημένα <span class="badge">14</span></button>
-                    <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'old activities')">
+
+                    <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'user_elements')"  th:id="${param.tab[0] == 'elements' ? 'my_active' : ''}">
+                        <i class="fa fa-user" style="color:#cc834f "></i> Στοιχεια Χρήστη</button>
+                    <button type="button" class="tablinks list-group-item" onclick="openCity(event, 'wallet')" th:id="${param.tab[0] == 'wallet' ? 'my_active' : ''}">
+                        <i class="fa fa-university" style="color:#cc834f"></i> Πορτοφόλι</button>
+                    <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'reservations')" th:id="${param.tab[0] == 'reservations' ? 'my_active' : ''}">
+                        <i class="fa fa-calendar-check-o" style="color:#cc834f"></i> Kρατήσεις</button>
+                    <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'bookmarks')" th:id="${param.tab[0] == 'bookmarks' ? 'my_active' : ''}">
+                        <i class="fa fa-heart" style="color:#cc834f;"></i> Aγαπημένα <span class="badge">14</span></button>
+
+                    <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'old_activities')" th:id="${param.tab[0] == 'old_activities' ? 'my_active' : ''}">
                         <i class="fa fa-calendar-minus-o" style="color:#cc834f;"></i> Παλαιότερες Δραστηριότητες </button>
 
                 </div>
@@ -71,10 +77,7 @@ Licence URI: http://www.os-templates.com/template-terms
                     <div class="container2">
                         <div class="panel-body inf-content">
                             <div class="row">
-                                <!--<div class="col-md-3 col-lg-3" align="center" >-->
-                                <!--<img alt="User Pic" class="img-circle img-responsive" src="http://bootdey.com/img/Content/user-453533-fdadfd.png" data-original-title="Usuario">-->
-                                <!--<div class="col-md-3 col-lg-3 "  style='width: 200px;' align="center"> <img alt="User Pic" src="http://bootdey.com/img/Content/user-453533-fdadfd.png" class="img-circle img-responsive"> </div>-->
-                                <div class="col-md-3 col-lg-3 " style='width: 180px' align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
+                              <div class="col-md-3 col-lg-3 " style='width: 180px' align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
                                 <!--</div>-->
                                 <!--</br>-->
                                 <div class=" col-md-9 col-lg-9 ">
@@ -116,16 +119,7 @@ Licence URI: http://www.os-templates.com/template-terms
                                                     <a th:text="${parent.username}"></a>
                                                 </td>
                                             </tr>
-                                            <!--<tr>-->
-                                            <!--<td>-->
-                                            <!--<strong>-->
-                                            <!--<span class="glyphicon glyphicon-eye-open text-primary"></span>-->
-                                            <!--Role-->
-                                            <!--</strong>-->
-                                            <!--</td>-->
-                                            <!--<td class="text-primary">-->
-                                            <!--Admin-->
-                                            <!--</td>-->
+
                                             </tr>
                                             <tr>
                                                 <td>
@@ -527,7 +521,11 @@ Licence URI: http://www.os-templates.com/template-terms
         // Show the current tab, and add an "active" class to the link that opened the tab
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " active";
+
+
     }
+
+    document.getElementById("my_active").click();
 </script>
 </body>
 </html>

@@ -1,9 +1,20 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/XSL/Transform" xmlns:th="http://www.thymeleaf.org">
-<body>
-    <div th:fragment="navbar(module)">
 
+<body>
+
+    <div th:fragment="navbar(module)">
+        <style>
+            /* Dropdown menu background color*/
+
+            .topmenu > .dropdown > .dropdown-menu ul {     background-color:rgba(0,0,0,.6);  }
+
+            /* Dropdown menu font color*/
+
+            .topmenu >.dropdown > .dropdown-menu li{  border-right: none;   }
+            .topmenu >.dropdown > .dropdown-menu >li >a{ color: #8facf4 !important;   }
+        </style>
         <div class="bgded overlay" >
             <!-- ################################################################################################ -->
             <div class="wrapper row0">
@@ -30,10 +41,14 @@
                                 </li>
                                 <li class="dropdown">
 			                    <a class="dropdown-toggle" data-toggle="dropdown">Το προφιλ μου <span class="caret"></span></a>
-			                        <ul class="dropdown-menu" role="menu" style=" background-color:rgba(0,0,0,.6); ">
-                                        <li style="border-right: none; '"><a th:href="profile">Στοιχεια Χρήστη</a></li>
-                                        <li  style="border-right: none;"><a th:href="profile">Πορτοφολι</a></li>
-                                        <li  style="border-right: none;"><a th:href="buypoints">Αγορά Πόντων</a></li>
+			                        <ul class="dropdown-menu" role="menu">
+                                        <!--style=" background-color:rgba(0,0,0,.6); " -->
+                                        <li ><a th:href="@{profile(tab=elements)}">Στοιχεια Χρήστη</a></li>
+                                        <li ><a th:href="@{profile(tab=wallet)}">Πορτοφολι</a></li>
+                                        <li ><a th:href="@{profile(tab=reservations)}">Κρατησεις</a></li>
+                                        <li ><a th:href="@{profile(tab=bookmarks)}">Αγαπημενα</a></li>
+                                        <li ><a th:href="@{profile(tab=old_activities)}">Παλαιοτερες</a></li>
+                                        <li ><a th:href="buypoints">Αγορά Πόντων</a></li>
                                     </ul>
                                 </li>
 
