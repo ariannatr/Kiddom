@@ -2,6 +2,7 @@ package kiddom.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.security.Provider;
 
 /**
  * Created by Stathis on 6/11/2017.
@@ -12,6 +13,14 @@ public class ProviderPK implements Serializable {
     /*--------------Primary foreign key: username, from user table--------------*/
     @OneToOne
     private UserEntity user;
+
+    /*--------------Primary foreign key: username, from user table--------------*/
+    public ProviderPK(String name){
+        System.out.println("Eimai ston constructor provider me name " + name);
+        user = new UserEntity(name);
+    }
+    public ProviderPK(){}
+
     public UserEntity getUser() {
         return user;
     }
@@ -24,7 +33,7 @@ public class ProviderPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ParentPK parentPK = (ParentPK) o;
+        ProviderPK providertPK = (ProviderPK) o;
 
         //if (username != parentPK.username) return false;
         return true;

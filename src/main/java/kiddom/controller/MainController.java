@@ -30,8 +30,11 @@ public class MainController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
-        if(!authentication.getName().equals("anonymousUser"))
-            modelAndView.addObject("uname",authentication.getName());
+        if(!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            UserEntity userS = userService.findByUsername(authentication.getName());
+            modelAndView.addObject("type", String.valueOf(userS.getType()));
+        }
         modelAndView.setViewName("/activity");
         return modelAndView;
     }
@@ -41,8 +44,11 @@ public class MainController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
-        if(!authentication.getName().equals("anonymousUser"))
-            modelAndView.addObject("uname",authentication.getName());
+        if(!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            UserEntity userS = userService.findByUsername(authentication.getName());
+            modelAndView.addObject("type", String.valueOf(userS.getType()));
+        }
         modelAndView.setViewName("error_page");
         return modelAndView;
     }
@@ -52,8 +58,11 @@ public class MainController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
-        if(!authentication.getName().equals("anonymousUser"))
-            modelAndView.addObject("uname",authentication.getName());
+        if(!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            UserEntity userS = userService.findByUsername(authentication.getName());
+            modelAndView.addObject("type", String.valueOf(userS.getType()));
+        }
         modelAndView.setViewName("faq");
         return modelAndView;
     }
@@ -63,8 +72,11 @@ public class MainController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
-        if(!authentication.getName().equals("anonymousUser"))
-            modelAndView.addObject("uname",authentication.getName());
+        if(!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            UserEntity userS = userService.findByUsername(authentication.getName());
+            modelAndView.addObject("type", String.valueOf(userS.getType()));
+        }
         modelAndView.setViewName("google_map");
         return modelAndView;
     }
@@ -74,8 +86,11 @@ public class MainController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
-        if(!authentication.getName().equals("anonymousUser"))
-            modelAndView.addObject("uname",authentication.getName());
+        if(!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            UserEntity userS = userService.findByUsername(authentication.getName());
+            modelAndView.addObject("type", String.valueOf(userS.getType()));
+        }
         modelAndView.setViewName("about");
         return modelAndView;
     }
@@ -85,19 +100,25 @@ public class MainController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
-        if(!authentication.getName().equals("anonymousUser"))
-            modelAndView.addObject("uname",authentication.getName());
+        if(!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            UserEntity userS = userService.findByUsername(authentication.getName());
+            modelAndView.addObject("type", String.valueOf(userS.getType()));
+        }
         modelAndView.setViewName("error_page");
         return modelAndView;
     }
 
-    @RequestMapping(value="/search", method = RequestMethod.GET)
+    @RequestMapping(value="/search", method = RequestMethod.POST)
     public ModelAndView search(@ModelAttribute("user") @Valid UserEntity user){
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
-        if(!authentication.getName().equals("anonymousUser"))
-            modelAndView.addObject("uname",authentication.getName());
+        if(!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            UserEntity userS = userService.findByUsername(authentication.getName());
+            modelAndView.addObject("type", String.valueOf(userS.getType()));
+        }
         modelAndView.setViewName("search");
         return modelAndView;
     }
@@ -107,8 +128,11 @@ public class MainController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
-        if(!authentication.getName().equals("anonymousUser"))
-            modelAndView.addObject("uname",authentication.getName());
+        if(!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            UserEntity userS = userService.findByUsername(authentication.getName());
+            modelAndView.addObject("type", String.valueOf(userS.getType()));
+        }
         modelAndView.setViewName("buypoints");
         return modelAndView;
     }
@@ -118,8 +142,11 @@ public class MainController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
-        if(!authentication.getName().equals("anonymousUser"))
-            modelAndView.addObject("uname",authentication.getName());
+        if(!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            UserEntity userS = userService.findByUsername(authentication.getName());
+            modelAndView.addObject("type", String.valueOf(userS.getType()));
+        }
         modelAndView.setViewName("categories_form");
         return modelAndView;
     }

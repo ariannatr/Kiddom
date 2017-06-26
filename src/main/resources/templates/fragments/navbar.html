@@ -1,9 +1,20 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/XSL/Transform" xmlns:th="http://www.thymeleaf.org">
-<body>
-    <div th:fragment="navbar(module)">
 
+<body>
+
+    <div th:fragment="navbar(module)">
+        <style>
+            /* Dropdown menu background color*/
+
+            .topmenu > .dropdown > .dropdown-menu ul {     background-color:rgba(0,0,0,.6);  }
+
+            /* Dropdown menu font color*/
+
+            .topmenu >.dropdown > .dropdown-menu li{  border-right: none;   }
+            .topmenu >.dropdown > .dropdown-menu >li >a{ color: #8facf4 !important;   }
+        </style>
         <div class="bgded overlay" >
             <!-- ################################################################################################ -->
             <div class="wrapper row0">
@@ -22,41 +33,61 @@
                     </div>
                     <!-- ################################################################################################ -->
                     <div id="topmenu" class="fl_right">
+                    <ul>
+                        <div th:if ="${(uname != null) and (type=='1')} ">
 
-                            <div th:if ="${(uname != null)} ">
-                                <ul class="clear">
                                 <li>
                                     <strong><span th:text="${uname}"></span></strong>
                                 </li>
                                 <li class="dropdown">
 			                    <a class="dropdown-toggle" data-toggle="dropdown">Το προφιλ μου <span class="caret"></span></a>
-			                        <ul class="dropdown-menu" role="menu" style=" background-color:rgba(0,0,0,.6); ">
-                                        <li style="border-right: none; '"><a th:href="profile">Στοιχεια Χρήστη</a></li>
-                                        <li  style="border-right: none;"><a th:href="profile">Πορτοφολι</a></li>
-                                        <li  style="border-right: none;"><a th:href="buypoints">Αγορά Πόντων</a></li>
+			                        <ul class="dropdown-menu" role="menu">
+                                        <!--style=" background-color:rgba(0,0,0,.6); " -->
+                                        <li ><a th:href="@{profile(tab=elements)}">Στοιχεια Χρήστη</a></li>
+                                        <li ><a th:href="@{profile(tab=wallet)}">Πορτοφολι</a></li>
+                                        <li ><a th:href="@{profile(tab=reservations)}">Κρατησεις</a></li>
+                                        <li ><a th:href="@{profile(tab=bookmarks)}">Αγαπημενα</a></li>
+                                        <li ><a th:href="@{profile(tab=old_activities)}">Παλαιοτερες</a></li>
+                                        <li ><a th:href="buypoints">Αγορά Πόντων</a></li>
                                     </ul>
                                 </li>
 
                                 <li>
-                                    <a th:href="logout">Αποσύνδεση</a></li>
+                                    <a th:href="logout">Αποσυνδεση</a></li>
                                 </li>
-                                </ul>
-                            </div >
-                            <div th:if ="${(uname == null)} ">
-                                <ul class="clear">
-                                <li th:classappend="${module == '' ? 'active' : ''}">
-                                    <a  th:href="index"><i class="fa fa-lg fa-home"></i></a>
-                                    <!--li><a th:href="index"><i class="fa fa-lg fa-home"></i></a></li-->
-                                <li><a data-toggle="modal" href="#login_overlay">Συνδεση</a> </li>
-                                <li th:classappend="${module == 'register' ? 'active' : ''}">
-                                    <a  th:href="register">Εγγραφη</a>
-                                </li>
-                                <li th:classappend="${module == 'register_prov' ? 'active' : ''}">
-                                    <a  th:href="register_prov">Παροχοι</a>
-                                </li>
-                                </ul>
-                            </div >
 
+                            </div >
+                            <div th:if ="${(uname != null) and (type=='2')} ">
+                                <li><i class="fa fa-lg fa-home"></i></a></li>
+                                <li>
+                                    <strong><span th:text="${uname}"></span></strong>
+                                </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown">Το προφιλ μου <span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                    <!--style=" background-color:rgba(0,0,0,.6); " -->
+                                        <li ><a th:href="@{profileProvider(tab=elements)}">Στοιχεια Χρήστη</a></li>
+                                        <li ><a th:href="@{profileProvider(tab=wallet)}">Πορτοφολι</a></li>
+                                        <li ><a th:href="@{profileProvider(tab=activites)}">Δραστηριοτητες</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                <a href="logout">Αποσύνδεση</a></li>
+                                </li>
+                            </div >
+                            <div th:if ="${(uname == null) or (type==null)} ">
+                                <li><i class="fa fa-lg fa-home"></i></a></li>
+                                <li>
+                                    <a data-toggle="modal" href="#login_overlay">Συνδεση</a>
+                                </li>
+                                <li>
+                                    <a th:href="register">Εγγραφη</a></li>
+                                </li>
+                                <li>
+                                    <a th:href="register_prov">Πaροχοι</a>
+                                </li>
+                            </div >
+                    </ul>
                     </div>
                     <!-- ################################################################################################ -->
                 </div>
@@ -139,7 +170,9 @@
                                     <li><a th:href="profile">Προφιλ γονεα</a></li>
                                     <li>Aγορα ποντων</li>
                                 </span>
-
+                                <span th:if="${(module=='error_page')}">
+                                    <li>Λαθος</li>
+                                </span>
                             </span>
 
                         </ul>

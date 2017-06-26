@@ -1,0 +1,46 @@
+Εδώ θα γράψουμε τι μας έχει μείνει να υλοποιήσουμε
+Ό,τι υλοποιείται θα το μαρκάρουμε ως DONE
+για να ξέρουμε σε τι στάδιο βρισκόμαστε και τι μας λείπει.
+
+SOS! --> Να κρατηθεί (και να βελτιωθεί) η δομή της Java
+     --> Όχι ανοργάνωτος και χύμα κώδικας
+
+> Full reporting at the error page - TODO
+
+> Admin: create admin page - TODO
+> Admin: create providers approval form - TODO
+> Admin: create admin interface to get statistics etc - TODO
+
+> Provider: not allowed to create activities if not approved - TODO
+> Provider: finish reports - TODO
+> Provider: fix edit page for activity - TODO
+> Provider: allow event cancelation - TODO
+
+> User: cookies algorithm to create suggestions - TODO
+> User: finish wallet - TODO
+> User: finish reports - TODO
+> User: finish comments - TODO
+> User: fix cancelation - TODO
+> User: search algorithms - TODO
+
+> View: fix colors - TODO
+> View: find a way to upload photos to the server - TODO
+> View: make drop-down lists work properly with data from db - TODO
+> View: unified search results show - TODO
+
+> HTML: fix activity form - TODO
+> HTML: fix provider profile - TODO
+> HTML: fix tabs for create activity etc - TODO
+> HTML: fix buypoints - TODO
+
+> SQL: create script to insert all data to db - TODO
+> SQL: connect Elastic to project - TODO
+
+> Login: rememeber me attribute - TODO
+> Login: show wrong password message in modal in case of failure - TODO
+> Login: fix the download problem - TODO
+
+> Register (provider and parent): put clear button and cancel button in form - TODO
+> Register : message when input username is already in use - TODO
+
+>Password Change : Confirm user before changing password? - TODO

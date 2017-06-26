@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "comments", schema = "mydb")
 public class CommentsEntity implements Serializable {
+    
     private String comment;
     private String reply;
     private float rating;

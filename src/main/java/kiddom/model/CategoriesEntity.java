@@ -15,10 +15,12 @@ import java.util.Set;
 @Table(name = "categories", schema = "mydb")
 public class CategoriesEntity implements Serializable{
 
-
+    /*----------------------------Fields----------------------------*/
     @Id
     @Column(name = "name")
     private String name;
+
+     /*--------------Getters - Setters for table fields--------------*/
     public String getName() {
         return name;
     }

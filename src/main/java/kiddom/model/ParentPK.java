@@ -16,8 +16,8 @@ public class ParentPK implements Serializable {
     private UserEntity user;
 
     /*--------------Primary foreign key: username, from user table--------------*/
-    public ParentPK(String name){
-        System.out.println("Eimai ston constructor me name " + name);
+    public ParentPK  (String name){
+        System.out.println("Eimai ston constructor (parent) me name " + name);
         user = new UserEntity(name);
     }
     public ParentPK(){}

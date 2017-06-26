@@ -36,16 +36,46 @@ Licence URI: http://www.os-templates.com/template-terms
 
       <div class="fl_right">
         <ul>
-          <div th:if ="${(uname != null)} ">
+            <div th:if ="${(uname != null) and (type=='1')} ">
               <li><i class="fa fa-lg fa-home"></i></a></li>
+              <li>
+                <strong><span th:text="${uname}"></span></strong>
+              </li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">Το προφιλ μου <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                <!--style=" background-color:rgba(0,0,0,.6); " -->
+                  <li ><a th:href="@{profile(tab=elements)}">Στοιχεια Χρήστη</a></li>
+                  <li ><a th:href="@{profile(tab=wallet)}">Πορτοφολι</a></li>
+                  <li ><a th:href="@{profile(tab=reservations)}">Κρατησεις</a></li>
+                  <li ><a th:href="@{profile(tab=bookmarks)}">Αγαπημενα</a></li>
+                  <li ><a th:href="@{profile(tab=old_activities)}">Παλαιοτερες</a></li>
+                  <li ><a th:href="buypoints">Αγορά Πόντων</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="logout">Αποσύνδεση</a></li>
+              </li>
+            </div >
+          <div th:if ="${(uname != null) and (type=='2')} ">
+            <li><i class="fa fa-lg fa-home"></i></a></li>
             <li>
-            <span th:text="${uname}"></span>!
+              <strong><span th:text="${uname}"></span></strong>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown">Το προφιλ μου <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <!--style=" background-color:rgba(0,0,0,.6); " -->
+                <li ><a th:href="@{profileProvider(tab=elements)}">Στοιχεια Χρήστη</a></li>
+                <li ><a th:href="@{profileProvider(tab=wallet)}">Πορτοφολι</a></li>
+                <li ><a th:href="@{profileProvider(tab=activites)}">Δραστηριοτητες</a></li>
+              </ul>
             </li>
             <li>
               <a href="logout">Αποσύνδεση</a></li>
             </li>
           </div >
-          <div th:if ="${(uname == null)} ">
+          <div th:if ="${(uname == null) or (type==null)} ">
               <li><i class="fa fa-lg fa-home"></i></a></li>
             <li>
               <a data-toggle="modal" href="#login_overlay">Συνδεση</a>
@@ -128,22 +158,7 @@ Licence URI: http://www.os-templates.com/template-terms
             </footer>
           </article>
         </li>
-        <li>
-          <!--article>
-            <p>Vulputate</p>
-            <h3 class="heading">Rhoncus nisl non</h3>
-            <p>Interdum erat ipsum quis leo viverra magna</p>
-            <footer><a class="btn inverse" href="#">Fusce efficitur</a></footer>
-          </article-->
-        </li>
-        <li>
-          <!--article>
-            <p>Maecenas</p>
-            <h3 class="heading">Diam feugiat tellus</h3>
-            <p>Aliquam ante odio at condimentum mauris</p>
-            <footer><a class="btn" href="#">Tincidunt etiam</a></footer>
-          </article-->
-        </li>
+
       </ul>
     </div>
     <!-- ################################################################################################ -->

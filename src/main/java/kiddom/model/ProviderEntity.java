@@ -15,7 +15,7 @@ public class ProviderEntity {
 
     /*----------------------------Fields----------------------------*/
     @EmbeddedId
-    ProviderPK pk = new ProviderPK();
+    ProviderPK pk = new ProviderPK("");
     @Column(name = "name")
     private String name;
     @Column(name = "surname")
@@ -24,6 +24,10 @@ public class ProviderEntity {
     private String email;
     @Column(name = "telephone")
     private String telephone;
+    @Column(name = "town")
+    private String town;
+    @Column(name = "area")
+    private String area;
     @Column(name = "TR")
     private String tr;
     @Column(name = "owed_points")
@@ -34,6 +38,18 @@ public class ProviderEntity {
     private int totalPoints;
     @Column(name = "approved")
     private int approved;
+
+    /*--------------Constructor------------------------------*/
+    //ProviderEntity() {
+    //Default constructor
+    //}
+
+    public ProviderEntity () {
+        this.setApproved(0);
+        this.setGottenPoints(0);
+        this.setOwedPoints(0);
+        this.setTotalPoints(0);
+    }
 
     /*--------------Relations with other tables--------------*/
 
@@ -52,6 +68,9 @@ public class ProviderEntity {
 
 
     /*--------------Getters - Setters for table fields--------------*/
+    @Transient
+    public void setUser(UserEntity user){ this.pk.setUser(user);}
+
     public void setPk(ProviderPK pk) {
         this.pk = pk;
     }
@@ -78,6 +97,20 @@ public class ProviderEntity {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTown() {
+        return town;
+    }
+    public void setTown(String town) {
+        this.town = town;
+    }
+
+    public String getArea() {
+        return area;
+    }
+    public void setArea(String area) {
+        this.area = area;
     }
 
     public String getTelephone() {
@@ -138,7 +171,8 @@ public class ProviderEntity {
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
         if (telephone != null ? !telephone.equals(that.telephone) : that.telephone != null) return false;
         if (tr != null ? !tr.equals(that.tr) : that.tr != null) return false;
-
+        if (town != null ? !town.equals(that.town) : that.town != null) return false;
+        if (area!= null ? !area.equals(that.area) : that.area != null) return false;
         return true;
     }
 
