@@ -15,7 +15,7 @@ public class ProviderEntity {
 
     /*----------------------------Fields----------------------------*/
     @EmbeddedId
-    ProviderPK pk = new ProviderPK();
+    ProviderPK pk = new ProviderPK("");
     @Column(name = "name")
     private String name;
     @Column(name = "surname")
@@ -24,6 +24,10 @@ public class ProviderEntity {
     private String email;
     @Column(name = "telephone")
     private String telephone;
+    @Column(name = "town")
+    private String town;
+    @Column(name = "area")
+    private String area;
     @Column(name = "TR")
     private String tr;
     @Column(name = "owed_points")
@@ -93,6 +97,20 @@ public class ProviderEntity {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTown() {
+        return town;
+    }
+    public void setTown(String town) {
+        this.town = town;
+    }
+
+    public String getArea() {
+        return area;
+    }
+    public void setArea(String area) {
+        this.area = area;
     }
 
     public String getTelephone() {

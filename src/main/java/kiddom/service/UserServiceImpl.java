@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import kiddom.model.*;
 
+import java.security.Provider;
 import java.util.Collection;
 import java.util.List;
 //import com.example.model.Role;
@@ -29,9 +30,11 @@ public class UserServiceImpl implements UserService {
     @Qualifier("parentRepository")
 	@Autowired
     private ParentRepository parentRepository;
+
     @Qualifier("providerRepository")
     @Autowired
     private ProviderRepository providerRepository;
+
     @Qualifier("cookieRepository")
     @Autowired
     private CookieRepository cookieRepository;
@@ -52,7 +55,11 @@ public class UserServiceImpl implements UserService {
 	    return parent;
     }
 
-
+    @Override
+    public ProviderEntity findProvider(ProviderPK providerPk){
+        ProviderEntity provider = providerRepository.findOne(providerPk);
+        return provider;
+    }
 
 	@Override
     public UserEntity findByUsernamePassword(String username,String password){
@@ -161,5 +168,50 @@ public class UserServiceImpl implements UserService {
         System.out.println("new telephone "+parent.getTelephone());
         userRepository.save(useron);
         parentRepository.save(parenton);
+    }
+
+
+
+    @Override
+    public void updateUserProvider(ProviderEntity provideron,ProviderEntity provider,UserEntity useron,UserEntity user){
+        if(!provider.getEmail().replaceAll(" ","").equals("")){
+            provideron.setEmail(provider.getEmail());
+        }
+
+        if(!provider.getName().replaceAll(" ","").equals(""))
+        {
+            provideron.setName(provider.getName());
+        }
+        if(!provider.getSurname().replaceAll(" ","").equals(""))
+        {
+            provideron.setSurname(provider.getSurname());
+        }
+        if(!provider.getArea().replaceAll(" ","").equals(""))
+        {
+            provideron.setArea(provider.getArea());
+        }
+        if(!provider.getTown().replaceAll(" ","").equals(""))
+        {
+            provideron.setTown(provider.getTown());
+        }
+        if(!provider.getArea().replaceAll(" ","").equals(""))
+        {
+            provideron.setArea(provider.getArea());
+        }
+        if(!provider.getTelephone().replaceAll(" ","").equals(""))
+        {
+            provideron.setTelephone(provider.getTelephone());
+        }
+        if(!provider.getTr().replaceAll(" ","").equals(""))
+        {
+            provideron.setTr(provider.getTr());
+        }
+        if(!user.getPassword().replaceAll(" ","").equals(""))
+        {
+            useron.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        }
+
+        userRepository.save(useron);
+        providerRepository.save(provideron);
     }
 }

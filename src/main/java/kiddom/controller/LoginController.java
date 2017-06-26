@@ -114,6 +114,7 @@ public class LoginController {
             modelAndView.addObject("restr_points",parenton.getRestrPoints());
             modelAndView.addObject("avail_points",parenton.getAvailPoints());
             modelAndView.addObject("type",String.valueOf(useron.getType()));
+
         }
         modelAndView.setViewName("profile");
         return modelAndView;
@@ -127,6 +128,16 @@ public class LoginController {
         System.out.println("Authentication name is"+authentication.getName());
         if(!authentication.getName().equals("anonymousUser")) {
             modelAndView.addObject("uname", authentication.getName());
+            System.out.println("username " + authentication.getName());
+            ProviderPK providerPk = new ProviderPK(authentication.getName());
+            System.out.println("username in PK is :"+providerPk.getUser().getUsername());
+            ProviderEntity useron=userService.findProvider(providerPk);
+            modelAndView.addObject("provider", providerPk.getUser());
+            modelAndView.addObject("user",useron);
+            System.out.println("Avail points are"+useron.getTotalPoints());
+            modelAndView.addObject("total_points",useron.getTotalPoints());
+            modelAndView.addObject("owed_points",useron.getOwedPoints());
+            modelAndView.addObject("gotten_points",useron.getGottenPoints());
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
         }
