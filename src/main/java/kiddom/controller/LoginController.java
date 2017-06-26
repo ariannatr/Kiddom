@@ -117,6 +117,32 @@ public class LoginController {
         return modelAndView;
     }
 
+    @RequestMapping(value="/pointsBuy", method = RequestMethod.POST)
+    public ModelAndView pointsBuy(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("parent") @Valid ParentEntity parent){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication authentication = authenticationFacade.getAuthentication();
+        System.out.println("Authentication name is " + authentication.getName());
+        if(!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            ParentEntity parenton = userService.findParent(new ParentPK(authentication.getName()));
+            UserEntity useron = userService.findByUsername(authentication.getName());
+            userService.updateUserPoints(parenton,parent,useron,user);
+            ParentPK parentonPK = new ParentPK(authentication.getName());
+            parenton = userService.findParent(parentonPK);
+            modelAndView.addObject("parent", parentonPK.getUser());
+            modelAndView.addObject("user",parenton);
+            //modelAndView.addObject("user",parenton);
+            System.out.println("Avail points are " + parenton.getAvailPoints());
+            modelAndView.addObject("total_points",parenton.getTotalPoints());
+            modelAndView.addObject("restr_points",parenton.getRestrPoints());
+            modelAndView.addObject("avail_points",parenton.getAvailPoints());
+            modelAndView.addObject("type",String.valueOf(useron.getType()));
+
+        }
+        modelAndView.setViewName("profile");
+        return modelAndView;
+    }
+
     @RequestMapping(value="/profileProvider", method = RequestMethod.GET)
     public ModelAndView profileProvider(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user){
         ModelAndView modelAndView = new ModelAndView();

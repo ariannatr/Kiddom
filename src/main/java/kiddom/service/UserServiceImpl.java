@@ -231,4 +231,12 @@ public class UserServiceImpl implements UserService {
         userRepository.save(useron);
         providerRepository.save(provideron);
     }
+
+    public void updateUserPoints(ParentEntity parenton,ParentEntity parent,UserEntity useron,UserEntity user) {
+        int newtotal=parent.getTotalPoints() + parenton.getTotalPoints();
+        parenton.setTotalPoints(newtotal);
+        int newavail=newtotal + parenton.getAvailPoints();
+        parenton.setAvailPoints(newavail);
+        parentRepository.save(parenton);
+    }
 }
