@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -26,41 +27,36 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.stereotype.Component;
-
-import java.util.EnumSet;
 
 
-//@Configuration
-//@EnableWebSecurity
-@Component
+@ComponentScan
 @Configuration
-//@EnableRedisHttpSession
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private IAuthenticationFacade authenticationFacade;
-    @Autowired
-    private MyDBAythenticationService myDBAauthenticationService;
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Qualifier("dataSource")
     @Autowired
-	private DataSource dataSource;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	@Value("${spring.queries.users-query}")
-	private String usersQuery;
+    @Autowired
+    private MyDBAythenticationService myDBAythenticationService;
+
+
+/*   @Qualifier("datasource")
+    @Autowired
+	private DataSource dataSource;*/
+
+	/*@Value("${spring.queries.users-query}")
+	private String usersQuery;*/
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()
                 .withUser("user").password("password").roles("USER");
-        auth.userDetailsService(myDBAauthenticationService).passwordEncoder(bCryptPasswordEncoder);
+        auth.userDetailsService(myDBAythenticationService).passwordEncoder(bCryptPasswordEncoder);
     }
-	@Value("${spring.queries.roles-query}")
-	private String rolesQuery;
+/*	@Value("${spring.queries.roles-query}")
+	private String rolesQuery;*/
 
    /* @Override
 	protected void configure(AuthenticationManagerBuilder auth)
@@ -77,7 +73,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.
 			authorizeRequests()
-				.antMatchers("/").permitAll()
+				.antMatchers("/static/**").denyAll()
+                .antMatchers("/fonts/**").denyAll()
+                .antMatchers("/css/**").denyAll()
+                .antMatchers("/scripts/**").denyAll()
+                .antMatchers("/").permitAll()
 				.antMatchers("/index").permitAll()
 				.antMatchers("/register").anonymous()
                 .antMatchers("/register_prov").anonymous()
@@ -100,13 +100,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
 				.loginPage("/index")
                 .loginProcessingUrl("/login")
-                .failureUrl("/error_page")
-                .defaultSuccessUrl("/index")
                 .usernameParameter("username")
-				.passwordParameter("password")
+                .passwordParameter("password")
+                .failureUrl("/error_page")
+                .defaultSuccessUrl("/about")
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/").and().exceptionHandling()
+				.logoutSuccessUrl("/index").and().exceptionHandling()
 				.accessDeniedPage("/error_page");
         http.sessionManagement()//now added
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
@@ -130,10 +130,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-	    web
-	       .ignoring()
-	       .antMatchers("/fragments/**","/resources/**", "/static/**", "/css/**", "/js/**", "/images/**","/scripts/**");
-		web.ignoring().antMatchers("/the_js_path/**");
+	    /*web.ignoring()
+	       .antMatchers("/fragments/**","/resources/templates/**", "/css/**", "/js/**", "/images/**","/scripts/**");
+		web.ignoring().antMatchers("/the_js_path/**");*/
 	}
 
 
