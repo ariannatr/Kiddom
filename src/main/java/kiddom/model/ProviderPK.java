@@ -33,7 +33,7 @@ public class ProviderPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ParentPK parentPK = (ParentPK) o;
+        ProviderPK providertPK = (ProviderPK) o;
 
         //if (username != parentPK.username) return false;
         return true;

@@ -94,7 +94,7 @@ Licence URI: http://www.os-templates.com/template-terms
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    <a th:text="${user.name}"></a>
+                                                    <span th:text="${user.name}"></span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -105,7 +105,7 @@ Licence URI: http://www.os-templates.com/template-terms
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    <a th:text="${user.surname}"></a>
+                                                    <span th:text="${user.surname}"></span>
                                                 </td>
                                             </tr>
 
@@ -117,7 +117,7 @@ Licence URI: http://www.os-templates.com/template-terms
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    <a th:text="${parent.username}"></a>
+                                                    <span th:text="${parent.username}"></span>
                                                 </td>
                                             </tr>
 
@@ -130,7 +130,7 @@ Licence URI: http://www.os-templates.com/template-terms
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    <a th:text="${user.email}"></a>
+                                                    <span th:text="${user.email}"></span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -141,7 +141,7 @@ Licence URI: http://www.os-templates.com/template-terms
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    <a th:text="${user.telephone}"></a>
+                                                    <span th:text="${user.telephone}"></span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -152,7 +152,7 @@ Licence URI: http://www.os-templates.com/template-terms
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    <a th:text="${user.area}"></a>
+                                                    <span th:text="${user.area}"></span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -163,7 +163,7 @@ Licence URI: http://www.os-templates.com/template-terms
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    <a th:text="${user.town}"></a>
+                                                    <span th:text="${user.town}"></span>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -198,13 +198,7 @@ Licence URI: http://www.os-templates.com/template-terms
                                 <input type="name" class="form-control" id="surname" th:placeholder="${user.surname}" name="surname">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="username">Username:</label>
-                            <div class="col-sm-10">
-                                <input type="username" class="form-control" id="username" th:placeholder="${parent.username}" name="username">
-                            </div>
-                            <span class="help-block"></span>
-                        </div>
+
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="email">Email:</label>
                             <div class="col-sm-10">

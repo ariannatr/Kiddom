@@ -66,9 +66,9 @@ Licence URI: http://www.os-templates.com/template-terms
               <a class="dropdown-toggle" data-toggle="dropdown">Το προφιλ μου <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <!--style=" background-color:rgba(0,0,0,.6); " -->
-                <li ><a th:href="profileProvider">Στοιχεια Χρήστη</a></li>
-                <li ><a th:href="profileProvider">Πορτοφολι</a></li>
-                <li ><a th:href="profileProvider">Δραστηριοτητες</a></li>
+                <li ><a th:href="@{profileProvider(tab=elements)}">Στοιχεια Χρήστη</a></li>
+                <li ><a th:href="@{profileProvider(tab=wallet)}">Πορτοφολι</a></li>
+                <li ><a th:href="@{profileProvider(tab=activites)}">Δραστηριοτητες</a></li>
               </ul>
             </li>
             <li>

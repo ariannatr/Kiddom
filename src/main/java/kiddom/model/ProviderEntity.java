@@ -171,7 +171,8 @@ public class ProviderEntity {
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
         if (telephone != null ? !telephone.equals(that.telephone) : that.telephone != null) return false;
         if (tr != null ? !tr.equals(that.tr) : that.tr != null) return false;
-
+        if (town != null ? !town.equals(that.town) : that.town != null) return false;
+        if (area!= null ? !area.equals(that.area) : that.area != null) return false;
         return true;
     }
 

@@ -141,4 +141,29 @@ public class LoginController {
         modelAndView.setViewName("profileProvider");
         return modelAndView;
     }
+
+    @RequestMapping(value="/edit_prov", method = RequestMethod.POST)
+    public ModelAndView edit_prov(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication authentication = authenticationFacade.getAuthentication();
+        System.out.println("Authentication name is " + authentication.getName());
+        if(!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            ProviderEntity provideron = userService.findProvider(new ProviderPK(authentication.getName()));
+            UserEntity useron = userService.findByUsername(authentication.getName());
+            userService.updateUserProvider(provideron,provider,useron,user);
+            ProviderPK provideronPK = new ProviderPK(authentication.getName());
+            provideron = userService.findProvider(provideronPK);
+            modelAndView.addObject("provider", provideronPK.getUser());
+            modelAndView.addObject("user",provideron);
+            modelAndView.addObject("total_points",provideron.getTotalPoints());
+            modelAndView.addObject("owed_points",provideron.getOwedPoints());
+            modelAndView.addObject("gotten_points",provideron.getGottenPoints());
+            UserEntity userS = userService.findByUsername(authentication.getName());
+            modelAndView.addObject("type",String.valueOf(userS.getType()));
+
+        }
+        modelAndView.setViewName("profileProvider");
+        return modelAndView;
+    }
 }

@@ -176,10 +176,7 @@ public class UserServiceImpl implements UserService {
         {
             parenton.setTown(parent.getTown());
         }
-        if(!parent.getArea().replaceAll(" ","").equals(""))
-        {
-            parenton.setArea(parent.getArea());
-        }
+
         if(!parent.getTelephone().replaceAll(" ","").equals(""))
         {
             parenton.setTelephone(parent.getTelephone());
@@ -209,10 +206,7 @@ public class UserServiceImpl implements UserService {
         {
             provideron.setSurname(provider.getSurname());
         }
-        if(!provider.getArea().replaceAll(" ","").equals(""))
-        {
-            provideron.setArea(provider.getArea());
-        }
+
         if(!provider.getTown().replaceAll(" ","").equals(""))
         {
             provideron.setTown(provider.getTown());
