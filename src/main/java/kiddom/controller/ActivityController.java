@@ -63,47 +63,12 @@ public class ActivityController {
                 userService.saveActivity(useron, provideron, event);
             }
             else {
-                modelAndView.setViewName("redirect:/error_page");
+                modelAndView.setViewName("redirect:/error_page?error_code=not_prov");
             }
         }
         else {
-            modelAndView.setViewName("redirect:/error_page");
+            modelAndView.setViewName("redirect:/error_page?error_code=anon");
         }
-        /*UserEntity userExists = userService.findByUsername(user.getUsername());
-		if (userExists == null){
-			modelAndView.addObject("user", user);
-			System.out.println("-----------" + user.getUsername() + "------------");
-            modelAndView.setViewName("redirect:/activity");
-			return modelAndView;
-		}
-		else if(userExists.getType() == 1) {
-			modelAndView.addObject("user", user);
-			modelAndView.addObject("provider", provider);
-			modelAndView.setViewName("redirect:/activity");
-			return modelAndView;
-		}
-        if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("/error_page");
-            Authentication authentication = authenticationFacade.getAuthentication();
-            System.out.println("Authentication name is" + authentication.getName());
-            if (!authentication.getName().equals("anonymousUser")) {
-                modelAndView.addObject("uname", authentication.getName());
-                UserEntity userS = userService.findByUsername(authentication.getName());
-                modelAndView.addObject("type", String.valueOf(userS.getType()));
-            }
-            return modelAndView;
-        } else {
-            userService.saveActivity(user, provider, event);
-            modelAndView.addObject("successMessage", "User has been registered successfully");
-            Authentication authentication = authenticationFacade.getAuthentication();
-            System.out.println("Authentication name is"+authentication.getName());
-            if (!authentication.getName().equals("anonymousUser")) {
-                modelAndView.addObject("uname", authentication.getName());
-                UserEntity userS = userService.findByUsername(authentication.getName());
-                modelAndView.addObject("type", String.valueOf(userS.getType()));
-            }
-        }
-        modelAndView.setViewName("redirect:/activity");*/
         return modelAndView;
     }
 }

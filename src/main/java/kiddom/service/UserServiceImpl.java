@@ -64,9 +64,9 @@ public class UserServiceImpl implements UserService {
 	@Override
     public UserEntity findByUsernamePassword(String username,String password){
         UserEntity userExists = findByUsername(username);
-        if(userExists != null)
+        if (userExists != null)
         {
-            if(bCryptPasswordEncoder.matches((password),userExists.getPassword()))//
+            if (bCryptPasswordEncoder.matches((password),userExists.getPassword()))//
             {
                 System.out.println("Same password");
                 return userExists;
@@ -126,6 +126,29 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveActivity(UserEntity user, ProviderEntity provider, SingleEventEntity event)
     {
+        /*
+        String photos = null;
+        if (request.getParameter("image1") != null) {
+			photos += request.getParameter("image1");
+			photos += "\n";
+		}
+        if (request.getParameter("image2") != null) {
+			photos += request.getParameter("image2");
+			photos += "\n";
+		}
+        if (request.getParameter("image3") != null) {
+			photos += request.getParameter("image3");
+			photos += "\n";
+		}
+        if (request.getParameter("image4") != null) {
+			photos += request.getParameter("image4");
+			photos += "\n";
+		}
+        if (request.getParameter("image5") != null) {
+			photos += request.getParameter("image5");
+			photos += "\n";
+		}
+		event.setPhotos(photos);*/
         event.setProviders(provider);
         System.out.println("Event by " + provider.getPk().getUser().getUsername());
         activityRepository.save(event);

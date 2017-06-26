@@ -59,7 +59,7 @@ public class RegisterController {
             System.out.println("Authentication name is"+authentication.getName());
             if (!authentication.getName().equals("anonymousUser"))
                 modelAndView.addObject("uname",authentication.getName());
-            modelAndView.setViewName("redirect:/error_page");
+            modelAndView.setViewName("redirect:/error_page?error_code=reg");
         } else {
             userService.saveUser(user, parent);
             Authentication authentication = authenticationFacade.getAuthentication();
@@ -103,7 +103,7 @@ public class RegisterController {
         }
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("user",user);
-            modelAndView.setViewName("redirect:/error_page");
+            modelAndView.setViewName("redirect:/error_page?error_code=reg");
         } else {
             userService.saveUserProvider(user,provider);
             //userRepository.saveUser(user);
