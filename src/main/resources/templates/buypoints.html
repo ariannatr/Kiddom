@@ -111,7 +111,22 @@
 <div  class="wrapper row3" style="background-color:white" >
     <main class="hoc container clear" >
         <div class="row">
-
+            <div id="change_form" style="display: none;">
+                <form class="form-horizontal" method="POST" th:action="@{/edit}"   >
+                    <div class="form-group" >
+                        <label class="control-label col-sm-2" for="totalPoints">TotalPoints:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="totalPoints"  name="totalPoints">
+                            <!--<div type=text" id="totalPoints"  name="totalPoints"> 100 </div>-->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class=" col-sm-offset-2 col-sm-1">
+                            <button id="finishbutton" type="submit" class="btn btn-default">Αλλαγή</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <h3 style="text-transform: none;"> Επιλέξτε πακέτο ή πληκτρολογείστε τον επιθυμητό αριθμό πόντων</h3>
             <!--<div class="w3ls_main_grid_right_grid_form">-->
             <div class="col-md-4">
@@ -153,23 +168,24 @@
 
                 <br>
                 <h2 class="col-md-offset-1"> Total Points</h2>
-                <h3 id="points" style="position: relative;padding:2em; background:#f1a700; text-align: center"> 0€ </h3>
+                <h3 id="points"  style="position: relative;padding:2em; background:#f1a700; text-align: center"> 0 </h3>
 
 
 
             </div>
         </div>
+        <button id="buybutton"> buy </button>
         <br>
         <div class=" col-md-4"  >
             <br><br><br>
             <div style="position: relative;padding:5em; background:#f1a700; text-align: center">
-            <h2> ΠΛΗΡΩΜΗ </h2>
-            <div class=" mybox">
-            <select style=" float: right; margin: 0px 0px 0px 0px;" id="payment"  onchange="pr()">
-                <option value="1" selected>Πιστωτικη καρτα</option>
-                <option value="2">Paypal</option>
-            </select>
-            </div>
+                <h2> ΠΛΗΡΩΜΗ </h2>
+                <div class=" mybox">
+                    <select style=" float: right; margin: 0px 0px 0px 0px;" id="payment"  onchange="pr()">
+                        <option value="1" selected>Πιστωτικη καρτα</option>
+                        <option value="2">Paypal</option>
+                    </select>
+                </div>
             </div>
         </div>
 
@@ -244,13 +260,15 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <span class="close" >
-                        <button type="button" class="close"  aria-hidden="true" onclick="reset()" >  X</button>
+                        <button type="button" class="close" id="closebutton"  aria-hidden="true"  >  X</button>
                     </span>
                 </div>
                 <div class="modal-body" style="text-align: center">
-                    <strong> Η συναλλαγή ολοκληρώθηκε </strong>
+                    <strong> Η συναλλαγή ολοκληρώθηκε.</strong>
+                    <strong> Αποκτήσατε <div id="finalpoints" name="totalPoints">  </div>  πόντους</strong>
                     <br>
-                   <a  class="btn btn-success" role="button" data-dismiss="myModal" onclick="reset()"> EΠΙΣΤΡΟΦΗ ΣΤΟ ΠΟΡΤΟΦΟΛΙ</a>
+                    <a  th:href="profile" class="btn btn-success" role="button" data-dismiss="myModal" onclick="reset()"> EΠΙΣΤΡΟΦΗ ΣΤΟ ΠΟΡΤΟΦΟΛΙ</a>
+
 
                 </div>
 
@@ -303,23 +321,58 @@
 
 <div th:replace="fragments/foot :: foot"></div>
 
+<!--<script>-->
+<!--function myFunction() {-->
+<!--document.getElementById("finishbutton").click();-->
+<!--}-->
+<!--document.getElementById('totalPoints').value = 200;-->
+<!--var button = document.getElementById("buybutton");-->
+<!--button.onclick = function () {-->
+
+<!--myFunction();-->
+<!--}-->
+<!--</script>-->
+
 <script>
     // Get the modal
 
     var modal = document.getElementById('myModal');
     var btn = document.getElementById("myBtn");
     var btn2 = document.getElementById("myBtn2");
-    var span = document.getElementsByClassName("close")[0];
+    var finalpoints = document.getElementById("finalpoints");
+    var closebutton = document.getElementById("closebutton");
+    function myFunction() {
+        document.getElementById("finishbutton").click();
+    }
+    //    document.getElementById('totalPoints').value = 200;
+
+
+
     // When the user clicks on the button, open the modal
     btn.onclick = function() {
+//        document.getElementById('change_form').submit();
+        var quantity = parseInt(document.getElementById("quantity").value);
+        var quantity2 = parseInt(document.getElementById("quantity2").value);
+        var quantity3 = parseInt(document.getElementById("quantity3").value);
+        var quantity4 = parseInt(document.getElementById("quantity4").value);
+        var points = (quantity * 260) + (quantity2 * 530) + (quantity3 * 1070) + (quantity4);
+        document.getElementById("finalpoints").innerText = points;
         modal.style.display = "block";
+        myFunction();
     }
     btn2.onclick = function() {
+        var quantity = parseInt(document.getElementById("quantity").value);
+        var quantity2 = parseInt(document.getElementById("quantity2").value);
+        var quantity3 = parseInt(document.getElementById("quantity3").value);
+        var quantity4 = parseInt(document.getElementById("quantity4").value);
+        var points = (quantity * 260) + (quantity2 * 530) + (quantity3 * 1070) + (quantity4);
+        document.getElementById("finalpoints").innerText = points;
         modal.style.display = "block";
     }
     //    reset();
     // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
+    closebutton.onclick = function() {
+        reset();
         modal.style.display = "none";
     }
 
@@ -388,6 +441,7 @@
         var points = (quantity * 260) + (quantity2 * 530) + (quantity3 * 1070) + (quantity4);
         document.getElementById("cost").innerText = quantity5 + "$";
         document.getElementById("points").innerText = points;
+        document.getElementById('totalPoints').value = points;
         document.getElementById("points2").innerText =quantity5;
         document.getElementById("points3").innerText =quantity5;
     }
