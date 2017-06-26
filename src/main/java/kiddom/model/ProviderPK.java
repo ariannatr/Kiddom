@@ -13,6 +13,7 @@ public class ProviderPK implements Serializable {
     /*--------------Primary foreign key: username, from user table--------------*/
     @OneToOne
     private UserEntity user;
+
     /*--------------Primary foreign key: username, from user table--------------*/
     public ProviderPK(String name){
         System.out.println("Eimai ston constructor provider me name " + name);
@@ -26,8 +27,6 @@ public class ProviderPK implements Serializable {
     public void setUser(UserEntity user) {
         this.user = user;
     }
-
-
 
     @Override
     public boolean equals(Object o) {

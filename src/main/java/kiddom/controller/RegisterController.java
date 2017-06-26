@@ -37,9 +37,9 @@ public class RegisterController {
         ParentEntity parent = new ParentEntity();
         redirectAttributes.addFlashAttribute("success",false);
         Authentication authentication = authenticationFacade.getAuthentication();
-        System.out.println("Authentication name is"+authentication.getName());
+        System.out.println("Authentication name is " + authentication.getName());
         if (!authentication.getName().equals("anonymousUser"))
-            modelAndView.addObject("uname",authentication.getName());
+            modelAndView.addObject("uname", authentication.getName());
         modelAndView.setViewName("register");
         return modelAndView;
     }
