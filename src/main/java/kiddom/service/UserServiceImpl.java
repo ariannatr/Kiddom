@@ -245,9 +245,10 @@ public class UserServiceImpl implements UserService {
     }
 
     public void updateUserPoints(ParentEntity parenton,ParentEntity parent,UserEntity useron,UserEntity user) {
-        int newtotal=parent.getTotalPoints() + parenton.getTotalPoints();
+        int temp=parent.getTotalPoints();
+        int newtotal=temp + parenton.getTotalPoints();
         parenton.setTotalPoints(newtotal);
-        int newavail=newtotal + parenton.getAvailPoints();
+        int newavail=temp + parenton.getAvailPoints();
         System.out.println("Tha valw twra "+newavail+" lefta");
         parenton.setAvailPoints(newavail);
         parentRepository.save(parenton);
