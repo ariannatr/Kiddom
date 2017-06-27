@@ -114,9 +114,9 @@
             <div id="change_form" style="display: none;">
                 <form class="form-horizontal" method="POST" th:action="@{/pointsBuy}"   >
                     <div class="form-group" >
-                        <label class="control-label col-sm-2" >TotalPoints:</label>
+                        <label class="control-label col-sm-2" for="totalPoints">TotalPoints:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="totaloints" >
+                            <input type="text" class="form-control" id="totalPoints"  name="totalPoints">
                             <!--<div type=text" id="totalPoints"  name="totalPoints"> 100 </div>-->
                         </div>
                     </div>
@@ -174,7 +174,7 @@
 
             </div>
         </div>
-        <button id="buybutton"> buy </button>
+
         <br>
         <div class=" col-md-4"  >
             <br><br><br>
@@ -252,21 +252,7 @@
                 </li>
             </ul>
             <br/>
-            <form class="form-horizontal" method="POST" th:action="@{/pointsBuy}"   >
-                <div class="form-group" >
-                    <label class="control-label col-sm-2" >Συνολικοί Πόντοι:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="total_points"  name="total_points">
-                        <!--<div type=text" id="totalPoints"  name="totalPosints"> 100 </div>-->
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class=" col-sm-offset-2 col-sm-1">
-                        <button id="myBtn" type="submit" class="btn btn-default">Πληρωμή</button>
-                    </div>
-                </div>
-            </form>
-            <!--  <button   id="myBtn" class="btn btn-success btn-lg btn-block">Πληρωμη</button>-->
+            <button   id="myBtn" class="btn btn-success btn-lg btn-block">Πληρωμη</button>
         </div>
         <div id="myModal" class="modal">
 
@@ -279,7 +265,7 @@
                 </div>
                 <div class="modal-body" style="text-align: center">
                     <strong> Η συναλλαγή ολοκληρώθηκε.</strong>
-                    <strong> Αποκτήσατε <div id="finalpoints" name="total_points">  </div>  πόντους</strong>
+                    <strong> Αποκτήσατε <div id="finalpoints">  </div>  πόντους</strong>
                     <br>
                     <a  th:href="profile" class="btn btn-success" role="button" data-dismiss="myModal" onclick="reset()"> EΠΙΣΤΡΟΦΗ ΣΤΟ ΠΟΡΤΟΦΟΛΙ</a>
 
@@ -455,7 +441,7 @@
         var points = (quantity * 260) + (quantity2 * 530) + (quantity3 * 1070) + (quantity4);
         document.getElementById("cost").innerText = quantity5 + "$";
         document.getElementById("points").innerText = points;
-        document.getElementById('total_points').value = points;
+        document.getElementById('totalPoints').value = points;
         document.getElementById("points2").innerText =quantity5;
         document.getElementById("points3").innerText =quantity5;
     }
