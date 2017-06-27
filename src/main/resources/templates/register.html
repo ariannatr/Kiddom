@@ -18,8 +18,11 @@
 <div class="wrapper row3" style="background-color:#b7c1ae" >
 
     <main class="hoc container clear" >
-        <div th:if ="${(param.success != null) and (param.success[0] == 'true')}">
+        <div th:if ="${(success != null) and (success == 'true')}">
             <div class="alert alert-success" style="text-align: center;"> Η εγγραφή σας ολοκληρώθηκε! <br>  <a  th:href="index">Πίσω στην Αρχική</a></div>
+        </div >
+        <div th:if ="${(success != null) and (success == 'false')}">
+            <div class="alert alert-danger" style="text-align: center;"> Λυπούμαστε ,αλλά το username που χρησιμοποιήσατε δεν είναι διαθέσιμο! <br>  <a  th:href="index">Πίσω στην Αρχική</a></div>
         </div >
         <div id="pageintro" class="hoc clear" style="padding:1% 0 1% 0 ">
             <div id="container"  >
