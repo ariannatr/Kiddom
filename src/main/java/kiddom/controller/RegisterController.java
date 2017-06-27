@@ -91,7 +91,7 @@ public class RegisterController {
 
     /*-- Post --*/
     @RequestMapping(value = "/register_prov", method = RequestMethod.POST)
-    public ModelAndView createNewUserProvider(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("provider") @Valid ProviderEntity provider, BindingResult bindingResult,RedirectAttributes redirectAttributes) {
+    public ModelAndView createNewUserProvider(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("provider") @Valid ProviderEntity provider, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         ModelAndView modelAndView = new ModelAndView();
         UserEntity userExists = userService.findByUsername(user.getUsername());
         if (userExists != null)
