@@ -73,10 +73,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.
 			authorizeRequests()
-				.antMatchers("/static/**").denyAll()
-                .antMatchers("/fonts/**").denyAll()
-                .antMatchers("/css/**").denyAll()
-                .antMatchers("/scripts/**").denyAll()
                 .antMatchers("/").permitAll()
 				.antMatchers("/index").permitAll()
 				.antMatchers("/register").anonymous()
@@ -130,9 +126,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-	    /*web.ignoring()
-	       .antMatchers("/fragments/**","/resources/templates/**", "/css/**", "/js/**", "/images/**","/scripts/**");
-		web.ignoring().antMatchers("/the_js_path/**");*/
+	    web.ignoring()
+	       .antMatchers("/fragments/**","/resources/**","/static/**", "/css/**", "/js/**", "/images/**","/scripts/**");
+		web.ignoring().antMatchers("/the_js_path/**");
 	}
 
 

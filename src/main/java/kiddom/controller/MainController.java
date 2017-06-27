@@ -1,6 +1,7 @@
 package kiddom.controller;
 
 import kiddom.authentication.IAuthenticationFacade;
+import kiddom.model.ParentEntity;
 import kiddom.model.ProviderEntity;
 import kiddom.model.UserEntity;
 import kiddom.service.UserService;
@@ -124,10 +125,12 @@ public class MainController {
     }
 
     @RequestMapping(value="/buypoints", method = RequestMethod.GET)
-    public ModelAndView buypoints(@ModelAttribute("user") @Valid UserEntity user){
+    public ModelAndView buypoints(){
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
+        UserEntity user = new UserEntity("");
+        ParentEntity parent = new ParentEntity();
         if(!authentication.getName().equals("anonymousUser")) {
             modelAndView.addObject("uname", authentication.getName());
             UserEntity userS = userService.findByUsername(authentication.getName());

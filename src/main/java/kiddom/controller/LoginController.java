@@ -119,6 +119,7 @@ public class LoginController {
 
     @RequestMapping(value="/pointsBuy", method = RequestMethod.POST)
     public ModelAndView pointsBuy(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("parent") @Valid ParentEntity parent){
+        System.out.println("zitise "+parent.getTotalPoints()+" ");
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is " + authentication.getName());
@@ -127,6 +128,7 @@ public class LoginController {
             ParentEntity parenton = userService.findParent(new ParentPK(authentication.getName()));
             UserEntity useron = userService.findByUsername(authentication.getName());
             userService.updateUserPoints(parenton,parent,useron,user);
+            System.out.println("Tha agorasw "+parent.getTotalPoints());
             ParentPK parentonPK = new ParentPK(authentication.getName());
             parenton = userService.findParent(parentonPK);
             modelAndView.addObject("parent", parentonPK.getUser());
@@ -176,6 +178,7 @@ public class LoginController {
         if(!authentication.getName().equals("anonymousUser")) {
             modelAndView.addObject("uname", authentication.getName());
             ProviderEntity provideron = userService.findProvider(new ProviderPK(authentication.getName()));
+            System.out.println("dimiourgisa prov"+provideron.getName());
             UserEntity useron = userService.findByUsername(authentication.getName());
             userService.updateUserProvider(provideron,provider,useron,user);
             ProviderPK provideronPK = new ProviderPK(authentication.getName());
@@ -187,7 +190,6 @@ public class LoginController {
             modelAndView.addObject("gotten_points",provideron.getGottenPoints());
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type",String.valueOf(userS.getType()));
-
         }
         modelAndView.setViewName("profileProvider");
         return modelAndView;
