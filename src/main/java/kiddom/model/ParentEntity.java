@@ -43,6 +43,12 @@ public class ParentEntity {
     //}
 
     public ParentEntity() {
+        this.area="";
+        this.town="";
+        this.surname="";
+        this.name="";
+        this.telephone="";
+        this.email="";
         this.setAvailPoints(0);
         this.setRestrPoints(0);
         this.setTotalPoints(0);

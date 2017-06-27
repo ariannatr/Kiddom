@@ -190,59 +190,45 @@ public class UserServiceImpl implements UserService {
         parentRepository.save(parenton);
     }
 
-
-
+ /****** Update Provider's Profile ******/
     @Override
     public void updateUserProvider(ProviderEntity provideron,ProviderEntity provider,UserEntity useron,UserEntity user){
-        System.out.println("-------------bika edw------------\n");
-        if(provider==null)
-            System.out.println("ti den dimiourgisa");
-        if(provideron==null)
-            System.out.println("ti den dimiourgisa2");
         if(!provider.getEmail().replaceAll(" ","").equals("")){
             provideron.setEmail(provider.getEmail());
         }
-        System.out.println("-------------bika edw meta mail------------\n");
         if(!provider.getName().replaceAll(" ","").equals(""))
         {
             provideron.setName(provider.getName());
         }
-        System.out.println("-------------bika edw meta name------------\n");
         if(!provider.getSurname().replaceAll(" ","").equals(""))
         {
             provideron.setSurname(provider.getSurname());
         }
-        System.out.println("-------------bika edw meta surname------------\n");
         if(!provider.getTown().replaceAll(" ","").equals(""))
         {
             provideron.setTown(provider.getTown());
         }
-        System.out.println("-------------bika edw meta town------------\n");
         if(!provider.getArea().replaceAll(" ","").equals(""))
         {
             provideron.setArea(provider.getArea());
         }
-        System.out.println("-------------bika edw meta are------------\n");
         if(!provider.getTelephone().replaceAll(" ","").equals(""))
         {
             provideron.setTelephone(provider.getTelephone());
         }
-        System.out.println("-------------bika edw meta telephone------------\n");
         if(!provider.getTr().replaceAll(" ","").equals(""))
         {
             provideron.setTr(provider.getTr());
         }
-        System.out.println("-------------bika edw meta tr------------\n");
         if(!user.getPassword().replaceAll(" ","").equals(""))
         {
             useron.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         }
-        System.out.println("-------------bika edw meta kwd------------\n");
         userRepository.save(useron);
-        System.out.println("-------------save tn user------------\n");
         providerRepository.save(provideron);
-        System.out.println("-------------save ton prov------------\n");
     }
+
+    /****** Update Parent's Points ******/
 
     public void updateUserPoints(ParentEntity parenton,ParentEntity parent,UserEntity useron,UserEntity user) {
         int temp=parent.getTotalPoints();

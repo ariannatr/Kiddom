@@ -224,7 +224,7 @@ Licence URI: http://www.os-templates.com/template-terms
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="area">Πόλη:</label>
+                            <label class="control-label col-sm-2" for="town">Πόλη:</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="town" th:placeholder="${user.town}" name="town">
                             </div>
@@ -233,6 +233,12 @@ Licence URI: http://www.os-templates.com/template-terms
                             <label class="control-label col-sm-2" for="area">Περιοχή:</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="area" th:placeholder="${user.area}" name="area">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="email">Email:</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="email" th:placeholder="${user.email}" name="email">
                             </div>
                         </div>
                         <div class="form-group">
@@ -249,7 +255,7 @@ Licence URI: http://www.os-templates.com/template-terms
                         </div>
                         <div class="form-group">
                             <div class=" col-sm-offset-2 col-sm-1">
-                                <button type="submit" class="btn btn-default">Αλλαγη</button>
+                                <button type="submit" class="btn btn-default">Αλλαγή</button>
                             </div>
                             <div class="col-sm-offset-2 col-sm-1">
                                 <button type="button" class="btn btn-default" onclick="openCity(event, 'user_elements')">Eπιστροφη</button>

@@ -45,6 +45,13 @@ public class ProviderEntity {
     //}
 
     public ProviderEntity () {
+        this.email="";
+        this.tr="";
+        this.area="";
+        this.town="";
+        this.surname="";
+        this.name="";
+        this.telephone="";
         this.setApproved(0);
         this.setGottenPoints(0);
         this.setOwedPoints(0);

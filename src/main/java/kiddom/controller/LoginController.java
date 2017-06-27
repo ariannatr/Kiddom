@@ -133,7 +133,6 @@ public class LoginController {
             parenton = userService.findParent(parentonPK);
             modelAndView.addObject("parent", parentonPK.getUser());
             modelAndView.addObject("user",parenton);
-            //modelAndView.addObject("user",parenton);
             System.out.println("Avail points are " + parenton.getAvailPoints());
             modelAndView.addObject("total_points",parenton.getTotalPoints());
             modelAndView.addObject("restr_points",parenton.getRestrPoints());
@@ -148,7 +147,6 @@ public class LoginController {
     @RequestMapping(value="/profileProvider", method = RequestMethod.GET)
     public ModelAndView profileProvider(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user){
         ModelAndView modelAndView = new ModelAndView();
-        //UserEntity user = new UserEntity();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name (provider) is "+authentication.getName());
         if(!authentication.getName().equals("anonymousUser")) {
@@ -170,15 +168,16 @@ public class LoginController {
         return modelAndView;
     }
 
+    /*--POST Edit Provider's Profile --*/
     @RequestMapping(value="/edit_prov", method = RequestMethod.POST)
-    public ModelAndView edit_prov(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user){
+    public ModelAndView edit_prov(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user)
+    {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is " + authentication.getName());
         if(!authentication.getName().equals("anonymousUser")) {
             modelAndView.addObject("uname", authentication.getName());
             ProviderEntity provideron = userService.findProvider(new ProviderPK(authentication.getName()));
-            System.out.println("dimiourgisa prov"+provideron.getName());
             UserEntity useron = userService.findByUsername(authentication.getName());
             userService.updateUserProvider(provideron,provider,useron,user);
             ProviderPK provideronPK = new ProviderPK(authentication.getName());
