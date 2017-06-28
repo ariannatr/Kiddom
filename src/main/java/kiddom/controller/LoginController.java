@@ -58,7 +58,7 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is "+authentication.getName());
-        if(!authentication.getName().equals("anonymousUser")) {
+        if (!authentication.getName().equals("anonymousUser")) {
             modelAndView.addObject("uname", authentication.getName());
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
@@ -72,7 +72,7 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is" + authentication.getName());
-        if(!authentication.getName().equals("anonymousUser")) {
+        if (!authentication.getName().equals("anonymousUser")) {
             modelAndView.addObject("uname", authentication.getName());
             System.out.println("username " + authentication.getName());
             ParentPK parentPk = new ParentPK(authentication.getName());
@@ -96,7 +96,7 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is " + authentication.getName());
-        if(!authentication.getName().equals("anonymousUser")) {
+        if (!authentication.getName().equals("anonymousUser")) {
             modelAndView.addObject("uname", authentication.getName());
             ParentEntity parenton = userService.findParent(new ParentPK(authentication.getName()));
             UserEntity useron = userService.findByUsername(authentication.getName());
@@ -123,7 +123,7 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is " + authentication.getName());
-        if(!authentication.getName().equals("anonymousUser")) {
+        if (!authentication.getName().equals("anonymousUser")) {
             modelAndView.addObject("uname", authentication.getName());
             ParentEntity parenton = userService.findParent(new ParentPK(authentication.getName()));
             UserEntity useron = userService.findByUsername(authentication.getName());
@@ -149,7 +149,7 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name (provider) is "+authentication.getName());
-        if(!authentication.getName().equals("anonymousUser")) {
+        if (!authentication.getName().equals("anonymousUser")) {
             modelAndView.addObject("uname", authentication.getName());
             System.out.println("username " + authentication.getName());
             ProviderPK providerPk = new ProviderPK(authentication.getName());
@@ -175,7 +175,7 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is " + authentication.getName());
-        if(!authentication.getName().equals("anonymousUser")) {
+        if (!authentication.getName().equals("anonymousUser")) {
             modelAndView.addObject("uname", authentication.getName());
             ProviderEntity provideron = userService.findProvider(new ProviderPK(authentication.getName()));
             UserEntity useron = userService.findByUsername(authentication.getName());
