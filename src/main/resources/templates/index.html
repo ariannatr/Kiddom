@@ -135,6 +135,9 @@ Licence URI: http://www.os-templates.com/template-terms
       <ul class="slides">
         <li>
           <article>
+            <div th:if ="${(param.success != null) and (param.success[0] == 'false')}">
+              <div class="alert alert-danger" style="text-align: center;"> Συγνώμη εισάγατε λάθος κωδικό ή username ! <br></div>
+            </div >
            <!-- <p>Tincidunt</p>-->
             <h3 class="heading">Καλως ηρθατε </h3>
             <p>Περάστε χρόνο με το παιδί σας με ένα click !</p>
@@ -315,6 +318,9 @@ Licence URI: http://www.os-templates.com/template-terms
                                  
                                </div>
                              </div>
+                            <input type="hidden"
+                                   name="${_csrf.parameterName}"
+                                   value="${_csrf.token}"/>
                               <button type="submit" class="btn btn-success btn-block">Συνδεση</button>
                             
                           </form>

@@ -52,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
+                .withUser("user").password("password").roles("1");
         auth.userDetailsService(myDBAythenticationService).passwordEncoder(bCryptPasswordEncoder);
     }
 /*	@Value("${spring.queries.roles-query}")

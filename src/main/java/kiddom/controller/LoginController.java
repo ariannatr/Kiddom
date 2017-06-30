@@ -6,7 +6,9 @@ import kiddom.model.*;
 import kiddom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -52,6 +54,18 @@ public class LoginController {
         }
 		return modelAndView;
 	}
+
+
+    @RequestMapping(value={"/login_error"}, method = RequestMethod.GET)
+    public ModelAndView login_process(HttpSession session, @ModelAttribute("user") @Valid UserEntity user, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+        ModelAndView modelAndView = new ModelAndView();
+        UserEntity userExists = userService.findByUsernamePassword(user.getUsername(),user.getPassword());
+        System.out.println("bika edw");
+        redirectAttributes.addFlashAttribute("success","error");
+        modelAndView.setViewName("redirect:/index");
+        return modelAndView;
+    }
+
 
 	@RequestMapping(value={"/", "/index"}, method = RequestMethod.GET, produces= "application/javascript")
 	public ModelAndView index(@ModelAttribute("user") UserEntity user){
