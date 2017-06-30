@@ -71,11 +71,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.
-			authorizeRequests()
-                .antMatchers("/").permitAll()
-				.antMatchers("/index").permitAll()
-				.antMatchers("/register").anonymous()
+        http.
+                authorizeRequests()
+                .antMatchers("/index").permitAll()
+                .antMatchers("/register").anonymous()
                 .antMatchers("/register_prov").anonymous()
                 .antMatchers("/about").permitAll()
                 .antMatchers("/error_page").permitAll()
@@ -85,25 +84,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/faq").permitAll()
                 .antMatchers("/activity_reg").hasRole("2")//be a provider
                 //
-				.antMatchers("/categories_form").permitAll()//has to be admin
+                .antMatchers("/categories_form").permitAll()//has to be admin
                 //
-				.antMatchers("/category_submit").permitAll()//has t be admin
-				//
+                .antMatchers("/category_submit").permitAll()//has t be admin
+                //
                 .antMatchers("/profile").hasRole("1")//hasAuthority("1")//be a parent
                 .antMatchers("/profileProvider").hasRole("2")//be a Provider
-				.antMatchers("/admin").hasRole("0").anyRequest()//be admin
-				.authenticated().and().csrf().disable()
+                .antMatchers("/admin").hasRole("0").anyRequest()//be admin
+                .authenticated().and().csrf().disable()
                 .formLogin()
-				.loginPage("/index")
+                .loginPage("/index")
                 .loginProcessingUrl("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .failureUrl("/error_page")
+                .failureUrl("/index?success=false")
                 .defaultSuccessUrl("/about")
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/index").and().exceptionHandling()
-				.accessDeniedPage("/error_page");
+                .logoutSuccessUrl("/index").and().exceptionHandling()
+                .accessDeniedPage("/error_page");
         http.sessionManagement()//now added
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .maximumSessions(2)
@@ -111,6 +110,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.sessionManagement()
                 .invalidSessionUrl("/index")
                 .sessionFixation().migrateSession();
+	    http.requiresChannel()
+                .antMatchers("/index","/register","/register_prov","/about","error_page",
+                        "/activity","google_map","/search","/faq",
+                        "activity_reg","/categories_form","/category_submit","/profile","/profileProvider","/admin").requiresSecure();
+
       //  servletContext.setSessionTrackingModes(EnumSet.of(SessionTrackingMode.COOKIE));*/
 	}
 

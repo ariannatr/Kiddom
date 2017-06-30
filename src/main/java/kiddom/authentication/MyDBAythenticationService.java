@@ -4,6 +4,7 @@ import kiddom.model.UserEntity;
 import kiddom.repository.UserRepository;
 import kiddom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,8 +21,10 @@ import java.util.List;
 /**
  * Created by Arianna on 8/6/2017.
 **/
-@Service
+@Component
 public class MyDBAythenticationService implements UserDetailsService {
+
+    @Qualifier("userService")
     @Autowired
     private UserService userService;
 
