@@ -223,58 +223,33 @@ Licence URI: http://www.os-templates.com/template-terms
       <h6 class="heading">Δημοφιλεις Δραστηριοτητες</h6>
     </div>
     <div class="group latest">
-      <article class="one_third first">
-        <figure><a href="#"><img src="images/demo/event1.jpg" alt=""></a>
-          <figcaption>
-            <time datetime="2045-04-06T08:15+00:00"><strong>06</strong> <em>Απρ</em></time>
-          </figcaption>
-        </figure>
-        <div class="txtwrap">
-          <h4 class="heading">Perperino</h4>
-          <ul class="nospace meta">
-            <li><i class="fa fa-user"></i> <a href="#">Διοργανωτής</a></li>
-            <li><i class="fa fa-tag"></i> <a href="#">Κατηγορία</a></li>
-          </ul>
-          <p>Κλείστε τώρα μια θέση για εκδηλώσεις ποδοσφαίρου, χορού, καλλιτεχνικών[&hellip;]</p>
-          <footer><a href="#">Διαβάστε Περισσότερα &raquo;</a></footer>
+        <div th:if ="${(events!=null)}">
+            <article th:each="event : ${events} " class="one_third">
+              <figure><a href="#"><img src="images/demo/event1.jpg" alt=""></a>
+                <figcaption>
+                  <time datetime="2045-04-06T08:15+00:00"><strong>06</strong> <em>Απρ</em></time>
+                </figcaption>
+              </figure>
+              <div class="txtwrap">
+                <h4 class="heading"><span th:text="${event.name}"></span></h4>
+                <ul class="nospace meta">
+                  <li><i class="fa fa-user"></i> <a href="#"><span th:text="${ event.owner }"></span></a></li>
+                  <li><i class="fa fa-tag"></i> <a href="#"><span th:text="${event.category}"></span></a></li>
+                </ul>
+                  <p><span th:text="${event.description}"></span></p>
+                <footer><a href="#">Διαβάστε Περισσότερα &raquo;</a></footer>
+              </div>
+            </article>
+            <ul class="pager">
+                <li class="previous"><a href="#">Previous</a></li>
+                <li class="next"><a href="#">Next</a></li>
+            </ul>
         </div>
-      </article>
-      <article class="one_third">
-        <figure><a href="#"><img src="images/demo/event2.jpg" alt=""></a>
-          <figcaption>
-            <time datetime="2045-04-05T08:15+00:00"><strong>05</strong> <em>Απρ</em></time>
-          </figcaption>
-        </figure>
-        <div class="txtwrap">
-          <h4 class="heading">Ballons</h4>
-          <ul class="nospace meta">
-            <li><i class="fa fa-user"></i> <a href="#">Διοργανωτής</a></li>
-            <li><i class="fa fa-tag"></i> <a href="#">Κατηγορία</a></li>
-          </ul>
-          <p>Σας καλούμε στον ανακαινισμένο και ανανεωμένο μας χώρο για να διασκεδάσετε μαζί με το παιδί σας.Τσουλήθρες,κούνιες ,τραμπολίνο  είναι λίγες μόνο απο τις νέες[&hellip;]</p>
-          <footer><a href="#">Διαβάστε Περισσότερα &raquo;</a></footer>
-        </div>
-      </article>
-      <article class="one_third">
-        <figure><a href="#"><img src="images/demo/event3.jpg" alt=""></a>
-          <figcaption>
-            <time datetime="2045-04-04T08:15+00:00"><strong>04</strong> <em>Απρ</em></time>
-          </figcaption>
-        </figure>
-        <div class="txtwrap">
-          <h4 class="heading">Ζωγραφιζοντας τους τοιχους</h4>
-          <ul class="nospace meta">
-            <li><i class="fa fa-user"></i> <a href="#">Διοργανωτής</a></li>
-            <li><i class="fa fa-tag"></i> <a href="#">Κατηγορία</a></li>
-          </ul>
-          <p>Έχετε κουραστεί να τρέχετε πίσω από τα μικρά σας για να μην εκφράσουν τις καλλιτεχνικές ανησυχίες τους στους τοίχους του σπιτιού; Τότε σίγουρα πρέπει να παρευρεθείτε[&hellip;]</p>
-          <footer><a href="#">Διαβάστε Περισσότερα &raquo;</a></footer>
-        </div>
-      </article>
     </div>
     
     <div class="clear"></div>
   </section>
+    <div th:replace="fragments/paginationbar :: paginationbar"></div>
 </div>
 
 

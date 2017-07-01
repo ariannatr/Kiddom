@@ -3,21 +3,20 @@ package kiddom.controller;
 
 import kiddom.authentication.IAuthenticationFacade;
 import kiddom.model.*;
+import kiddom.service.EventService;
 import kiddom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import sun.security.pkcs11.wrapper.Constants;
 
-import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
@@ -25,11 +24,20 @@ import java.security.Principal;
 
 @Controller
 public class LoginController {
+
     @Autowired
     private IAuthenticationFacade authenticationFacade;
 
+    @Qualifier("userService")
 	@Autowired
 	private UserService userService;
+
+    @Qualifier("eventService")
+    @Autowired
+    private EventService eventService;
+
+    @Autowired
+    private Validator validator;
 
 	@RequestMapping(value={"/login"}, method = RequestMethod.POST)
 	public ModelAndView login(HttpSession session, @ModelAttribute("user") @Valid UserEntity user, BindingResult bindingResult, Principal principal){
@@ -68,7 +76,7 @@ public class LoginController {
 
 
 	@RequestMapping(value={"/", "/index"}, method = RequestMethod.GET, produces= "application/javascript")
-	public ModelAndView index(@ModelAttribute("user") UserEntity user){
+	public ModelAndView index(@ModelAttribute("user") UserEntity user,Pageable pageable){
 		ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is "+authentication.getName());
@@ -76,8 +84,12 @@ public class LoginController {
             modelAndView.addObject("uname", authentication.getName());
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
-            modelAndView.setViewName("index");
+
         }
+        Page<SingleEventEntity> eventPage = eventService.getAllEvents(pageable);
+        PageWrapper<SingleEventEntity> page = new PageWrapper<>(eventPage, "/index");
+        modelAndView.addObject("page",page);
+        modelAndView.setViewName("index");
         return modelAndView;
 	}
 

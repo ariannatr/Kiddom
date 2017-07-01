@@ -6,7 +6,9 @@ import kiddom.model.ProviderEntity;
 import kiddom.model.UserEntity;
 import kiddom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,8 +22,11 @@ import javax.validation.Valid;
 /**
  * Created by Arianna on 6/6/2017.
  */
+
 @Controller
 public class RegisterController {
+
+    @Qualifier("userService")
     @Autowired
     private UserService userService;
     @Autowired

@@ -4,8 +4,10 @@ package kiddom.service;
  * Created by Stathis on 6/12/2017.
  */
 import kiddom.model.*;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import java.util.List;
+
 
 @Service("categoryService")
 public interface CategoryService {

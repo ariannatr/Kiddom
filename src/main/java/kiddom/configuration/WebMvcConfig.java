@@ -1,14 +1,30 @@
 package kiddom.configuration;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.MethodParameter;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableArgumentResolver;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.support.WebDataBinderFactory;
+import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.method.support.ModelAndViewContainer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.mvc.method.annotation.ServletWebArgumentResolverAdapter;
+
+import java.util.List;
 
 @Configuration
-@Component
+@EnableWebMvc
+@ComponentScan
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
@@ -37,4 +53,24 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/category_submit").setViewName("category_submit");
 		registry.addViewController("/buy_points").setViewName("buy_points");
 	}
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        PageableHandlerMethodArgumentResolver resolver = new PageableHandlerMethodArgumentResolver();
+        resolver.setPageParameterName("page.page");
+        resolver.setSizeParameterName("page.size");
+        resolver.setFallbackPageable(new PageRequest(1, 3));
+        resolver.setOneIndexedParameters(true);
+        argumentResolvers.add(resolver);
+        super.addArgumentResolvers(argumentResolvers);
+    }
+
+	/*@Override
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers)
+	{
+		PageableArgumentResolver resolver = new PageableArgumentResolver();
+		resolver.setFallbackPagable(new PageRequest(1, 5));
+		argumentResolvers.add(new ServletWebArgumentResolverAdapter(resolver));
+	}*/
+
 }

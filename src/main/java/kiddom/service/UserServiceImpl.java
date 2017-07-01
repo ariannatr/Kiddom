@@ -4,17 +4,22 @@ import kiddom.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import kiddom.model.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.security.Provider;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 //import com.example.model.Role;
 
 //import com.example.repository.RoleRepository;
-
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -23,9 +28,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
 	private UserRepository userRepository;
 
-    @Qualifier("activityRepository")
-    @Autowired
-    private ActivityRepository activityRepository;
 
     @Qualifier("parentRepository")
 	@Autowired
@@ -48,6 +50,8 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByUsername(username);
 		//return null;
 	}
+
+
 
 	@Override
     public  ParentEntity findParent(ParentPK parentPk){
@@ -120,38 +124,6 @@ public class UserServiceImpl implements UserService {
         System.out.println("Trying to add " + provider.getName() + " " + provider.getSurname() + " " + provider.getEmail());
         provider.setUser(user);
         providerRepository.save(provider);
-        System.out.println("Done.");
-    }
-
-    @Override
-    public void saveActivity(UserEntity user, ProviderEntity provider, SingleEventEntity event)
-    {
-        /*
-        String photos = null;
-        if (request.getParameter("image1") != null) {
-			photos += request.getParameter("image1");
-			photos += "\n";
-		}
-        if (request.getParameter("image2") != null) {
-			photos += request.getParameter("image2");
-			photos += "\n";
-		}
-        if (request.getParameter("image3") != null) {
-			photos += request.getParameter("image3");
-			photos += "\n";
-		}
-        if (request.getParameter("image4") != null) {
-			photos += request.getParameter("image4");
-			photos += "\n";
-		}
-        if (request.getParameter("image5") != null) {
-			photos += request.getParameter("image5");
-			photos += "\n";
-		}
-		event.setPhotos(photos);*/
-        event.setProviders(provider);
-        System.out.println("Event by " + provider.getPk().getUser().getUsername());
-        activityRepository.save(event);
         System.out.println("Done.");
     }
 
@@ -239,4 +211,6 @@ public class UserServiceImpl implements UserService {
         parenton.setAvailPoints(newavail);
         parentRepository.save(parenton);
     }
+
+
 }

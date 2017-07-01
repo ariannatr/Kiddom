@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 //import org.springframework.security.web.context.*;
 
 @SpringBootApplication
-@Configuration
+//@Configuration
 @EnableAutoConfiguration
 @EnableWebSecurity
 @ComponentScan//({"kiddom.kid.controller.model","kiddom.kid.controller.repository","kiddom.kid.controller.service"})

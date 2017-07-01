@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import kiddom.model.*;
 
@@ -17,6 +18,7 @@ import java.util.List;
 /**
  * Created by Stathis on 6/12/2017.
  */
+
 @Service("categoryService")
 public class CategoryServiceImpl implements CategoryService {
 

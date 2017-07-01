@@ -5,9 +5,12 @@ import kiddom.model.ProviderEntity;
 import kiddom.model.ProviderPK;
 import kiddom.model.SingleEventEntity;
 import kiddom.model.UserEntity;
+import kiddom.service.EventService;
 import kiddom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,14 +24,20 @@ import javax.validation.Valid;
 /**
  * Created by Arianna on 6/6/2017.
  */
+
 @Controller
 public class ActivityController {
 
     @Autowired
     private IAuthenticationFacade authenticationFacade;
 
+    @Qualifier("userService")
     @Autowired
     private UserService userService;
+
+    @Qualifier("eventService")
+    @Autowired
+    private EventService eventService;
 
     @RequestMapping(value="/activity_reg", method = RequestMethod.GET)
     public ModelAndView activity_register(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, RedirectAttributes redirectAttributes){
@@ -66,7 +75,7 @@ public class ActivityController {
             modelAndView.addObject("provider", provideron);
             if (useron.getType() == 2) {
                 System.out.println("I'm a provider");
-                userService.saveActivity(useron, provideron, event);
+                eventService.saveActivity(useron, provideron, event);
             }
             else {
                 modelAndView.setViewName("redirect:/error_page?error_code=not_prov");

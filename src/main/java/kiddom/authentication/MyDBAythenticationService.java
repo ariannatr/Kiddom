@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Created by Arianna on 8/6/2017.
 **/
-@Component
+@Service("mydb")
 public class MyDBAythenticationService implements UserDetailsService {
 
     @Qualifier("userService")

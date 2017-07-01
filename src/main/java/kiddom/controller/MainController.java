@@ -1,33 +1,43 @@
 package kiddom.controller;
 
 import kiddom.authentication.IAuthenticationFacade;
-import kiddom.model.ParentEntity;
-import kiddom.model.ProviderEntity;
-import kiddom.model.UserEntity;
+import kiddom.model.*;
+import kiddom.service.EventService;
 import kiddom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Arianna on 6/6/2017.
  */
+
 @Controller
 public class MainController {
     @Autowired
     private IAuthenticationFacade authenticationFacade;
 
+    @Qualifier("userService")
     @Autowired
     private UserService userService;
 
+    @Qualifier("eventService")
+    @Autowired
+    private EventService eventService;
+
     @RequestMapping(value="/activity", method = RequestMethod.GET)
-    public ModelAndView activity_show(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user){
+    public ModelAndView activity_show(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("single_event") SingleEventEntity singleEvent, RedirectAttributes redirectAttributes){
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
@@ -35,6 +45,18 @@ public class MainController {
             modelAndView.addObject("uname", authentication.getName());
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
+        }
+        SingleEventEntity  single_event= eventService.findSingleEvent(singleEvent);
+        System.out.println("Vrika t event "+single_event.getName());
+        modelAndView.addObject("single_event", single_event);
+        Set<ProgramEntity> programEntity= single_event.getProgram();
+        if(programEntity.isEmpty()) {
+            System.out.println("To programma einai keno");
+            redirectAttributes.addFlashAttribute("define", "false");
+        }
+        else {
+            System.out.println("To programma    den  einai keno");
+            redirectAttributes.addFlashAttribute("define", "true");
         }
         modelAndView.setViewName("/activity");
         return modelAndView;
