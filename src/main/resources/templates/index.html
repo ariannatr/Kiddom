@@ -78,7 +78,7 @@ Licence URI: http://www.os-templates.com/template-terms
           <div th:if ="${(uname == null) or (type==null)} ">
               <li><i class="fa fa-lg fa-home"></i></a></li>
             <li>
-              <a data-toggle="modal" href="#login_overlay">Συνδεση</a>
+              <a id="trial"  data-toggle="modal" href="#login_overlay">Συνδεση</a>
             </li>
             <li>
               <a th:href="register">Εγγραφη</a></li>
@@ -130,6 +130,9 @@ Licence URI: http://www.os-templates.com/template-terms
   <!-- ################################################################################################ -->
   <!-- ################################################################################################ -->
   <div id="pageintro" class="hoc clear">
+    <div th:if ="${(param.success != null) and (param.success[0] == 'false')}">
+      <div class="alert alert-danger" style="text-align: center;"> Πληκτρολογήσατε λάθος ονομα ή κωδικό χρήστη.Παρακαλούμε επαναλάβετε τη διαδικασία.</div>
+    </div >
     <!-- ################################################################################################ -->
     <div class="flexslider basicslider">
       <ul class="slides">
@@ -285,6 +288,7 @@ Licence URI: http://www.os-templates.com/template-terms
   <div class="modal fade" id="login_overlay">  
     <div  class="modal-dialog">
       <div class="modal-content">
+
           <div class="modal-header">
              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Κλείσιμο</span></button>
               <h4 class="modal-title" id="myModalLabel">Συνδεση στο KIDDOM</h4>
