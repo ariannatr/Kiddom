@@ -139,6 +139,9 @@
 												<span class="help-block"></span>
 											</div>
 										</div>
+										<div class="col-md-4">
+											<span id="usernameError" class="hidden alert-danger">Το όνομα χρήστη που επιλέξατε χρησιμοποιείται ήδη</span>
+										</div>
 									</div>
 
 									<div class="form-group">
@@ -193,6 +196,7 @@
 
 <!-- ################################################################################################ -->
 <div th:replace="fragments/foot :: foot"></div>
+<script th:src="@{scripts/regErrorCheck.js}" type="application/javascript"></script>
 </body>
 
 </html>
