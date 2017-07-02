@@ -23,6 +23,6 @@ public class AdminServiceImpl implements AdminService{
     @Transactional
     @Override
     public Page<ProviderEntity> findAllPageable(Pageable pageable) {
-        return providerRepository.findAll(pageable);
+        return providerRepository.findAllByApproved(0,pageable);
     }
 }

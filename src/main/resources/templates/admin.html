@@ -36,20 +36,20 @@
         <div th:if="${providers.totalPages != 1}" class="form-group col-md-11 pagination-centered">
             <ul class="pagination">
                 <li th:class="${providers.number == 0} ? disabled">
-                    <a class="pageLink" th:href="@{/(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+                    <a class="pageLink" th:href="@{/admin(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
                 </li>
                 <li th:class="${providers.number == 0} ? disabled">
-                    <a class="pageLink" th:href="@{/(pageSize=${selectedPageSize}, page=${providers.number})}">&larr;</a>
+                    <a class="pageLink" th:href="@{/admin(pageSize=${selectedPageSize}, page=${providers.number})}">&larr;</a>
                 </li>
                 <li th:class="${providers.number == (page - 1)} ? 'active pointer-disabled'"
                     th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
-                    <a class="pageLink" th:href="@{/(pageSize=${selectedPageSize}, page=${page})}" th:text="${page}"></a>
+                    <a class="pageLink" th:href="@{/admin(pageSize=${selectedPageSize}, page=${page})}" th:text="${page}"></a>
                 </li>
                 <li th:class="${providers.number + 1 == providers.totalPages} ? disabled">
-                    <a class="pageLink" th:href="@{/(pageSize=${selectedPageSize}, page=${providers.number + 2})}">&rarr;</a>
+                    <a class="pageLink" th:href="@{/admin(pageSize=${selectedPageSize}, page=${providers.number + 2})}">&rarr;</a>
                 </li>
                 <li th:class="${providers.number + 1 == providers.totalPages} ? disabled">
-                    <a class="pageLink" th:href="@{/(pageSize=${selectedPageSize}, page=${providers.totalPages})}">&raquo;</a>
+                    <a class="pageLink" th:href="@{/admin(pageSize=${selectedPageSize}, page=${providers.totalPages})}">&raquo;</a>
                 </li>
             </ul>
         </div>
