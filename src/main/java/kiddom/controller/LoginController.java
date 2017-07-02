@@ -40,6 +40,20 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
+    @RequestMapping(value={"/", "/index"}, method = RequestMethod.GET, produces= "application/javascript")
+    public ModelAndView index(@ModelAttribute("user") UserEntity user){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication authentication = authenticationFacade.getAuthentication();
+        System.out.println("Authentication name is "+authentication.getName());
+        modelAndView.setViewName("index");
+        if (!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            UserEntity userS = userService.findByUsername(authentication.getName());
+            modelAndView.addObject("type", String.valueOf(userS.getType()));
+        }
+        return modelAndView;
+    }
+
 	@RequestMapping(value={"/login"}, method = RequestMethod.POST)
 	public ModelAndView login(HttpSession session, @ModelAttribute("user") @Valid UserEntity user, BindingResult bindingResult, Principal principal){
 		ModelAndView modelAndView = new ModelAndView();
@@ -64,19 +78,7 @@ public class LoginController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value={"/", "/index"}, method = RequestMethod.GET, produces= "application/javascript")
-	public ModelAndView index(@ModelAttribute("user") UserEntity user){
-		ModelAndView modelAndView = new ModelAndView();
-        Authentication authentication = authenticationFacade.getAuthentication();
-        System.out.println("Authentication name is "+authentication.getName());
-        if (!authentication.getName().equals("anonymousUser")) {
-            modelAndView.addObject("uname", authentication.getName());
-            UserEntity userS = userService.findByUsername(authentication.getName());
-            modelAndView.addObject("type", String.valueOf(userS.getType()));
-            modelAndView.setViewName("index");
-        }
-        return modelAndView;
-	}
+
 
     @RequestMapping(value="/profile", method = RequestMethod.GET)
     public ModelAndView profile(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("parent") @Valid ParentEntity parent){
@@ -226,9 +228,11 @@ public class LoginController {
             modelAndView.addObject("uname", authentication.getName());
             ProviderEntity provideron = userService.findProvider(new ProviderPK(authentication.getName()));
             UserEntity useron = userService.findByUsername(authentication.getName());
+            System.out.println("useron.type= "+useron.getType());
             userService.updateUserProvider(provideron,provider,useron,user);
             ProviderPK provideronPK = new ProviderPK(authentication.getName());
             provideron = userService.findProvider(provideronPK);
+            System.out.println("provideron.town= "+provideron.getTown());
             modelAndView.addObject("provider", provideronPK.getUser());
             modelAndView.addObject("user",provideron);
             modelAndView.addObject("total_points",provideron.getTotalPoints());
