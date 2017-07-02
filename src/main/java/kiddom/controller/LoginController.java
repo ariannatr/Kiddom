@@ -228,11 +228,9 @@ public class LoginController {
             modelAndView.addObject("uname", authentication.getName());
             ProviderEntity provideron = userService.findProvider(new ProviderPK(authentication.getName()));
             UserEntity useron = userService.findByUsername(authentication.getName());
-            System.out.println("useron.type= "+useron.getType());
             userService.updateUserProvider(provideron,provider,useron,user);
             ProviderPK provideronPK = new ProviderPK(authentication.getName());
             provideron = userService.findProvider(provideronPK);
-            System.out.println("provideron.town= "+provideron.getTown());
             modelAndView.addObject("provider", provideronPK.getUser());
             modelAndView.addObject("user",provideron);
             modelAndView.addObject("total_points",provideron.getTotalPoints());
@@ -241,6 +239,7 @@ public class LoginController {
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type",String.valueOf(userS.getType()));
         }
+
         modelAndView.setViewName("profileProvider");
         return modelAndView;
     }
