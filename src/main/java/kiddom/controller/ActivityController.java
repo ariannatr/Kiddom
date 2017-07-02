@@ -2,6 +2,7 @@ package kiddom.controller;
 
 import kiddom.authentication.IAuthenticationFacade;
 import kiddom.model.*;
+import kiddom.service.EventService;
 import kiddom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -27,6 +28,9 @@ public class ActivityController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private EventService eventService;
 
     @RequestMapping(value="/activity_reg", method = RequestMethod.GET)
     public ModelAndView activity_register(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, RedirectAttributes redirectAttributes){
@@ -77,7 +81,7 @@ public class ActivityController {
             modelAndView.addObject("provider", provideron);
             if (useron.getType() == 2) {
                 System.out.println("I'm a provider");
-                userService.saveActivity(useron, provideron, event, program);
+                eventService.saveActivity(useron, provideron, event, program);
             }
             else {
                 modelAndView.setViewName("redirect:/error_page?error_code=not_prov");
