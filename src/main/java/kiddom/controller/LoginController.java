@@ -17,8 +17,15 @@ import sun.security.pkcs11.wrapper.Constants;
 
 import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpSession;
+import javax.swing.text.html.HTMLDocument;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 
 @Controller
@@ -154,15 +161,22 @@ public class LoginController {
             System.out.println("username " + authentication.getName());
             ProviderPK providerPk = new ProviderPK(authentication.getName());
             System.out.println("username in PK is :"+providerPk.getUser().getUsername());
-            ProviderEntity useron=userService.findProvider(providerPk);
+            ProviderEntity useron = userService.findProvider(providerPk);
             modelAndView.addObject("provider", providerPk.getUser());
             modelAndView.addObject("user",useron);
             System.out.println("Avail points are"+useron.getTotalPoints());
-            modelAndView.addObject("total_points",useron.getTotalPoints());
-            modelAndView.addObject("owed_points",useron.getOwedPoints());
-            modelAndView.addObject("gotten_points",useron.getGottenPoints());
+            modelAndView.addObject("total_points", useron.getTotalPoints());
+            modelAndView.addObject("owed_points", useron.getOwedPoints());
+            modelAndView.addObject("gotten_points", useron.getGottenPoints());
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
+            Set events = useron.getEvents();
+            List<SingleEventEntity> provider_events = new ArrayList<>(events);
+            SingleEventEntity first_event = provider_events.get(0);
+            System.out.println("First event postcode: " + first_event.getPostcode());
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate localDate = LocalDate.now();
+            System.out.println(dtf.format(localDate));
         }
         modelAndView.setViewName("profileProvider");
         return modelAndView;

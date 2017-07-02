@@ -36,11 +36,13 @@ SOS! --> Να κρατηθεί (και να βελτιωθεί) η δομή τη
 > SQL: create script to insert all data to db - TODO
 > SQL: connect Elastic to project - TODO
 
-> Login: rememeber me attribute - TODO
+> Login: remember me attribute - TODO
 > Login: show wrong password message in modal in case of failure - TODO
 > Login: fix the download problem - TODO
 
 > Register (provider and parent): put clear button and cancel button in form - TODO
 > Register : message when input username is already in use - TODO
 
->Password Change : Confirm user before changing password? - TODO
+> Password Change : Confirm user before changing password? - TODO
+
+> Unit testing!

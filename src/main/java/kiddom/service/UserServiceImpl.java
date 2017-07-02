@@ -10,6 +10,8 @@ import kiddom.model.*;
 
 import java.security.Provider;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 //import com.example.model.Role;
 
@@ -39,10 +41,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private CookieRepository cookieRepository;
 
+    @Qualifier("programRepository")
+    @Autowired
+    private ProgramRepository programRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
 	@Override
 	public UserEntity findByUsername(String username) {
 		return userRepository.findByUsername(username);
@@ -124,7 +129,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveActivity(UserEntity user, ProviderEntity provider, SingleEventEntity event)
+    public void saveActivity(UserEntity user, ProviderEntity provider, SingleEventEntity event, HashSet<ProgramEntity> program)
     {
         /*
         String photos = null;
@@ -150,8 +155,16 @@ public class UserServiceImpl implements UserService {
 		}
 		event.setPhotos(photos);*/
         event.setProviders(provider);
+        System.out.println("Event id is " + event.getId());
+        //event.setProgram(program);
         System.out.println("Event by " + provider.getPk().getUser().getUsername());
         activityRepository.save(event);
+        for (ProgramEntity daily_program : program) {
+            daily_program.setEvent(event);
+            programRepository.save(daily_program);
+        }
+        event.setProgram(program);
+        activityRepository.saveAndFlush(event);
         System.out.println("Done.");
     }
 

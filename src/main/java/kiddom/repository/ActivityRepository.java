@@ -10,3 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository("activityRepository")
 public interface ActivityRepository extends JpaRepository<SingleEventEntity, Long> {
 }
+
+
