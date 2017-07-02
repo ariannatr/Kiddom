@@ -33,7 +33,7 @@ public class LoginController {
 	public ModelAndView login(HttpSession session, @ModelAttribute("user") @Valid UserEntity user, BindingResult bindingResult, Principal principal){
 		ModelAndView modelAndView = new ModelAndView();
 		UserEntity userExists = userService.findByUsernamePassword(user.getUsername(),user.getPassword());
-
+        System.out.println("geiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		if (userExists != null) {  //found a user with username and password
 			System.out.println("Found the user " + userExists.getUsername());
 			String uname = userExists.getUsername();
@@ -118,7 +118,7 @@ public class LoginController {
     }
 
     @RequestMapping(value="/pointsBuy", method = RequestMethod.POST)
-    public ModelAndView pointsBuy(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("parent") @Valid ParentEntity parent){
+    public ModelAndView pointsBuy(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("parent") @Valid ParentEntity parent,RedirectAttributes redirectAttributes){
         System.out.println("zitise "+parent.getTotalPoints()+" ");
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
@@ -140,7 +140,10 @@ public class LoginController {
             modelAndView.addObject("type",String.valueOf(useron.getType()));
 
         }
-        modelAndView.setViewName("profile");
+//        modelAndView.setViewName("redirect:/buypoints");
+        redirectAttributes.addFlashAttribute("success","true");
+//        modelAndView.setViewName("buypoints");
+        modelAndView.setViewName("redirect:/buypoints");
         return modelAndView;
     }
 

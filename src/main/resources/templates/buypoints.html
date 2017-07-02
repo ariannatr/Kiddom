@@ -107,31 +107,22 @@
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- Top Background Image Wrapper -->
+<div th:if ="${(success != null) and (success == 'true')}">
+    <script>
+        window.onload = function () {
+            var modal = document.getElementById('myModal');
+            modal.style.display = "block";
+        }
+    </script>
+</div>
 
 <div  class="wrapper row3" style="background-color:white" >
     <main class="hoc container clear" >
         <div class="row">
-            <div id="change_form" style="display: none;">
-                <form class="form-horizontal" method="POST" th:action="@{/pointsBuy}"   >
-                    <div class="form-group" >
-                        <label class="control-label col-sm-2" for="totalPoints">TotalPoints:</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="totalPoints"  name="totalPoints">
-                            <!--<div type=text" id="totalPoints"  name="totalPoints"> 100 </div>-->
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class=" col-sm-offset-2 col-sm-1">
-                            <button id="finishbutton" type="submit" class="btn btn-default">Αλλαγή</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+
             <h3 style="text-transform: none;"> Επιλέξτε πακέτο ή πληκτρολογείστε τον επιθυμητό αριθμό πόντων</h3>
-            <!--<div class="w3ls_main_grid_right_grid_form">-->
             <div class="col-md-4">
                 <form class="form" action="#" method="post">
-                    <!--<div class="w3l_main_grid_right_grid_form1">-->
 
                     <div class="form-group">
                         <label class="control-label" > Πακέτο 1 (260 πόντοι - 50€)</label>
@@ -158,7 +149,7 @@
                     </div>
                 </form>
 
-                <!--<button class="btn" onclick="reset()" > Tέλος </button>-->
+
             </div>
             <div class="col-md-4 col-md-offset-2">
                 <!--<div class="hidden-xs" > <br><br><br> </div>-->
@@ -189,7 +180,7 @@
             </div>
         </div>
 
-        <div class="col-md-8 " id="credit_payment"  >
+        <div class="col-md-8 "   >
             <!--<div class="row">-->
             <!--<div class="col-xs-12 col-md-4 col-md-offset-2">-->
             <div class="panel panel-default">
@@ -199,13 +190,32 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <form role="form">
-                        <div class="form-group">
+                    <form role="form" method="POST" th:action="@{/pointsBuy}">
+                        <div id="paypal_payment" style="display: none">
+                            <div class="form-group">
+                                <label for="username">
+                                    Όνομα Χρήστη</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="username" placeholder="Username">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Email">
+                                    Email</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="Email" placeholder="noreply@email.com">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="credit_payment">
+                        <div class="form-group" >
                             <label for="cardNumber">
                                 Αριθμός Κάρτας</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="cardNumber" placeholder="Valid Card Number"
-                                       required autofocus />
+                                       required >
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                             </div>
                         </div>
@@ -216,7 +226,7 @@
                                         Ημερομηνία Λήξης</label>
                                     <div class="col-xs-6 col-lg-6 pl-ziro">
                                         <!--<input type="text" class="form-control" id="expityMonth" placeholder="MM" required / >-->
-                                        <select class="form-control" required  >
+                                        <select class="form-control" id="monthselect" required  >
                                             <option  value="" disabled selected >Μήνας</option>
                                             <option value="Ιανουάριος">01</option>
                                             <option value="Φεβρουάριος">02</option>
@@ -244,6 +254,12 @@
                                 </div>
                             </div>
                         </div>
+                        </div>
+                        <div class="col-sm-10" style="display: none;">
+                            <input type="text" class="form-control" id="totalPoints"  name="totalPoints">
+                            <!--<div type=text" id="totalPoints"  name="totalPoints"> 100 </div>-->
+                        </div>
+                        <button type="submit"   class="btn btn-success btn-lg btn-block">Πληρωμη</button>
                     </form>
                 </div>
             </div>
@@ -252,11 +268,12 @@
                 </li>
             </ul>
             <br/>
-            <button   id="myBtn" class="btn btn-success btn-lg btn-block">Πληρωμη</button>
+            <!--<button   id="myBtn" class="btn btn-success btn-lg btn-block">Πληρωμη</button>-->
         </div>
         <div id="myModal" class="modal">
 
             <!-- Modal content -->
+
             <div class="modal-content">
                 <div class="modal-header">
                     <span class="close" >
@@ -265,9 +282,9 @@
                 </div>
                 <div class="modal-body" style="text-align: center">
                     <strong> Η συναλλαγή ολοκληρώθηκε.</strong>
-                    <strong> Αποκτήσατε <div id="finalpoints">  </div>  πόντους</strong>
+                    <!--<strong> Διαθέτετε <span th:text="${total_points}"></span>  πόντους</strong>-->
                     <br>
-                    <a  th:href="profile" class="btn btn-success" role="button" data-dismiss="myModal" onclick="reset()"> EΠΙΣΤΡΟΦΗ ΣΤΟ ΠΟΡΤΟΦΟΛΙ</a>
+                    <a  th:href="profile" class="btn btn-success" role="button" data-dismiss="myModal" > EΠΙΣΤΡΟΦΗ ΣΤΟ ΠΟΡΤΟΦΟΛΙ</a>
 
 
                 </div>
@@ -276,111 +293,62 @@
 
         </div>
 
-        <div class="col-md-8" id="paypal_payment" style="display: none">
 
-            <!--<div class="row">-->
-            <!--<div class="col-xs-12 col-md-4 col-md-offset-2">-->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        ΠΛΗΡΩΜΗ ΜΕ PAYPAL
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <form role="form">
-                        <div class="form-group">
-                            <label for="username">
-                                Όνομα Χρήστη</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="username" placeholder="Username"
-                                       required autofocus />
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="Email">
-                                Email</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="Email" placeholder="noreply@email.com"
-                                       required autofocus />
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <ul class="nav nav-pills nav-stacked">
-                <li style="text-align: center" class="active"><a href="#"><span class="glyphicon glyphicon-euro" id="points3"></span> Final Payment</a>
-                </li>
-            </ul>
-            <br/>
-            <button  id="myBtn2" class="btn btn-success btn-lg btn-block" >Πληρωμη</button>
-        </div>
     </main>
 </div>
 
 <div th:replace="fragments/foot :: foot"></div>
 
-<!--<script>-->
-<!--function myFunction() {-->
-<!--document.getElementById("finishbutton").click();-->
-<!--}-->
-<!--document.getElementById('totalPoints').value = 200;-->
-<!--var button = document.getElementById("buybutton");-->
-<!--button.onclick = function () {-->
 
-<!--myFunction();-->
-<!--}-->
-<!--</script>-->
 
 <script>
     // Get the modal
 
     var modal = document.getElementById('myModal');
-    var btn = document.getElementById("myBtn");
-    var btn2 = document.getElementById("myBtn2");
-    var finalpoints = document.getElementById("finalpoints");
+    //    var btn = document.getElementById("myBtn");
+    //    var btn2 = document.getElementById("myBtn2");
+    //    var finalpoints = document.getElementById("finalpoints");
     var closebutton = document.getElementById("closebutton");
-    function myFunction() {
-        document.getElementById("finishbutton").click();
-    }
+    //    function myFunction() {
+    //        document.getElementById("finishbutton").click();
+    //    }
     //    document.getElementById('totalPoints').value = 200;
 
 
 
     // When the user clicks on the button, open the modal
-    btn.onclick = function() {
-//        document.getElementById('change_form').submit();
-        var quantity = parseInt(document.getElementById("quantity").value);
-        var quantity2 = parseInt(document.getElementById("quantity2").value);
-        var quantity3 = parseInt(document.getElementById("quantity3").value);
-        var quantity4 = parseInt(document.getElementById("quantity4").value);
-        var points = (quantity * 260) + (quantity2 * 530) + (quantity3 * 1070) + (quantity4);
-        document.getElementById("finalpoints").innerText = points;
-        modal.style.display = "block";
-        myFunction();
-    }
-    btn2.onclick = function() {
-        var quantity = parseInt(document.getElementById("quantity").value);
-        var quantity2 = parseInt(document.getElementById("quantity2").value);
-        var quantity3 = parseInt(document.getElementById("quantity3").value);
-        var quantity4 = parseInt(document.getElementById("quantity4").value);
-        var points = (quantity * 260) + (quantity2 * 530) + (quantity3 * 1070) + (quantity4);
-        document.getElementById("finalpoints").innerText = points;
-        modal.style.display = "block";
-        myFunction();
-    }
+    //    btn.onclick = function() {
+    ////        document.getElementById('change_form').submit();
+    //        var quantity = parseInt(document.getElementById("quantity").value);
+    //        var quantity2 = parseInt(document.getElementById("quantity2").value);
+    //        var quantity3 = parseInt(document.getElementById("quantity3").value);
+    //        var quantity4 = parseInt(document.getElementById("quantity4").value);
+    //        var points = (quantity * 260) + (quantity2 * 530) + (quantity3 * 1070) + (quantity4);
+    ////        document.getElementById("finalpoints").innerText = points;
+    //        modal.style.display = "block";
+    //        myFunction();
+    //    }
+    //    btn2.onclick = function() {
+    //        var quantity = parseInt(document.getElementById("quantity").value);
+    //        var quantity2 = parseInt(document.getElementById("quantity2").value);
+    //        var quantity3 = parseInt(document.getElementById("quantity3").value);
+    //        var quantity4 = parseInt(document.getElementById("quantity4").value);
+    //        var points = (quantity * 260) + (quantity2 * 530) + (quantity3 * 1070) + (quantity4);
+    ////        document.getElementById("finalpoints").innerText = points;
+    //        modal.style.display = "block";
+    //        myFunction();
+    //    }
     //    reset();
     // When the user clicks on <span> (x), close the modal
     closebutton.onclick = function() {
-        reset();
+//        reset();
         modal.style.display = "none";
     }
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
-            reset();
+//            reset();
             modal.style.display = "none";
         }
     }
@@ -412,6 +380,14 @@
         if (document.getElementById("payment").value == "1") {
 
             showdiv('credit_payment');
+            document.getElementById("cardNumber").required=true;
+            document.getElementById("monthselect").required=true;
+            document.getElementById("expityYear").required=true;
+            document.getElementById("cvCode").required=true;
+            document.getElementById("username").required=false;
+            document.getElementById("Email").required=false;
+
+
 
         }
         else {
@@ -421,6 +397,13 @@
         }
         if (document.getElementById("payment").value == "2") {
             showdiv('paypal_payment');
+            document.getElementById("cardNumber").required=false;
+            document.getElementById("monthselect").required=false;
+            document.getElementById("expityYear").required=false;
+            document.getElementById("cvCode").required=false;
+            document.getElementById("username").required=true;
+            document.getElementById("Email").required=true;
+
         }
         else {
             hidediv('paypal_payment');
