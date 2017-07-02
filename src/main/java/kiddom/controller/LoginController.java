@@ -21,12 +21,15 @@ import javax.swing.text.html.HTMLDocument;
 import javax.validation.Valid;
 import java.awt.print.Pageable;
 import java.security.Principal;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 
 @Controller
@@ -176,11 +179,37 @@ public class LoginController {
             modelAndView.addObject("type", String.valueOf(userS.getType()));
             Set events = useron.getEvents();
             List<SingleEventEntity> provider_events = new ArrayList<>(events);
-            SingleEventEntity first_event = provider_events.get(0);
-            System.out.println("First event postcode: " + first_event.getPostcode());
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate localDate = LocalDate.now();
             System.out.println(dtf.format(localDate));
+            String curr_date = dtf.format(localDate).toString();
+            if (provider_events != null) {
+                System.out.println("With events");
+                List<SingleEventEntity> curr_events = new ArrayList<>();
+                List<SingleEventEntity> past_events = new ArrayList<>();
+                for (SingleEventEntity event : provider_events) {
+                    if (event.getProgram() != null) {
+                        List<ProgramEntity> full_program = new ArrayList<>(event.getProgram());
+                        ProgramEntity program = full_program.get(0);
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        try {
+                            Date currDate = sdf.parse(curr_date);
+                            Date eventDate = sdf.parse(program.getDate());
+                            if (eventDate.after(currDate)) {
+                                curr_events.add(event);
+                            }
+                            else {
+                                past_events.add(event);
+                            }
+                        }
+                        catch (ParseException e) {
+                        }
+                    }
+                }
+            }
+            else {
+                System.out.println("Without events");
+            }
         }
         modelAndView.setViewName("profileProvider");
         return modelAndView;

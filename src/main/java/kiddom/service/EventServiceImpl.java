@@ -67,7 +67,6 @@ public class EventServiceImpl implements  EventService {
 		event.setPhotos(photos);*/
         event.setProviders(provider);
         System.out.println("Event id is " + event.getId());
-        //event.setProgram(program);
         System.out.println("Event by " + provider.getPk().getUser().getUsername());
         activityRepository.save(event);
         for (ProgramEntity daily_program : program) {
