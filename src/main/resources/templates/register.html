@@ -8,6 +8,37 @@
     <meta th:replace="fragments/head :: head">
     <link th:href="@{css/register_new.css}" rel="stylesheet" type="text/css" media="all">
         <script th:src="@{scripts/register_new.js}"></script>
+
+    <style type="text/css">
+        @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+        .isa_info, .isa_success, .isa_warning, .isa_error {
+            margin: 10px 0px;
+            padding:12px;
+
+        }
+        .isa_info {
+            color: #00529B;
+            background-color: #BDE5F8;
+        }
+        .isa_success {
+            color: #4F8A10;
+            background-color: #DFF2BF;
+        }
+        .isa_warning {
+            color: #9F6000;
+            background-color: #FEEFB3;
+        }
+        .isa_error {
+            color: #D8000C;
+            background-color: #FFBABA;
+        }
+        .isa_info i, .isa_success i, .isa_warning i, .isa_error i {
+            /*margin:10px 22px;*/
+            font-size: inherit;
+            vertical-align:middle;
+        }
+    </style>
 </head>
 
 
@@ -37,8 +68,8 @@
                     </div>
                     <br>
                     <div id="login" >
-                        <form  class="well form-horizontal" id="loginForm" method="POST" th:action="@{/register}" autocomplete="on">
-
+                        <form  class="well form-horizontal" id="loginForm" method="POST" th:action="@{/register}"   autocomplete="on">
+                            <!--th:action="@{/register}"-->
                             <div class="row setup-content" id="step-1">
 
                                 <div class="col-md-10">
@@ -126,11 +157,13 @@
                                         <div class="col-md-4 inputGroupContainer">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                                <input  name="username" id="username" required="required"  pattern=".{3,}" placeholder="πχ. mysuperusername" class="form-control"
+                                                <input  name="username" id="username" required="required" pattern=".{3,}" placeholder="πχ. mysuperusername" class="form-control"
                                                         type="text" title="Το όνομα χρήστη πρέπει να περιέχει τουλάχιστον 3 χαρακτήρες">
-
                                                 <span class="help-block"></span>
                                             </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <span id="usernameError" class="hidden alert-danger">Το όνομα χρήστη που επιλέξατε χρησιμοποιείται ήδη</span>
                                         </div>
                                     </div>
 
@@ -142,6 +175,9 @@
                                                 <input  name="email" id="email" required="required"   placeholder="πχ. mymail@mail.com" class="form-control" type="email" >
                                                 <span class="help-block"></span>
                                             </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <span id="emailError" class="hidden alert-danger"></span>
                                         </div>
                                     </div>
 
@@ -155,6 +191,11 @@
                                                 <span class="help-block"></span>
                                             </div>
                                         </div>
+                                        <div class="col-md-4">
+                                            <span id="pass1Error" >
+
+                                            </span>
+                                        </div>
                                     </div>
 
                                     <div class="form-group">
@@ -166,6 +207,12 @@
                                                         type="password"  title="Εισάγατε λάθος κωδικό επιβεβαίωσης !">
                                                 <span class="help-block"></span>
                                             </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <span id="pass2Error" class="hidden"> <div class="isa_error">
+                                                    <i class="fa fa-times-circle"></i>
+                                                    <span> </span>
+                                                </div></span>
                                         </div>
                                     </div>
 
@@ -186,6 +233,8 @@
 </div>
 
 <div th:replace="fragments/foot :: foot"></div>
+
+<script th:src="@{scripts/regErrorCheck.js}" type="application/javascript"></script>
 
 </body>
 
