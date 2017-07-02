@@ -1,9 +1,5 @@
 package kiddom.controller;
 
-
-
-
-import kiddom.AjaxValidation.UserInfo;
 import kiddom.model.UserEntity;
 import kiddom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
