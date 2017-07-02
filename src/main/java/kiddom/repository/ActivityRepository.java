@@ -16,7 +16,6 @@ import org.springframework.stereotype.Repository;
 @Repository("activityRepository")
 public interface ActivityRepository extends JpaRepository<SingleEventEntity, Long> {
     SingleEventEntity findSingleEventById(Integer Id);
-
     //Page<SingleEventEntity> findAllEvents(Pageable pageable);
 
 }

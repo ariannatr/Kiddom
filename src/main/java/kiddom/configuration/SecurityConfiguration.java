@@ -92,7 +92,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				//
                 .antMatchers("/profile").hasRole("1")//hasAuthority("1")//be a parent
                 .antMatchers("/profileProvider").hasRole("2")//be a Provider
-				.antMatchers("/admin").hasRole("0").anyRequest()//be admin
+				.antMatchers("/admin").permitAll()//.hasRole("0")
+                .anyRequest()//be admin
 				.authenticated().and().csrf().disable()
                 .formLogin()
 				.loginPage("/index")
