@@ -359,6 +359,7 @@ Licence URI: http://www.os-templates.com/template-terms
         input.type=type;
         if (value){
             input.value = value;
+            input.value = value;
         }
 
         return input;
@@ -384,7 +385,7 @@ Licence URI: http://www.os-templates.com/template-terms
         result = createField("glyphicon-time", "Ώρα λήξης δραστηριότητας", input);
         panel.appendChild(result);
 
-        input = createInput("capacity", "Διαθέσιμες θέσεις", "text", "");
+        input = createInput("availability", "Διαθέσιμες θέσεις", "text", "");
         result = createField("glyphicon-user", "Διαθέσιμες θέσεις", input);
         panel.appendChild(result);
 
@@ -511,7 +512,7 @@ Licence URI: http://www.os-templates.com/template-terms
 
     function alerter(button){
         var date = button.id.replace("-button", "");
-        addRow(date);
+        addRow(date, "#"+date+"-panel");
 
     }
 
@@ -520,10 +521,22 @@ Licence URI: http://www.os-templates.com/template-terms
     });
 
     function validation(){
-        alert("123");
-        jQuery("#dates .panel-group").each(function(){
-            console.log(this);
-        })
+//        alert("123");
+//        jQuery("#dates .panel-group").each(function(){
+//            console.log(this);
+//        })
+
+        var doc = jQuery("#dates .panel-group");
+        console.log(doc);
+        var notes = doc.childNodes[0];
+        console.log(notes[0])
+        console.log(notes.childNodes.length);
+//        for (var i = 0; i < doc.childNodes.length; i++) {
+//            console.log(notes[i]);
+//            for (var j =0; j <notes[i].childNodes.length; j++){
+//                console.log(notes[i][j]);
+//            }
+//        }
     }
 
 
