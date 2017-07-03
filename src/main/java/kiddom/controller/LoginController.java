@@ -58,7 +58,7 @@ public class LoginController {
 	public ModelAndView login(HttpSession session, @ModelAttribute("user") @Valid UserEntity user, BindingResult bindingResult, Principal principal){
 		ModelAndView modelAndView = new ModelAndView();
 		UserEntity userExists = userService.findByUsernamePassword(user.getUsername(),user.getPassword());
-        System.out.println("geiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+      //  System.out.println("geiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		if (userExists != null) {  //found a user with username and password
 			System.out.println("Found the user " + userExists.getUsername());
 			String uname = userExists.getUsername();
@@ -70,10 +70,10 @@ public class LoginController {
 			if(userExists != null)  //wrong password given
 			{
 				System.out.println("wrong password");
-				modelAndView.setViewName("redirect:/error_page");
+				modelAndView.setViewName("redirect:/error");
 			}
 			else
-				modelAndView.setViewName("redirect:/error_page");
+				modelAndView.setViewName("redirect:/error");
         }
 		return modelAndView;
 	}

@@ -139,6 +139,9 @@
                         <ul>
                             <li><a th:href="@{/index}">Αρχικη</a></li>
                             <span th:if ="${(module != null)} ">
+                                 <span th:if="${(module=='admin')}">
+                                    <li>Σελιδα διαχειριστη</li>
+                                </span>
                                 <span th:if="${(module=='about')}">
                                     <li>Σχετικα με εμας</li>
                                 </span>

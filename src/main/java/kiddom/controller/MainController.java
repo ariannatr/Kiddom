@@ -29,7 +29,7 @@ public class MainController {
     private UserService userService;
 
 
-    @RequestMapping(value="/error_page", method = RequestMethod.GET)
+    @RequestMapping(value="/error", method = RequestMethod.GET)
     public ModelAndView error(@ModelAttribute("user") @Valid UserEntity user){
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
@@ -39,7 +39,7 @@ public class MainController {
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
         }
-        modelAndView.setViewName("error_page");
+        modelAndView.setViewName("error");
         return modelAndView;
     }
 
@@ -95,7 +95,7 @@ public class MainController {
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
         }
-        modelAndView.setViewName("error_page");
+        modelAndView.setViewName("error");
         return modelAndView;
     }
 

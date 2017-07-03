@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 <!--
 Template Name: Maxisonix
 Author: <a href="http://www.os-templates.com/">OS Templates</a>
@@ -21,104 +21,97 @@ Licence URI: http://www.os-templates.com/template-terms
     <!-- main body -->
     <!-- ################################################################################################ -->
     <div class="sidebar one_quarter first"> 
-<h4 align="center" style="color:#cc834f;">Φιλτρα αναζητησης</h4>
+        <h4 align="center" style="color:#cc834f;">Φιλτρα αναζητησης</h4>
       <!-- ################################################################################################ -->
-     <div class="container">
+        <div class="container">
  
-    <div class="col-lg-2 col-md-5 col-md-offset-3 col-lg-offset-0">
-      <!--div class="well"-->
-        <form class="form-horizontal">
-          <div class="form-group">
-            <label for="type1" class="control-label"  style="text-align: left;">Κατηγορια Δραστηριοτητας</label>
-          <!--  <select class="form-control" name="category" id="type1" onchange="changeSelect( this.value )">-->
-                <div th:if ="${(categories!=null)}">
-                <select th:field="*{categories}" class="form-control" name="category" id="type1" onchange="changeSelect( this.value )">
-                    <option th:each="categorie : ${categories}"
+            <div class="col-lg-2 col-md-5 col-md-offset-3 col-lg-offset-0">
+
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="type1" class="control-label"  style="text-align: left;">Κατηγορια Δραστηριοτητας</label>
+                    <select th:field="*{categories}" class="form-control" name="category" id="type1" onchange="changeSelect( this.value )">
+                        <option value="0">Οποιαδήποτε</option>
+                        <option th:each="categorie : ${categories}"
                             th:value="${categorie}"
                             th:text="${categorie}">Wireframe</option>
-                </select>
-                 </div>
-          </div>
-
-          <div class="form-group">
-            <div  id="type2">
-              <label for="type2" class="control-label"  style="text-align: left;">Υποκατηγορία</label>
-              <select class="form-control" name="subcategory" style="display:none"> 
-                <option value="0">Οποιαδήποτε</option> 
-                <option value="1">Ποδόσφαιρο</option> 
-                <option value="2">Μπασκετ</option> 
-                <option value="3">Στίβος</option> 
-              </select> 
-
-              <select class="form-control" name="subcategory" style="display:none"> 
-                <option value="0">Οποιαδήποτε</option> 
-                <option value="1">Ζωγραφική</option> 
-                <option value="2">Κατασκευές</option> 
-                <option value="3">3</option> 
-              </select> 
-
-              <select class="form-control"  name="subcategory" style="display:none"> 
-                <option value="0">Οποιαδήποτε</option> 
-                <option value="1">Κουκλοθέατρο</option> 
-                <option value="2">Σινεμά</option> 
-                <option value="3">Κλόουν</option> 
-              </select> 
-            </div> 
-          </div>
-
-          <div class="form-group">
-            <label for="location1" class="control-label"  style="text-align: left;">Είδος χώρου</label>
-            <select class="form-control" name="location1" id="location1">
-              <option value="0">Οποιοσδήποτε</option>
-              <option value="1">Εσωτερικός χώρος</option>
-              <option value="2">Εξωτερικός χώρος</option>
-            </select>
-          </div>
+                        </select>
+                </div>
 
 
-          <div class="form-group">
-            <label  class="control-label"  style="text-align: left;">Ηλικίες</label>
-            <label class="inline"><input type="checkbox" autocomplete="off" id="0" value="0"/> Βρέφη </label>
-            <label class="inline"><input type="checkbox" autocomplete="off" /> Νήπια </label>
-            <label class="inline"><input type="checkbox" autocomplete="off" /> Παιδία </label>
-            <label class="inline"><input type="checkbox" autocomplete="off" /> Έφηβοι</label>
-          </div>
+            <div class="form-group">
+                <div  id="type2">
+                <label for="type2" class="control-label"  style="text-align: left;">Υποκατηγορία</label>
+                    <select class="form-control" name="subcategory" style="display:none">
+                        <option value="0">Οποιαδήποτε</option>
+                        <option value="1">Ποδόσφαιρο</option>
+                        <option value="2">Μπασκετ</option>
+                        <option value="3">Στίβος</option>
+                    </select>
 
-          <!--div class="form-group">
-            <label for="pricefrom" class="control-label"  style="text-align: left;">Min Price</label>
-            <div class="input-group">
-              <div class="input-group-addon" id="basic-addon1">$</div>
-              <input type="text" class="form-control" id="pricefrom" aria-describedby="basic-addon1">
+                    <select class="form-control" name="subcategory" style="display:none">
+                        <option value="0">Οποιαδήποτε</option>
+                        <option value="1">Ζωγραφική</option>
+                        <option value="2">Κατασκευές</option>
+                        <option value="3">3</option>
+                    </select>
+
+                    <select class="form-control"  name="subcategory" style="display:none">
+                        <option value="0">Οποιαδήποτε</option>
+                         <option value="1">Κουκλοθέατρο</option>
+                        <option value="2">Σινεμά</option>
+                        <option value="3">Κλόουν</option>
+                    </select>
+                </div>
             </div>
-          </div-->
+
+            <div class="form-group">
+                <label for="location1" class="control-label"  style="text-align: left;">Είδος χώρου</label>
+                <select class="form-control" name="location1" id="location1">
+                    <option value="0">Οποιοσδήποτε</option>
+                    <option value="1">Εσωτερικός χώρος</option>
+                    <option value="2">Εξωτερικός χώρος</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label  class="control-label"  style="text-align: left;">Ηλικίες</label>
+                <label class="inline"><input type="checkbox" autocomplete="off" id="0" value="0"/> Βρέφη </label>
+                <label class="inline"><input type="checkbox" autocomplete="off" /> Νήπια </label>
+                <label class="inline"><input type="checkbox" autocomplete="off" /> Παιδία </label>
+                <label class="inline"><input type="checkbox" autocomplete="off" /> Έφηβοι</label>
+            </div>
+
+
           
 
-          <div class="form-group" id="pricerange" >
-            <label for="pricerange" class="control-label"  style="text-align: left;">Εύρος τιμής (€)</label>
-            <div class="input-group" >
-                <label class="radio-inline">
-              <input type="radio" name="pricerange" id="price1"  value="1"/> 0-10    </label>  </br>
-              <label class="radio-inline">
-              <input type="radio" name="pricerange" id="price2"  value="2"/>10-20 </label>  </br>
-              <label class="radio-inline">
-              <input type="radio" name="pricerange" id="price3" value="3"/>20-30 </label>
+            <div class="form-group" id="pricerange" >
+                <label for="pricerange" class="control-label"  style="text-align: left;">Εύρος τιμής (€)</label>
+                <div class="input-group" >
+                    <label class="radio-inline">
+                        <input type="radio" name="pricerange" id="price1"  value="1"/> 0-10    </label>  </br>
+                    <label class="radio-inline">
+                        <input type="radio" name="pricerange" id="price2"  value="2"/>10-20 </label>  </br>
+                    <label class="radio-inline">
+                        <input type="radio" name="pricerange" id="price3" value="3"/>20-30 </label>
+                </div>
             </div>
-          </div>
 
-          <div class="text-center">
-            <button type="submit" title="Αναζήτηση" class="btn btn-default">
-            <i class="fa fa-search">
-              <em>Αναζητηση Ξανα</em>
-            </i>
-            </button>
-          </div>
+            <div class="text-center">
+                <button type="submit" title="Αναζήτηση" class="btn btn-default">
+                    <i class="fa fa-search">
+                    <em>Αναζητηση Ξανα</em>
+                    </i>
+                </button>
+            </div>
         </form>
-      <!--/div-->
+        </div>
+        </div>
     </div>
-</div>
 
      
-    </div>
+
     <!-- ################################################################################################ -->
     <!-- ################################################################################################ -->
     <div class="content three_quarter"> 
@@ -128,10 +121,11 @@ Licence URI: http://www.os-templates.com/template-terms
 
 
       <div class="group results">
-      <div th:if ="${(items!=null)}">
-              <div class=" borderedbox inspace-5">
-                  <article th:each="event : ${items} " class="one_third">
-                      <figure><a href="#"><img src="images/demo/event1.jpg" alt=""></a>
+
+          <div th:if ="${(items!=null)}">
+              <div th:each="event : ${items} " class=" borderedbox inspace-5">
+                  <article  >
+                      <figure><img th:src="@{images/demo/event1.jpg}"  style=" width:200px; height:190px;float: left; margin: 0px 15px 15px 0px;"alt="">
                           <figcaption>
                               <time datetime="2045-04-06T08:15+00:00"><strong>06</strong> <em>Απρ</em></time>
                           </figcaption>
@@ -142,17 +136,21 @@ Licence URI: http://www.os-templates.com/template-terms
                               <li><i class="fa fa-user"></i> <a href="#"><span th:text="${ event.owner }"></span></a></li>
                               <li><i class="fa fa-tag"></i> <a href="#"><span th:text="${event.category}"></span></a></li>
                           </ul>
-                          <p><span th:text="${event.description}"></span></p>
-                          <footer><a th:href="@{/activity/{eventID}(eventID=${event.id})}">Διαβάστε Περισσότερα &raquo;</a></footer>
+                          <p><span th:text="${event.description}">Εδω κατοικεί η περιγραφή της δρααστηριοτητας</span></p>
+                          <footer><a href="#">Διαβάστε Περισσότερα &raquo;</a></footer>
                       </div>
                   </article>
-              </div>
+              </div></br>
           </div>
-          <div th:replace="fragments/paginationbar :: paginationbar"></div>
+          </br></br>
 
       </div>
+            <div class="scrollable">
 
+            </div>
 
+                </br></br>
+        <div th:replace="fragments/paginationbar :: paginationbar"></div>
             </div>
     <!-- / main body -->
         <div class="clear"></div>
@@ -161,9 +159,30 @@ Licence URI: http://www.os-templates.com/template-terms
 
 
     <div th:replace="fragments/foot :: foot"></div>
+    <script>
+        function changeSelect( selectNo )
+        {
+            var cats=document.getElementById("type1");
+            var selectMe=0;
+            for( var i=0; i<cats.length; i++ )
+            {
+                if ( cats[i].value==selectNo )
+                { selectMe=i; }
+                cats[i].value = i+1;
 
-<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
-<script th:src="@{/js/app.js}"></script>
+
+            }
+            var sels = document.getElementById("type2").getElementsByTagName('SELECT');
+            for( var j=0; j<sels.length; j++ )
+            {
+                sels[j].style.display = "none";
+
+                if ( j==(selectMe-1) )
+                { sels[j].style.display = ''; }
+            }
+        }
+
+</script>
+
 </body>
 </html>

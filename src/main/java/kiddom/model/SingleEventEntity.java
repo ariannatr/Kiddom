@@ -69,7 +69,7 @@ public class SingleEventEntity implements Serializable {
         this.provider = provider;
     }
 
-    public String getOwner(){return provider.getName();}
+    public String getOwner(){return new String (provider.getName()+" "+ provider.getSurname());}
 
     /*--------------One to Many relation for event_id from event to the program--------------*/
     @OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL)

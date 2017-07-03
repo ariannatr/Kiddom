@@ -69,7 +69,7 @@ public class ActivityController {
             redirectAttributes.addFlashAttribute("success","true");
         }
         else {
-            modelAndView.setViewName("redirect:/error_page?error_code=anon");
+            modelAndView.setViewName("redirect:/error?error_code=anon");
             return modelAndView;
         }
         modelAndView.setViewName("activity_reg");
@@ -105,12 +105,12 @@ public class ActivityController {
                 eventService.saveActivity(useron, provideron, event, program);
             }
             else {
-                modelAndView.setViewName("redirect:/error_page?error_code=not_prov");
+                modelAndView.setViewName("redirect:/error?error_code=not_prov");
                 return modelAndView;
             }
         }
         else {
-            modelAndView.setViewName("redirect:/error_page?error_code=anon");
+            modelAndView.setViewName("redirect:/error?error_code=anon");
             return modelAndView;
         }
         redirectAttributes.addFlashAttribute("success","true");
