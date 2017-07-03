@@ -370,7 +370,7 @@
         <div class="row">
                 <!--Title-->
                 <div class="col-lg-12">
-                    <h1> The activity</h1>
+                    <h1><span th:text="${event.name}"></span></h1>
                 </div>
 
                 <!--Images preview for activity-->
@@ -419,9 +419,8 @@
                         </div>
                         <div class="col-lg-12 col-md-3">
 
-                            Αγ. Νικολαου 5
-                            Ηλιούπολη, ΑΘήνα
-                            Τηλ : 210 12 34 567
+                            <span th:text="${event.address}" , th:text="${event.number}"></span>
+                            <span th:text="${event.town}" , th:text="${event.area}"></span>
                         </div>
                     </div>
                 </div>
@@ -444,22 +443,7 @@
         <div class="row">
             <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <p id="description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque consequat est sit amet metus dignissim, non malesuada felis luctus.
-                    Praesent sed nibh eu libero lobortis gravida vitae posuere risus.
-                    bibendum imperdiet nulla, id tempor dui posuere ut. Praesent laoreet, ex sed consequat facilisis, dolor felis convallis urna, sed convallis turpis ex id quam.
-                    Nullam tincidunt hendrerit lorem non rhoncus. Curabitur quis efficitur arcu, bibendum blandit odio. Donec iaculis nisl nulla, a accumsan erat commodo vitae.
-                    Suspendisse tellus arcu, tempus at magna vitae, dictum aliquet lacus. Suspendisse accumsan eu nisl quis vulputate.
-
-                    Cras at nunc tincidunt ante consectetur dapibus non sit amet tellus.
-                    Vestibulum sit amet ex risus. Vivamus eleifend tempor porttitor.
-                    Aenean id massa id enim mollis consequat. Aliquam erat volutpat.
-                    Phasellus tincidunt lorem vel lacus rutrum vulputate. Quisque eros elit, finibus ut orci et, molestie congue felis.
-                    Phasellus commodo laoreet dolor eu aliquet.
-
-                    Sed vitae massa pretium, lacinia ex a, lacinia arcu. Etiam convallis, ipsum ac suscipit placerat, lorem ligula elementum nisi, ut pretium eros odio nec lorem.
-                    Aenean pretium in eros nec rutrum. Nullam sodales tristique mattis. Fusce aliquam rutrum lacus ut accumsan. Aliquam hendrerit posuere arcu ut auctor.
-                    Etiam nisi erat, porttitor at nibh varius, iaculis euismod ligula. Nullam vel porttitor orci, sed tincidunt eros.
-                    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec eget erat in lorem euismod lacinia nec eleifend turpis.
+                    <span th:text="${event.description}"></span>
                 </p>
             </div>
         </div>
