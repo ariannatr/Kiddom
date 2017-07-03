@@ -20,6 +20,7 @@ public interface EventService {
     public SingleEventEntity findSingleEvent(SingleEventEntity singleEventEntity);
     public SingleEventEntity findSingleEventById(int eventID);
     public List<SingleEventEntity> findALLEvents();
-   // public Page<SingleEventEntity> getAllEvents(Pageable pageable);
+    //public Page<SingleEventEntity> getAllEvents(Pageable pageable);
     public void saveActivity(UserEntity user, ProviderEntity provider, SingleEventEntity event, HashSet<ProgramEntity> program);
+    public void updateSingleEvent(ProviderEntity provider, SingleEventEntity event, SingleEventEntity eventEdit);
 }

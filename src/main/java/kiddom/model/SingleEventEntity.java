@@ -51,8 +51,19 @@ public class SingleEventEntity implements Serializable {
     private float ratings_sum;
     @Column(name = "ratings_number")
     private float ratings_number;
+    @Column(name = "canceled")
+    private int canceled;
 
     private String owner;
+
+    /*----------------------Constructor----------------------*/
+    //SingleEventEntity() {
+    //  Default constructor
+    //}
+
+    public SingleEventEntity() {
+        this.canceled = 0;
+    }
 
      /*--------------Relations with other tables--------------*/
 
@@ -217,6 +228,9 @@ public class SingleEventEntity implements Serializable {
     public void setRating(float rating) {
         this.ratings_number = rating;
     }
+
+    public int getCanceled() { return canceled; }
+    public void setCanceled(int canceled) { this.canceled = canceled; }
 
     @Override
     public boolean equals(Object o) {

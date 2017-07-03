@@ -118,12 +118,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/usernameCheck").anonymous()
                 .antMatchers("/register_prov").anonymous()
                 .antMatchers("/about").permitAll()
-                .antMatchers("/error").permitAll()
+                //.antMatchers("/error").permitAll()
                 .antMatchers("/activity").permitAll()
                 .antMatchers("/google_map").permitAll()
                 .antMatchers("/search").permitAll()
                 .antMatchers("/faq").permitAll()
                 .antMatchers("/activity_reg").hasRole("2")//be a provider
+                .antMatchers("/activityProvider").hasRole("2")
                 //
 				.antMatchers("/categories_form").permitAll()//has to be admin
                 //
@@ -144,8 +145,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/index").and().exceptionHandling()
-				.accessDeniedPage("/error");
+				.logoutSuccessUrl("/index").and().exceptionHandling();
+				//.accessDeniedPage("/error");
         http.sessionManagement()//now added
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .maximumSessions(2)
@@ -154,8 +155,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .invalidSessionUrl("/index")
                 .sessionFixation().migrateSession();
 		http.requiresChannel()
-				.antMatchers("/index","/register","/register_prov","/about","error",
-						"/activity","google_map","/search","/faq",
+				.antMatchers("/index","/register","/register_prov","/about",//"error",
+						"/activity","/activityProvider","google_map","/search","/faq",
 						"activity_reg","/categories_form","/category_submit","/profile","/profileProvider","/admin").requiresSecure();
       //  servletContext.setSessionTrackingModes(EnumSet.of(SessionTrackingMode.COOKIE));
 	}

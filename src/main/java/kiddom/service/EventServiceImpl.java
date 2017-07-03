@@ -6,6 +6,7 @@ import kiddom.model.SingleEventEntity;
 import kiddom.model.UserEntity;
 import kiddom.repository.ActivityRepository;
 import kiddom.repository.ProgramRepository;
+import kiddom.repository.ProviderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -28,6 +29,10 @@ public class EventServiceImpl implements EventService {
     @Qualifier("activityRepository")
     @Autowired
     private ActivityRepository activityRepository;
+
+    @Qualifier("providerRepository")
+    @Autowired
+    private ProviderRepository providerRepository;
 
     @Override
     public SingleEventEntity findSingleEventById(int eventID) {
@@ -82,4 +87,16 @@ public class EventServiceImpl implements EventService {
         activityRepository.saveAndFlush(event);
         System.out.println("Done.");
     }
+
+    @Override
+    public void updateSingleEvent(ProviderEntity provider, SingleEventEntity event, SingleEventEntity eventEdit) {
+        if (!event.getName().replaceAll(" ", "").equals("")) {
+            eventEdit.setName(event.getName());
+        }
+        if (!event.getDescription().replaceAll(" ", "").equals("")) {
+            eventEdit.setDescription(event.getDescription());
+        }
+        activityRepository.save(eventEdit);
+    }
+
 }

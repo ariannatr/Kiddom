@@ -34,7 +34,7 @@ public class ActivityController {
     private EventService eventService;
 
 
-    @RequestMapping(value="/activity/{eventID}", method = RequestMethod.GET)
+    @RequestMapping(value="/activityProvider/{eventID}", method = RequestMethod.GET)
     public ModelAndView activity_show(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @PathVariable String eventID){
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
@@ -49,7 +49,7 @@ public class ActivityController {
         System.out.println("Diavasa " + eventID_);
         SingleEventEntity event = eventService.findSingleEventById(eventID_);
         modelAndView.addObject("event", event);
-        modelAndView.setViewName("/activity");
+        modelAndView.setViewName("/activityProvider");
         return modelAndView;
     }
 
@@ -82,15 +82,8 @@ public class ActivityController {
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name (provider) is " + authentication.getName());
         if (!authentication.getName().equals("anonymousUser")) {
-
-            System.out.println("Created a program with date: " + daily_program.getDate());
-            System.out.println("Created a program with capacity: " + daily_program.getCapacity());
-            System.out.println("Created a program with start_time: " + daily_program.getStartTime());
-            System.out.println("Created a program with end_time: " + daily_program.getEndTime());
-            System.out.println("Created a program with price: " + daily_program.getPrice());
-
             System.out.println("To event exei id " + event.getId());
-
+            System.out.println("To date einai: " + daily_program.getDate());
             program.add(daily_program);
             //TODO for many event times!
             modelAndView.addObject("uname", authentication.getName());
@@ -115,6 +108,27 @@ public class ActivityController {
         }
         redirectAttributes.addFlashAttribute("success","true");
         modelAndView.setViewName("redirect:/activity_reg");
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/edit_event/{eventID}", method = RequestMethod.POST)
+    public ModelAndView edit_event(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("single_event") @Valid SingleEventEntity event, @PathVariable String eventID)
+    {
+        System.out.println("Provider name: " + provider.getName());
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication authentication = authenticationFacade.getAuthentication();
+        System.out.println("Authentication name is " + authentication.getName());
+        if (!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            Integer eventID_ = Integer.parseInt(eventID);
+            SingleEventEntity eventEdit = eventService.findSingleEventById(eventID_);
+            System.out.println("Kanw update sto " + eventID_);
+            eventService.updateSingleEvent(provider, event, eventEdit);
+            modelAndView.addObject("event", eventEdit);
+            modelAndView.addObject("provider", provider);
+            modelAndView.addObject("user", user);
+        }
+        modelAndView.setViewName("activityProvider");
         return modelAndView;
     }
 }

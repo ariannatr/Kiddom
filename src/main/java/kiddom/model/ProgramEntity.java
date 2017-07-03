@@ -33,7 +33,17 @@ public class ProgramEntity implements Serializable{
     private int price;
     @Column(name = "availability")
     private int availability;
+    @Column(name = "canceled")
+    private int canceled;
 
+    /*----------------------Constructor----------------------*/
+    //ProgramEntity() {
+    //  Default constructor
+    //}
+
+    public ProgramEntity() {
+        this.canceled = 0;
+    }
 
     /*--------------Relations with other tables--------------*/
 
@@ -115,6 +125,9 @@ public class ProgramEntity implements Serializable{
     public void setAvailability(int availability) {
         this.availability = availability;
     }
+
+    public int getCanceled() { return canceled; }
+    public void setCanceled(int canceled) { this.canceled = canceled; }
 
     @Override
     public boolean equals(Object o) {

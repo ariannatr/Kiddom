@@ -58,9 +58,6 @@ Licence URI: http://www.os-templates.com/template-terms
                         <button type="button" class="tablinks list-group-item" onclick="openCity(event, 'wallet')" th:id="${((param.tab != null) and (param.tab[0] == 'wallet')) ? 'my_active' : ''}">
                             <i class="fa fa-money" style="color:#cc834f"></i> Πορτοφόλι
                         </button>
-                        <button type="button" class="tablinks list-group-item" onclick="openCity(event, 'activity_creation')" th:id="${((param.tab != null) and (param.tab[0] == 'activity_creation')) ? 'my_active' : ''}">
-                            <i class="fa fa-university" style="color:#cc834f"></i> Δημιουργία Εκδήλωσης
-                        </button>
                         <button type="button" class="tablinks list-group-item" onclick="openCity(event, 'current_activities')" th:id="${((param.tab != null) and (param.tab[0] == 'current_activities')) ? 'my_active' : ''}">
                             <i class="fa fa-bicycle" style="color:#cc834f"></i> Επισκόπηση Δραστηριοτήτων
                         </button>
@@ -261,7 +258,6 @@ Licence URI: http://www.os-templates.com/template-terms
                         <table class="table" >
                             <thead>
                             <tr>
-
                                 <th > Πληρωθέν ποσό </th>
                                 <th> Χρωστούμενο ποσό </th>
                                 <th> Συνολικο ποσό </th>
@@ -278,307 +274,22 @@ Licence URI: http://www.os-templates.com/template-terms
                     </div>
                 </div>
 
-                <div id="activity_creation" class="tabcontent" >
-                    <div class="activityform">
-                        <form class="well form-horizontal" th:action="@{/activity_reg}" method="POST"  id="contact_form">
-                            <fieldset>
-
-                                <h3 style="text-transform: capitalize; text-align: center;"> Δημιουργία Δραστηριότητας</h3>
-                                <!-- Text input-->
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Όνομα δραστηριότητας</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                                            <input  name="name"  style="width: auto"  placeholder="Όνομα δραστηριότητας" class="form-control"  type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <br/>
-                                <!-- Text input-->
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" >Περιγραφή δραστηριότητας</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                                            <input style="width: auto" name="description" placeholder="Περιγραφή δραστηριότητας" class="form-control"  type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <br/>
-
-
-                                <!-- Text input-->
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Ημερομηνία έναρξης δραστηριότητας</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                            <input name="date" style="width: auto" placeholder="Ημερομηνία έναρξης δραστηριότητας" class="form-control"  type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <br/>
-
-
-                                <!-- Text input-->
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Ώρα έναρξης δραστηριότητας</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                                            <input name="startTime" style="width: auto" placeholder="Ώρα έναρξης δραστηριότητας" class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <br/>
-
-                                <!-- Text input-->
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Ώρα λήξης δραστηριότητας</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                                            <input name="endTime" style="width: auto" placeholder="Ώρα λήξης δραστηριότητας" class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <br/>
-
-                                <!-- Text input-->
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Διαθέσιμες θέσεις</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input name="capacity" style="width: auto" placeholder="Διαθέσιμες θέσεις" class="form-control"  type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <br/>
-
-                                <!-- Text input-->
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Τιμή ανά άτομο</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
-                                            <input name="price" style="width: auto" placeholder="Τιμή ανά άτομο" class="form-control"  type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <br/>
-
-                                <!-- Select Basic -->
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Πόλη</label>
-                                    <div class="col-md-4 selectContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                            <select name="town" style="width: auto" class="form-control selectpicker" >
-                                                <option value=" " >Παρακαλώ επιλέξτε πόλη</option>
-                                                <option>Alabama</option>
-                                                <option>Alaska</option>
-                                                <option >Arizona</option>
-                                                <option >Arkansas</option>
-                                                <option >California</option>
-                                                <option >Colorado</option>
-                                                <option >Connecticut</option>
-                                                <option >Delaware</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br/>
-
-                                <!-- Select Basic -->
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Περιοχή</label>
-                                    <div class="col-md-4 selectContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                            <select name="area" style="width: auto" class="form-control selectpicker" >
-                                                <option value=" " >Παρακαλώ επιλέξτε περιοχή</option>
-                                                <option>Alabama</option>
-                                                <option>Alaska</option>
-                                                <option >Arizona</option>
-                                                <option >Arkansas</option>
-                                                <option >California</option>
-                                                <option >Colorado</option>
-                                                <option >Connecticut</option>
-                                                <option >Delaware</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br/>
-
-                                <!-- Text input-->
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Οδός</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-                                            <input name="address" style="width: auto" placeholder="Οδός" class="form-control"  type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <br/>
-
-                                <!-- Text input-->
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Αριθμός</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                            <input name="number" style="width: auto" placeholder="Αριθμός" class="form-control"  type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <br/>
-
-                                <!-- Text input-->
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Ταχυδρομικός κώδικας</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                            <input name="postcode" style="width: auto" placeholder="Ταχυδρομικός κώδικας" class="form-control"  type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <br/>
-
-                                <!-- Select Basic -->
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Κατηγορία</label>
-                                    <div class="col-md-4 selectContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                            <select name="category" style="width: auto" class="form-control selectpicker" >
-                                                <option value=" " >Παρακαλώ επιλέξτε κατηγορία</option>
-                                                <option>Χορός</option>
-                                                <option>Αθλητισμός</option>
-                                                <option >Δημιουργική Δραστηριότητα</option>
-                                                <option >Ομαδικά παιχνίδια</option>
-                                                <option >Εκπαιδευτική Δραστηριότητα</option>
-                                                <option >Ζωγραφική</option>
-                                                <option >Παιχνίδι</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br/>
-
-                                <!-- Select Basic -->
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Υποκατηγορία 1</label>
-                                    <div class="col-md-4 selectContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                            <select name="sub1" style="width: auto" class="form-control selectpicker" >
-                                                <option value=" " >Παρακαλώ επιλέξτε υποκατηγορία</option>
-                                                <option>Μπάσκετ</option>
-                                                <option>Ποδόσφαιρο</option>
-                                                <option >Τέννις</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br/>
-
-                                <!-- Select Basic -->
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Υποκατηγορία 2</label>
-                                    <div class="col-md-4 selectContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                            <select name="sub2" style="width: auto" class="form-control selectpicker" >
-                                                <option value=" " >Παρακαλώ επιλέξτε υποκατηγορία</option>
-                                                <option>Μπαλέτο</option>
-                                                <option>Λάτιν</option>
-                                                <option >Παραδοσιακός</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br/>
-
-                                <!-- Select Basic -->
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Υποκατηγορία 3</label>
-                                    <div class="col-md-4 selectContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                            <select name="sub3" style="width: auto" class="form-control selectpicker" >
-                                                <option value=" " >Παρακαλώ επιλέξτε υποκατηγορία</option>
-                                                <option>Κατασκευές</option>
-                                                <option >Πηλός</option>
-                                                <option >Χρώματα</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br/>
-
-                                <div class="form-group" align="center">
-                                    <br/>
-                                    <label for="menu_images1" class="photo_upload" >Φωτογραφίες δραστηριότητας</label>
-                                    <br/>
-                                    <input name="image1"  type="file" accept="image/*" id="menu_images1" style="color: black;"/>
-                                    <br/>
-                                    <input name="image2"  type="file" accept="image/*" id="menu_images2" style="color: black;"/>
-                                    <br/>
-                                    <input name="image3"  type="file" accept="image/*" id="menu_images3" style="color: black;"/>
-                                    <br/>
-                                    <input name="image4"  type="file" accept="image/*" id="menu_images4" style="color: black;"/>
-                                    <br/>
-                                    <input name="image5"  type="file" accept="image/*" id="menu_images5" style="color: black;"/>
-                                    <!--img id="menu_image" class="preview_img" /-->
-                                    <span class="help-block"></span>
-                                </div>
-                                <br/>
-
-                                <!-- Button -->
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label"></label>
-                                    <div class="col-md-4">
-                                        <button type="submit" class="btn btn-warning" >Αποθηκευση δραστηριοτητας <span class="glyphicon glyphicon-send"></span></button>
-                                    </div>
-                                </div>
-
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
 
                 <div id="current_activities" class="tabcontent">
                     <!--change is needed here-->
                     <h3 style="text-transform: capitalize; text-align: center;"> Επισκόπηση Δραστηριοτήτων</h3>
                     <div class="table-responsive" >
                         <div th:if="${(currEvents != null)}">
-                            <article th:each="currEvent : ${currEvents}" class="one_third">
+                            <article style="background-color:white;" th:each="currEvent : ${currEvents}" class="one_third">
                                 <figure>
                                     <a href="#"><img th:src="@{images/demo/event1.jpg}" alt=""></a>
                                 </figure>
                                 <div class="txtwrap">
-                                    <h4 class="heading"><span th:text="${currEvent.name}"></span></h4>
-                                    <h5><span th:text="${currEvent.description}"></span></h5>
+                                    <br/>
+                                    <h4 class="heading" style="text-transform: capitalize; font-size: 16px; text-align: center;"><a th:href="@{/activityProvider/{eventID}(eventID=${currEvent.id})}">
+                                        <span th:text="${currEvent.name}"></span></a>
+                                    </h4>
+                                    <h6 style="text-transform: capitalize; font-size: 14px;  text-align: center;" th:text="${currEvent.description}"></h6>
                                 </div>
                             </article>
                         </div>
@@ -590,15 +301,16 @@ Licence URI: http://www.os-templates.com/template-terms
                     <h3 style="text-transform: capitalize; text-align: center;"> Παλαιότερες Δραστηριότητες</h3>
                     <div class="table-responsive" >
                         <div th:if="${(pastEvents != null)}">
-                            <article th:each="pastEvent : ${pastEvents}" class="one_third">
+                            <article style="background-color:white;" th:each="pastEvent : ${pastEvents}" class="one_third">
                                 <figure>
                                     <a href="#"><img th:src="@{images/demo/event1.jpg}" alt=""></a>
                                 </figure>
                                 <div class="txtwrap">
                                     <br/>
-                                    <input type="hidden" name="eventID" th:value="${pastEvent.id}" />
-                                    <h4 class="heading" style="text-transform: capitalize; font-size: 16px;"><a th:href="@{/activity/{eventID}(eventID=${pastEvent.id})}"><span th:text="${pastEvent.name}"></span></a></h4>
-                                    <h6 style="text-transform: capitalize; font-size: 14px;" th:text="${pastEvent.description}"></h6>
+                                    <h4 class="heading" style="text-transform: capitalize; font-size: 16px; text-align: center;"><a th:href="@{/activityProvider/{eventID}(eventID=${pastEvent.id})}">
+                                        <span th:text="${pastEvent.name}"></span></a>
+                                    </h4>
+                                    <h6 style="text-transform: capitalize; font-size: 14px;  text-align: center;" th:text="${pastEvent.description}"></h6>
                                 </div>
                             </article>
                         </div>

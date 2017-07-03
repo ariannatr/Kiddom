@@ -183,7 +183,7 @@ public class LoginController {
             modelAndView.addObject("type", String.valueOf(userS.getType()));
             Set events = useron.getEvents();
             List<SingleEventEntity> providerEvents = new ArrayList<>(events);
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate localDate = LocalDate.now();
             System.out.println(dtf.format(localDate));
             String currDate1 = dtf.format(localDate).toString();
@@ -199,7 +199,7 @@ public class LoginController {
                 //}
                 for (SingleEventEntity event : providerEvents) {
                     if (event.getProgram() != null) {
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                         for (ProgramEntity program : event.getProgram()) {
                             try {
                                 Date currDate = sdf.parse(currDate1);
