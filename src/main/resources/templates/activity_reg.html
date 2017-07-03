@@ -356,10 +356,11 @@ Licence URI: http://www.os-templates.com/template-terms
         input.name=name;
         input.placeholder=placeholder;
         input.classList.add("form-control");
-        input.type=type;
+        input.classList.add(name);
+        input.setAttribute("type", type);
         if (value){
             input.value = value;
-            input.value = value;
+            //input.value = value;
         }
 
         return input;
@@ -367,12 +368,13 @@ Licence URI: http://www.os-templates.com/template-terms
 
     var counter =0;
 
-    function addRow(date, parent) {
+    function addRow(date, parent, mode) {
         counter++;
+        alert(date);
         var panel = document.createElement("div");
         panel.setAttribute("class", "panel-body" );
 
-        var input = createInput("date", "Ημερομηνία έναρξης δραστηριότητας", "text", jQuery("#hiddenField").val());
+        var input = createInput("date", "Ημερομηνία έναρξης δραστηριότητας", "text", date);
         var result = createField("glyphicon-calendar", "Ημερομηνία", input);
         result.classList.add("hidden");
         panel.appendChild(result);
@@ -385,11 +387,11 @@ Licence URI: http://www.os-templates.com/template-terms
         result = createField("glyphicon-time", "Ώρα λήξης δραστηριότητας", input);
         panel.appendChild(result);
 
-        input = createInput("availability", "Διαθέσιμες θέσεις", "text", "");
+        input = createInput("availability", "Διαθέσιμες θέσεις", "number", "");
         result = createField("glyphicon-user", "Διαθέσιμες θέσεις", input);
         panel.appendChild(result);
 
-        input = createInput("price", "Τιμή ανά άτομο", "text", "");
+        input = createInput("price", "Τιμή ανά άτομο", "number", "");
         result = createField("glyphicon-euro", "Τιμή ανά άτομο", input);
         panel.appendChild(result);
 
@@ -419,8 +421,9 @@ Licence URI: http://www.os-templates.com/template-terms
 //
 //        alert(date);
 //        alert(date.toString());
-        if (date) {
+        if (mode) {
             var panelId = date.toString()+"-panel";
+            alert(date+"-panel");
             document.getElementById(date+"-panel").appendChild(divpanel);
 //            document.getElementById(date.toString()+"-panel").appendChild(divpanel);
 //            document.getElementById(date.toString()+"-panel").appendChild(divpanel);
@@ -432,11 +435,12 @@ Licence URI: http://www.os-templates.com/template-terms
 
     function createDate(){
         var date = jQuery("#hiddenField").val();
-        var panelContent = addRow("", "#"+date+"-panel");
+        var panelContent = addRow(date, "#"+date+"-panel", 0);
 
         var hoursPanelGroup = document.createElement("div");
         hoursPanelGroup.setAttribute("id", date+"-panel");
         hoursPanelGroup.setAttribute("class", "panel-group");
+        hoursPanelGroup.classList.add("timeslots");
         hoursPanelGroup.appendChild(panelContent);
 
         var msgSpan = document.createElement("span");
@@ -512,7 +516,7 @@ Licence URI: http://www.os-templates.com/template-terms
 
     function alerter(button){
         var date = button.id.replace("-button", "");
-        addRow(date, "#"+date+"-panel");
+        addRow(date, "#"+date+"-panel", 1);
 
     }
 
@@ -521,16 +525,52 @@ Licence URI: http://www.os-templates.com/template-terms
     });
 
     function validation(){
-//        alert("123");
-//        jQuery("#dates .panel-group").each(function(){
-//            console.log(this);
-//        })
+        //alert("123");
+        var slotsPerDay = [];
+        var slots=0;
+        jQuery(".timeslots").each(function(){
+            slots++;
+            console.log(this);
+            console.log(this.getElementsByClassName("panel-default").length);
 
-        var doc = jQuery("#dates .panel-group");
-        console.log(doc);
-        var notes = doc.childNodes[0];
-        console.log(notes[0])
-        console.log(notes.childNodes.length);
+            var panels = this.getElementsByClassName("panel-default");
+            var timeslot=panels[0];
+            console.log(timeslot);
+            for (var i=0; i<panels.length; i++) {
+                console.log("lala");
+            }
+            var panel= timeslot.lastChild.lastChild;
+            panel.childNodes[1]
+            console.log( panel.childNodes[1].lastChild.lastChild);
+            var wanted = jQuery(".startTime").get();
+
+             console.log(wanted.length);
+            slotsPerDay.push(wanted.length);
+//            console.log(starttime);
+//            var panelsLength = panels.length;
+//            for (var i=0; i<panels; i++){
+//
+//            }
+//            var div = this.getElementsByClassName(".panel-collapse");
+//             console.log(div);
+//            var div2 = div.getElementsByClassName(".panel-collapse")
+        });
+        var startHours = jQuery(".startTime").get();
+        var endHours = jQuery(".startTime").get();
+        for (var i =0; i<slots; i++){
+            for (var j=0; j<slotsPerDay[i]; j++){
+                for (var k = j+1; k<slotsPerDay[i]; k++) {
+                    console.log(slots);
+                    console.log(slotsPerDay[i]);
+                }
+            }
+        }
+
+//        var doc = jQuery("#dates .panel-group");
+//        console.log(doc);
+//        var notes = doc.childNodes[0];
+//        console.log(notes[0])
+//        console.log(notes.childNodes.length);
 //        for (var i = 0; i < doc.childNodes.length; i++) {
 //            console.log(notes[i]);
 //            for (var j =0; j <notes[i].childNodes.length; j++){
