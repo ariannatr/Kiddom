@@ -119,7 +119,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 						"activity_reg","/categories_form","/category_submit","/profile","/profileProvider","/admin").requiresSecure();
       //  servletContext.setSessionTrackingModes(EnumSet.of(SessionTrackingMode.COOKIE));*/
 		http.requiresChannel()
-				.antMatchers("/index","/register","/register_prov","/about","error",
+				.antMatchers("/index","/register","/register_prov","/about","/error",
 						"/activity","google_map","/search","/faq",
 						"activity_reg","/categories_form","/category_submit","/profile","/profileProvider","/admin").requiresSecure();
 	}
