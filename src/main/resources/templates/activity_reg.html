@@ -10,9 +10,9 @@ Licence URI: http://www.os-templates.com/template-terms
 -->
 
 <head>
-    <meta th:replace="fragments/head :: head">
+    <meta th:replace="/fragments/head :: head">
     <title>Kiddom-ActivityReg</title>
-    <script th:src="@{scripts/subcategories_show.js}"></script>
+    <script th:src="@{/scripts/subcategories_show.js}"></script>
 
     <style>
         /* Style the buttons that are used to open and close the accordion panel */
@@ -52,7 +52,7 @@ Licence URI: http://www.os-templates.com/template-terms
 
     <!-- Form Name -->
     <div th:if ="${(success != null) and (success == 'true')}">
-        <div class="alert alert-success" style="text-align: center;"> Η δημιουργία της εκδήλωσής σας ολοκληρώθηκε επιτυχώς! <br>  <a  th:href="index">Πίσω στην Αρχική</a></div>
+        <div class="alert alert-success" style="text-align: center;"> Η δημιουργία της εκδήλωσής σας ολοκληρώθηκε επιτυχώς! <br>  <a  th:href="@{/index}">Πίσω στην Αρχική</a></div>
     </div >
     <h1 align="center" style="font-weight: bold; color: lightslategrey;">Δημιουργηστε μια δραστηριοτητα!</h1>
     <p/>
@@ -285,7 +285,7 @@ Licence URI: http://www.os-templates.com/template-terms
     </form>
 </div>
 </div><!-- /.container -->
-<div th:replace="fragments/foot :: foot"></div>
+<div th:replace="/fragments/foot :: foot"></div>
 <script type="application/javascript">
 
     jQuery(".accordion").click(function() {
