@@ -19,7 +19,7 @@ import java.util.List;
  * Created by Arianna on 1/7/2017.
  */
 @Service("eventService")
-public class EventServiceImpl implements  EventService {
+public class EventServiceImpl implements EventService {
 
     @Qualifier("programRepository")
     @Autowired
@@ -28,6 +28,11 @@ public class EventServiceImpl implements  EventService {
     @Qualifier("activityRepository")
     @Autowired
     private ActivityRepository activityRepository;
+
+    @Override
+    public SingleEventEntity findSingleEventById(int eventID) {
+        return  activityRepository.findSingleEventById(eventID);
+    }
 
     @Override
     public SingleEventEntity findSingleEvent(SingleEventEntity singleEventEntity) {

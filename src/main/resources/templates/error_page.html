@@ -10,11 +10,11 @@ Licence URI: http://www.os-templates.com/template-terms
       xmlns:th="http://www.thymeleaf.org">
 <head >
   <title>Kiddom-ErrorPage</title>
-  <meta th:replace="fragments/head :: head">
+  <meta th:replace="/fragments/head :: head">
 </head>
 <body id="top">
 <!-- ################################################################################################ -->
-<div th:replace="fragments/navbar :: navbar('error_page')"></div>
+<div th:replace="/fragments/navbar :: navbar('error_page')"></div>
 
 
 <div class="wrapper row3">
@@ -36,6 +36,6 @@ Licence URI: http://www.os-templates.com/template-terms
 </div>
 <!--###################################### -->
 
-<div th:replace="fragments/foot :: foot"></div>
+<div th:replace="/fragments/foot :: foot"></div>
 </body>
 </html>

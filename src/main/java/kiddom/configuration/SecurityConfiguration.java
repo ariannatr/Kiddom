@@ -80,7 +80,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/register_prov").anonymous()
                 .antMatchers("/about").permitAll()
                 .antMatchers("/error_page").permitAll()
-                .antMatchers("/activity**").permitAll()
+                .antMatchers("/activity").permitAll()
                 .antMatchers("/google_map").permitAll()
                 .antMatchers("/search").permitAll()
                 .antMatchers("/faq").permitAll()
@@ -115,7 +115,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionFixation().migrateSession();
 		http.requiresChannel()
 				.antMatchers("/index","/register","/register_prov","/about","error_page",
-						"/activity**","google_map","/search","/faq",
+						"/activity","google_map","/search","/faq",
 						"activity_reg","/categories_form","/category_submit","/profile","/profileProvider","/admin").requiresSecure();
       //  servletContext.setSessionTrackingModes(EnumSet.of(SessionTrackingMode.COOKIE));*/
 	}

@@ -10,7 +10,7 @@ Licence URI: http://www.os-templates.com/template-terms
 -->
 <head >
     <title>Kiddom-Profile</title>
-    <meta th:replace="fragments/head :: head">
+    <meta th:replace="/fragments/head :: head">
 
     <style>
         .container2 {
@@ -37,12 +37,12 @@ Licence URI: http://www.os-templates.com/template-terms
     </style>
 
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
-    <script th:src="@{scripts/profile.js}"> </script>
+    <script th:src="@{/scripts/profile.js}"> </script>
 </head>
 
 <body id="top" >
 
-<div th:replace="fragments/navbar :: navbar('profile')"></div>
+<div th:replace="/fragments/navbar :: navbar('profile')"></div>
 
 
 <div class="wrapper row3" style="background-color:#b7c1ae" >
@@ -479,7 +479,7 @@ Licence URI: http://www.os-templates.com/template-terms
 </div>
 
 
-<div th:replace="fragments/foot :: foot"></div>
+<div th:replace="/fragments/foot :: foot"></div>
 <!-- JAVASCRIPTS -->
 
 

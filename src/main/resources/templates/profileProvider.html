@@ -35,11 +35,12 @@ Licence URI: http://www.os-templates.com/template-terms
     </style>
 
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <script th:src="@{/scripts/profile.js}"> </script>
 </head>
 
 <body id="top">
 
-    <div th:replace="fragments/navbar :: navbar('profile_prov')"></div>
+    <div th:replace="/fragments/navbar :: navbar('profile_prov')"></div>
 
 <div class="wrapper row3" style="background-color:#b7c1ae" >
     <main class="hoc container clear" >
@@ -605,7 +606,7 @@ Licence URI: http://www.os-templates.com/template-terms
                                 <div class="txtwrap">
                                     <br/>
                                     <input type="hidden" name="eventID" th:value="${pastEvent.id}" />
-                                    <h4 class="heading" style="text-transform: capitalize; font-size: 16px;"><a th:action="activity"><span th:text="${pastEvent.name}"></span></a></h4>
+                                    <h4 class="heading" style="text-transform: capitalize; font-size: 16px;"><a th:href="@{/activity/{eventID}(eventID=${pastEvent.id})}"><span th:text="${pastEvent.name}"></span></a></h4>
                                     <h6 style="text-transform: capitalize; font-size: 14px;" th:text="${pastEvent.description}"></h6>
                                 </div>
                             </article>
@@ -622,7 +623,7 @@ Licence URI: http://www.os-templates.com/template-terms
     </main>
 </div>
 
-    <div th:replace="fragments/foot :: foot"></div>
+    <div th:replace="/fragments/foot :: foot"></div>
 
 
 

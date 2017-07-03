@@ -3,10 +3,10 @@
 <head>
 
     <title>Title</title>
-    <meta th:replace="fragments/head :: head">
+    <meta th:replace="/fragments/head :: head">
 </head>
 <body id="top">
-<div th:replace="fragments/navbar :: navbar('about')"></div>
+<div th:replace="/fragments/navbar :: navbar('about')"></div>
 
 <div class="container">
     <div class="row">
@@ -26,11 +26,11 @@
             </tr>
         </table>
     </div>
-    <div th:replace="fragments/paginationbar :: paginationbar"></div>
+    <div th:replace="/fragments/paginationbar :: paginationbar"></div>
 </div>
 <script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/app.js}"></script>
-<div th:replace="fragments/foot :: foot"></div>
+<div th:replace="/fragments/foot :: foot"></div>
 </body>
 </html>

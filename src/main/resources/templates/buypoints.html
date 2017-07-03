@@ -4,9 +4,9 @@
 <html>
 <head >
     <title>Kiddom-Buy Points</title>
-    <meta th:replace="fragments/head :: head">
-    <script th:src="@{scripts/register_new.js}"></script>
-    <script th:src="@{scripts/wallet.js}"></script>
+    <meta th:replace="/fragments/head :: head">
+    <script th:src="@{/scripts/register_new.js}"></script>
+    <script th:src="@{/scripts/wallet.js}"></script>
 
     <style>
 
@@ -105,7 +105,7 @@
 </head>
 
 <body id="top">
-<div th:replace="fragments/navbar :: navbar('buypoints')"></div>
+<div th:replace="/fragments/navbar :: navbar('buypoints')"></div>
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
@@ -310,7 +310,7 @@
             <strong> Η συναλλαγή ολοκληρώθηκε.</strong>
             <!--<strong> Διαθέτετε <span th:text="${total_points}"></span>  πόντους</strong>-->
             <br>
-            <a  th:href="@{profile(tab=wallet)}" class="btn btn-success" role="button" data-dismiss="myModal" > EΠΙΣΤΡΟΦΗ ΣΤΟ ΠΟΡΤΟΦΟΛΙ</a>
+            <a  th:href="@{/profile(tab=wallet)}" class="btn btn-success" role="button" data-dismiss="myModal" > EΠΙΣΤΡΟΦΗ ΣΤΟ ΠΟΡΤΟΦΟΛΙ</a>
 
 
         </div>
@@ -319,7 +319,7 @@
 
 </div>
 
-<div th:replace="fragments/foot :: foot"></div>
+<div th:replace="/fragments/foot :: foot"></div>
 
 
 

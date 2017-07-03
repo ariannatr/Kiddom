@@ -143,7 +143,7 @@ Licence URI: http://www.os-templates.com/template-terms
                               <li><i class="fa fa-tag"></i> <a href="#"><span th:text="${event.category}"></span></a></li>
                           </ul>
                           <p><span th:text="${event.description}"></span></p>
-                          <footer><a th:href="@{/activity/${event.id}}">Διαβάστε Περισσότερα &raquo;</a></footer>
+                          <footer><a th:href="@{/activity/{eventID}(eventID=${event.id})}">Διαβάστε Περισσότερα &raquo;</a></footer>
                       </div>
                   </article>
               </div>

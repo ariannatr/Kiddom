@@ -10,13 +10,13 @@ Licence URI: http://www.os-templates.com/template-terms
 -->
 
 <head>
-    <meta th:replace="fragments/head :: head">
+    <meta th:replace="/fragments/head :: head">
     <title>Kiddom-ActivityReg</title>
-    <script th:src="@{scripts/subcategories_show.js}"></script>
+    <script th:src="@{/scripts/subcategories_show.js}"></script>
 </head>
 
 <body id="top" style="background-color:#b7c1ae">
-<div th:replace="fragments/navbar :: navbar('activity_reg')"></div>
+<div th:replace="/fragments/navbar :: navbar('activity_reg')"></div>
 
 
 <div class="container" style="background-color:#b7c1ae">
@@ -315,7 +315,7 @@ Licence URI: http://www.os-templates.com/template-terms
     </form>
 </div>
 </div><!-- /.container -->
-<div th:replace="fragments/foot :: foot"></div>
+<div th:replace="/fragments/foot :: foot"></div>
 
 
 </body>
