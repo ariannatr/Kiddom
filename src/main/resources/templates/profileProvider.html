@@ -10,6 +10,7 @@ Licence URI: http://www.os-templates.com/template-terms
 <head >
     <title>Provider Profile</title>
     <meta th:replace="fragments/head :: head">
+    <script th:src="@{scripts/profile.js}"> </script>
     <style>
         .container2 {
             padding-right: 15px;
@@ -35,11 +36,12 @@ Licence URI: http://www.os-templates.com/template-terms
     </style>
 
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <script th:src="@{/scripts/profile.js}"> </script>
 </head>
 
 <body id="top">
 
-    <div th:replace="fragments/navbar :: navbar('profile_prov')"></div>
+    <div th:replace="/fragments/navbar :: navbar('profile_prov')"></div>
 
 <div class="wrapper row3" style="background-color:#b7c1ae" >
     <main class="hoc container clear" >
@@ -291,7 +293,7 @@ Licence URI: http://www.os-templates.com/template-terms
                         <form class="well form-horizontal" th:action="@{/activity_reg}" method="POST"  id="contact_form">
                             <fieldset>
 
-                                <h3 style="text-transform: capitalize; text-align: center;"> Δημιουργία Δραστηριότητες</h3>
+                                <h3 style="text-transform: capitalize; text-align: center;"> Δημιουργία Δραστηριότητας</h3>
                                 <!-- Text input-->
 
                                 <div class="form-group">
@@ -576,39 +578,41 @@ Licence URI: http://www.os-templates.com/template-terms
                 </div>
 
                 <div id="current_activities" class="tabcontent">
-                    <!--change is needen here-->
+                    <!--change is needed here-->
                     <h3 style="text-transform: capitalize; text-align: center;"> Επισκόπηση Δραστηριοτήτων</h3>
                     <div class="table-responsive" >
-
-
-
-
-
-
+                        <div th:if="${(currEvents != null)}">
+                            <article th:each="currEvent : ${currEvents}" class="one_third">
+                                <figure>
+                                    <a href="#"><img src="images/demo/event1.jpg" alt=""></a>
+                                </figure>
+                                <div class="txtwrap">
+                                    <h4 class="heading"><span th:text="${currEvent.name}"></span></h4>
+                                    <h5><span th:text="${currEvent.description}"></span></h5>
+                                </div>
+                            </article>
+                        </div>
                     </div>
                 </div>
 
                 <div id="older_activities" class="tabcontent">
-                    <!--change is needen here-->
+                    <!--change is needed here-->
                     <h3 style="text-transform: capitalize; text-align: center;"> Παλαιότερες Δραστηριότητες</h3>
                     <div class="table-responsive" >
-                        <table class="table" >
-                            <thead>
-                            <tr>
-
-                                <th > Πληρωθέν ποσό </th>
-                                <th> Χρωστούμενο ποσό </th>
-                                <th> Συνολικο ποσό </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="text-primary"> <a th:text="${gotten_points}"></a></td>
-                                <td class="text-primary"> <a th:text="${owed_points}"></a></td>
-                                <td class="text-primary"> <a th:text="${total_points}"></a></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div th:if="${(pastEvents != null)}">
+                            <article th:each="pastEvent : ${pastEvents}" class="one_third">
+                                <figure>
+                                    <a href="#"><img src="images/demo/event1.jpg" alt=""></a>
+                                </figure>
+                                <div class="txtwrap">
+                                    <br/>
+                                    <input type="hidden" name="eventID" th:value="${pastEvent.id}" />
+                                    <h4 class="heading" style="text-transform: capitalize; font-size: 16px;"><a th:href="@{/activity/{eventID}(eventID=${pastEvent.id})}"><span th:text="${pastEvent.name}"></span></a></h4>
+                                    <h6 style="text-transform: capitalize; font-size: 14px;" th:text="${pastEvent.description}"></h6>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
                     </div>
                 </div>
 
@@ -620,7 +624,7 @@ Licence URI: http://www.os-templates.com/template-terms
     </main>
 </div>
 
-    <div th:replace="fragments/foot :: foot"></div>
+    <div th:replace="/fragments/foot :: foot"></div>
 
 
 

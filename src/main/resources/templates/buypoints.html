@@ -4,7 +4,10 @@
 <html>
 <head >
     <title>Kiddom-Buy Points</title>
-    <meta th:replace="fragments/head :: head">
+    <meta th:replace="/fragments/head :: head">
+    <script th:src="@{/scripts/register_new.js}"></script>
+    <script th:src="@{/scripts/wallet.js}"></script>
+
     <style>
 
         .form input[type="text"],.form input[type="number"],.mybox select {
@@ -102,7 +105,7 @@
 </head>
 
 <body id="top">
-<div th:replace="fragments/navbar :: navbar('buypoints')"></div>
+<div th:replace="/fragments/navbar :: navbar('buypoints')"></div>
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
@@ -116,331 +119,211 @@
     </script>
 </div>
 
-<div  class="wrapper row3" style="background-color:white" >
+<div class="wrapper row3" style="background-color:#b7c1ae" >
     <main class="hoc container clear" >
-        <div class="row">
-
-            <h3 style="text-transform: none;"> Επιλέξτε πακέτο ή πληκτρολογείστε τον επιθυμητό αριθμό πόντων</h3>
-            <div class="col-md-4">
-                <form class="form" action="#" method="post">
-
-                    <div class="form-group">
-                        <label class="control-label" > Πακέτο 1 (260 πόντοι - 50€)</label>
-                        <!--<div class="col-sm-8">-->
-                        <input type="number" value="0" id="quantity" min="0" required="" oninput="calculate()"><br>
-                        <!--</div>-->
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label"> Πακέτο 2 (530 πόντοι - 100€)</label>
-                        <!--<div class="col-sm-8">-->
-                        <input type="number" value="0" id="quantity2" min="0" required="" oninput="calculate()"><br>
-                        <!--</div>-->
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label"> Πακέτο 3 (1070 πόντοι - 200€)</label>
-                        <!--<div class="col-sm-8">-->
-                        <input type="number" value="0" id="quantity3" min="0" required="" oninput="calculate()"><br>
-                        <!--</div>-->
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label">Πληκτρολογήστε αριθμό πόντων</label>
-                        <input type="text" value="0" name="Points" id="quantity4" min="0"  placeholder="Aριθμός πόντων" required="" oninput="calculate()">
-                    </div>
-                </form>
-
-
-            </div>
-            <div class="col-md-4 col-md-offset-2">
-                <!--<div class="hidden-xs" > <br><br><br> </div>-->
-
-                <h2 class="col-md-offset-1">Total cost</h2>
-                <h3 id="cost" style="position: relative;padding:2em; background:#f1a700; text-align: center"> 0€ </h3>
-
-                <br>
-                <h2 class="col-md-offset-1"> Total Points</h2>
-                <h3 id="points"  style="position: relative;padding:2em; background:#f1a700; text-align: center"> 0 </h3>
-
-
-
-            </div>
-        </div>
-
-        <br>
-        <div class=" col-md-4"  >
-            <br><br><br>
-            <div style="position: relative;padding:5em; background:#f1a700; text-align: center">
-                <h2> ΠΛΗΡΩΜΗ </h2>
-                <div class=" mybox">
-                    <select style=" float: right; margin: 0px 0px 0px 0px;" id="payment"  onchange="pr()">
-                        <option value="1" selected>Πιστωτικη καρτα</option>
-                        <option value="2">Paypal</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-8 "   >
-            <!--<div class="row">-->
-            <!--<div class="col-xs-12 col-md-4 col-md-offset-2">-->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        ΛΕΠΤΟΜΕΡΕΙΕΣ ΠΛΗΡΩΜΗΣ
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <form role="form" method="POST" th:action="@{/pointsBuy}">
-                        <div id="paypal_payment" style="display: none">
-                            <div class="form-group">
-                                <label for="username">
-                                    Όνομα Χρήστη</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="username" placeholder="Username">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="Email">
-                                    Email</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="Email" placeholder="noreply@email.com">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                </div>
-                            </div>
+        <div id="pageintro" class="hoc clear" style="padding:1% 0 1% 0 ">
+            <div id="container"  >
+                <div id="wrapper stepwizard">
+                    <div class="stepwizard-row setup-panel ">
+                        <div class="stepwizard-step">
+                            <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
                         </div>
-                        <div id="credit_payment">
-                        <div class="form-group" >
-                            <label for="cardNumber">
-                                Αριθμός Κάρτας</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="cardNumber" placeholder="Valid Card Number"
-                                       required >
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                            </div>
+                        <div class="stepwizard-step">
+                            <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-7 col-md-7">
-                                <div class="form-group">
-                                    <label >
-                                        Ημερομηνία Λήξης</label>
-                                    <div class="col-xs-6 col-lg-6 pl-ziro">
-                                        <!--<input type="text" class="form-control" id="expityMonth" placeholder="MM" required / >-->
-                                        <select class="form-control" id="monthselect" required  >
-                                            <option  value="" disabled selected >Μήνας</option>
-                                            <option value="Ιανουάριος">01</option>
-                                            <option value="Φεβρουάριος">02</option>
-                                            <option value="Μάρτιος">03</option>
-                                            <option value="Απρίλιος">04</option>
-                                            <option value="Μάιος">05</option>
-                                            <option value="Ιούνιος">06</option>
-                                            <option value="Ιούλιος">07</option>
-                                            <option value="Αύγουστος">08</option>
-                                            <option value="Σεπτέμβριος">09</option>
-                                            <option value="Οκτώβριος">10</option>
-                                            <option value="Νοέμβριος">11</option>
-                                            <option value="Δεκέμβριος">12</option>
+                    </div>
+
+
+                    <div class="row setup-content" id="step-1">
+
+                        <div class="col-md-12">
+                            <h1 align="center" style="font-weight: bold; color: lightslategrey;">Βημα 1 :Επιλέξτε πακέτο ή πληκτρολογείστε τον επιθυμητό αριθμό πόντων</h1>
+                            <br/>
+
+
+                            <div class="col-md-4">
+                                <form  class="well form-horizontal" id="pointsForm" action="#" method="post"   >
+                                    <!--form class="form" action="#" method="post"-->
+
+                                    <div class="form-group">
+                                        <label for="quantity"> Πακέτο 1 (260 πόντοι - 50€)</label>
+                                        <!--<div class="col-sm-8">-->
+                                        <input type="number" value="0" id="quantity" min="0" required="" oninput="calculate()"><br>
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="quantity2"> Πακέτο 2 (530 πόντοι - 100€)</label>
+                                        <!--<div class="col-sm-8">-->
+                                        <input type="number" value="0" id="quantity2" min="0" required="" oninput="calculate()"><br>
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="quantity3"> Πακέτο 3 (1070 πόντοι - 200€)</label>
+                                        <!--<div class="col-sm-8">-->
+                                        <input type="number" value="0" id="quantity3" min="0" required="" oninput="calculate()"><br>
+                                        <!--</div>-->
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="Points">Πληκτρολογήστε αριθμό πόντων</label>
+                                        <input type="text" value="0" name="Points" id="quantity4" min="0"  placeholder="Aριθμός πόντων" required="" oninput="calculate()">
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="col-md-4 col-md-offset-2">
+                                <!--<div class="hidden-xs" > <br><br><br> </div>-->
+
+                                <h2 class="col-md-offset-1">Τελικη Χρεωση</h2>
+                                <h3 id="cost" style="position: relative;padding:2em; background:#f1a700; text-align: center"> 0€ </h3>
+
+                                <br>
+                                <h2 class="col-md-offset-1"> Τελικοι Ποντοι</h2>
+                                <h3 id="points"  style="position: relative;padding:2em; background:#f1a700; text-align: center"> 0 </h3>
+
+                            </div>
+
+                        </div>
+                        <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Επομενο</button>
+                    </div>
+                    <br>
+
+                    <div class="row setup-content" id="step-2">
+                        <div class="col-md-12">
+                            <h1 align="center" style="font-weight: bold; color: lightslategrey;">Βημα 2 :Ολοκληρωση Αγορας Ποντων</h1>
+                            <br/>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li style="text-align: center" class="active" ><a>Τελικη πληρωμή &ensp;<span id="points2" class="glyphicon glyphicon-euro"> </span></a></li>
+                            </ul>
+                            <br/>
+                                <div class=" col-md-4"  >
+                                <br><br>
+                                <div style="position: relative;padding:5em; background:#f1a700; text-align: center">
+
+                                    <div class=" mybox">
+                                        <select style=" float: right; margin: 0px 0px 0px 0px;" id="payment"  onchange="pr()">
+                                            <option value="1" selected>Πιστωτικη καρτα</option>
+                                            <option value="2">Paypal</option>
                                         </select>
                                     </div>
-                                    <div class="col-xs-6 col-lg-6 pl-ziro">
-                                        <input type="text" class="form-control" id="expityYear" placeholder="Xρονιά" required /></div>
                                 </div>
                             </div>
-                            <div class="col-xs-5 col-md-5 pull-right">
-                                <div class="form-group">
-                                    <label for="cvCode">
-                                        CV CODE</label>
-                                    <input type="password" class="form-control" id="cvCode" placeholder="CV" required />
+
+                            <div class="col-md-8 "   >
+                                <!--<div class="row">-->
+                                <!--<div class="col-xs-12 col-md-4 col-md-offset-2">-->
+                                <div class="panel panel-default">
+                                    <!--div class="panel-heading">
+                                        <h3 class="panel-title"> ΛΕΠΤΟΜΕΡΕΙΕΣ ΠΛΗΡΩΜΗΣ  </h3>
+                                    </div-->
+                                    <div class="panel-body">
+                                        <form class="well form-horizontal" role="form" method="POST" th:action="@{/pointsBuy}" autocomplete="on">
+                                            <div id="paypal_payment" style="display: none"> <!---->
+                                                <div class="form-group">
+                                                    <label for="username"> Όνομα Χρήστη</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="username" placeholder="Username">
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Email"> Email</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="Email" placeholder="noreply@email.com">
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="credit_payment">
+                                                <div class="form-group" >
+                                                    <label for="cardNumber"> Αριθμός Κάρτας</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="cardNumber" placeholder="Valid Card Number"
+                                                               required >
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-7 col-md-7">
+                                                        <div class="form-group">
+                                                            <label >Ημερομηνία Λήξης</label>
+                                                            <div class="col-xs-6 col-lg-6 pl-ziro">
+                                                                <!--<input type="text" class="form-control" id="expityMonth" placeholder="MM" required / >-->
+                                                                <select class="form-control" id="monthselect" required  >
+                                                                    <option  value="" disabled selected >Μήνας</option>
+                                                                    <option value="Ιανουάριος">01</option>
+                                                                    <option value="Φεβρουάριος">02</option>
+                                                                    <option value="Μάρτιος">03</option>
+                                                                    <option value="Απρίλιος">04</option>
+                                                                    <option value="Μάιος">05</option>
+                                                                    <option value="Ιούνιος">06</option>
+                                                                    <option value="Ιούλιος">07</option>
+                                                                    <option value="Αύγουστος">08</option>
+                                                                    <option value="Σεπτέμβριος">09</option>
+                                                                    <option value="Οκτώβριος">10</option>
+                                                                    <option value="Νοέμβριος">11</option>
+                                                                    <option value="Δεκέμβριος">12</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-xs-6 col-lg-6 pl-ziro">
+                                                                <input type="text" class="form-control" id="expityYear" placeholder="Xρονιά" required /></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-5 col-md-5 pull-right">
+                                                        <div class="form-group">
+                                                            <label for="cvCode">CV CODE</label>
+                                                            <input type="password" class="form-control" id="cvCode" placeholder="CV" required />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-10" style="display: none;">
+                                                <input type="text" class="form-control" id="totalPoints"  name="totalPoints">
+                                                <!--<div type=text" id="totalPoints"  name="totalPoints"> 100 </div>-->
+                                            </div>
+                                            </br>
+                                            <button type="submit" class="btn btn-success btn-lg btn-block">Πληρωμη<span class="glyphicon glyphicon-send"></button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
+
+                            <!--<button   id="myBtn" class="btn btn-success btn-lg btn-block">Πληρωμη</button>-->
                         </div>
-                        </div>
-                        <div class="col-sm-10" style="display: none;">
-                            <input type="text" class="form-control" id="totalPoints"  name="totalPoints">
-                            <!--<div type=text" id="totalPoints"  name="totalPoints"> 100 </div>-->
-                        </div>
-                        <button type="submit"   class="btn btn-success btn-lg btn-block">Πληρωμη</button>
-                    </form>
+                    </div>
                 </div>
             </div>
-            <ul class="nav nav-pills nav-stacked">
-                <li style="text-align: center" class="active" ><a href="#"><span class="glyphicon glyphicon-euro" id="points2"></span> Final Payment</a>
-                </li>
-            </ul>
-            <br/>
-            <!--<button   id="myBtn" class="btn btn-success btn-lg btn-block">Πληρωμη</button>-->
         </div>
-        <div id="myModal" class="modal">
+    </main>
+</div>
+<div id="myModal" class="modal">
 
-            <!-- Modal content -->
+    <!-- Modal content -->
 
-            <div class="modal-content">
-                <div class="modal-header">
+    <div class="modal-content">
+        <div class="modal-header">
                     <span class="close" >
                         <button type="button" class="close" id="closebutton"  aria-hidden="true"  >  X</button>
                     </span>
-                </div>
-                <div class="modal-body" style="text-align: center">
-                    <strong> Η συναλλαγή ολοκληρώθηκε.</strong>
-                    <!--<strong> Διαθέτετε <span th:text="${total_points}"></span>  πόντους</strong>-->
-                    <br>
-                    <a  th:href="profile" class="btn btn-success" role="button" data-dismiss="myModal" > EΠΙΣΤΡΟΦΗ ΣΤΟ ΠΟΡΤΟΦΟΛΙ</a>
+        </div>
+        <div class="modal-body" style="text-align: center">
+            <strong> Η συναλλαγή ολοκληρώθηκε.</strong>
+            <!--<strong> Διαθέτετε <span th:text="${total_points}"></span>  πόντους</strong>-->
+            <br>
+            <a  th:href="@{/profile(tab=wallet)}" class="btn btn-success" role="button" data-dismiss="myModal" > EΠΙΣΤΡΟΦΗ ΣΤΟ ΠΟΡΤΟΦΟΛΙ</a>
 
-
-                </div>
-
-            </div>
 
         </div>
 
+    </div>
 
-    </main>
 </div>
 
-<div th:replace="fragments/foot :: foot"></div>
+<div th:replace="/fragments/foot :: foot"></div>
 
 
 
-<script>
-    // Get the modal
 
-    var modal = document.getElementById('myModal');
-    //    var btn = document.getElementById("myBtn");
-    //    var btn2 = document.getElementById("myBtn2");
-    //    var finalpoints = document.getElementById("finalpoints");
-    var closebutton = document.getElementById("closebutton");
-    //    function myFunction() {
-    //        document.getElementById("finishbutton").click();
-    //    }
-    //    document.getElementById('totalPoints').value = 200;
-
-
-
-    // When the user clicks on the button, open the modal
-    //    btn.onclick = function() {
-    ////        document.getElementById('change_form').submit();
-    //        var quantity = parseInt(document.getElementById("quantity").value);
-    //        var quantity2 = parseInt(document.getElementById("quantity2").value);
-    //        var quantity3 = parseInt(document.getElementById("quantity3").value);
-    //        var quantity4 = parseInt(document.getElementById("quantity4").value);
-    //        var points = (quantity * 260) + (quantity2 * 530) + (quantity3 * 1070) + (quantity4);
-    ////        document.getElementById("finalpoints").innerText = points;
-    //        modal.style.display = "block";
-    //        myFunction();
-    //    }
-    //    btn2.onclick = function() {
-    //        var quantity = parseInt(document.getElementById("quantity").value);
-    //        var quantity2 = parseInt(document.getElementById("quantity2").value);
-    //        var quantity3 = parseInt(document.getElementById("quantity3").value);
-    //        var quantity4 = parseInt(document.getElementById("quantity4").value);
-    //        var points = (quantity * 260) + (quantity2 * 530) + (quantity3 * 1070) + (quantity4);
-    ////        document.getElementById("finalpoints").innerText = points;
-    //        modal.style.display = "block";
-    //        myFunction();
-    //    }
-    //    reset();
-    // When the user clicks on <span> (x), close the modal
-    closebutton.onclick = function() {
-//        reset();
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-//            reset();
-            modal.style.display = "none";
-        }
-    }
-
-</script>
-
-<script>
-    function hidediv(id){$('#'+id).css('display','none');}
-    function showdiv(id){$('#'+id).css('display','block');}
-</script>
-<script >
-    $('#user_input, #pass_input, #v_pass_input, #email').bind('keyup', function() {
-        if(allFilled()) $('#register').removeAttr('disabled');
-    });
-</script>
-
-<script>
-    function allFilled() {
-        var filled = true;
-        $('body input').each(function() {
-            if($(this).val() == '') filled = false;
-        });
-        return filled;
-    }
-
-</script>
-<script>
-    function pr() {
-        if (document.getElementById("payment").value == "1") {
-
-            showdiv('credit_payment');
-            document.getElementById("cardNumber").required=true;
-            document.getElementById("monthselect").required=true;
-            document.getElementById("expityYear").required=true;
-            document.getElementById("cvCode").required=true;
-            document.getElementById("username").required=false;
-            document.getElementById("Email").required=false;
-
-
-
-        }
-        else {
-
-            hidediv('credit_payment');
-
-        }
-        if (document.getElementById("payment").value == "2") {
-            showdiv('paypal_payment');
-            document.getElementById("cardNumber").required=false;
-            document.getElementById("monthselect").required=false;
-            document.getElementById("expityYear").required=false;
-            document.getElementById("cvCode").required=false;
-            document.getElementById("username").required=true;
-            document.getElementById("Email").required=true;
-
-        }
-        else {
-            hidediv('paypal_payment');
-        }
-    }
-</script>
-<script>
-    function calculate() {
-        var cost = 10;
-        var quantity = parseInt(document.getElementById("quantity").value);
-        var quantity2 = parseInt(document.getElementById("quantity2").value);
-        var quantity3 = parseInt(document.getElementById("quantity3").value);
-        var quantity4 = parseInt(document.getElementById("quantity4").value);
-        if (quantity4 < 0) {
-            alert("Πληκτρολογειστε μια τιμη μεγαλύτερη ή ιση με το 0");
-            return;
-        }
-        var quantity5 = (quantity * 50) + (quantity2 * 100) + (quantity3 * 200) + (quantity4 / 5);
-        var points = (quantity * 260) + (quantity2 * 530) + (quantity3 * 1070) + (quantity4);
-        document.getElementById("cost").innerText = quantity5 + "$";
-        document.getElementById("points").innerText = points;
-        document.getElementById('totalPoints').value = points;
-        document.getElementById("points2").innerText =quantity5;
-        document.getElementById("points3").innerText =quantity5;
-    }
-
-
-    function reset() {
-//        alert("Πληκτρολογειστε μια τιμη μεγαλύτερη ή ιση με το 0");
-
-        document.getElementById("quantity").value = 0;
-        document.getElementById("quantity2").value = 0;
-        document.getElementById("quantity3").value = 0;
-        document.getElementById("quantity4").value = 0;
-        calculate();
-    }
-</script>
 
 </body>
 </html>

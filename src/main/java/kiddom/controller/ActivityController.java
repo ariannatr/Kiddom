@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,6 +33,26 @@ public class ActivityController {
     @Autowired
     private EventService eventService;
 
+
+    @RequestMapping(value="/activity/{eventID}", method = RequestMethod.GET)
+    public ModelAndView activity_show(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @PathVariable String eventID){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication authentication = authenticationFacade.getAuthentication();
+        System.out.println("Authentication name is"+authentication.getName());
+        if(!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            UserEntity userS = userService.findByUsername(authentication.getName());
+            modelAndView.addObject("type", String.valueOf(userS.getType()));
+        }
+        System.out.println("Phra " + eventID);
+        Integer eventID_ = Integer.parseInt(eventID);
+        System.out.println("Diavasa " + eventID_);
+        SingleEventEntity event = eventService.findSingleEventById(eventID_);
+        modelAndView.addObject("event", event);
+        modelAndView.setViewName("/activity");
+        return modelAndView;
+    }
+
     @RequestMapping(value="/activity_reg", method = RequestMethod.GET)
     public ModelAndView activity_register(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, RedirectAttributes redirectAttributes){
         ModelAndView modelAndView = new ModelAndView();
@@ -48,7 +69,7 @@ public class ActivityController {
             redirectAttributes.addFlashAttribute("success","true");
         }
         else {
-            modelAndView.setViewName("redirect:/error_page?error_code=anon");
+            modelAndView.setViewName("redirect:/error?error_code=anon");
             return modelAndView;
         }
         modelAndView.setViewName("activity_reg");
@@ -84,12 +105,12 @@ public class ActivityController {
                 eventService.saveActivity(useron, provideron, event, program);
             }
             else {
-                modelAndView.setViewName("redirect:/error_page?error_code=not_prov");
+                modelAndView.setViewName("redirect:/error?error_code=not_prov");
                 return modelAndView;
             }
         }
         else {
-            modelAndView.setViewName("redirect:/error_page?error_code=anon");
+            modelAndView.setViewName("redirect:/error?error_code=anon");
             return modelAndView;
         }
         redirectAttributes.addFlashAttribute("success","true");

@@ -10,10 +10,19 @@ Licence URI: http://www.os-templates.com/template-terms
        xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Kiddom</title>
-  <meta th:replace="fragments/head :: head">
+  <meta th:replace="/fragments/head :: head">
 </head>
 <body id="top">
+<style>
+  /* Dropdown menu background color*/
 
+  .topmenu > .dropdown > .dropdown-menu ul {     background-color:rgba(0,0,0,.6);  }
+
+  /* Dropdown menu font color*/
+
+  .topmenu >.dropdown > .dropdown-menu li{  border-right: none;   }
+  .topmenu >.dropdown > .dropdown-menu >li >a{ color: #8facf4 !important;   }
+</style>
 <!-- ################################################################################################ -->
 <!-- Top Background Image Wrapper -->
 <div class="bgded overlay" >
@@ -42,15 +51,15 @@ Licence URI: http://www.os-templates.com/template-terms
                 <strong><span th:text="${uname}"></span></strong>
               </li>
               <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown">Το προφιλ μου <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
+                <a class="dropdown-toggle" data-toggle="dropdown" style="font-size:13px;">Το προφιλ μου <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu" style="text-transform: capitalize; font-size:12px;">
                 <!--style=" background-color:rgba(0,0,0,.6); " -->
-                  <li ><a th:href="@{profile(tab=elements)}">Στοιχεια Χρήστη</a></li>
-                  <li ><a th:href="@{profile(tab=wallet)}">Πορτοφολι</a></li>
-                  <li ><a th:href="@{profile(tab=reservations)}">Κρατησεις</a></li>
-                  <li ><a th:href="@{profile(tab=bookmarks)}">Αγαπημενα</a></li>
-                  <li ><a th:href="@{profile(tab=old_activities)}">Παλαιοτερες</a></li>
-                  <li ><a th:href="buypoints">Αγορά Πόντων</a></li>
+                  <li><a th:href="@{/profile(tab=elements)}">&nbsp; Στοιχεία Χρήστη</a></li>
+                  <li><a th:href="@{/profile(tab=wallet)}">&nbsp; Πορτοφόλι</a></li>
+                  <li><a th:href="@{/buypoints}">&nbsp; Αγορά Πόντων</a></li>
+                  <li><a th:href="@{/profile(tab=reservations)}">&nbsp; Κρατήσεις</a></li>
+                  <li><a th:href="@{/profile(tab=old_activities)}">&nbsp; Παλαιότερες Κρατήσεις</a></li>
+                  <li><a th:href="@{/profile(tab=bookmarks)}">&nbsp; Αγαπημένα</a></li>
                 </ul>
               </li>
               <li>
@@ -66,9 +75,9 @@ Licence URI: http://www.os-templates.com/template-terms
               <a class="dropdown-toggle" data-toggle="dropdown">Το προφιλ μου <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <!--style=" background-color:rgba(0,0,0,.6); " -->
-                <li ><a th:href="@{profileProvider(tab=elements)}">Στοιχεια Χρήστη</a></li>
-                <li ><a th:href="@{profileProvider(tab=wallet)}">Πορτοφολι</a></li>
-                <li ><a th:href="@{profileProvider(tab=activites)}">Δραστηριοτητες</a></li>
+                <li ><a th:href="@{/profileProvider(tab=elements)}">Στοιχεια Χρήστη</a></li>
+                <li ><a th:href="@{/profileProvider(tab=wallet)}">Πορτοφολι</a></li>
+                <li ><a th:href="@{/profileProvider(tab=activites)}">Δραστηριοτητες</a></li>
               </ul>
             </li>
             <li>
@@ -105,20 +114,20 @@ Licence URI: http://www.os-templates.com/template-terms
       </div>
       <nav id="mainav" class="fl_right">
         <ul class="clear">
-          <li class="active"><a href="index">Αρχικη</a></li>
+          <li class="active"><a th:href="@{/index}">Αρχικη</a></li>
           <li><a class="drop" >Δραστηριοτητες</a>
             <ul>
               <li th:classappend="${module == 'activity' ? 'active' : ''}">
-                <a  th:href="activity">Ενεργή Δραστηριότητα</a>
+                <a  th:href="@{/activity}">Ενεργή Δραστηριότητα</a>
               </li>
               <li th:classappend="${module == 'activity_reg' ? 'active' : ''}">
-                <a  th:href="activity_reg">Δημιουργία Δραστηριότητας</a>
+                <a  th:href="@{/activity_reg}">Δημιουργία Δραστηριότητας</a>
               </li>
 
             </ul>
           </li>
-          <li><a href="about">Σχετικα με εμας</a></li>
-          <li><a href="faq">FAQ</a></li>
+          <li><a th:href="@{/about}">Σχετικα με εμας</a></li>
+          <li><a th:href="@{/faq}">FAQ</a></li>
         </ul>
       </nav>
       <!-- ################################################################################################ -->
@@ -324,12 +333,12 @@ Licence URI: http://www.os-templates.com/template-terms
                             
                               <div class="form-group">
                                   <label for="username" class="control-label">Όνομα Χρήστη</label>
-                                  <input type="text" class="form-control" id="username" name="username" value="" required="required" title="Συμπληρώστε το όνομα χρήστη" placeholder="username">
+                                  <input type="text" class="form-control" id="username" name="username" value="" required="required" title="Συμπληρώστε το όνομα χρήστη" placeholder="Όνομα χρήστη">
                                   <span class="help-block"></span>
                               </div>
                               <div class="form-group">
                                   <label for="password" class="control-label">Κωδικός Χρήστη</label>
-                                  <input type="password" class="form-control" id="password" name="password" value="" required="required" title="Συμπληρώστε τον κωδικό σας">
+                                  <input type="password" class="form-control" id="password" name="password" value="" required="required" title="Συμπληρώστε τον κωδικό σας" placeholder="Κωδικός χρήστη">
                                   <span class="help-block"></span>
                               </div>
                               <div id="loginErrorMsg" class="alert alert-error hidden">Λάθος όνομα ή κωδικός χρήστη</div>
@@ -361,7 +370,7 @@ Licence URI: http://www.os-templates.com/template-terms
 
 
 
-<div th:replace="fragments/foot :: foot"></div>
+<div th:replace="/fragments/foot :: foot"></div>
 
 
 
@@ -369,12 +378,12 @@ Licence URI: http://www.os-templates.com/template-terms
 
 
 <!-- JAVASCRIPTS -->
-<script th:src="@{scripts/jquery.min.js}"></script>
-<script th:src="@{scripts/jquery.backtotop.js}"></script>
-<script th:src="@{scripts/jquery.mobilemenu.js}"></script>
-<script th:src="@{scripts/jquery.flexslider-min.js}"></script>
-<script th:src="@{scripts/jquery-ui.js}"></script>
-<script th:src="@{scripts/datepicker.js}"></script>
+<script th:src="@{/scripts/jquery.min.js}"></script>
+<script th:src="@{/scripts/jquery.backtotop.js}"></script>
+<script th:src="@{/scripts/jquery.mobilemenu.js}"></script>
+<script th:src="@{/scripts/jquery.flexslider-min.js}"></script>
+<script th:src="@{/scripts/jquery-ui.js}"></script>
+<script th:src="@{/scripts/datepicker.js}"></script>
 
 </body>
 </html>

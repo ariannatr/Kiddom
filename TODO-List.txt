@@ -17,7 +17,7 @@ SOS! --> Να κρατηθεί (και να βελτιωθεί) η δομή τη
 > Provider: allow event cancelation - TODO
 
 > User: cookies algorithm to create suggestions - TODO
-> User: finish wallet - TODO
+> User: finish wallet - DONE
 > User: finish reports - TODO
 > User: finish comments - TODO
 > User: fix cancelation - TODO
@@ -31,17 +31,17 @@ SOS! --> Να κρατηθεί (και να βελτιωθεί) η δομή τη
 > HTML: fix activity form - TODO
 > HTML: fix provider profile - TODO
 > HTML: fix tabs for create activity etc - TODO
-> HTML: fix buypoints - TODO
+> HTML: fix buypoints - DONE
 
 > SQL: create script to insert all data to db - TODO
 > SQL: connect Elastic to project - TODO
 
 > Login: remember me attribute - TODO
-> Login: show wrong password message in modal in case of failure - TODO
+> Login: show wrong password message in modal in case of failure - DONE
 > Login: fix the download problem - TODO
 
 > Register (provider and parent): put clear button and cancel button in form - TODO
-> Register : message when input username is already in use - TODO
+> Register : message when input username is already in use - DONE
 
 > Password Change : Confirm user before changing password? - TODO
 

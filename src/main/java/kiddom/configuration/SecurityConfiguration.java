@@ -79,7 +79,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/usernameCheck").anonymous()
                 .antMatchers("/register_prov").anonymous()
                 .antMatchers("/about").permitAll()
-                .antMatchers("/error_page").permitAll()
+                .antMatchers("/error").permitAll()
                 .antMatchers("/activity").permitAll()
                 .antMatchers("/google_map").permitAll()
                 .antMatchers("/search").permitAll()
@@ -92,7 +92,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				//
                 .antMatchers("/profile").hasRole("1")//hasAuthority("1")//be a parent
                 .antMatchers("/profileProvider").hasRole("2")//be a Provider
-				.antMatchers("/admin").hasRole("0").anyRequest()//be admin
+				.antMatchers("/admin").permitAll()//.hasRole("0")
+                .anyRequest()//be admin
 				.authenticated().and().csrf().disable()
                 .formLogin()
 				.loginPage("/index")
@@ -104,7 +105,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/index").and().exceptionHandling()
-				.accessDeniedPage("/error_page");
+				.accessDeniedPage("/error");
         http.sessionManagement()//now added
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .maximumSessions(2)
@@ -113,10 +114,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .invalidSessionUrl("/index")
                 .sessionFixation().migrateSession();
 		http.requiresChannel()
-				.antMatchers("/index","/register","/register_prov","/about","error_page",
+				.antMatchers("/index","/register","/register_prov","/about","error",
 						"/activity","google_map","/search","/faq",
 						"activity_reg","/categories_form","/category_submit","/profile","/profileProvider","/admin").requiresSecure();
       //  servletContext.setSessionTrackingModes(EnumSet.of(SessionTrackingMode.COOKIE));*/
+		http.requiresChannel()
+				.antMatchers("/index","/register","/register_prov","/about","error",
+						"/activity","google_map","/search","/faq",
+						"activity_reg","/categories_form","/category_submit","/profile","/profileProvider","/admin").requiresSecure();
 	}
 
     @Bean//lately added

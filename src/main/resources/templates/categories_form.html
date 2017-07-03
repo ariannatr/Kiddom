@@ -3,12 +3,12 @@
 
 <head>
     <title>Admin - Επεξεργασία Κατηγοριών Δραστηριοτήτων</title>
-    <meta th:replace="fragments/head :: head">>
-    <script th:src="@{scripts/categories.js}"></script>
+    <meta th:replace="/fragments/head :: head">>
+    <script th:src="@{/scripts/categories.js}"></script>
 
 </head>
 <body>
-<div th:replace="fragments/navbar :: navbar('activity_reg')"></div>
+<div th:replace="/fragments/navbar :: navbar('activity_reg')"></div>
 
 <form class="well form-horizontal" action="@{/categories_form}" method="POST"  id="contact_form">
     <fieldset>
@@ -49,6 +49,6 @@
 </form>
 </div>
 </div><!-- /.container -->
-<div th:replace="fragments/foot :: foot"></div>
+<div th:replace="/fragments/foot :: foot"></div>
 </body>
 </html>

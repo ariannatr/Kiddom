@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <title>Title</title>
+    <title>Admin</title>
     <meta th:replace="fragments/head :: head">
 </head>
 <body id="top">
-<div th:replace="fragments/navbar :: navbar('about')"></div>
+<div th:replace="fragments/navbar :: navbar('admin')"></div>
 
 <div class="container">
     <div class="row">
@@ -19,41 +19,14 @@
                 <th>Last name</th>
                 <th>Email</th>
             </tr>
-            <tr th:each="provider : ${providers}">
+            <tr th:each="provider : ${items}">
                 <td th:text="${provider.name}"></td>
                 <td th:text="${provider.surname}"></td>
                 <td th:text="${provider.email}"></td>
             </tr>
         </table>
     </div>
-
-    <div class="row">
-        <div class="form-group col-md-1">
-            <select class="form-control pagination" id="pageSizeSelect">
-                <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}" th:selected="${pageSize} == ${selectedPageSize}"></option>
-            </select>
-        </div>
-        <div th:if="${providers.totalPages != 1}" class="form-group col-md-11 pagination-centered">
-            <ul class="pagination">
-                <li th:class="${providers.number == 0} ? disabled">
-                    <a class="pageLink" th:href="@{/admin(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
-                </li>
-                <li th:class="${providers.number == 0} ? disabled">
-                    <a class="pageLink" th:href="@{/admin(pageSize=${selectedPageSize}, page=${providers.number})}">&larr;</a>
-                </li>
-                <li th:class="${providers.number == (page - 1)} ? 'active pointer-disabled'"
-                    th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
-                    <a class="pageLink" th:href="@{/admin(pageSize=${selectedPageSize}, page=${page})}" th:text="${page}"></a>
-                </li>
-                <li th:class="${providers.number + 1 == providers.totalPages} ? disabled">
-                    <a class="pageLink" th:href="@{/admin(pageSize=${selectedPageSize}, page=${providers.number + 2})}">&rarr;</a>
-                </li>
-                <li th:class="${providers.number + 1 == providers.totalPages} ? disabled">
-                    <a class="pageLink" th:href="@{/admin(pageSize=${selectedPageSize}, page=${providers.totalPages})}">&raquo;</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <div th:replace="fragments/paginationbar :: paginationbar"></div>
 </div>
 <script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
