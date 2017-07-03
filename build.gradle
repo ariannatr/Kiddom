@@ -34,7 +34,7 @@ configurations {
 }
 
 dependencies {
-	compile 'org.springframework.session:spring-session:2.0.0.BUILD-SNAPSHOT'
+	//compile 'org.springframework.session:spring-session:2.0.0.BUILD-SNAPSHOT'
 	compile("net.sourceforge.nekohtml:nekohtml:1.9.21")
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
@@ -78,7 +78,26 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/org.springframework/spring-web
 	//compile group: 'org.springframework', name: 'spring-web', version: '4.3.4.RELEASE'
-// https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity3
+	// https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity3
 	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity3', version: '2.1.1.RELEASE'
 
+    compile 'org.elasticsearch.client:rest:5.4.1'
+    compile 'org.elasticsearch:elasticsearch:5.4.1'
+    compile 'org.elasticsearch.client:transport:5.4.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.2'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.2'
+    compile 'org.apache.httpcomponents:httpasyncclient'
+    compile 'org.apache.httpcomponents:httpcore-nio'
+    compile 'org.apache.httpcomponents:httpclient'
+    compile 'org.apache.httpcomponents:httpcore'
+    compile 'commons-codec:commons-codec'
+    compile 'commons-logging:commons-logging'
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.5.4'
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.5.4'
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.5.4'
 }
