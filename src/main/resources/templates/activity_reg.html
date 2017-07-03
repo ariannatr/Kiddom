@@ -86,8 +86,10 @@ Licence URI: http://www.os-templates.com/template-terms
             </div>
             <br/>
 
+            <label>Προσθέστε μια ημερομηνία</label><input type="input" id="hiddenField" class="datepicker" /><input type="button" value="+" onclick="createDate()"/>
 
-            <span>Προσθέστε ενα timeslot</span></span><input type="button" value="+" onclick="addRow()">
+
+            <!--<span>Προσθέστε ενα timeslot</span></span><input type="button" value="+" onclick="addRow()">-->
             <div id="dates">
 
             </div>
@@ -286,28 +288,36 @@ Licence URI: http://www.os-templates.com/template-terms
 </div>
 </div><!-- /.container -->
 <div th:replace="/fragments/foot :: foot"></div>
+
+
+<script th:src="@{scripts/jquery.min.js}"></script>
+<script th:src="@{scripts/jquery.backtotop.js}"></script>
+<script th:src="@{scripts/jquery.mobilemenu.js}"></script>
+<script th:src="@{scripts/jquery.flexslider-min.js}"></script>
+<script th:src="@{scripts/jquery-ui.js}"></script>
+
 <script type="application/javascript">
 
-    jQuery(".accordion").click(function() {
-        openAccordion();
-    });
-
-    function openAccordion() {
-        var acc = document.getElementsByClassName("accordion");
-        var i;
-
-        for (i = 0; i < acc.length; i++) {
-            acc[i].onclick = function () {
-                this.classList.toggle("active");
-                var panel = this.nextElementSibling;
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null;
-                } else {
-                    panel.style.maxHeight = panel.scrollHeight + "px";
-                }
-            }
-        }
-    }
+//    jQuery(".accordion").click(function() {
+//        openAccordion();
+//    });
+//
+//    function openAccordion() {
+//        var acc = document.getElementsByClassName("accordion");
+//        var i;
+//
+//        for (i = 0; i < acc.length; i++) {
+//            acc[i].onclick = function () {
+//                this.classList.toggle("active");
+//                var panel = this.nextElementSibling;
+//                if (panel.style.maxHeight) {
+//                    panel.style.maxHeight = null;
+//                } else {
+//                    panel.style.maxHeight = panel.scrollHeight + "px";
+//                }
+//            }
+//        }
+//    }
 
     function createField(glyphicon, labeltxt, input){
 
@@ -354,15 +364,8 @@ Licence URI: http://www.os-templates.com/template-terms
 
     var counter =0;
 
-    function addRow() {
-
+    function addRow(date, parent) {
         counter++;
-
-
-
-
-
-
         var panel = document.createElement("div");
         panel.setAttribute("class", "panel-body" );
 
@@ -389,27 +392,12 @@ Licence URI: http://www.os-templates.com/template-terms
 
         var div = document.createElement("div");
         div.setAttribute("id", "timeslot"+counter.toString());
-        div.setAttribute("class", "panel-collapse collapse in");
+        div.setAttribute("class", "panel-collapse collapse");
         div.appendChild(panel);
-
-
-        //    <div class="panel panel-default">
-//            <div class="panel-heading">
-//            <h4 class="panel-title">
-//            <a data-toggle="collapse" data-parent="#accordion2" href="#collapse4">Collapsible Group 1</a>
-//        </h4>
-//        </div>
-//        <div id="collapse4" class="panel-collapse collapse in">
-//            <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-//            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-//            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-//        </div>
-//        </div>
-
 
         var a = document.createElement("a");
         a.setAttribute("data-toggle", "collapse");
-//        a.setAttribute("data-parent", "");
+        a.setAttribute("data-parent", parent);
         a.href = "#timeslot"+counter.toString();
         a.innerHTML="Timeslot " +counter.toString();
 
@@ -425,46 +413,109 @@ Licence URI: http://www.os-templates.com/template-terms
         divpanel.setAttribute("class", "panel panel-default");
         divpanel.appendChild(heading);
         divpanel.appendChild(div);
+//
+//        alert(date);
+//        alert(date.toString());
+        if (date) {
+            var panelId = date.toString()+"-panel";
+            document.getElementById(date+"-panel").appendChild(divpanel);
+//            document.getElementById(date.toString()+"-panel").appendChild(divpanel);
+//            document.getElementById(date.toString()+"-panel").appendChild(divpanel);
+        }
+        else
+            return divpanel;
+    }
+
+
+    function createDate(){
+        var date = jQuery("#hiddenField").val();
+        var panelContent = addRow("", "#"+date+"-panel");
+
+        var hoursPanelGroup = document.createElement("div");
+        hoursPanelGroup.setAttribute("id", date+"-panel");
+        hoursPanelGroup.setAttribute("class", "panel-group");
+        hoursPanelGroup.appendChild(panelContent);
+
+        var msgSpan = document.createElement("span");
+        msgSpan.innerHTML="Προσθέστε ενα timeslot"
+
+        var addButton = document.createElement("input");
+        addButton.setAttribute("id", date+"-button");
+        addButton.setAttribute("class", "addButton");
+        addButton.setAttribute("onclick", "alerter(this)");
+//        addButton.setAttribute("style", "position:absolute");
+        addButton.type="button";
+        addButton.value = "+";
+
+        var panelBody = document.createElement("div");
+        panelBody.setAttribute("class", "panel-body");
+        panelBody.appendChild(msgSpan);
+        panelBody.appendChild(addButton);
+        panelBody.appendChild(hoursPanelGroup);
+
+        var panelFooter = document.createElement("div");
+        panelFooter.setAttribute("class", "panel-footer");
+
+        var collapseDiv = document.createElement("div");
+        collapseDiv.setAttribute("id", date.toString());
+        collapseDiv.setAttribute("class", "panel-collapse collapse");
+        collapseDiv.appendChild(panelBody);
+        collapseDiv.appendChild(panelFooter);
+
+
+        var a = document.createElement("a");
+        a.setAttribute("data-toggle", "collapse");
+//        a.setAttribute("data-parent", "");
+        a.href = "#"+date;
+        a.innerHTML=date;
+
+        var h4 = document.createElement("h4");
+        h4.setAttribute("class", "panel-title");
+        h4.appendChild(a);
+
+        var heading = document.createElement("div");
+        heading.setAttribute("class", "panel-heading");
+        heading.appendChild(h4);
+
+
+        var divpanel = document.createElement("div");
+        divpanel.setAttribute("class", "panel panel-default");
+        divpanel.appendChild(heading);
+        divpanel.appendChild(collapseDiv);
 
         var panelGroup = document.createElement("div");
         panelGroup.setAttribute("class", "panel-group");
         panelGroup.appendChild(divpanel);
 
-        //    <div class="panel-group">
-//            <div class="panel panel-default">
-
-
-//            <div class="panel-heading">
-//            <h4 class="panel-title">
-//            <a data-toggle="collapse" href="#collapse1">Collapsible panel</a>
-//        </h4>
-//        </div>
-
-
-//        <div id="collapse1" class="panel-collapse collapse">
-//            <div class="panel-body">Panel Body</div>
-//        </div>
-
-//        </div>
-
-//        </div>
-//
-
-
-
-//        var button = document.createElement("button");
-//        button.setAttribute("class", "accordion");
-//        button.type="button";
-//        button.innerHTML="Time Slot";
-
-//        document.getElementById('dates').appendChild(button);
         document.getElementById('dates').appendChild(panelGroup);
-
     }
+
 
     function removeRow(input) {
         document.getElementById('dates').removeChild( input.parentNode );
     }
+
+    jQuery("#hiddenField").datepicker({
+//        showOn: "button",
+//        buttonText: "day",
+        dateFormat: "dd-mm-yy",
+        onSelect: function(dateText, inst) {
+//            var dateAsString = dateText; //the first parameter of this function
+//            var dateAsObject = jQuery(this).datepicker( 'getDate' ); //the getDate method
+        }
+    });
+
+    function alerter(button){
+        var date = button.id.replace("-button", "");
+        addRow(date);
+
+    }
+
+    jQuery("input").on("click", ".addButton", function(){
+        alert("123");
+    });
+
+
 </script>
 
 </body>
