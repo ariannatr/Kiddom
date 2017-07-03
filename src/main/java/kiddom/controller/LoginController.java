@@ -180,34 +180,46 @@ public class LoginController {
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
             Set events = useron.getEvents();
-            List<SingleEventEntity> provider_events = new ArrayList<>(events);
+            List<SingleEventEntity> providerEvents = new ArrayList<>(events);
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate localDate = LocalDate.now();
             System.out.println(dtf.format(localDate));
-            String curr_date = dtf.format(localDate).toString();
-            if (provider_events != null) {
+            String currDate1 = dtf.format(localDate).toString();
+            if (providerEvents != null) {
                 System.out.println("With events");
-                List<SingleEventEntity> curr_events = new ArrayList<>();
-                List<SingleEventEntity> past_events = new ArrayList<>();
-                for (SingleEventEntity event : provider_events) {
+                List<SingleEventEntity> currEvents = new ArrayList<>();
+                List<SingleEventEntity> pastEvents = new ArrayList<>();
+                //if (currEvents == null) {
+                //    System.out.println("eimai adeio akomaaa");
+                //}
+                //else {
+                //    System.out.println("exw pragmata");
+                //}
+                for (SingleEventEntity event : providerEvents) {
                     if (event.getProgram() != null) {
-                        List<ProgramEntity> full_program = new ArrayList<>(event.getProgram());
-                        ProgramEntity program = full_program.get(0);
                         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                        try {
-                            Date currDate = sdf.parse(curr_date);
-                            Date eventDate = sdf.parse(program.getDate());
-                            if (eventDate.after(currDate)) {
-                                curr_events.add(event);
+                        for (ProgramEntity program : event.getProgram()) {
+                            try {
+                                Date currDate = sdf.parse(currDate1);
+                                Date eventDate = sdf.parse(program.getDate());
+                                if (eventDate.after(currDate)) {
+                                    currEvents.add(event);
+                                }
+                                else {
+                                    pastEvents.add(event);
+                                }
                             }
-                            else {
-                                past_events.add(event);
+                            catch (ParseException e) {
                             }
-                        }
-                        catch (ParseException e) {
                         }
                     }
+                    else {
+                        modelAndView.addObject("eventsStatus", 0);
+                    }
                 }
+                modelAndView.addObject("eventsStatus", 1);
+                modelAndView.addObject("pastEvents", pastEvents);
+                modelAndView.addObject("currEvents", currEvents);
             }
             else {
                 System.out.println("Without events");
