@@ -36,7 +36,6 @@ Licence URI: http://www.os-templates.com/template-terms
     </style>
 
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
-    <script th:src="@{/scripts/profile.js}"> </script>
 </head>
 
 <body id="top">
@@ -68,16 +67,7 @@ Licence URI: http://www.os-templates.com/template-terms
                         <button type="button" class="tablinks list-group-item" onclick="openCity(event, 'older_activities')" th:id="${((param.tab != null) and (param.tab[0] == 'older_activities')) ? 'my_active' : ''}">
                             <i class="fa fa-archive" style="color:#cc834f"></i> Παλαιότερες Δραστηριότητες
                         </button>
-                        <!--div class="btn-group">
-                            <button type="button" class="tablinks list-group-item" data-toggle="dropdown" onclick="openCity(event, 'activity_creation')" th:id="${((param.tab != null) and (param.tab[0] == 'activities')) ? 'my_active' : ''}">
-                                <i class="fa fa-calendar-minus-o" style="color:#cc834f;"></i>
-                                  Δραστηριότητες  <span class="caret"></span></button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li onclick="openCity(event, 'activity_creation')">Δημιουργία Εκδήλωσης</li>
-                                <li onclick="openCity(event, 'activities')">Ενεργές Δραστηριότητες</li>
-                                <li onclick="openCity(event, 'old activities')" >Παλαιότερες Δραστηριότητες</li>
-                            </ul>
-                        </div-->
+
                     </div>
                 </div>
             </div>                  <!--one quorter ending-->
@@ -547,18 +537,18 @@ Licence URI: http://www.os-templates.com/template-terms
                                 <br/>
 
                                 <div class="form-group" align="center">
-                                    <p/>
-                                    <label for="image" class="photo_upload" >Φωτογραφίες δραστηριότητας</label>
-                                    <p/>
-                                    <input name="image1" id="image1" type="file" accept="image/*" id="menu_images1" style="color: black;"/>
-                                    <p/>
-                                    <input name="image2" id="image2" type="file" accept="image/*" id="menu_images2" style="color: black;"/>
-                                    <p/>
-                                    <input name="image3" id="image3" type="file" accept="image/*" id="menu_images3" style="color: black;"/>
-                                    <p/>
-                                    <input name="image4" id="image4" type="file" accept="image/*" id="menu_images4" style="color: black;"/>
-                                    <p/>
-                                    <input name="image5" id="image5" type="file" accept="image/*" id="menu_images5" style="color: black;"/>
+                                    <br/>
+                                    <label for="menu_images1" class="photo_upload" >Φωτογραφίες δραστηριότητας</label>
+                                    <br/>
+                                    <input name="image1"  type="file" accept="image/*" id="menu_images1" style="color: black;"/>
+                                    <br/>
+                                    <input name="image2"  type="file" accept="image/*" id="menu_images2" style="color: black;"/>
+                                    <br/>
+                                    <input name="image3"  type="file" accept="image/*" id="menu_images3" style="color: black;"/>
+                                    <br/>
+                                    <input name="image4"  type="file" accept="image/*" id="menu_images4" style="color: black;"/>
+                                    <br/>
+                                    <input name="image5"  type="file" accept="image/*" id="menu_images5" style="color: black;"/>
                                     <!--img id="menu_image" class="preview_img" /-->
                                     <span class="help-block"></span>
                                 </div>
@@ -584,7 +574,7 @@ Licence URI: http://www.os-templates.com/template-terms
                         <div th:if="${(currEvents != null)}">
                             <article th:each="currEvent : ${currEvents}" class="one_third">
                                 <figure>
-                                    <a href="#"><img src="images/demo/event1.jpg" alt=""></a>
+                                    <a href="#"><img th:src="@{images/demo/event1.jpg}" alt=""></a>
                                 </figure>
                                 <div class="txtwrap">
                                     <h4 class="heading"><span th:text="${currEvent.name}"></span></h4>
@@ -602,7 +592,7 @@ Licence URI: http://www.os-templates.com/template-terms
                         <div th:if="${(pastEvents != null)}">
                             <article th:each="pastEvent : ${pastEvents}" class="one_third">
                                 <figure>
-                                    <a href="#"><img src="images/demo/event1.jpg" alt=""></a>
+                                    <a href="#"><img th:src="@{images/demo/event1.jpg}" alt=""></a>
                                 </figure>
                                 <div class="txtwrap">
                                     <br/>
@@ -619,10 +609,9 @@ Licence URI: http://www.os-templates.com/template-terms
                     <!-- ################################################################################################ -->
 
             </div>                  <!--three quorters ending -->
-        </div>
-
     </main>
-</div>
+    </div>
+
 
     <div th:replace="/fragments/foot :: foot"></div>
 
