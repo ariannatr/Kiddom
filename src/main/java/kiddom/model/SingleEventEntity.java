@@ -52,6 +52,8 @@ public class SingleEventEntity implements Serializable {
     @Column(name = "ratings_number")
     private float ratings_number;
 
+    private String owner;
+
      /*--------------Relations with other tables--------------*/
 
     /*--------------Many to One relation from provider, to get username--------------*/
@@ -66,6 +68,8 @@ public class SingleEventEntity implements Serializable {
     public void setProviders(ProviderEntity provider) {
         this.provider = provider;
     }
+
+    public String getOwner(){return provider.getName();}
 
     /*--------------One to Many relation for event_id from event to the program--------------*/
     @OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
