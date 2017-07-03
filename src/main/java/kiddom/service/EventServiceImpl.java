@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Arianna on 1/7/2017.
@@ -47,6 +48,12 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<SingleEventEntity> findALLEvents(){
         return activityRepository.findAll();
+    }
+
+    @Override
+    public Set<ProgramEntity> findProgram(int eventID)
+    {
+        return findSingleEventById(eventID).getProgram();
     }
 
     @Override
