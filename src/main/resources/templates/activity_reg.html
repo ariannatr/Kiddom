@@ -13,6 +13,35 @@ Licence URI: http://www.os-templates.com/template-terms
     <meta th:replace="fragments/head :: head">
     <title>Kiddom-ActivityReg</title>
     <script th:src="@{scripts/subcategories_show.js}"></script>
+
+    <style>
+        /* Style the buttons that are used to open and close the accordion panel */
+        /*button.accordion {*/
+            /*background-color: #eee;*/
+            /*color: #444;*/
+            /*cursor: pointer;*/
+            /*padding: 18px;*/
+            /*width: 100%;*/
+            /*text-align: left;*/
+            /*border: none;*/
+            /*outline: none;*/
+            /*transition: 0.4s;*/
+        /*}*/
+
+        /*!* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) *!*/
+        /*button.accordion.active, button.accordion:hover {*/
+            /*background-color: #ddd;*/
+        /*}*/
+
+        /*!* Style the accordion panel. Note: hidden by default *!*/
+        /*div.panel {*/
+            /*padding: 0 18px;*/
+            /*background-color: white;*/
+            /*max-height: 0;*/
+            /*overflow: hidden;*/
+            /*transition: max-height 0.2s ease-out;*/
+        /*}*/
+    </style>
 </head>
 
 <body id="top" style="background-color:#b7c1ae">
@@ -33,8 +62,7 @@ Licence URI: http://www.os-templates.com/template-terms
         <fieldset>
 
 
-            <!-- Text input-->
-
+            <!--Activity Name-->
             <div class="form-group">
                 <label class="col-md-4 control-label">Όνομα δραστηριότητας</label>
                 <div class="col-md-4 inputGroupContainer">
@@ -45,8 +73,8 @@ Licence URI: http://www.os-templates.com/template-terms
                 </div>
             </div>
             <br/>
-            <!-- Text input-->
 
+            <!--Activity Description-->
             <div class="form-group">
                 <label class="col-md-4 control-label" >Περιγραφή δραστηριότητας</label>
                 <div class="col-md-4 inputGroupContainer">
@@ -59,70 +87,12 @@ Licence URI: http://www.os-templates.com/template-terms
             <br/>
 
 
-            <!-- Text input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label">Ημερομηνία έναρξης δραστηριότητας</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input name="date" placeholder="Ημερομηνία έναρξης δραστηριότητας" class="form-control"  type="text">
-                    </div>
-                </div>
-            </div>
-            <br/>
+            <span>Προσθέστε ενα timeslot</span></span><input type="button" value="+" onclick="addRow()">
+            <div id="dates">
 
+            </div>
 
             <!-- Text input-->
-
-            <div class="form-group">
-                <label class="col-md-4 control-label">Ώρα έναρξης δραστηριότητας</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                        <input name="startTime" placeholder="Ώρα έναρξης δραστηριότητας" class="form-control" type="text">
-                    </div>
-                </div>
-            </div>
-            <br/>
-
-            <!-- Text input-->
-
-            <div class="form-group">
-                <label class="col-md-4 control-label">Ώρα λήξης δραστηριότητας</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                        <input name="endTime" placeholder="Ώρα λήξης δραστηριότητας" class="form-control" type="text">
-                    </div>
-                </div>
-            </div>
-            <br/>
-
-            <!-- Text input-->
-
-            <div class="form-group">
-                <label class="col-md-4 control-label">Διαθέσιμες θέσεις</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input name="capacity" placeholder="Διαθέσιμες θέσεις" class="form-control"  type="text">
-                    </div>
-                </div>
-            </div>
-            <br/>
-
-            <!-- Text input-->
-
-            <div class="form-group">
-                <label class="col-md-4 control-label">Τιμή ανά άτομο</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
-                        <input name="price" placeholder="Τιμή ανά άτομο" class="form-control"  type="text">
-                    </div>
-                </div>
-            </div>
-            <br/>
 
             <!-- Select Basic -->
 
@@ -316,7 +286,186 @@ Licence URI: http://www.os-templates.com/template-terms
 </div>
 </div><!-- /.container -->
 <div th:replace="fragments/foot :: foot"></div>
+<script type="application/javascript">
 
+    jQuery(".accordion").click(function() {
+        openAccordion();
+    });
+
+    function openAccordion() {
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].onclick = function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            }
+        }
+    }
+
+    function createField(glyphicon, labeltxt, input){
+
+        var i = document.createElement("i");
+        i.setAttribute("class", "glyphicon " + glyphicon);
+
+        var span = document.createElement("span");
+        span.setAttribute("class","input-group-addon");
+        span.appendChild(i);
+
+        var div = document.createElement("div");
+        div.classList.add("input-group");
+        div.appendChild(span);
+        div.appendChild(input);
+
+        var div2 = document.createElement("div");
+        div2.setAttribute("class","col-md-4 inputGroupContainer");
+        div2.appendChild(div);
+
+        var label = document.createElement("label");
+        label.setAttribute("class","col-md-4 control-label");
+        label.innerHTML= labeltxt;
+
+        div = document.createElement("div");
+        div.setAttribute("class","form-group");
+        div.appendChild(label);
+        div.appendChild(div2);
+
+        return div;
+    }
+
+    function createInput(name, placeholder, type, value){
+        var input = document.createElement("input");
+        input.name=name;
+        input.placeholder=placeholder;
+        input.classList.add("form-control");
+        input.type=type;
+        if (!value){
+            input.value = value;
+        }
+
+        return input;
+    }
+
+    var counter =0;
+
+    function addRow() {
+
+        counter++;
+
+
+
+
+
+
+        var panel = document.createElement("div");
+        panel.setAttribute("class", "panel-body" );
+
+        var input = createInput("date", "Ημερομηνία έναρξης δραστηριότητας", "text", "");
+        var result = createField("glyphicon-calendar", "Ώρα έναρξης δραστηριότητας", input);
+        result.classList.add("hidden");
+        panel.appendChild(result);
+
+        input = createInput("startTime", "Ώρα έναρξης δραστηριότητας", "text", "");
+        result = createField("glyphicon-time", "Ώρα έναρξης δραστηριότητας", input);
+        panel.appendChild(result);
+
+        input = createInput("endTime", "Ώρα λήξης δραστηριότητας", "text", "");
+        result = createField("glyphicon-time", "Ώρα λήξης δραστηριότητας", input);
+        panel.appendChild(result);
+
+        input = createInput("capacity", "Διαθέσιμες θέσεις", "text", "");
+        result = createField("glyphicon-user", "Διαθέσιμες θέσεις", input);
+        panel.appendChild(result);
+
+        input = createInput("price", "Τιμή ανά άτομο", "text", "");
+        result = createField("glyphicon-euro", "Τιμή ανά άτομο", input);
+        panel.appendChild(result);
+
+        var div = document.createElement("div");
+        div.setAttribute("id", "timeslot"+counter.toString());
+        div.setAttribute("class", "panel-collapse collapse in");
+        div.appendChild(panel);
+
+
+        //    <div class="panel panel-default">
+//            <div class="panel-heading">
+//            <h4 class="panel-title">
+//            <a data-toggle="collapse" data-parent="#accordion2" href="#collapse4">Collapsible Group 1</a>
+//        </h4>
+//        </div>
+//        <div id="collapse4" class="panel-collapse collapse in">
+//            <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+//            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+//            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+//        </div>
+//        </div>
+
+
+        var a = document.createElement("a");
+        a.setAttribute("data-toggle", "collapse");
+//        a.setAttribute("data-parent", "");
+        a.href = "#timeslot"+counter.toString();
+        a.innerHTML="Timeslot " +counter.toString();
+
+        var h4 = document.createElement("h4");
+        h4.setAttribute("class", "panel-title");
+        h4.appendChild(a);
+
+        var heading = document.createElement("div");
+        heading.setAttribute("class", "panel-heading");
+        heading.appendChild(h4);
+
+        var divpanel = document.createElement("div");
+        divpanel.setAttribute("class", "panel panel-default");
+        divpanel.appendChild(heading);
+        divpanel.appendChild(div);
+
+        var panelGroup = document.createElement("div");
+        panelGroup.setAttribute("class", "panel-group");
+        panelGroup.appendChild(divpanel);
+
+        //    <div class="panel-group">
+//            <div class="panel panel-default">
+
+
+//            <div class="panel-heading">
+//            <h4 class="panel-title">
+//            <a data-toggle="collapse" href="#collapse1">Collapsible panel</a>
+//        </h4>
+//        </div>
+
+
+//        <div id="collapse1" class="panel-collapse collapse">
+//            <div class="panel-body">Panel Body</div>
+//        </div>
+
+//        </div>
+
+//        </div>
+//
+
+
+
+//        var button = document.createElement("button");
+//        button.setAttribute("class", "accordion");
+//        button.type="button";
+//        button.innerHTML="Time Slot";
+
+//        document.getElementById('dates').appendChild(button);
+        document.getElementById('dates').appendChild(panelGroup);
+
+    }
+
+    function removeRow(input) {
+        document.getElementById('dates').removeChild( input.parentNode );
+    }
+</script>
 
 </body>
 
