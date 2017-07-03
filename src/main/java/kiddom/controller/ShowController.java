@@ -107,7 +107,43 @@ public class ShowController {
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 
         List<SingleEventEntity> events = eventService.findALLEvents(/*new PageRequest(evalPage, evalPageSize)*/);
-        Page<SingleEventEntity> page_events = new PageImpl<>(events);
+        Page<SingleEventEntity> page_events = new PageImpl<>(events,new PageRequest(evalPage, evalPageSize),events.size());
+        Pager pager = new Pager(page_events.getTotalPages(), page_events.getNumber(), BUTTONS_TO_SHOW);
+
+        modelAndView.addObject("url", "search");
+        modelAndView.addObject("items", page_events);
+        modelAndView.addObject("selectedPageSize", evalPageSize);
+        modelAndView.addObject("pageSizes", PAGE_SIZES);
+        modelAndView.addObject("pager", pager);
+        modelAndView.setViewName("/search");
+        return modelAndView;
+    }
+
+    @GetMapping("/search")
+    public ModelAndView showevents2(@ModelAttribute("user") @Valid UserEntity user,@RequestParam("pageSize") Optional<Integer> pageSize,
+                                   @RequestParam("page") Optional<Integer> page) {
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication authentication = authenticationFacade.getAuthentication();
+        System.out.println("Authentication name is"+authentication.getName());
+        if(!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            UserEntity userS = userService.findByUsername(authentication.getName());
+            modelAndView.addObject("type", String.valueOf(userS.getType()));
+        }
+        modelAndView.addObject("categories",categoryService.getCategoriesNames());
+        // Evaluate page size. If requested parameter is null, return initial
+        // page size
+        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+        // Evaluate page. If requested parameter is null or less than 0 (to
+        // prevent exception), return initial size. Otherwise, return value of
+        // param. decreased by 1.
+        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+
+        List<SingleEventEntity> events = eventService.findALLEvents(/*new PageRequest(evalPage, evalPageSize)*/);
+        Page<SingleEventEntity> page_events = new PageImpl<>(events,new PageRequest(evalPage, evalPageSize),events.size());
+        System.out.println("Exw elements "+page_events.getTotalElements()+" kai selides "+page_events.getTotalPages()
+                +" kai number of elements"+page_events.getNumberOfElements());
+        System.out.println("evalPage "+evalPage+" evalPageSize "+evalPageSize);
         Pager pager = new Pager(page_events.getTotalPages(), page_events.getNumber(), BUTTONS_TO_SHOW);
 
         modelAndView.addObject("url", "search");
