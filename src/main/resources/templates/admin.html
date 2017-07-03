@@ -12,21 +12,36 @@
     <div class="row">
         <h1>Providers</h1>
     </div>
-    <div class="row">
-        <table class="table">
-            <tr>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Email</th>
-            </tr>
-            <tr th:each="provider : ${items}">
-                <td th:text="${provider.name}"></td>
-                <td th:text="${provider.surname}"></td>
-                <td th:text="${provider.email}"></td>
-            </tr>
-        </table>
+    <div class="wrapper row3">
+        <main class="hoc container clear">
+            <!-- main body -->
+            <div class="center">
+                <div th:if ="${(items==null)}">
+                    <div class="alert alert-success" style="text-align: center;"> Δεν υπάρχουν ετοίματα Παρόχων</span>! <br>  </div>
+                </div >
+                <div th:if ="${(items!=null)}">
+                    <div class="row">
+                        <table class="table">
+                            <tr>
+                                <th>First name</th>
+                                <th>Last name</th>
+                                <th>Email</th>
+                            </tr>
+                            <tr th:each="provider : ${items}">
+                                <form method="POST" th:action="@{/accept/{provID}(provID=${provider.username})}">
+                                <td th:text="${provider.name}"></td>
+                                <td th:text="${provider.surname}"></td>
+                                <td th:text="${provider.email}"></td>
+                                    <td><button class="btn btn-warning" type="submit">Έγκριση</button></td>
+                                </form>
+                            </tr>
+                        </table>
+                    </div>
+                    <div th:replace="fragments/paginationbar :: paginationbar"></div>
+                </div>
+            </div>
+        </main>
     </div>
-    <div th:replace="fragments/paginationbar :: paginationbar"></div>
 </div>
 <script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>

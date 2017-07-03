@@ -205,4 +205,11 @@ public class UserServiceImpl implements UserService {
         parenton.setAvailPoints(newavail);
         parentRepository.save(parenton);
     }
+
+    @Override
+    public void approveProvider(ProviderEntity providerEntity)
+    {
+        providerEntity.setApproved(1);
+        providerRepository.save(providerEntity);
+    }
 }

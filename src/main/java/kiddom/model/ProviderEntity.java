@@ -39,6 +39,7 @@ public class ProviderEntity {
     @Column(name = "approved")
     private int approved;
 
+    private String username;
     /*--------------Constructor------------------------------*/
     //ProviderEntity() {
     //Default constructor
@@ -161,6 +162,8 @@ public class ProviderEntity {
     public void setApproved(int approved) {
         this.approved = approved;
     }
+
+    public String getUsername(){ return pk.getUser().getUsername();}
 
     @Override
     public boolean equals(Object o) {

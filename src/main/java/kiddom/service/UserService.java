@@ -17,4 +17,5 @@ public interface UserService {
 	public void updateUserParent(ParentEntity parenton,ParentEntity parent,UserEntity useron,UserEntity user);
 	public void updateUserPoints(ParentEntity parenton,ParentEntity parent,UserEntity useron,UserEntity user);
 	public void updateUserProvider(ProviderEntity provideron,ProviderEntity provider,UserEntity useron,UserEntity user);
+	public void approveProvider(ProviderEntity providerEntity);
 }

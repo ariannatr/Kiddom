@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -31,7 +32,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @ComponentScan
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableWebSecurity
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -41,13 +43,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private MyDBAythenticationService myDBAythenticationService;
 
 
-/*   @Qualifier("datasource")
-    @Autowired
-	private DataSource dataSource;*/
-
-	/*@Value("${spring.queries.users-query}")
-	private String usersQuery;*/
-
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -55,19 +50,63 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .withUser("user").password("password").roles("USER");
         auth.userDetailsService(myDBAythenticationService).passwordEncoder(bCryptPasswordEncoder);
     }
-/*	@Value("${spring.queries.roles-query}")
-	private String rolesQuery;*/
+   // @formatter:off
+   /*     @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http.
+            authorizeRequests()
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/index").permitAll()
+                    .antMatchers("/register").anonymous()
+                    .antMatchers("/usernameCheck").anonymous()
+                    .antMatchers("/register_prov").anonymous()
+                    .antMatchers("/about").permitAll()
+                    .antMatchers("/error").permitAll()
+                    .antMatchers("/activity").permitAll()
+                    .antMatchers("/google_map").permitAll()
+                    .antMatchers("/search").permitAll()
+                    .antMatchers("/faq").permitAll()
+                    .antMatchers("/activity_reg").hasRole("2")//be a provider
+                    //
+                    .antMatchers("/categories_form").permitAll()//has to be admin
+                    //
+                    .antMatchers("/category_submit").permitAll()//has t be admin
+                    //
+                    .antMatchers("/profile").hasRole("1")//hasAuthority("1")//be a parent
+                    .antMatchers("/profileProvider").hasRole("2")//be a Provider
+                    .antMatchers("/admin").permitAll()//.hasRole("0")
+                    .anyRequest()//be admin
+                    .authenticated().and().csrf().disable()
+                    .httpBasic();
+           /* http
+                    .formLogin()
+                    .loginPage("/index")
+                    .loginProcessingUrl("/login")
+                    .usernameParameter("username")
+                    .passwordParameter("password")
+                    .failureUrl("/index?success=false")
+                    .defaultSuccessUrl("/index")
+                    .and()
+                    .logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/index").and().exceptionHandling()
+                    .accessDeniedPage("/error");
+            http.sessionManagement()//now added
+                    .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                    .maximumSessions(2)
+                    .expiredUrl("/index");
+            http.sessionManagement()
+                    .invalidSessionUrl("/index")
+                    .sessionFixation().migrateSession();
+            http.requiresChannel()
+                    .antMatchers("/index","/register","/register_prov","/about","error",
+                            "/activity","google_map","/search","/faq",
+                            "activity_reg","/categories_form","/category_submit","/profile","/profileProvider","/admin").requiresSecure();
+        }*/
+        // @formatter:on
 
-   /* @Override
-	protected void configure(AuthenticationManagerBuilder auth)
-			throws Exception {
-		auth.
-			jdbcAuthentication()
-				.usersByUsernameQuery(usersQuery)
-				.authoritiesByUsernameQuery(rolesQuery)
-				.dataSource(dataSource)
-				.passwordEncoder(bCryptPasswordEncoder);
-	}*/
+
+
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -92,7 +131,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				//
                 .antMatchers("/profile").hasRole("1")//hasAuthority("1")//be a parent
                 .antMatchers("/profileProvider").hasRole("2")//be a Provider
-				.antMatchers("/admin").permitAll()//.hasRole("0")
+				.antMatchers("/admin").hasRole("0")
                 .anyRequest()//be admin
 				.authenticated().and().csrf().disable()
                 .formLogin()
@@ -102,7 +141,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .failureUrl("/index?success=false")
                 .defaultSuccessUrl("/index")
-                .and().logout()
+                .and()
+                .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/index").and().exceptionHandling()
 				.accessDeniedPage("/error");
@@ -117,11 +157,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/index","/register","/register_prov","/about","error",
 						"/activity","google_map","/search","/faq",
 						"activity_reg","/categories_form","/category_submit","/profile","/profileProvider","/admin").requiresSecure();
-      //  servletContext.setSessionTrackingModes(EnumSet.of(SessionTrackingMode.COOKIE));*/
-		http.requiresChannel()
-				.antMatchers("/index","/register","/register_prov","/about","/error",
-						"/activity","google_map","/search","/faq",
-						"activity_reg","/categories_form","/category_submit","/profile","/profileProvider","/admin").requiresSecure();
+      //  servletContext.setSessionTrackingModes(EnumSet.of(SessionTrackingMode.COOKIE));
 	}
 
     @Bean//lately added

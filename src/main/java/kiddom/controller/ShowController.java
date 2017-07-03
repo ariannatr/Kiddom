@@ -1,10 +1,7 @@
 package kiddom.controller;
 
 import kiddom.authentication.IAuthenticationFacade;
-import kiddom.model.Pager;
-import kiddom.model.ProviderEntity;
-import kiddom.model.SingleEventEntity;
-import kiddom.model.UserEntity;
+import kiddom.model.*;
 import kiddom.service.AdminService;
 import kiddom.service.CategoryService;
 import kiddom.service.EventService;
@@ -74,14 +71,30 @@ public class ShowController {
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 
         Page<ProviderEntity> persons = adminService.findAllPageable(new PageRequest(evalPage, evalPageSize));
-        Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
-
+        if(persons.getTotalPages()!=0) {
+            Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
+            modelAndView.addObject("items", persons);
+            modelAndView.addObject("selectedPageSize", evalPageSize);
+            modelAndView.addObject("pageSizes", PAGE_SIZES);
+            modelAndView.addObject("pager", pager);
+        }
         modelAndView.addObject("url", "admin");
-        modelAndView.addObject("items", persons);
-        modelAndView.addObject("selectedPageSize", evalPageSize);
-        modelAndView.addObject("pageSizes", PAGE_SIZES);
-        modelAndView.addObject("pager", pager);
         modelAndView.setViewName("/admin");
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value="/accept/{provID}", method = RequestMethod.POST)
+    public ModelAndView approve(/*@RequestParam("pageSize") Optional<Integer> pageSize,
+                                        @RequestParam("page") Optional<Integer> page,*/@PathVariable String provID) {
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication authentication = authenticationFacade.getAuthentication();
+        modelAndView.addObject("uname", authentication.getName());
+        UserEntity userS = userService.findByUsername(authentication.getName());
+        modelAndView.addObject("type", String.valueOf(userS.getType()));
+        ProviderEntity provider = userService.findProvider(new ProviderPK(provID));
+        userService.approveProvider(provider);
+        modelAndView.setViewName("redirect:/admin");
         return modelAndView;
     }
 
