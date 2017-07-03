@@ -86,14 +86,14 @@ Licence URI: http://www.os-templates.com/template-terms
             </div>
             <br/>
 
-            <label>Προσθέστε μια ημερομηνία</label><input type="input" id="hiddenField" class="datepicker" /><input type="button" value="+" onclick="createDate()"/>
+
 
 
             <!--<span>Προσθέστε ενα timeslot</span></span><input type="button" value="+" onclick="addRow()">-->
             <div id="dates">
-
+                <label>Προσθέστε μια ημερομηνία</label><input type="input" id="hiddenField" class="datepicker" /><input type="button" value="+" onclick="createDate()"/>
             </div>
-
+            <br>
             <!-- Text input-->
 
             <!-- Select Basic -->
@@ -275,6 +275,8 @@ Licence URI: http://www.os-templates.com/template-terms
             </div>
             <br/>
 
+            <input value="pressme" type="button" onclick="validation()"/>
+
             <!-- Button -->
             <div class="form-group">
                 <label class="col-md-4 control-label"></label>
@@ -355,7 +357,7 @@ Licence URI: http://www.os-templates.com/template-terms
         input.placeholder=placeholder;
         input.classList.add("form-control");
         input.type=type;
-        if (!value){
+        if (value){
             input.value = value;
         }
 
@@ -369,8 +371,8 @@ Licence URI: http://www.os-templates.com/template-terms
         var panel = document.createElement("div");
         panel.setAttribute("class", "panel-body" );
 
-        var input = createInput("date", "Ημερομηνία έναρξης δραστηριότητας", "text", "");
-        var result = createField("glyphicon-calendar", "Ώρα έναρξης δραστηριότητας", input);
+        var input = createInput("date", "Ημερομηνία έναρξης δραστηριότητας", "text", jQuery("#hiddenField").val());
+        var result = createField("glyphicon-calendar", "Ημερομηνία", input);
         result.classList.add("hidden");
         panel.appendChild(result);
 
@@ -500,8 +502,10 @@ Licence URI: http://www.os-templates.com/template-terms
 //        buttonText: "day",
         dateFormat: "dd-mm-yy",
         onSelect: function(dateText, inst) {
+            $('.ui-datepicker').css('z-index', 99999999999999);
 //            var dateAsString = dateText; //the first parameter of this function
 //            var dateAsObject = jQuery(this).datepicker( 'getDate' ); //the getDate method
+
         }
     });
 
@@ -514,6 +518,13 @@ Licence URI: http://www.os-templates.com/template-terms
     jQuery("input").on("click", ".addButton", function(){
         alert("123");
     });
+
+    function validation(){
+        alert("123");
+        jQuery("#dates .panel-group").each(function(){
+            console.log(this);
+        })
+    }
 
 
 </script>
