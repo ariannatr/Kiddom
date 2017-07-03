@@ -111,6 +111,7 @@ public class ShowController {
             modelAndView.addObject("type", String.valueOf(userS.getType()));
         }
         modelAndView.addObject("categories",categoryService.getCategoriesNames());
+        modelAndView.addObject("subcategories",categoryService.getALLSubCategoryNamesByCategory());
         // Evaluate page size. If requested parameter is null, return initial
         // page size
         int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
@@ -144,6 +145,7 @@ public class ShowController {
             modelAndView.addObject("type", String.valueOf(userS.getType()));
         }
         modelAndView.addObject("categories",categoryService.getCategoriesNames());
+        modelAndView.addObject("subcategories",categoryService.getALLSubCategoryNamesByCategory());
         // Evaluate page size. If requested parameter is null, return initial
         // page size
         int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);

@@ -25,7 +25,8 @@ public interface CategoryService {
     /*-----------------------CRUD methods for subcategories----------------------*/
 
     SubcategoriesEntity getSubCategoryByCategory(String category, String subcategory);
-
+    List<String> getSubCategoryNamesByCategory(String category);
+    List<List<String>> getALLSubCategoryNamesByCategory();
     void saveSubCategory(CategoriesEntity category, List<SubcategoriesEntity> subcategory);
     void saveSubCategory(CategoriesEntity category, SubcategoriesEntity subcategory);
 

@@ -76,6 +76,33 @@ public class CategoryServiceImpl implements CategoryService {
         return null;
      }
 
+    @Override
+    public List<String> getSubCategoryNamesByCategory(String category)
+    {
+        List<SubcategoriesEntity> list=subcategoryRepository.findAll();
+        List<String> subcat_return=new ArrayList<String>();
+        for(SubcategoriesEntity sub:list)
+        {
+            if((sub.getCategory().getName()).equals(category)){
+                subcat_return.add(sub.getSubName());
+                System.out.println(category+" -> "+sub.getSubName());
+            }
+
+        }
+        return subcat_return;
+    }
+
+    @Override
+    public List<List<String>> getALLSubCategoryNamesByCategory()
+    {
+        List<String> cats=getCategoriesNames();
+        List<List<String>> ret=new ArrayList<>();
+        for (String category:cats)
+        {
+            ret.add(getSubCategoryNamesByCategory(category));
+        }
+        return ret;
+    }
 
 
     @Override

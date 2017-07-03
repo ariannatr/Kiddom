@@ -42,26 +42,15 @@ Licence URI: http://www.os-templates.com/template-terms
             <div class="form-group">
                 <div  id="type2">
                 <label for="type2" class="control-label"  style="text-align: left;">Υποκατηγορία</label>
+                    <div th:each="subcategorie:${subcategories}" >
                     <select class="form-control" name="subcategory" style="display:none">
                         <option value="0">Οποιαδήποτε</option>
-                        <option value="1">Ποδόσφαιρο</option>
-                        <option value="2">Μπασκετ</option>
-                        <option value="3">Στίβος</option>
+                        <option th:each="subname : ${subcategorie}"
+                                th:value="${subnameStat.count}"
+                                th:text="${subname}">SubName</option>
                     </select>
 
-                    <select class="form-control" name="subcategory" style="display:none">
-                        <option value="0">Οποιαδήποτε</option>
-                        <option value="1">Ζωγραφική</option>
-                        <option value="2">Κατασκευές</option>
-                        <option value="3">3</option>
-                    </select>
-
-                    <select class="form-control"  name="subcategory" style="display:none">
-                        <option value="0">Οποιαδήποτε</option>
-                         <option value="1">Κουκλοθέατρο</option>
-                        <option value="2">Σινεμά</option>
-                        <option value="3">Κλόουν</option>
-                    </select>
+                </div>
                 </div>
             </div>
 
