@@ -105,7 +105,7 @@ public class LoginController {
     }
 
     @RequestMapping(value="/edit", method = RequestMethod.POST)
-    public ModelAndView edit(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("parent") @Valid ParentEntity parent){
+    public ModelAndView edit(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("parent") @Valid ParentEntity parent ){
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is " + authentication.getName());
@@ -126,7 +126,9 @@ public class LoginController {
             modelAndView.addObject("type",String.valueOf(useron.getType()));
 
         }
-        modelAndView.setViewName("profile");
+        //redirectAttributes.addFlashAttribute("tab","elements");
+        modelAndView.setViewName("redirect:/profile?tab=elements");
+     //   modelAndView.setViewName("profile");
         return modelAndView;
     }
 
@@ -252,7 +254,7 @@ public class LoginController {
             modelAndView.addObject("type",String.valueOf(userS.getType()));
         }
 
-        modelAndView.setViewName("profileProvider");
+        modelAndView.setViewName("redirect:/profileProvider?tab=elements");
         return modelAndView;
     }
 }
