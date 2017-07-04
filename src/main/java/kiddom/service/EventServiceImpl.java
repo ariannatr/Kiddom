@@ -1,18 +1,14 @@
 package kiddom.service;
 
-import kiddom.model.ProgramEntity;
-import kiddom.model.ProviderEntity;
-import kiddom.model.SingleEventEntity;
-import kiddom.model.UserEntity;
-import kiddom.repository.ActivityRepository;
-import kiddom.repository.ProgramRepository;
-import kiddom.repository.ProviderRepository;
+import kiddom.model.*;
+import kiddom.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.OneToOne;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +23,10 @@ public class EventServiceImpl implements EventService {
     @Autowired
     private ProgramRepository programRepository;
 
+    @Qualifier("commentRepository")
+    @Autowired
+    private CommentRepository commentRepository;
+
     @Qualifier("activityRepository")
     @Autowired
     private ActivityRepository activityRepository;
@@ -34,6 +34,10 @@ public class EventServiceImpl implements EventService {
     @Qualifier("providerRepository")
     @Autowired
     private ProviderRepository providerRepository;
+
+    @Qualifier("parentRepository")
+    @Autowired
+    private ParentRepository parentRepository;
 
     @Override
     public SingleEventEntity findSingleEventById(int eventID) {
@@ -48,6 +52,32 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<SingleEventEntity> findALLEvents(){
         return activityRepository.findAll();
+    }
+
+   /* @Override
+    public Set<CommentsEntity> findAllCommentsByEvent(Integer eventID_)
+    {
+        return commentRepository.findAllByEventId(eventID_);
+    }*/
+
+    @Override
+    public void addComment(ParentEntity parentEntity, CommentsEntity commentsEntity, SingleEventEntity singleEventEntity)
+    {
+        /*Update Comment of Parents at event*/
+       Set<ParentEntity> parents=singleEventEntity.getComment_parent();
+       parents.add(parentEntity);
+       singleEventEntity.setComment_parent(parents);
+       activityRepository.save(singleEventEntity);
+
+       /*Update Comment  of events to Parents*/
+       Set<SingleEventEntity> events =parentEntity.getComment_event();
+       events.add(singleEventEntity);
+       parentEntity.setComment_event(events);
+       parentRepository.save(parentEntity);
+
+       /*Save the comment*/
+       commentRepository.save(commentsEntity);
+
     }
 
     @Override

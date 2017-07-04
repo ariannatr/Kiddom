@@ -54,9 +54,30 @@ public class ActivityController {
         Integer eventID_ = Integer.parseInt(eventID);
         SingleEventEntity event = eventService.findSingleEventById(eventID_);
         Set<ProgramEntity> program= eventService.findProgram(eventID_);
+        //Set<CommentsEntity> comments =eventService.findAllCommentsByEvent(eventID_);
         modelAndView.addObject("event", event);
+        //modelAndView.addObject("comments", comments);
         modelAndView.addObject("program", program);
         modelAndView.setViewName("/activity");
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/comment/{eventID}", method = RequestMethod.POST)
+    public ModelAndView comment(@ModelAttribute("user") @Valid UserEntity user, @PathVariable String eventID,@RequestParam("comment") String Comment){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication authentication = authenticationFacade.getAuthentication();
+        modelAndView.addObject("uname", authentication.getName());
+        UserEntity userS = userService.findByUsername(authentication.getName());
+        modelAndView.addObject("type", String.valueOf(userS.getType()));
+        System.out.println("Eimai o gonios "+ userS.getUsername()+"thelw n prosthesw ena sxolio ,to"+Comment);
+        Integer eventID_ = Integer.parseInt(eventID);
+        SingleEventEntity event = eventService.findSingleEventById(eventID_);
+        ParentEntity parenton = userService.findParent(new ParentPK(authentication.getName()));
+        CommentsEntity commentsEntity=new CommentsEntity();
+        commentsEntity.setComment(Comment);
+        eventService.addComment(parenton,commentsEntity,event);
+        System.out.println("to prosthesa");
+        modelAndView.setViewName("redirect:/activity");
         return modelAndView;
     }
 
