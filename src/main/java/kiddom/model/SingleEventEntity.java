@@ -53,6 +53,10 @@ public class SingleEventEntity implements Serializable {
     private float ratings_number;
     @Column(name = "canceled")
     private int canceled;
+    @Transient
+    private int numOfSlots;
+    @Transient
+    private int slotDuration;
 
     private String owner;
 
@@ -231,6 +235,12 @@ public class SingleEventEntity implements Serializable {
 
     public int getCanceled() { return canceled; }
     public void setCanceled(int canceled) { this.canceled = canceled; }
+
+    public int getNumOfSlots() { return  numOfSlots; }
+    public void setNumOfSlots(int numOfSlots) { this.numOfSlots = numOfSlots; }
+
+    public int getSlotDuration() { return slotDuration; }
+    public void setSlotDuration(int slotDuration) { this.slotDuration = slotDuration; }
 
     @Override
     public boolean equals(Object o) {

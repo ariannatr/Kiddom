@@ -6,6 +6,9 @@ import kiddom.service.CategoryService;
 import kiddom.service.EventService;
 import kiddom.service.ProgramService;
 import kiddom.service.UserService;
+import org.joda.time.LocalTime;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.DateTimeFormatterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
@@ -129,11 +132,60 @@ public class ActivityController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name (provider) is " + authentication.getName());
+        event.setCategory("Temp Category");
         if (!authentication.getName().equals("anonymousUser")) {
-            System.out.println("To event exei id " + event.getId());
-            System.out.println("To date einai: " + daily_program.getDate());
-            program.add(daily_program);
-            //TODO for many event times!
+            if (event.getNumOfSlots() == 0) {
+                System.out.println("No slots");
+                event.setNumOfSlots(1);
+                program.add(daily_program);
+            }
+            else if (event.getNumOfSlots() > 1) {
+                String startTime = daily_program.getStartTime();
+                int numOfSlots = event.getNumOfSlots();
+                int slotDuration = event.getSlotDuration();
+                int price = daily_program.getPrice();
+                int availability = daily_program.getAvailability();
+                int capacity = daily_program.getCapacity();
+
+                String timeValue = startTime;
+                System.out.println("Time value is " + timeValue);
+                DateTimeFormatter parseFormat = new DateTimeFormatterBuilder().appendPattern("HH:mm").toFormatter();
+                LocalTime startTimeL = LocalTime.parse(timeValue, parseFormat);
+                System.out.println(startTimeL);
+
+                int hours = slotDuration/60;
+                int minutes = slotDuration%60;
+
+                LocalTime lastEndTime = startTimeL;
+
+                for (int i = 0; i < numOfSlots; ++i) {
+                    ProgramEntity newProgram = new ProgramEntity();
+                    newProgram.setCanceled(0);
+                    newProgram.setAvailability(availability);
+                    newProgram.setCapacity(capacity);
+                    newProgram.setPrice(price);
+                    newProgram.setDate(daily_program.getDate());
+                    System.out.println("Last end time is " + lastEndTime);
+                    String finalStartTime = lastEndTime.toString();
+                    String finalST = finalStartTime.substring(0, 5);
+                    newProgram.setStartTime(finalST);
+                    LocalTime endTime = lastEndTime.plusMinutes(minutes);
+                    endTime = endTime.plusHours(hours);
+                    String finalEndTime = endTime.toString();
+                    String finalET = finalEndTime.substring(0, 5);
+                    newProgram.setEndTime(finalET);
+                    program.add(newProgram);
+                    lastEndTime = endTime;
+                }
+                for (ProgramEntity p : program) {
+                    System.out.println("Program with start " + p.getStartTime() + " end " + p.getEndTime());
+                }
+            }
+            else {
+                event.setNumOfSlots(1);
+                program.add(daily_program);
+            }
+
             modelAndView.addObject("uname", authentication.getName());
             ProviderEntity provideron = userService.findProvider(new ProviderPK(authentication.getName()));
             UserEntity useron = userService.findByUsername(authentication.getName());
