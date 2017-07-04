@@ -91,7 +91,7 @@ Licence URI: http://www.os-templates.com/template-terms
 
             <!--<span>Προσθέστε ενα timeslot</span></span><input type="button" value="+" onclick="addRow()">-->
             <div id="dates">
-                <label>Προσθέστε μια ημερομηνία</label><input type="input" id="hiddenField" class="datepicker" /><input type="button" value="+" onclick="createDate()"/>
+                <label>Προσθέστε μια ημερομηνία</label><input type="input" id="hiddenField" placeholder ="dd-mm-yyyy" class="datepicker" /><input type="button" value="+" onclick="createDate()"/>
             </div>
             <br>
             <!-- Text input-->
@@ -351,12 +351,13 @@ Licence URI: http://www.os-templates.com/template-terms
         return div;
     }
 
-    function createInput(name, placeholder, type, value){
+    function createInput(name, className, placeholder, type, value){
         var input = document.createElement("input");
         input.name=name;
         input.placeholder=placeholder;
         input.classList.add("form-control");
-        input.classList.add(name);
+        if(className)
+            input.classList.add(className);
         input.setAttribute("type", type);
         if (value){
             input.value = value;
@@ -370,34 +371,34 @@ Licence URI: http://www.os-templates.com/template-terms
 
     function addRow(date, parent, mode) {
         counter++;
-        alert(date);
+
         var panel = document.createElement("div");
         panel.setAttribute("class", "panel-body" );
 
-        var input = createInput("date", "Ημερομηνία έναρξης δραστηριότητας", "text", date);
+        var input = createInput("date", "", "Ημερομηνία έναρξης δραστηριότητας", "text", date);
         var result = createField("glyphicon-calendar", "Ημερομηνία", input);
         result.classList.add("hidden");
         panel.appendChild(result);
 
-        input = createInput("startTime", "Ώρα έναρξης δραστηριότητας", "text", "");
+        input = createInput("startTime", "startTime", "Ώρα έναρξης δραστηριότητας", "text", "");
         result = createField("glyphicon-time", "Ώρα έναρξης δραστηριότητας", input);
         panel.appendChild(result);
 
-        input = createInput("endTime", "Ώρα λήξης δραστηριότητας", "text", "");
+        input = createInput("endTime", "endTime", "Ώρα λήξης δραστηριότητας", "text", "");
         result = createField("glyphicon-time", "Ώρα λήξης δραστηριότητας", input);
         panel.appendChild(result);
 
-        input = createInput("availability", "Διαθέσιμες θέσεις", "number", "");
+        input = createInput("availability","",  "Διαθέσιμες θέσεις", "number", "");
         result = createField("glyphicon-user", "Διαθέσιμες θέσεις", input);
         panel.appendChild(result);
 
-        input = createInput("price", "Τιμή ανά άτομο", "number", "");
+        input = createInput("price", "", "Τιμή ανά άτομο", "number", "");
         result = createField("glyphicon-euro", "Τιμή ανά άτομο", input);
         panel.appendChild(result);
 
         var div = document.createElement("div");
         div.setAttribute("id", "timeslot"+counter.toString());
-        div.setAttribute("class", "panel-collapse collapse");
+        div.setAttribute("class", "panel-collapse collapse in");
         div.appendChild(panel);
 
         var a = document.createElement("a");
@@ -465,7 +466,7 @@ Licence URI: http://www.os-templates.com/template-terms
 
         var collapseDiv = document.createElement("div");
         collapseDiv.setAttribute("id", date.toString());
-        collapseDiv.setAttribute("class", "panel-collapse collapse");
+        collapseDiv.setAttribute("class", "panel-collapse collapse in");
         collapseDiv.appendChild(panelBody);
         collapseDiv.appendChild(panelFooter);
 
@@ -556,15 +557,31 @@ Licence URI: http://www.os-templates.com/template-terms
 //            var div2 = div.getElementsByClassName(".panel-collapse")
         });
         var startHours = jQuery(".startTime").get();
-        var endHours = jQuery(".startTime").get();
+        console.log(startHours);
+        var endHours = jQuery(".endTime").get();
         for (var i =0; i<slots; i++){
+            if (startHours[i].value>=endHours[i].value){
+                console.log(startHours[i]);
+                console.log(endHours[i]);
+                alert("123");
+                return false;
+            }
             for (var j=0; j<slotsPerDay[i]; j++){
                 for (var k = j+1; k<slotsPerDay[i]; k++) {
-                    console.log(slots);
+                    if(endHours[i].value>startHours[j].value) {
+                        alert("Invalid times");
+                        return false;
+                    }
+                    else if(endHours[j].value>startHours[i].value) {
+                        alert("invalid times");
+                        return false;
+                    }
                     console.log(slotsPerDay[i]);
                 }
             }
         }
+        alert("all good");
+        return true;
 
 //        var doc = jQuery("#dates .panel-group");
 //        console.log(doc);
