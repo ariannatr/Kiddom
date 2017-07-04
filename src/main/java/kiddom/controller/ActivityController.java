@@ -2,10 +2,12 @@ package kiddom.controller;
 
 import kiddom.authentication.IAuthenticationFacade;
 import kiddom.model.*;
+import kiddom.service.CategoryService;
 import kiddom.service.EventService;
 import kiddom.service.ProgramService;
 import kiddom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -34,6 +36,10 @@ public class ActivityController {
 
     @Autowired
     private ProgramService programService;
+
+    @Qualifier("categoryService")
+    @Autowired
+    private CategoryService categoryService;
 
     @RequestMapping(value="/activity/{eventID}", method = RequestMethod.GET)
     public ModelAndView activityshow(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @PathVariable String eventID){
@@ -91,6 +97,8 @@ public class ActivityController {
             modelAndView.setViewName("redirect:/error?error_code=anon");
             return modelAndView;
         }
+        modelAndView.addObject("categories",categoryService.getCategoriesNames());
+        modelAndView.addObject("subcategories",categoryService.getALLSubCategoryNamesByCategory());
         modelAndView.setViewName("activity_reg");
         return modelAndView;
     }

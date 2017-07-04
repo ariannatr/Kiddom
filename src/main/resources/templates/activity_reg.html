@@ -12,7 +12,7 @@ Licence URI: http://www.os-templates.com/template-terms
 <head>
     <meta th:replace="/fragments/head :: head">
     <title>Kiddom-ActivityReg</title>
-    <script th:src="@{/scripts/subcategories_show.js}"></script>
+    <script th:src="@{/scripts/select_categories.js}"></script>
 
     <style>
         /* Style the buttons that are used to open and close the accordion panel */
@@ -188,15 +188,11 @@ Licence URI: http://www.os-templates.com/template-terms
                 <div class="col-md-4 selectContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                        <select name="category" class="form-control selectpicker" >
-                            <option value=" " >Παρακαλώ επιλέξτε κατηγορία</option>
-                            <option>Χορός</option>
-                            <option>Αθλητισμός</option>
-                            <option >Δημιουργική Δραστηριότητα</option>
-                            <option >Ομαδικά παιχνίδια</option>
-                            <option >Εκπαιδευτική Δραστηριότητα</option>
-                            <option >Ζωγραφική</option>
-                            <option >Παιχνίδι</option>
+                        <select th:field="*{categories}" class="form-control" name="category" id="type1" onchange="changeSelect( this.value )">
+                            <option value="0">Οποιαδήποτε</option>
+                            <option th:each="categorie : ${categories}"
+                                    th:value="${categorie}"
+                                    th:text="${categorie}">CategoryName</option>
                         </select>
                     </div>
                 </div>
@@ -205,57 +201,62 @@ Licence URI: http://www.os-templates.com/template-terms
 
             <!-- Select Basic -->
 
+
             <div class="form-group">
+                <div id="type2">
                 <label class="col-md-4 control-label">Υποκατηγορία 1</label>
                 <div class="col-md-4 selectContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                        <select name="sub1" class="form-control selectpicker" >
-                            <option value=" " >Παρακαλώ επιλέξτε υποκατηγορία</option>
-                            <option>Μπάσκετ</option>
-                            <option>Ποδόσφαιρο</option>
-                            <option >Τέννις</option>
+                    <div class="input-group" th:each="subcategorie:${subcategories}">
+                        <span class="input-group-addon" style="display:none"><i class="glyphicon glyphicon-list"></i></span>
+                        <select class="form-control" name="subcategory" style="display:none">
+                            <option value="0">Παρακαλώ επιλέξτε υποκατηγορία</option>
+                            <option th:each="subname : ${subcategorie}"
+                                    th:value="${subnameStat.count}"
+                                    th:text="${subname}">SubName</option>
                         </select>
                     </div>
                 </div>
             </div>
+            </div>
             <br/>
-
-            <!-- Select Basic -->
 
             <div class="form-group">
-                <label class="col-md-4 control-label">Υποκατηγορία 2</label>
-                <div class="col-md-4 selectContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                        <select name="sub2" class="form-control selectpicker" >
-                            <option value=" " >Παρακαλώ επιλέξτε υποκατηγορία</option>
-                            <option>Μπαλέτο</option>
-                            <option>Λάτιν</option>
-                            <option >Παραδοσιακός</option>
-                        </select>
+                <div id="type3">
+                    <label class="col-md-4 control-label">Υποκατηγορία 2</label>
+                    <div class="col-md-4 selectContainer">
+                        <div class="input-group" th:each="subcategorie:${subcategories}">
+                            <span class="input-group-addon" style="display:none"><i class="glyphicon glyphicon-list"></i></span>
+                            <select class="form-control" name="subcategory" style="display:none">
+                                <option value="0">Παρακαλώ επιλέξτε υποκατηγορία 2</option>
+                                <option th:each="subname : ${subcategorie}"
+                                        th:value="${subnameStat.count}"
+                                        th:text="${subname}">SubName</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
             <br/>
-
-            <!-- Select Basic -->
 
             <div class="form-group">
-                <label class="col-md-4 control-label">Υποκατηγορία 3</label>
-                <div class="col-md-4 selectContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                        <select name="sub3" class="form-control selectpicker" >
-                            <option value=" " >Παρακαλώ επιλέξτε υποκατηγορία</option>
-                            <option>Κατασκευές</option>
-                            <option >Πηλός</option>
-                            <option >Χρώματα</option>
-                        </select>
+                <div id="type4">
+                    <label class="col-md-4 control-label">Υποκατηγορία 3</label>
+                    <div class="col-md-4 selectContainer">
+                        <div class="input-group" th:each="subcategorie:${subcategories}">
+                            <span class="input-group-addon" style="display:none"><i class="glyphicon glyphicon-list"></i></span>
+                            <select class="form-control" name="subcategory" style="display:none">
+                                <option value="0">Παρακαλώ επιλέξτε υποκατηγορία 3</option>
+                                <option th:each="subname : ${subcategorie}"
+                                        th:value="${subnameStat.count}"
+                                        th:text="${subname}">SubName</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
             <br/>
+
+
 
             <div class="form-group" align="center">
                 <p/>
