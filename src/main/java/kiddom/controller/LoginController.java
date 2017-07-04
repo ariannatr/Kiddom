@@ -156,8 +156,10 @@ public class LoginController {
                     catch (ParseException e) {
                     }
                 }
-                modelAndView.addObject("items" , pastEvents);
-                modelAndView.addObject("curr", currEvents);
+                if(pastEvents.size()>0)
+                    modelAndView.addObject("items" , pastEvents);
+                if(currEvents.size()>0)
+                     modelAndView.addObject("curr", currEvents);
             }
         }
 
@@ -296,10 +298,13 @@ public class LoginController {
                     else {
                         modelAndView.addObject("eventsStatus", 0);
                     }
+                    //break;
                 }
                 modelAndView.addObject("eventsStatus", 1);
-                modelAndView.addObject("pastEvents", pastEvents);
-                modelAndView.addObject("currEvents", currEvents);
+                if(pastEvents.size()>0)
+                    modelAndView.addObject("pastEvents", pastEvents);
+                if(currEvents.size()>0)
+                    modelAndView.addObject("currEvents", currEvents);
             }
             else {
                 System.out.println("Without events");
