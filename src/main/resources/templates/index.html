@@ -130,17 +130,17 @@ Licence URI: http://www.os-templates.com/template-terms
           <li class="active"}">
             <a  th:href="@{/index}"><i class="fa fa-lg fa-home"></i>Αρχικη</a>
           </li>
-          <li ><a class="drop" >Δραστηριότητες</a>
+          <!--li ><a class="drop" >Δραστηριότητες</a>
             <ul>`
               <li th:classappend="${module == 'activity' ? 'active' : ''}">
                 <a  th:href="@{/activity}">Ενεργή Δραστηριότητα</a>
-              </li>
-              <li th:classappend="${module == 'activity_reg' ? 'active' : ''}">
+              </li-->
+              <li th:if ="${(uname != null) and (type=='2')}" >
                 <a  th:href="@{/activity_reg}">Δημιουργία Δραστηριότητας</a>
               </li>
 
-            </ul>
-          </li>
+            <!--/ul>
+          </li-->
           <li><a th:href="@{/about}">Σχετικα με εμας</a></li>
           <li><a th:href="@{/faq}">FAQ</a></li>
         </ul>

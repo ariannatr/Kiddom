@@ -82,10 +82,10 @@
                                 <li>
                                     <a style="font-size:13px;" data-toggle="modal" href="#login_overlay">Συνδεση</a>
                                 </li>
-                                <li>
+                                <li th:classappend="${module == 'register' ? 'active' : ''}">
                                     <a style="font-size:13px;" th:href="@{/register}">Εγγραφη</a></li>
                                 </li>
-                                <li>
+                                <li th:classappend="${module == 'register_prov' ? 'active' : ''}">
                                     <a style="font-size:13px;" th:href="@{/register_prov}">Παροχοι</a>
                                 </li>
                             </div >
@@ -120,20 +120,20 @@
                             <li th:classappend="${module == 'index' ? 'active' : ''}">
                                 <a  th:href="@{/index}"><i class="fa fa-lg fa-home"></i>Αρχικη</a>
                             </li>
-                            <li><a class="drop" >Δραστηριοτητες</a>
+                            <!--li><a class="drop" >Δραστηριοτητες</a>
                                 <ul>
                                     <li th:classappend="${module == 'activity' ? 'active' : ''}">
                                         <a  th:href="@{/activity}">Ενεργη Δραστηριοτητα</a>
-                                    </li>
+                                    </li-->
                                     <li th:classappend="${module == 'activity_reg' ? 'active' : ''}">
                                         <a  th:href="@{/activity_reg}">Δημιουργια Δραστηριοτητας</a>
                                     </li>
-                                    <li th:classappend="${module == 'activity_reg' ? 'active' : ''}">
+                                    <!--li th:classappend="${module == 'activity_reg' ? 'active' : ''}">
                                         <a  th:href="@{/activity_reg}">Παλαιοτερες δραστηριοτητες</a>
                                     </li>
 
 
-                                </ul>
+                                </ul-->
                             </li>
                             <li th:classappend="${module == 'about' ? 'active' : ''}">
                                 <a  th:href="@{/about}">Σχετικα με εμας</a>
