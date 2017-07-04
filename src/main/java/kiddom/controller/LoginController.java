@@ -127,11 +127,13 @@ public class LoginController {
             ParentEntity parenton = userService.findParent(new ParentPK(authentication.getName()));
             UserEntity useron = userService.findByUsername(authentication.getName());
             userService.updateUserParent(parenton,parent,useron,user);
-            for (MultipartFile uploadedFile : uploadingFiles) {
+            if (!uploadingFiles[0].isEmpty()) {
+                for (MultipartFile uploadedFile : uploadingFiles) {
 
-                File file = new File(uploadingdir + uploadedFile.getOriginalFilename());
-                userService.uploadPhoto(parenton,parent,useron,user,"/image/" + uploadedFile.getOriginalFilename());
-                uploadedFile.transferTo(file);
+                    File file = new File(uploadingdir + uploadedFile.getOriginalFilename());
+                    userService.uploadPhoto(parenton, parent, useron, user, "/image/" + uploadedFile.getOriginalFilename());
+                    uploadedFile.transferTo(file);
+                }
             }
             ParentPK parentonPK = new ParentPK(authentication.getName());
             parenton = userService.findParent(parentonPK);
