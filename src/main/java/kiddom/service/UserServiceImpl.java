@@ -151,7 +151,6 @@ public class UserServiceImpl implements UserService {
         {
             useron.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         }
-        System.out.println("new telephone "+parent.getTelephone());
         userRepository.save(useron);
         parentRepository.save(parenton);
     }
@@ -159,7 +158,7 @@ public class UserServiceImpl implements UserService {
  /****** Update Provider's Profile ******/
     @Override
     public void updateUserProvider(ProviderEntity provideron,ProviderEntity provider,UserEntity useron,UserEntity user){
-        if(!provider.getEmail().replaceAll(" ","").equals("")){
+        if(!provider.getEmail().replaceAll(" ","").equals("")) {
             provideron.setEmail(provider.getEmail());
         }
         if(!provider.getName().replaceAll(" ","").equals(""))
