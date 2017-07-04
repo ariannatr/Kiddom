@@ -12,6 +12,7 @@ Licence URI: http://www.os-templates.com/template-terms
 <head >
     <title>Kiddom - View activity</title>
     <meta th:replace="/fragments/head :: head">
+    <link th:href="@{/css/lightbox.css}" rel="stylesheet" type="text/css" media="all">
 </head>
 
 <body id="top">
@@ -528,13 +529,14 @@ https://bootsnipp.com/snippets/featured/ui-comments
 
 <div th:replace="/fragments/foot :: foot"></div>
 
-    <script th:src="@{scripts/jquery.min.js}"></script>
-    <script th:src="@{scripts/jquery.backtotop.js}"></script>
-    <script th:src="@{scripts/jquery.mobilemenu.js}"></script>
-    <script th:src="@{scripts/jquery.flexslider-min.js}"></script>
-    <script th:src="@{scripts/jquery-ui.js}"></script>
+    <script th:src="@{/scripts/jquery.min.js}"></script>
+    <script th:src="@{/scripts/jquery.backtotop.js}"></script>
+    <script th:src="@{/scripts/jquery.mobilemenu.js}"></script>
+    <script th:src="@{/scripts/jquery.flexslider-min.js}"></script>
+    <script th:src="@{/scripts/jquery-ui.js}"></script>
     <script th:src="@{/scripts/lightbox.js}" ></script>
     <script th:href="@{/scripts/jquery.mobilemenu.js}"></script>
+    <script th:href="@{/scripts/lightbox.js}"></script>
 <script>
     $('<form action="#"><select /></form>').appendTo("#mainav");
     $("<option />", {selected: "selected", value: "", text: "Μενού"}).appendTo("#mainav select");
