@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Arianna on 6/6/2017.
@@ -34,8 +35,8 @@ public class ActivityController {
     private EventService eventService;
 
 
-    @RequestMapping(value="/activityProvider/{eventID}", method = RequestMethod.GET)
-    public ModelAndView activity_show(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @PathVariable String eventID){
+    @RequestMapping(value="/activity/{eventID}", method = RequestMethod.GET)
+    public ModelAndView activityshow(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @PathVariable String eventID){
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
@@ -44,14 +45,34 @@ public class ActivityController {
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
         }
-        System.out.println("Phra " + eventID);
         Integer eventID_ = Integer.parseInt(eventID);
-        System.out.println("Diavasa " + eventID_);
         SingleEventEntity event = eventService.findSingleEventById(eventID_);
+        Set<ProgramEntity> program= eventService.findProgram(eventID_);
         modelAndView.addObject("event", event);
-        modelAndView.setViewName("/activityProvider");
+        modelAndView.addObject("program", program);
+        modelAndView.setViewName("/activity");
         return modelAndView;
     }
+
+    /*@RequestMapping(value="/reserve/{programID}", method = RequestMethod.POST)
+    public ModelAndView reservation(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @PathVariable String programID){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication authentication = authenticationFacade.getAuthentication();
+        System.out.println("Authentication name is"+authentication.getName());
+        if(!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            UserEntity userS = userService.findByUsername(authentication.getName());
+            modelAndView.addObject("type", String.valueOf(userS.getType()));
+        }
+        Integer eventID_ = Integer.parseInt(eventID);
+        SingleEventEntity event = eventService.findSingleEventById(eventID_);
+        Set<ProgramEntity> program= eventService.findProgram(eventID_);
+        modelAndView.addObject("event", event);
+        modelAndView.addObject("program", program);
+        modelAndView.setViewName("redirect:/activity");
+        return modelAndView;
+    }*/
+
 
     @RequestMapping(value="/activity_reg", method = RequestMethod.GET)
     public ModelAndView activity_register(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, RedirectAttributes redirectAttributes){
@@ -111,24 +132,4 @@ public class ActivityController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/edit_event/{eventID}", method = RequestMethod.POST)
-    public ModelAndView edit_event(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("single_event") @Valid SingleEventEntity event, @PathVariable String eventID)
-    {
-        System.out.println("Provider name: " + provider.getName());
-        ModelAndView modelAndView = new ModelAndView();
-        Authentication authentication = authenticationFacade.getAuthentication();
-        System.out.println("Authentication name is " + authentication.getName());
-        if (!authentication.getName().equals("anonymousUser")) {
-            modelAndView.addObject("uname", authentication.getName());
-            Integer eventID_ = Integer.parseInt(eventID);
-            SingleEventEntity eventEdit = eventService.findSingleEventById(eventID_);
-            System.out.println("Kanw update sto " + eventID_);
-            eventService.updateSingleEvent(provider, event, eventEdit);
-            modelAndView.addObject("event", eventEdit);
-            modelAndView.addObject("provider", provider);
-            modelAndView.addObject("user", user);
-        }
-        modelAndView.setViewName("activityProvider");
-        return modelAndView;
-    }
 }
