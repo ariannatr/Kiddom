@@ -560,7 +560,7 @@ Licence URI: http://www.os-templates.com/template-terms
         console.log(startHours);
         var endHours = jQuery(".endTime").get();
         for (var i =0; i<slots; i++){
-            if (startHours[i]>=endHours[i]){
+            if (startHours[i].value>=endHours[i].value){
                 console.log(startHours[i]);
                 console.log(endHours[i]);
                 alert("123");
@@ -568,11 +568,11 @@ Licence URI: http://www.os-templates.com/template-terms
             }
             for (var j=0; j<slotsPerDay[i]; j++){
                 for (var k = j+1; k<slotsPerDay[i]; k++) {
-                    if(endHours[i]>startHours[j]) {
+                    if(endHours[i].value>startHours[j].value) {
                         alert("Invalid times");
                         return false;
                     }
-                    else if(endHours[j]>startHours[i]) {
+                    else if(endHours[j].value>startHours[i].value) {
                         alert("invalid times");
                         return false;
                     }
