@@ -139,6 +139,7 @@ public class ActivityController {
             modelAndView.setViewName("redirect:/error?error_code=anon");
             return modelAndView;
         }
+        modelAndView.addObject("is_approved", provider.getApproved());
         modelAndView.addObject("categories",categoryService.getCategoriesNames());
         modelAndView.addObject("subcategories",categoryService.getALLSubCategoryNamesByCategory());
         modelAndView.setViewName("/activity_reg");
