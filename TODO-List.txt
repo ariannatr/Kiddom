@@ -11,7 +11,7 @@ SOS! --> Να κρατηθεί (και να βελτιωθεί) η δομή τη
 > Admin: create providers approval form - DONE
 > Admin: create admin interface to get statistics etc - TODO
 
-> Provider: not allowed to create activities if not approved - TODO
+> Provider: not allowed to create activities if not approved - DONE
 > Provider: finish reports - TODO
 > Provider: fix edit page for activity - TODO
 > Provider: allow event cancelation - TODO
