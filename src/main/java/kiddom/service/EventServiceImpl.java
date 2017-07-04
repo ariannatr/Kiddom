@@ -111,5 +111,4 @@ public class EventServiceImpl implements EventService {
         eventEdit.setCanceled(1);
         activityRepository.save(eventEdit);
     }
-
 }
