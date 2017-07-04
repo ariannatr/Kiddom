@@ -1,9 +1,6 @@
 package kiddom.service;
 
-import kiddom.model.ProgramEntity;
-import kiddom.model.ProviderEntity;
-import kiddom.model.SingleEventEntity;
-import kiddom.model.UserEntity;
+import kiddom.model.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -17,6 +14,8 @@ import java.util.Set;
  */
 @Service("eventService")
 public interface EventService {
+   // public Set<CommentsEntity> findAllCommentsByEvent(Integer eventID_);
+    public void addComment(ParentEntity parentEntity,CommentsEntity commentsEntity,SingleEventEntity singleEventEntity);
     public Set<ProgramEntity> findProgram(int eventID);
     public SingleEventEntity findSingleEvent(SingleEventEntity singleEventEntity);
     public SingleEventEntity findSingleEventById(int eventID);

@@ -16,7 +16,11 @@ public class CommentsEntity implements Serializable {
     private String comment;
     private String reply;
     private float rating;
-
+  //  private String username;
+    public CommentsEntity() {
+        this.comment="";
+        this.reply="";
+    }
     @Id
     @Column
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -33,6 +37,10 @@ public class CommentsEntity implements Serializable {
     public String getComment() {
         return comment;
     }
+
+
+   /* @Column(name = "parent_username")
+    public String getParent() {return username;}*/
 
     public void setComment(String comment) {
         this.comment = comment;

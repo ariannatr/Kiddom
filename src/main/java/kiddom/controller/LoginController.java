@@ -37,6 +37,27 @@ import java.text.SimpleDateFormat;
 
 @Controller
 public class LoginController {
+
+    public class Show{
+        private String date;
+        private String startTime;
+        private String endTime;
+        private String owner;
+        private Integer price;
+        private Integer id;
+        private String category;
+        Show(String date,String startTime,String endTime,String owner,Integer price ,Integer id,String category){
+            this.date=date;this.startTime=startTime;this.endTime=endTime;this.owner=owner;
+            this.price=price;   this.id=id; this.category=category;
+        }
+        public Integer getId() {return id;}
+        public Integer getPrice(){return price;}
+        public String getDate(){return date;}
+        public String getEndTime() {return endTime;}
+        public String getOwner() {return owner;}
+        public String getStartTime() {return startTime;}
+        public String getCategory() {return category;}
+    }
     @Autowired
     private IAuthenticationFacade authenticationFacade;
 
@@ -103,8 +124,39 @@ public class LoginController {
             modelAndView.addObject("avail_points",useron.getAvailPoints());
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
+            Set<ProgramEntity> events =useron.getEvents();
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            LocalDate localDate = LocalDate.now();
+            String currDate1 = dtf.format(localDate).toString();
+            if(events!=null)
+            {
+                List<Show> currEvents = new ArrayList<>();
+                List<SingleEventEntity> pastEvents = new ArrayList<>();
+                for (ProgramEntity event : events)
+                {
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                    try {
+                        Date currDate = sdf.parse(currDate1);
+                        Date eventDate = sdf.parse(event.getDate());
+                        if (eventDate.after(currDate)) {
+                            Show show = new Show(event.getDate(),event.getStartTime(),event.getEndTime(),
+                                    event.getEvent().getName(),event.getEvent().getPrice(),event.getEvent().getId(),event.getEvent().getCategory());
+                            currEvents.add(show);
+                        }
+                        else {
+                            SingleEventEntity singleEventEntity=event.getEvent();
+                            pastEvents.add(singleEventEntity);
+                        }
+                    }
+                    catch (ParseException e) {
+                    }
+                }
+                modelAndView.addObject("items" , pastEvents);
+                modelAndView.addObject("curr", currEvents);
+            }
         }
-            modelAndView.setViewName("profile");
+
+        modelAndView.setViewName("profile");
         return modelAndView;
     }
 

@@ -24,12 +24,12 @@ SOS! --> Να κρατηθεί (και να βελτιωθεί) η δομή τη
 > User: search algorithms - TODO
 
 > View: fix colors - TODO
-> View: find a way to upload photos to the server - TODO
-> View: make drop-down lists work properly with data from db - TODO
-> View: unified search results show - TODO
+> View: find a way to upload photos to the server - DONE
+> View: make drop-down lists work properly with data from db - DONE
+> View: unified search results show - almost TODO
 
 > HTML: fix activity form - TODO
-> HTML: fix provider profile - TODO
+> HTML: fix provider profile - DONE
 > HTML: fix tabs for create activity etc - TODO
 > HTML: fix buypoints - DONE
 

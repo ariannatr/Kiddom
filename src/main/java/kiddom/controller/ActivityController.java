@@ -2,16 +2,16 @@ package kiddom.controller;
 
 import kiddom.authentication.IAuthenticationFacade;
 import kiddom.model.*;
+import kiddom.service.CategoryService;
 import kiddom.service.EventService;
+import kiddom.service.ProgramService;
 import kiddom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -34,6 +34,12 @@ public class ActivityController {
     @Autowired
     private EventService eventService;
 
+    @Autowired
+    private ProgramService programService;
+
+    @Qualifier("categoryService")
+    @Autowired
+    private CategoryService categoryService;
 
     @RequestMapping(value="/activity/{eventID}", method = RequestMethod.GET)
     public ModelAndView activityshow(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @PathVariable String eventID){
@@ -48,30 +54,49 @@ public class ActivityController {
         Integer eventID_ = Integer.parseInt(eventID);
         SingleEventEntity event = eventService.findSingleEventById(eventID_);
         Set<ProgramEntity> program= eventService.findProgram(eventID_);
+        //Set<CommentsEntity> comments =eventService.findAllCommentsByEvent(eventID_);
         modelAndView.addObject("event", event);
+        //modelAndView.addObject("comments", comments);
         modelAndView.addObject("program", program);
         modelAndView.setViewName("/activity");
         return modelAndView;
     }
 
-    /*@RequestMapping(value="/reserve/{programID}", method = RequestMethod.POST)
-    public ModelAndView reservation(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @PathVariable String programID){
+    @RequestMapping(value="/comment/{eventID}", method = RequestMethod.POST)
+    public ModelAndView comment(@ModelAttribute("user") @Valid UserEntity user, @PathVariable String eventID,@RequestParam("comment") String Comment){
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
-        System.out.println("Authentication name is"+authentication.getName());
-        if(!authentication.getName().equals("anonymousUser")) {
-            modelAndView.addObject("uname", authentication.getName());
-            UserEntity userS = userService.findByUsername(authentication.getName());
-            modelAndView.addObject("type", String.valueOf(userS.getType()));
-        }
+        modelAndView.addObject("uname", authentication.getName());
+        UserEntity userS = userService.findByUsername(authentication.getName());
+        modelAndView.addObject("type", String.valueOf(userS.getType()));
+        System.out.println("Eimai o gonios "+ userS.getUsername()+"thelw n prosthesw ena sxolio ,to"+Comment);
         Integer eventID_ = Integer.parseInt(eventID);
         SingleEventEntity event = eventService.findSingleEventById(eventID_);
-        Set<ProgramEntity> program= eventService.findProgram(eventID_);
-        modelAndView.addObject("event", event);
-        modelAndView.addObject("program", program);
+        ParentEntity parenton = userService.findParent(new ParentPK(authentication.getName()));
+        CommentsEntity commentsEntity=new CommentsEntity();
+        commentsEntity.setComment(Comment);
+        eventService.addComment(parenton,commentsEntity,event);
+        System.out.println("to prosthesa");
         modelAndView.setViewName("redirect:/activity");
         return modelAndView;
-    }*/
+    }
+
+    @RequestMapping(value="/reserve/{programID}", method = RequestMethod.POST)
+    public ModelAndView reservation(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @PathVariable("programID") String programID, @RequestParam("num") int places){
+        ModelAndView modelAndView = new ModelAndView();
+        System.out.println("bika st reservation");
+        Authentication authentication = authenticationFacade.getAuthentication();
+        modelAndView.addObject("uname", authentication.getName());
+        UserEntity userS = userService.findByUsername(authentication.getName());
+        modelAndView.addObject("type", String.valueOf(userS.getType()));
+        ParentEntity parenton = userService.findParent(new ParentPK(authentication.getName()));
+        ProgramEntity programEntity=programService.getProgramById(Integer.parseInt(programID)); //slot of event
+        ProviderEntity providerEntity=  programEntity.getEvent().getProviders(); //provider of event
+        programService.makeReservation(parenton,places,programEntity,providerEntity);
+        modelAndView.setViewName("redirect:/activity/"+programEntity.getEvent().getId());
+        System.out.println("vgainw apo to st reservation");
+        return modelAndView;
+    }
 
 
     @RequestMapping(value="/activity_reg", method = RequestMethod.GET)
@@ -93,6 +118,8 @@ public class ActivityController {
             modelAndView.setViewName("redirect:/error?error_code=anon");
             return modelAndView;
         }
+        modelAndView.addObject("categories",categoryService.getCategoriesNames());
+        modelAndView.addObject("subcategories",categoryService.getALLSubCategoryNamesByCategory());
         modelAndView.setViewName("activity_reg");
         return modelAndView;
     }
