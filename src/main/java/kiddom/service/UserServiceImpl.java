@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
     }
 
 	@Override
-	public void saveUser(UserEntity user, ParentEntity parent) {
+    public void saveUser(UserEntity user, ParentEntity parent,String photopath) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		System.out.println("Creating user..." + user.getPassword());
 		user.setType(1);
@@ -95,6 +95,7 @@ public class UserServiceImpl implements UserService {
         System.out.println("Trying to add " + parent.getName() + " " + parent.getSurname() + "  " + parent.getEmail());
         //parent.setUsername(user.getUsername());
         parent.setUser(user);
+        parent.setPhoto(photopath);
         //cookie.setCategory("none");
         //cookie.setParentByParentId(parent);
         //cookie.setUsername(user.getUsername());
@@ -202,6 +203,11 @@ public class UserServiceImpl implements UserService {
         int newavail=temp + parenton.getAvailPoints();
         System.out.println("Tha valw twra "+newavail+" lefta");
         parenton.setAvailPoints(newavail);
+        parentRepository.save(parenton);
+    }
+
+    public void uploadPhoto(ParentEntity parenton,ParentEntity parent,UserEntity useron,UserEntity user,String photopath) {
+        parenton.setPhoto(photopath);
         parentRepository.save(parenton);
     }
 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sun.security.pkcs11.wrapper.Constants;
@@ -20,6 +21,8 @@ import javax.servlet.http.HttpSession;
 import javax.swing.text.html.HTMLDocument;
 import javax.validation.Valid;
 import java.awt.print.Pageable;
+import java.io.File;
+import java.io.IOException;
 import java.security.Principal;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -39,6 +42,7 @@ public class LoginController {
 
 	@Autowired
 	private UserService userService;
+    public static final String uploadingdir = System.getProperty("user.dir") + "/uploadingdir/";
 
     @RequestMapping(value={"/", "/index"}, method = RequestMethod.GET, produces= "application/javascript")
     public ModelAndView index(@ModelAttribute("user") UserEntity user){
@@ -104,8 +108,17 @@ public class LoginController {
         return modelAndView;
     }
 
+    @RequestMapping("/edit")
+    public ModelAndView uploading(Model model) {
+        File file = new File(uploadingdir);
+        model.addAttribute("files", file.listFiles());
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/buypoints");
+        return modelAndView;
+    }
+
     @RequestMapping(value="/edit", method = RequestMethod.POST)
-    public ModelAndView edit(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("parent") @Valid ParentEntity parent ){
+    public ModelAndView edit(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("parent") @Valid ParentEntity parent,@RequestParam("uploadingFiles") MultipartFile[] uploadingFiles) throws IOException {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is " + authentication.getName());
@@ -114,6 +127,12 @@ public class LoginController {
             ParentEntity parenton = userService.findParent(new ParentPK(authentication.getName()));
             UserEntity useron = userService.findByUsername(authentication.getName());
             userService.updateUserParent(parenton,parent,useron,user);
+            for (MultipartFile uploadedFile : uploadingFiles) {
+
+                File file = new File(uploadingdir + uploadedFile.getOriginalFilename());
+                userService.uploadPhoto(parenton,parent,useron,user,"/image/" + uploadedFile.getOriginalFilename());
+                uploadedFile.transferTo(file);
+            }
             ParentPK parentonPK = new ParentPK(authentication.getName());
             parenton = userService.findParent(parentonPK);
             modelAndView.addObject("parent", parentonPK.getUser());

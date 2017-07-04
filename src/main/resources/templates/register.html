@@ -7,7 +7,7 @@
     <title>Kiddom-Register</title>
     <meta th:replace="/fragments/head :: head">
     <link th:href="@{/css/register_new.css}" rel="stylesheet" type="text/css" media="all">
-        <script th:src="@{/scripts/register_new.js}"></script>
+    <script th:src="@{/scripts/register_new.js}"></script>
 
     <style type="text/css">
         @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
@@ -68,7 +68,7 @@
                     </div>
                     <br>
                     <div id="login" >
-                        <form  class="well form-horizontal" id="loginForm" method="POST" th:action="@{/register}"   autocomplete="on">
+                        <form  class="well form-horizontal" id="loginForm" enctype="multipart/form-data" method="POST" th:action="@{/register}"   >
                             <!--th:action="@{/register}"-->
                             <div class="row setup-content" id="step-1">
 
@@ -135,11 +135,11 @@
                                     <br/>
 
                                     <div class="form-group" align="center">
-                                        <p/>
-                                        <label for="image1" class="photo_upload" >Θα θέλατε να ανεβάσετε μια Φωτογραφία Προφίλ;</label>
-                                        <span class="help-block"></span>
-                                        <p/>
-                                        <input name="image" id="image1" type="file" accept="image/*" id="menu_images1" style="color: black;"/>
+
+                                        <label  class="photo_upload" >Θα θέλατε να ανεβάσετε μια Φωτογραφία Προφίλ;</label>
+                                        <div class="col-sm-10">
+                                            <input  type="file" name="uploadingFile"  >
+                                        </div>
                                     </div>
                                     <br/>
 
