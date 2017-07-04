@@ -24,5 +24,4 @@ public class ReservationsEntity implements Serializable {
     public void setReservationId(int reservationId) {
         this.reservation_id = reservationId;
     }
-    
 }

@@ -10,4 +10,5 @@ import kiddom.model.ProgramEntity;
 
 @Repository("programRepository")
 public interface ProgramRepository extends JpaRepository<ProgramEntity, Long> {
+    public ProgramEntity findById(Integer id);
 }

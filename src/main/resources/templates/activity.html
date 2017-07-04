@@ -364,7 +364,7 @@
     </style>
 
 
-    <div th:replace="fragments/navbar :: navbar('activity')"></div>
+    <div th:replace="/fragments/navbar :: navbar('activity')"></div>
 
     <div id="activity">
         <div class="row">
@@ -377,21 +377,21 @@
                 <div id="act-imgs" class="content col-lg-7 col-md-12 col-sm-12 col-xs-12">
 
                     <div class="row">
-                        <a th:href="@{images/activity/no_upload_image.jpg}" data-lightbox="image-1" data-title="My caption">
+                        <a th:href="@{/images/activity/no_upload_image.jpg}" data-lightbox="image-1" data-title="My caption">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><div class="act-img"><img style="width: auto" th:src="@{images/activity/no_upload_image.jpg}" alt="img here"></div></div>
                         </a>
-                        <a th:href="@{images/activity/no_upload_image.jpg}" data-lightbox="image-1" data-title="My caption">
+                        <a th:href="@{/images/activity/no_upload_image.jpg}" data-lightbox="image-1" data-title="My caption">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><div class="act-img"><img style="width: auto" th:src="@{images/activity/no_upload_image.jpg}" alt="img here"></div></div>
                         </a>
                     </div>
                     <div class="row">
-                        <a th:href="@{images/activity/no_upload_image.jpg}" data-lightbox="image-1" data-title="My caption">
+                        <a th:href="@{/images/activity/no_upload_image.jpg}" data-lightbox="image-1" data-title="My caption">
                         <div class="col-lg-4 col-md-4 col-sm-4"><div class="act-img"><img style="width: auto" th:src="@{images/activity/no_upload_image.jpg}" alt="img here"></div></div>
                         </a>
-                        <a th:href="@{images/activity/no_upload_image.jpg}" data-lightbox="image-1" data-title="My caption">
+                        <a th:href="@{/images/activity/no_upload_image.jpg}" data-lightbox="image-1" data-title="My caption">
                             <div class="col-lg-4 col-md-4 col-sm-4"><div class="act-img "><img style="width: auto" th:src="@{images/activity/no_upload_image.jpg}" alt="img here"></div></div>
                         </a>
-                        <a th:href="@{images/activity/no_upload_image.jpg}" data-lightbox="image-1" data-title="My caption">
+                        <a th:href="@{/images/activity/no_upload_image.jpg}" data-lightbox="image-1" data-title="My caption">
                             <div class="col-lg-4 col-md-4 col-sm-4"><div class="act-img" style="position: relative"><img style="width: auto" th:src="@{images/activity/no_upload_image.jpg}" alt="img here">
                             <div class="overlay" style="  position: absolute;bottom: 0%;left: 0;right: 0; background-color: rgba(255, 255, 255, 0.1); overflow: hidden; width: auto;
                             height:100%; margin:auto;  pointer-events:none;  transition: .5s ease;pointer-events:none;">
@@ -431,7 +431,7 @@
                         <div>
                             <ul>
                                 <li class="active"><a href="#description">Γενικά</a></li>
-                                <li class=""><a href="#calendar" id="services-link">Κρατήσεις</a></li>
+                                <li class=""><a th:href="@{#calendar}" id="services-link">Κρατήσεις</a></li>
                                 <li class=""><a href="#ratings" id="ratings-link">Αξιολογήσεις</a></li>
                             </ul>
                         </div>
@@ -471,6 +471,7 @@
                             <td th:text="${program_num.endTime}">10.00</td>
                             <td th:text="${program_num.availability}">20</td>
                             <td th:text="${program_num.price}">10</td>
+                            <td> <input field="num" name="num" id="num" required="required" type="number" ></td>
                             <td><button type="submit"  class="btn btn-default">Κράτηση</button> </td>
                         </form>
                     </tr>
@@ -635,13 +636,13 @@
     <!--<script src="@{../static/scripts/jquery.mobilemenu.js}"></script>-->
     <!--<script src="@{../static/scripts/jquery.flexslider-min.js}"></script>-->
     <!--<script src="@{../static/scripts/jquery-ui.js}"></script>-->
-    <div th:replace="fragments/foot :: foot"></div>
+    <div th:replace="/fragments/foot :: foot"></div>
 
-<script th:src="@{scripts/jquery.min.js}"></script>
-<script th:src="@{scripts/jquery.backtotop.js}"></script>
-<script th:src="@{scripts/jquery.mobilemenu.js}"></script>
-<script th:src="@{scripts/jquery.flexslider-min.js}"></script>
-<script th:src="@{scripts/jquery-ui.js}"></script>
+<script th:src="@{/scripts/jquery.min.js}"></script>
+<script th:src="@{/scripts/jquery.backtotop.js}"></script>
+<script th:src="@{/scripts/jquery.mobilemenu.js}"></script>
+<script th:src="@{/scripts/jquery.flexslider-min.js}"></script>
+<script th:src="@{/scripts/jquery-ui.js}"></script>
     <script>
         $('#calendar').datepicker({
             inline: true,
