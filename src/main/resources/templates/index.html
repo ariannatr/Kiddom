@@ -46,12 +46,12 @@ Licence URI: http://www.os-templates.com/template-terms
       <div class="fl_right">
         <ul>
             <div th:if ="${(uname != null) and (type=='1')} ">
-              <li><i class="fa fa-lg fa-home"></i></a></li>
+              <li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li>
               <li>
                 <strong><span th:text="${uname}"></span></strong>
               </li>
               <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" style="font-size:13px;">Το προφιλ μου <span class="caret"></span></a>
+                <a style="font-size:13px;" class="dropdown-toggle" data-toggle="dropdown" style="font-size:13px;">Το προφιλ μου <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu" style="text-transform: capitalize; font-size:12px;">
                 <!--style=" background-color:rgba(0,0,0,.6); " -->
                   <li><a th:href="@{/profile(tab=elements)}">&nbsp; Στοιχεία Χρήστη</a></li>
@@ -63,37 +63,47 @@ Licence URI: http://www.os-templates.com/template-terms
                 </ul>
               </li>
               <li>
-                <a href="logout">Αποσύνδεση</a></li>
+                <a style="font-size:13px;" href="logout">Αποσύνδεση</a></li>
               </li>
             </div >
           <div th:if ="${(uname != null) and (type=='2')} ">
-            <li><i class="fa fa-lg fa-home"></i></a></li>
+            <li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li>
             <li>
               <strong><span th:text="${uname}"></span></strong>
             </li>
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown">Το προφιλ μου <span class="caret"></span></a>
+              <a style="font-size:13px;" class="dropdown-toggle" data-toggle="dropdown">Το προφιλ μου <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu" style="text-transform: capitalize; font-size:12px;">
                 <!--style=" background-color:rgba(0,0,0,.6); " -->
-                <li ><a th:href="@{/profileProvider(tab=elements)}">Στοιχεια Χρήστη</a></li>
-                <li ><a th:href="@{/profileProvider(tab=wallet)}">Πορτοφολι</a></li>
-                <li ><a th:href="@{/profileProvider(tab=activites)}">Δραστηριοτητες</a></li>
+                <li ><a th:href="@{/profileProvider(tab=elements)}">Στοιχεία Χρήστη</a></li>
+                <li ><a th:href="@{/profileProvider(tab=wallet)}">Πορτοφόλι</a></li>
+                <li ><a th:href="@{/profileProvider(tab=cur_activites)}">Δραστηριότητες</a></li>
+                <li ><a th:href="@{/profileProvider(tab=old_activites)}">Δραστηριότητες</a></li>
               </ul>
             </li>
             <li>
-              <a href="logout">Αποσύνδεση</a></li>
+              <a style="font-size:13px;" href="logout">Αποσύνδεση</a></li>
             </li>
           </div >
           <div th:if ="${(uname == null) or (type==null)} ">
-              <li><i class="fa fa-lg fa-home"></i></a></li>
+              <li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li>
             <li>
-              <a id="trial"  data-toggle="modal" href="#login_overlay">Συνδεση</a>
+              <a id="trial" style="font-size:13px;" data-toggle="modal" href="#login_overlay">Συνδεση</a>
             </li>
             <li>
-              <a th:href="register">Εγγραφη</a></li>
+              <a style="font-size:13px;" th:href="register">Εγγραφη</a></li>
             </li>
             <li>
-              <a th:href="register_prov">Πaροχοι</a>
+              <a style="font-size:13px;" th:href="register_prov">Πaροχοι</a>
+            </li>
+          </div >
+          <div th:if ="${(uname != null) and (type=='0')} ">
+            <li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li>
+            <li>
+              <strong><span th:text="${uname}"></span></strong>
+            </li>
+            <li>
+              <a style="font-size:13px;" href="logout">Αποσύνδεση</a></li>
             </li>
           </div >
         </ul>
@@ -110,7 +120,7 @@ Licence URI: http://www.os-templates.com/template-terms
     <header id="header" class="hoc clear">
       <!-- ################################################################################################ -->
       <div id="logo" class="fl_left">
-        <h1><a href="index">Kiddom</a></h1>
+        <h1><a th:href="@{/index}">Kiddom</a></h1>
       </div>
       <nav id="mainav" class="fl_right">
         <ul class="clear">

@@ -58,7 +58,7 @@
 
                             </div >
                             <div style="font-size:13px;" th:if ="${(uname != null) and (type=='2')} ">
-                                <li><i class="fa fa-lg fa-home"></i></a></li>
+                                <li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li>
                                 <li>
                                     <strong><span th:text="${uname}"></span></strong>
                                 </li>
@@ -68,7 +68,8 @@
                                     <!--style=" background-color:rgba(0,0,0,.6); " -->
                                         <li ><a th:href="@{/profileProvider(tab=elements)}">Στοιχεία Χρήστη</a></li>
                                         <li ><a th:href="@{/profileProvider(tab=wallet)}">Πορτοφόλι</a></li>
-                                        <li ><a th:href="@{/profileProvider(tab=activites)}">Δραστηριότητες</a></li>
+                                        <li ><a th:href="@{/profileProvider(tab=cur_activites)}">Δραστηριότητες</a></li>
+                                        <li ><a th:href="@{/profileProvider(tab=old_activites)}">Δραστηριότητες</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -76,7 +77,7 @@
                                 </li>
                             </div >
                             <div style="font-size:13px;" th:if ="${(uname == null) or (type==null)} ">
-                                <li><i class="fa fa-lg fa-home"></i></a></li>
+                                <li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li>
                                 <li>
                                     <a style="font-size:13px;" data-toggle="modal" href="#login_overlay">Συνδεση</a>
                                 </li>
@@ -85,6 +86,15 @@
                                 </li>
                                 <li>
                                     <a style="font-size:13px;" th:href="@{/register_prov}">Παροχοι</a>
+                                </li>
+                            </div >
+                            <div th:if ="${(uname != null) and (type=='0')} ">
+                                <li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li>
+                                <li>
+                                    <strong><span th:text="${uname}"></span></strong>
+                                </li>
+                                <li>
+                                <a style="font-size:13px;" href="logout">Αποσύνδεση</a></li>
                                 </li>
                             </div >
                     </ul>
@@ -170,11 +180,15 @@
                                     <li>Προφιλ παροχου</li>
                                 </span>
                                 <span th:if="${(module=='buypoints')}">
-                                    <li><a th:href="profile">Προφιλ γονεα</a></li>
+                                    <li><a th:href="@{/profile}">Προφιλ γονεα</a></li>
                                     <li>Aγορα ποντων</li>
                                 </span>
                                 <span th:if="${(module=='error_page')}">
                                     <li>Λαθος</li>
+                                </span>
+                                <span th:if="${(module=='activityProvider')}">
+                                    <li><a th:href="@{/profileProvider}">Προφιλ Παροχου</a></li>
+                                    <li>Επισκοπηση Δραστηριοτητας</li>
                                 </span>
                             </span>
 

@@ -389,10 +389,12 @@ Licence URI: http://www.os-templates.com/template-terms
         panel.appendChild(result);
 
         input = createInput("availability","",  "Διαθέσιμες θέσεις", "number", "");
+        input.setAttribute("min","1");
         result = createField("glyphicon-user", "Διαθέσιμες θέσεις", input);
         panel.appendChild(result);
 
-        input = createInput("price", "", "Τιμή ανά άτομο", "number", "");
+        input = createInput("price", "", "Τιμή ανά άτομο", "number","");
+        input.setAttribute("min","1");
         result = createField("glyphicon-euro", "Τιμή ανά άτομο", input);
         panel.appendChild(result);
 
