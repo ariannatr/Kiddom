@@ -22,22 +22,21 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry)
 	{
-		registry.addViewController("/").setViewName("index");
-		registry.addViewController("/index").setViewName("index");
-		registry.addViewController("/activity_reg").setViewName("activity_reg");
-		registry.addViewController("/about").setViewName("about");
-		//registry.addViewController("/error").setViewName("error");
-		registry.addViewController("/faq").setViewName("faq");
-		registry.addViewController("/profile").setViewName("profile");
-		registry.addViewController("/profileProvider").setViewName("profileProvider");
-		registry.addViewController("/register_prov").setViewName("register_prov");
-		registry.addViewController("/register").setViewName("register");
-		registry.addViewController("/search").setViewName("search");
-		registry.addViewController("/activity").setViewName("activity");
-		registry.addViewController("/activityProvider").setViewName("activityProvider");
-		registry.addViewController("/google_map").setViewName("google_map");
-		registry.addViewController("/category_submit").setViewName("category_submit");
-		registry.addViewController("/buy_points").setViewName("buy_points");
-		registry.addViewController("/admin").setViewName("admin");
+		registry.addViewController("/").setViewName("/index");
+		registry.addViewController("/index").setViewName("/index");
+		registry.addViewController("/activity_reg").setViewName("/activity_reg");
+		registry.addViewController("/about").setViewName("/about");
+		registry.addViewController("/faq").setViewName("/faq");
+		registry.addViewController("/profile").setViewName("/profile");
+		registry.addViewController("/profileProvider").setViewName("/profileProvider");
+		registry.addViewController("/register_prov").setViewName("/register_prov");
+		registry.addViewController("/register").setViewName("/register");
+		registry.addViewController("/search").setViewName("/search");
+		registry.addViewController("/activity").setViewName("/activity");
+		registry.addViewController("/activityProvider").setViewName("/activityProvider");
+		registry.addViewController("/google_map").setViewName("/google_map");
+		registry.addViewController("/category_submit").setViewName("/category_submit");
+		registry.addViewController("/buy_points").setViewName("/buy_points");
+		registry.addViewController("/admin").setViewName("/admin");
 	}
 }

@@ -63,21 +63,24 @@ public class EventServiceImpl implements EventService {
     @Override
     public void addComment(ParentEntity parentEntity, CommentsEntity commentsEntity, SingleEventEntity singleEventEntity)
     {
-        /*Update Comment of Parents at event*/
+         /*Save the comment*/
+        commentsEntity.setParent_username(parentEntity);
+        commentsEntity.setEvent_id(singleEventEntity);
+        commentRepository.save(commentsEntity);
+
+        /*
+        /*Update Comment of Parents at event
        Set<ParentEntity> parents=singleEventEntity.getComment_parent();
        parents.add(parentEntity);
        singleEventEntity.setComment_parent(parents);
        activityRepository.save(singleEventEntity);
 
-       /*Update Comment  of events to Parents*/
+       /*Update Comment  of events to Parents
        Set<SingleEventEntity> events =parentEntity.getComment_event();
        events.add(singleEventEntity);
        parentEntity.setComment_event(events);
-       parentRepository.save(parentEntity);
-
-       /*Save the comment*/
-       commentRepository.save(commentsEntity);
-
+       parentRepository.save(parentEntity);*/
+        System.out.println("Paw n kanw save t comment "+commentsEntity.getComment());
     }
 
     @Override

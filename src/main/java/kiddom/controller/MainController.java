@@ -39,7 +39,7 @@ public class MainController {
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
         }
-        modelAndView.setViewName("error");
+        modelAndView.setViewName("/error");
         return modelAndView;
     }
 
@@ -53,7 +53,7 @@ public class MainController {
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
         }
-        modelAndView.setViewName("faq");
+        modelAndView.setViewName("/faq");
         return modelAndView;
     }
 
@@ -67,7 +67,7 @@ public class MainController {
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
         }
-        modelAndView.setViewName("google_map");
+        modelAndView.setViewName("/google_map");
         return modelAndView;
     }
 
@@ -81,7 +81,7 @@ public class MainController {
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
         }
-        modelAndView.setViewName("about");
+        modelAndView.setViewName("/about");
         return modelAndView;
     }
 
@@ -95,7 +95,7 @@ public class MainController {
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
         }
-        modelAndView.setViewName("error");
+        modelAndView.setViewName("/error");
         return modelAndView;
     }
 
@@ -125,7 +125,7 @@ public class MainController {
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
         }
-        modelAndView.setViewName("buypoints");
+        modelAndView.setViewName("/buypoints");
         return modelAndView;
     }
 
@@ -139,7 +139,7 @@ public class MainController {
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
         }
-        modelAndView.setViewName("categories_form");
+        modelAndView.setViewName("/categories_form");
         return modelAndView;
     }
 }

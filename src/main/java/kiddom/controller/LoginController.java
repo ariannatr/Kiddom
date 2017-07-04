@@ -70,7 +70,7 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is "+authentication.getName());
-        modelAndView.setViewName("index");
+        modelAndView.setViewName("/index");
         if (!authentication.getName().equals("anonymousUser")) {
             modelAndView.addObject("uname", authentication.getName());
             UserEntity userS = userService.findByUsername(authentication.getName());
@@ -156,7 +156,7 @@ public class LoginController {
             }
         }
 
-        modelAndView.setViewName("profile");
+        modelAndView.setViewName("/profile");
         return modelAndView;
     }
 
@@ -301,7 +301,7 @@ public class LoginController {
                 System.out.println("Without events");
             }
         }
-        modelAndView.setViewName("profileProvider");
+        modelAndView.setViewName("/profileProvider");
         return modelAndView;
     }
 

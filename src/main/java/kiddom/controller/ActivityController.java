@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.lang.reflect.Array;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,6 +28,18 @@ import java.util.Set;
  */
 @Controller
 public class ActivityController {
+
+    public class ShowComment
+    {
+        private String username;
+        private String comment;
+        private Float rate;
+        public String getUsername() {return username;}
+        public String getComment() {return comment;}
+        public Float getRate() {return rate;}
+        public ShowComment(String username,String comment,Float rate) {this.username = username;
+        this.rate=rate;this.comment=comment;}
+    }
 
     @Autowired
     private IAuthenticationFacade authenticationFacade;
@@ -57,9 +70,14 @@ public class ActivityController {
         Integer eventID_ = Integer.parseInt(eventID);
         SingleEventEntity event = eventService.findSingleEventById(eventID_);
         Set<ProgramEntity> program= eventService.findProgram(eventID_);
-        //Set<CommentsEntity> comments =eventService.findAllCommentsByEvent(eventID_);
+        Set<CommentsEntity> comment =event.getComment_parent();
         modelAndView.addObject("event", event);
-        //modelAndView.addObject("comments", comments);
+        Set<ShowComment> comments=new HashSet<>();
+        for (CommentsEntity com:comment){
+            ShowComment showComment=new ShowComment(com.getParent_username().getParentUsername(),com.getComment(),com.getRating());
+            comments.add(showComment);
+        }
+        modelAndView.addObject("comments", comments);
         modelAndView.addObject("program", program);
         modelAndView.setViewName("/activity");
         return modelAndView;
@@ -80,7 +98,7 @@ public class ActivityController {
         commentsEntity.setComment(Comment);
         eventService.addComment(parenton,commentsEntity,event);
         System.out.println("to prosthesa");
-        modelAndView.setViewName("redirect:/activity");
+        modelAndView.setViewName("redirect:/activity/"+eventID);
         return modelAndView;
     }
 
@@ -123,7 +141,7 @@ public class ActivityController {
         }
         modelAndView.addObject("categories",categoryService.getCategoriesNames());
         modelAndView.addObject("subcategories",categoryService.getALLSubCategoryNamesByCategory());
-        modelAndView.setViewName("activity_reg");
+        modelAndView.setViewName("/activity_reg");
         return modelAndView;
     }
 
