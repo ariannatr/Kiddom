@@ -10,7 +10,7 @@ Licence URI: http://www.os-templates.com/template-terms
 <head >
     <title>Provider Profile</title>
     <meta th:replace="fragments/head :: head">
-    <script th:src="@{scripts/profile.js}"> </script>
+    <script th:src="@{/scripts/profile.js}"> </script>
     <style>
         .container2 {
             padding-right: 15px;
@@ -58,10 +58,10 @@ Licence URI: http://www.os-templates.com/template-terms
                         <button type="button" class="tablinks list-group-item" onclick="openCity(event, 'wallet')" th:id="${((param.tab != null) and (param.tab[0] == 'wallet')) ? 'my_active' : ''}">
                             <i class="fa fa-money" style="color:#cc834f"></i> Πορτοφόλι
                         </button>
-                        <button type="button" class="tablinks list-group-item" onclick="openCity(event, 'current_activities')" th:id="${((param.tab != null) and (param.tab[0] == 'cur_activities')) ? 'my_active' : ''}">
+                        <button type="button" class="tablinks list-group-item" onclick="openCity(event, 'current_activities')" th:id="${((param.tab != null) and (param.tab[0] == 'current_activities')) ? 'my_active' : ''}">
                             <i class="fa fa-bicycle" style="color:#cc834f"></i> Επισκόπηση Δραστηριοτήτων
                         </button>
-                        <button type="button" class="tablinks list-group-item" onclick="openCity(event, 'older_activities')" th:id="${((param.tab != null) and (param.tab[0] == 'old_activities')) ? 'my_active' : ''}">
+                        <button type="button" class="tablinks list-group-item" onclick="openCity(event, 'older_activities')" th:id="${((param.tab != null) and (param.tab[0] == 'older_activities')) ? 'my_active' : ''}">
                             <i class="fa fa-archive" style="color:#cc834f"></i> Παλαιότερες Δραστηριότητες
                         </button>
 
@@ -293,6 +293,9 @@ Licence URI: http://www.os-templates.com/template-terms
                                 </div>
                             </article>
                         </div>
+                        <div th:if="${(currEvents==null)}">
+                            <p> Δέν έχετε δημιουργήσει ακόμα κάποια δραστηριότητα!<br>Πατήστε <a th:href="@{/activity_reg}">εδώ</a> για να δημιουργήσετε μια καινούρια δραστηριότητα</p>
+                        </div>
                     </div>
                 </div>
 
@@ -313,6 +316,9 @@ Licence URI: http://www.os-templates.com/template-terms
                                     <h6 style="text-transform: capitalize; font-size: 14px;  text-align: center;" th:text="${pastEvent.description}"></h6>
                                 </div>
                             </article>
+                        </div>
+                        <div th:if="${(pastEvents==null)}">
+                            <p> Δέν έχετε δημιουργήσει ακόμα κάποια δραστηριότητα που έχει λήξει!</p>
                         </div>
                     </div>
                     </div>
