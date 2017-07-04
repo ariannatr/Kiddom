@@ -26,37 +26,37 @@ public class SingleEventEntity implements Serializable {
     @Column(name="event_id")
     private Integer id;
     @Column(name = "name")
-    @Field(type = FieldType.text, store = true)
+    @Field(type = FieldType.String, store = true)
     private String name;
     @Column(name = "description")
-    @Field(type = FieldType.text, store = true)
+    @Field(type = FieldType.String, store = true)
     private String description;
     @Column(name = "photos")
-    @Field(type = FieldType.text, store = true)
+    @Field(type = FieldType.String, store = true)
     private String photos;
     @Field(type = FieldType.Integer, store = true)
     @Column(name = "price")
     private int price;
     @Column(name = "category")
-    @Field(type = FieldType.text, store = true)
+    @Field(type = FieldType.String, store = true)
     private String category;
     @Column(name = "sub1")
-    @Field(type = FieldType.text, store = true)
+    @Field(type = FieldType.String, store = true)
     private String sub1;
     @Column(name = "sub2")
-    @Field(type = FieldType.text, store = true)
+    @Field(type = FieldType.String, store = true)
     private String sub2;
     @Column(name = "sub3")
-    @Field(type = FieldType.text, store = true)
+    @Field(type = FieldType.String, store = true)
     private String sub3;
     @Column(name = "area")
-    @Field(type = FieldType.text, store = true)
+    @Field(type = FieldType.String, store = true)
     private String town;
     @Column (name = "town")
-    @Field(type = FieldType.text, store = true)
+    @Field(type = FieldType.String, store = true)
     private String area;
     @Column(name = "address")
-    @Field(type = FieldType.text, store = true)
+    @Field(type = FieldType.String, store = true)
     private String address;
     @Column(name = "number")
     @Field(type = FieldType.Integer, store = true)
