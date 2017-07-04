@@ -21,7 +21,7 @@ public interface EventService {
     public SingleEventEntity findSingleEventById(int eventID);
     public List<SingleEventEntity> findALLEvents();
     //public Page<SingleEventEntity> getAllEvents(Pageable pageable);
-    public void saveActivity(UserEntity user, ProviderEntity provider, SingleEventEntity event, HashSet<ProgramEntity> program);
+    public void saveActivity(UserEntity user, ProviderEntity provider, SingleEventEntity event, HashSet<ProgramEntity> program,String[] photos);
     public void updateSingleEvent(ProviderEntity provider, SingleEventEntity event, SingleEventEntity eventEdit);
     public void cancelSingleEvent(ProviderEntity provider, SingleEventEntity eventEdit);
 }

@@ -16,11 +16,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.lang.reflect.Array;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -57,6 +60,7 @@ public class ActivityController {
     @Qualifier("categoryService")
     @Autowired
     private CategoryService categoryService;
+    public static final String uploadingdir = System.getProperty("user.dir") + "/uploadingdir/";
 
     @RequestMapping(value="/activity/{eventID}", method = RequestMethod.GET)
     public ModelAndView activityshow(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @PathVariable String eventID){
@@ -153,7 +157,7 @@ public class ActivityController {
     }
 
     @RequestMapping(value="/activity_reg", method = RequestMethod.POST)
-    public ModelAndView activity_creation(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("single_event") @Valid SingleEventEntity event, @ModelAttribute("program") @Valid ProgramEntity daily_program, HashSet<ProgramEntity> program, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public ModelAndView activity_creation(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("single_event") @Valid SingleEventEntity event, @ModelAttribute("program") @Valid ProgramEntity daily_program, HashSet<ProgramEntity> program, BindingResult bindingResult, RedirectAttributes redirectAttributes,@RequestParam("uploadingFiles") MultipartFile[] uploadingFiles) throws IOException {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name (provider) is " + authentication.getName());
@@ -218,9 +222,23 @@ public class ActivityController {
             provideron = userService.findProvider(provideronPK);
             modelAndView.addObject("user", provideronPK.getUser());
             modelAndView.addObject("provider", provideron);
+            String[] files = new String[uploadingFiles.length];
+            int count=0;
+            if (!uploadingFiles[0].isEmpty()) {
+                for (MultipartFile uploadedFile : uploadingFiles) {
+
+
+                    File file = new File(uploadingdir + uploadedFile.getOriginalFilename());
+//                    userService.uploadPhoto(parenton, parent, useron, user, "/image/" + uploadedFile.getOriginalFilename());
+                    files[count] = "/image/" + uploadedFile.getOriginalFilename();
+                    uploadedFile.transferTo(file);
+                    ++count;
+                }
+            }
+            System.out.println(files);
             if (useron.getType() == 2) {
                 System.out.println("I'm a provider");
-                eventService.saveActivity(useron, provideron, event, program);
+                eventService.saveActivity(useron, provideron, event, program,files);
             }
             else {
                 modelAndView.setViewName("redirect:/error?error_code=not_prov");

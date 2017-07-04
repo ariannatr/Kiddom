@@ -62,7 +62,7 @@ Licence URI: http://www.os-templates.com/template-terms
         <h1 align="center" style="font-weight: bold; color: lightslategrey;">Δημιουργηστε μια δραστηριοτητα!</h1>
         <p/>
         <br/>
-        <form class="well form-horizontal" th:action="@{/activity_reg}" method="POST"  id="contact_form">
+        <form class="well form-horizontal" enctype="multipart/form-data" th:action="@{/activity_reg}" method="POST"  id="contact_form">
             <fieldset>
 
 
@@ -336,23 +336,25 @@ Licence URI: http://www.os-templates.com/template-terms
 
 
 
-                <div class="form-group" align="center">
-                    <p/>
-                    <label for="image0" class="photo_upload" >Φωτογραφίες δραστηριότητας</label>
-                    <p/>
-                    <input name="image1" id="image1" type="file" accept="image/*" id="menu_images1" style="color: black;"/>
-                    <p/>
-                    <input name="image2" id="image2" type="file" accept="image/*" id="menu_images2" style="color: black;"/>
-                    <p/>
-                    <input name="image3" id="image3" type="file" accept="image/*" id="menu_images3" style="color: black;"/>
-                    <p/>
-                    <input name="image4" id="image4" type="file" accept="image/*" id="menu_images4" style="color: black;"/>
-                    <p/>
-                    <input name="image5" id="image5" type="file" accept="image/*" id="menu_images5" style="color: black;"/>
-                    <!--img id="menu_image" class="preview_img" /-->
-                    <span class="help-block"></span>
-                </div>
-                <br/>
+            <div class="form-group" align="center">
+                <p/>
+                <label  class="photo_upload" >Φωτογραφίες δραστηριότητας(εως 5)</label>
+                <input id="fileInput" type="file" name="uploadingFiles"  multiple>
+                <!--&lt;!&ndash;<label for="image0" class="photo_upload" >Φωτογραφίες δραστηριότητας</label>&ndash;&gt;-->
+                <!--&lt;!&ndash;<p/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<input name="image1" id="image1" type="file" accept="image/*" id="menu_images1" style="color: black;"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<p/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<input name="image2" id="image2" type="file" accept="image/*" id="menu_images2" style="color: black;"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<p/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<input name="image3" id="image3" type="file" accept="image/*" id="menu_images3" style="color: black;"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<p/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<input name="image4" id="image4" type="file" accept="image/*" id="menu_images4" style="color: black;"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<p/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<input name="image5" id="image5" type="file" accept="image/*" id="menu_images5" style="color: black;"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;img id="menu_image" class="preview_img" /&ndash;&gt;&ndash;&gt;-->
+                <!--<span class="help-block"></span>-->
+            </div>
+            <br/>
 
                 <input value="pressme" type="button" onclick="validation()"/>
 

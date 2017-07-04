@@ -58,6 +58,29 @@ public class LoginController {
         public String getStartTime() {return startTime;}
         public String getCategory() {return category;}
     }
+
+    public class profevent {
+        private String name;
+        private Integer id;
+        private String description;
+        private String photo;
+
+        profevent(String name, Integer id, String description, String photo) {
+            this.name = name;
+            this.id = id;
+            this.description = description;
+            this.photo = photo;
+        }
+
+        public Integer getId() {return id; }
+
+        public String getName() {return name;}
+
+        public String getDescription() {return description;}
+
+        public String getPhoto() {return photo;}
+
+    }
     @Autowired
     private IAuthenticationFacade authenticationFacade;
 
@@ -269,8 +292,8 @@ public class LoginController {
             String currDate1 = dtf.format(localDate).toString();
             if (providerEvents != null) {
                 System.out.println("With events");
-                List<SingleEventEntity> currEvents = new ArrayList<>();
-                List<SingleEventEntity> pastEvents = new ArrayList<>();
+                List<profevent> currEvents = new ArrayList<>();
+                List<profevent> pastEvents = new ArrayList<>();
                 //if (currEvents == null) {
                 //    System.out.println("eimai adeio akomaaa");
                 //}
@@ -284,11 +307,21 @@ public class LoginController {
                             try {
                                 Date currDate = sdf.parse(currDate1);
                                 Date eventDate = sdf.parse(program.getDate());
+                                String photo = "@{images/demo/event1.jpg}";
+                                if (event.getPhotos() != null) {
+                                    String[] photos = event.getPhotos().split(";");
+                                    if (photos[0] != null) {
+                                        System.out.println("exw pragmata" + photos[0]);
+                                        photo = photos[0];
+                                    }
+                                }
+                                profevent ev = new profevent(event.getName(),event.getId(),event.getDescription(),photo);
                                 if (eventDate.after(currDate)) {
-                                    currEvents.add(event);
+
+                                    currEvents.add(ev);
                                 }
                                 else {
-                                    pastEvents.add(event);
+                                    pastEvents.add(ev);
                                 }
                             }
                             catch (ParseException e) {

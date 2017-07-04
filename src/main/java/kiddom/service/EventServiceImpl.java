@@ -90,7 +90,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void saveActivity(UserEntity user, ProviderEntity provider, SingleEventEntity event, HashSet<ProgramEntity> program)
+    public void saveActivity(UserEntity user, ProviderEntity provider, SingleEventEntity event, HashSet<ProgramEntity> program,String[] photos)
     {
         /*
         String photos = null;
@@ -123,6 +123,11 @@ public class EventServiceImpl implements EventService {
             daily_program.setEvent(event);
             programRepository.save(daily_program);
         }
+        String photo = "";
+        for (String file : photos) {
+            photo = photo + file +";";
+        }
+        event.setPhotos(photo);
         event.setProgram(program);
         activityRepository.saveAndFlush(event);
         System.out.println("Done.");
