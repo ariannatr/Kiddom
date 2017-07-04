@@ -45,8 +45,9 @@ Licence URI: http://www.os-templates.com/template-terms
 
       <div class="fl_right">
         <ul>
-            <div th:if ="${(uname != null) and (type=='1')} ">
-              <li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li>
+            <div style="font-size:13px;" th:if ="${(uname != null) and (type=='1')} ">
+              <!--li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li-->
+              <li></li>
               <li>
                 <strong><span th:text="${uname}"></span></strong>
               </li>
@@ -66,8 +67,9 @@ Licence URI: http://www.os-templates.com/template-terms
                 <a style="font-size:13px;" href="logout">Αποσύνδεση</a></li>
               </li>
             </div >
-          <div th:if ="${(uname != null) and (type=='2')} ">
-            <li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li>
+          <div style="font-size:13px;" th:if ="${(uname != null) and (type=='2')} ">
+            <!--li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li-->
+            <li></li>
             <li>
               <strong><span th:text="${uname}"></span></strong>
             </li>
@@ -85,10 +87,11 @@ Licence URI: http://www.os-templates.com/template-terms
               <a style="font-size:13px;" href="logout">Αποσύνδεση</a></li>
             </li>
           </div >
-          <div th:if ="${(uname == null) or (type==null)} ">
-              <li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li>
+          <div style="font-size:13px;" th:if ="${(uname == null) or (type==null)} ">
+              <!--li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li-->
+            <li></li>
             <li>
-              <a id="trial" style="font-size:13px;" data-toggle="modal" href="#login_overlay">Συνδεση</a>
+              <a class='' id="trial" style="font-size:13px;" data-toggle="modal" href="#login_overlay">Συνδεση</a>
             </li>
             <li>
               <a style="font-size:13px;" th:href="register">Εγγραφη</a></li>
@@ -97,8 +100,9 @@ Licence URI: http://www.os-templates.com/template-terms
               <a style="font-size:13px;" th:href="register_prov">Πaροχοι</a>
             </li>
           </div >
-          <div th:if ="${(uname != null) and (type=='0')} ">
-            <li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li>
+          <div style="font-size:13px;" th:if ="${(uname != null) and (type=='0')} ">
+            <!--li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li-->
+            <li></li>
             <li>
               <strong><span th:text="${uname}"></span></strong>
             </li>
@@ -124,9 +128,11 @@ Licence URI: http://www.os-templates.com/template-terms
       </div>
       <nav id="mainav" class="fl_right">
         <ul class="clear">
-          <li class="active"><a th:href="@{/index}">Αρχικη</a></li>
+          <li class="active"}">
+            <a  th:href="@{/index}"><i class="fa fa-lg fa-home"></i>Αρχικη</a>
+          </li>
           <li ><a class="drop" >Δραστηριότητες</a>
-            <ul>
+            <ul>`
               <li th:classappend="${module == 'activity' ? 'active' : ''}">
                 <a  th:href="@{/activity}">Ενεργή Δραστηριότητα</a>
               </li>
@@ -397,26 +403,6 @@ Licence URI: http://www.os-templates.com/template-terms
 <script th:src="@{/scripts/jquery.flexslider-min.js}"></script>
 <script th:src="@{/scripts/jquery-ui.js}"></script>
 <script th:src="@{/scripts/datepicker.js}"></script>
-<script>
-    $('<form action="#"><select /></form>').appendTo("#mainav");
-    $("<option />", {selected: "selected", value: "", text: "Μενού"}).appendTo("#mainav select");
-    $("#mainav a").each(function () {
-        var e = $(this);
-        if ($(e).parents("ul ul ul").length >= 1) {
-            $("<option />", {value: e.attr("href"), text: "- - - " + e.text()}).appendTo("#mainav select")
-        } else if ($(e).parents("ul ul").length >= 1) {
-            $("<option />", {value: e.attr("href"), text: "- - " + e.text()}).appendTo("#mainav select")
-        } else if ($(e).parents("ul").length >= 1) {
-            $("<option />", {value: e.attr("href"), text: "" + e.text()}).appendTo("#mainav select")
-        } else {
-            $("<option />", {value: e.attr("href"), text: e.text()}).appendTo("#mainav select")
-        }
-    });
-    $("#mainav select").change(function () {
-        if ($(this).find("option:selected").val() !== "#") {
-            window.location = $(this).find("option:selected").val()
-        }
-    })
-</script>
+<script th:src="@{/scripts/menuformobile.js}"></script>
 </body>
 </html>

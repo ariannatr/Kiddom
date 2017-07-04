@@ -28,7 +28,7 @@ public class MyDBAythenticationService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity user = userService.findByUsername(username);
-        System.out.println("UserInfo= " +user);
+        System.out.println("UserInfo= " +user.getUsername());
 
         if (user == null) {
             throw new UsernameNotFoundException("User " + username + " was not found in the database");

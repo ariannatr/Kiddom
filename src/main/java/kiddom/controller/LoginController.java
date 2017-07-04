@@ -87,6 +87,7 @@ public class LoginController {
 		if (userExists != null) {  //found a user with username and password
 			System.out.println("Found the user " + userExists.getUsername());
 			String uname = userExists.getUsername();
+			System.out.println("My name is "+uname);
             modelAndView.setViewName("redirect:/index");
 		}
 		else
@@ -98,7 +99,11 @@ public class LoginController {
 				modelAndView.setViewName("redirect:/error");
 			}
 			else
-				modelAndView.setViewName("redirect:/error");
+            {
+                modelAndView.setViewName("/error");
+                System.out.println("im here");
+            }
+
         }
 		return modelAndView;
 	}
