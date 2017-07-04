@@ -291,6 +291,7 @@ public class LoginController {
                     else {
                         modelAndView.addObject("eventsStatus", 0);
                     }
+                    break;
                 }
                 modelAndView.addObject("eventsStatus", 1);
                 modelAndView.addObject("pastEvents", pastEvents);

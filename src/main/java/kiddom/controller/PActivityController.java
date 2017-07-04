@@ -20,6 +20,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashSet;
 
 @Controller
@@ -48,6 +53,35 @@ public class PActivityController {
         Integer eventID_ = Integer.parseInt(eventID);
         System.out.println("Diavasa " + eventID_);
         SingleEventEntity event = eventService.findSingleEventById(eventID_);
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate localDate = LocalDate.now();
+        System.out.println(dtf.format(localDate));
+        String currDate1 = dtf.format(localDate).toString();
+        if (event.getProgram() != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            for (ProgramEntity program : event.getProgram()) {
+                try {
+                    Date currDate = sdf.parse(currDate1);
+                    Date eventDate = sdf.parse(program.getDate());
+                    if (eventDate.after(currDate)) {
+                    //    currEvent
+                        modelAndView.addObject("eventStatus", 1);
+                    }
+                    else {
+                    //    pastEvent
+                        modelAndView.addObject("eventStatus", 2);
+                    }
+                }
+                catch (ParseException e) {
+                }
+                break;
+            }
+        }
+        else {
+            modelAndView.addObject("eventStatus", 0);
+        }
+
         modelAndView.addObject("event", event);
         modelAndView.setViewName("/activityProvider");
         return modelAndView;
