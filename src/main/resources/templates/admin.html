@@ -13,7 +13,7 @@
         <h1>Providers</h1>
     </div>
     <div class="wrapper row3">
-        <main class="hoc container clear">
+        <main class="mainbodyHoc hoc container clear">
             <!-- main body -->
             <div class="center">
                 <div th:if ="${(items==null)}">
@@ -47,5 +47,26 @@
 <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/app.js}"></script>
 <div th:replace="fragments/foot :: foot"></div>
+<script>
+    $('<form action="#"><select /></form>').appendTo("#mainav");
+    $("<option />", {selected: "selected", value: "", text: "Μενού"}).appendTo("#mainav select");
+    $("#mainav a").each(function () {
+        var e = $(this);
+        if ($(e).parents("ul ul ul").length >= 1) {
+            $("<option />", {value: e.attr("href"), text: "- - - " + e.text()}).appendTo("#mainav select")
+        } else if ($(e).parents("ul ul").length >= 1) {
+            $("<option />", {value: e.attr("href"), text: "- - " + e.text()}).appendTo("#mainav select")
+        } else if ($(e).parents("ul").length >= 1) {
+            $("<option />", {value: e.attr("href"), text: "" + e.text()}).appendTo("#mainav select")
+        } else {
+            $("<option />", {value: e.attr("href"), text: e.text()}).appendTo("#mainav select")
+        }
+    });
+    $("#mainav select").change(function () {
+        if ($(this).find("option:selected").val() !== "#") {
+            window.location = $(this).find("option:selected").val()
+        }
+    })
+</script>
 </body>
 </html>

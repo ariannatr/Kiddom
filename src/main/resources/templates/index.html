@@ -25,7 +25,7 @@ Licence URI: http://www.os-templates.com/template-terms
 </style>
 <!-- ################################################################################################ -->
 <!-- Top Background Image Wrapper -->
-<div class="bgded overlay" >
+<div id="indexNavbar" class="bgded overlay" >
   <!-- ################################################################################################ -->
   <div class="wrapper row0">
     <div id="topbar" class="hoc clear">
@@ -125,7 +125,7 @@ Licence URI: http://www.os-templates.com/template-terms
       <nav id="mainav" class="fl_right">
         <ul class="clear">
           <li class="active"><a th:href="@{/index}">Αρχικη</a></li>
-          <li><a class="drop" >Δραστηριοτητες</a>
+          <li ><a class="drop" >Δραστηριότητες</a>
             <ul>
               <li th:classappend="${module == 'activity' ? 'active' : ''}">
                 <a  th:href="@{/activity}">Ενεργή Δραστηριότητα</a>
@@ -140,6 +140,9 @@ Licence URI: http://www.os-templates.com/template-terms
           <li><a th:href="@{/faq}">FAQ</a></li>
         </ul>
       </nav>
+
+
+
       <!-- ################################################################################################ -->
     </header>
   </div>
@@ -248,7 +251,7 @@ Licence URI: http://www.os-templates.com/template-terms
 
 
 <div class="wrapper row3">
-  <section class="hoc container clear"> 
+  <section class="mainbodyHoc hoc container clear">
     <!-- ################################################################################################ -->
     <div class="sectiontitle">
       <h6 class="heading">Δημοφιλεις Δραστηριοτητες</h6>
@@ -394,6 +397,26 @@ Licence URI: http://www.os-templates.com/template-terms
 <script th:src="@{/scripts/jquery.flexslider-min.js}"></script>
 <script th:src="@{/scripts/jquery-ui.js}"></script>
 <script th:src="@{/scripts/datepicker.js}"></script>
-
+<script>
+    $('<form action="#"><select /></form>').appendTo("#mainav");
+    $("<option />", {selected: "selected", value: "", text: "Μενού"}).appendTo("#mainav select");
+    $("#mainav a").each(function () {
+        var e = $(this);
+        if ($(e).parents("ul ul ul").length >= 1) {
+            $("<option />", {value: e.attr("href"), text: "- - - " + e.text()}).appendTo("#mainav select")
+        } else if ($(e).parents("ul ul").length >= 1) {
+            $("<option />", {value: e.attr("href"), text: "- - " + e.text()}).appendTo("#mainav select")
+        } else if ($(e).parents("ul").length >= 1) {
+            $("<option />", {value: e.attr("href"), text: "" + e.text()}).appendTo("#mainav select")
+        } else {
+            $("<option />", {value: e.attr("href"), text: e.text()}).appendTo("#mainav select")
+        }
+    });
+    $("#mainav select").change(function () {
+        if ($(this).find("option:selected").val() !== "#") {
+            window.location = $(this).find("option:selected").val()
+        }
+    })
+</script>
 </body>
 </html>

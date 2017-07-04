@@ -18,7 +18,7 @@ Licence URI: http://www.os-templates.com/template-terms
 
 
 <div class="wrapper row3">
-  <section class="hoc container clear">
+  <section class="mainbodyHoc hoc container clear">
     <div th:if ="${(param.error_code != null) and (param.error_code[0] == 'reg')}">
       <div class="alert alert-danger" style="text-align: center;"> Προέκυψε κάποιο λάθος κατά την εγγραφή σας. <br>  <a  th:href="index">Πίσω στην Αρχική</a></div>
     </div >
@@ -39,5 +39,26 @@ Licence URI: http://www.os-templates.com/template-terms
 <!--###################################### -->
 
 <div th:replace="fragments/foot :: foot"></div>
+<script>
+    $('<form action="#"><select /></form>').appendTo("#mainav");
+    $("<option />", {selected: "selected", value: "", text: "Μενού"}).appendTo("#mainav select");
+    $("#mainav a").each(function () {
+        var e = $(this);
+        if ($(e).parents("ul ul ul").length >= 1) {
+            $("<option />", {value: e.attr("href"), text: "- - - " + e.text()}).appendTo("#mainav select")
+        } else if ($(e).parents("ul ul").length >= 1) {
+            $("<option />", {value: e.attr("href"), text: "- - " + e.text()}).appendTo("#mainav select")
+        } else if ($(e).parents("ul").length >= 1) {
+            $("<option />", {value: e.attr("href"), text: "" + e.text()}).appendTo("#mainav select")
+        } else {
+            $("<option />", {value: e.attr("href"), text: e.text()}).appendTo("#mainav select")
+        }
+    });
+    $("#mainav select").change(function () {
+        if ($(this).find("option:selected").val() !== "#") {
+            window.location = $(this).find("option:selected").val()
+        }
+    })
+</script>
 </body>
 </html>

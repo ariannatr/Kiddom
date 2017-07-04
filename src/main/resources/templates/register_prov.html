@@ -14,7 +14,7 @@
 
 
 <div class="wrapper row3" style="background-color:#b7c1ae" >
-	<main class="hoc container clear" >
+	<main class="mainbodyHoc hoc container clear" >
 		<div th:if ="${(success != null) and (success == 'true')}">
 			<div class="alert alert-success" style="text-align: center;"> Η εγγραφή σας ολοκληρώθηκε! <br>  <a  th:href="@{/index}">Πίσω στην Αρχική</a></div>
 		</div >
@@ -188,6 +188,27 @@
 <!-- ################################################################################################ -->
 <div th:replace="/fragments/foot :: foot"></div>
 <script th:src="@{/scripts/regErrorCheck.js}" type="application/javascript"></script>
+<script>
+    $('<form action="#"><select /></form>').appendTo("#mainav");
+    $("<option />", {selected: "selected", value: "", text: "Μενού"}).appendTo("#mainav select");
+    $("#mainav a").each(function () {
+        var e = $(this);
+        if ($(e).parents("ul ul ul").length >= 1) {
+            $("<option />", {value: e.attr("href"), text: "- - - " + e.text()}).appendTo("#mainav select")
+        } else if ($(e).parents("ul ul").length >= 1) {
+            $("<option />", {value: e.attr("href"), text: "- - " + e.text()}).appendTo("#mainav select")
+        } else if ($(e).parents("ul").length >= 1) {
+            $("<option />", {value: e.attr("href"), text: "" + e.text()}).appendTo("#mainav select")
+        } else {
+            $("<option />", {value: e.attr("href"), text: e.text()}).appendTo("#mainav select")
+        }
+    });
+    $("#mainav select").change(function () {
+        if ($(this).find("option:selected").val() !== "#") {
+            window.location = $(this).find("option:selected").val()
+        }
+    })
+</script>
 </body>
 
 </html>

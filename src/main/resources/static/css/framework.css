@@ -28,7 +28,8 @@ html, body{margin:0; padding:0; font-size:14px; line-height:1.6em;}
 .borderedbox{border:1px solid;}
 .overlay{position:relative; z-index:1;}
 .overlay::after{display:block; position:absolute; top:0; left:0; width:100%; height:100%; content:""; z-index:-1;}
-.bgded{background-position:100% 70%; background-repeat:no-repeat; background-size:cover; background-image:url('../images/demo/backgrounds/index.jpg');}
+#topNavbar {background-position:100% 50%; background-repeat:no-repeat; background-size:cover; background-image:url('../images/demo/backgrounds/index.jpg');}
+#indexNavbar{background-position:100% 70%; background-repeat:no-repeat; background-size:cover; background-image:url('../images/demo/backgrounds/index.jpg');}
 .circle, .btn, .icon.fa{border-radius:50%; background-clip:padding-box;}
 
 .btn{display:inline-block; padding:8px 18px 10px; text-transform:uppercase; border:1px solid; border-radius:22px;}
@@ -41,8 +42,8 @@ html, body{margin:0; padding:0; font-size:14px; line-height:1.6em;}
 
 a{outline:none; text-decoration:none;}
 
-.fl_left, .imgl{float:left;}
-.fl_right, .imgr{float:right;}
+.fl_left, .imgl{float:left; margin-left:10px!important}
+.fl_right, .imgr{float:right;margin-right:10px!important}
 
 img{width:auto; max-width:100%; height:auto; margin:0; padding:0; border:none; line-height:normal; vertical-align:middle;}
 .imgl{margin:0 15px 10px 0; clear:left;}
@@ -81,7 +82,8 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0;}
 The "hoc" class is a generic class used to centre a containing element horizontally
 It should be used in conjunction with a second class or ID
 */
-.hoc{display:block; margin:0 auto;}
+.hoc{ display:block; margin:0 auto;}
+.mainbodyHoc{min-height:300px;}
 
 
 /* HTML 5 Overrides

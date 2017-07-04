@@ -445,33 +445,35 @@ Licence URI: http://www.os-templates.com/template-terms
     var counter =0;
 
     function addRow(date, parent, mode) {
-        counter++;
+
 
         var panel = document.createElement("div");
         panel.setAttribute("class", "panel-body" );
 
-        var input = createInput("date", "", "Ημερομηνία έναρξης δραστηριότητας", "text", date);
+        var input = createInput("program.["+counter.toString()+"].name", "", "Ημερομηνία έναρξης δραστηριότητας", "text", date);
         var result = createField("glyphicon-calendar", "Ημερομηνία", input);
         result.classList.add("hidden");
         panel.appendChild(result);
 
-        input = createInput("startTime", "startTime", "Ώρα έναρξης δραστηριότητας", "text", "");
+        input = createInput("program.["+counter.toString()+"].startTime", "startTime", "Ώρα έναρξης δραστηριότητας", "text", "");
         result = createField("glyphicon-time", "Ώρα έναρξης δραστηριότητας", input);
         panel.appendChild(result);
 
-        input = createInput("endTime", "endTime", "Ώρα λήξης δραστηριότητας", "text", "");
+        input = createInput("program.["+counter.toString()+"].endTime", "endTime", "Ώρα λήξης δραστηριότητας", "text", "");
         result = createField("glyphicon-time", "Ώρα λήξης δραστηριότητας", input);
         panel.appendChild(result);
 
-        input = createInput("availability","",  "Διαθέσιμες θέσεις", "number", "");
+        input = createInput("program.["+counter.toString()+"].capacity","",  "Διαθέσιμες θέσεις", "number", "");
         input.setAttribute("min","1");
         result = createField("glyphicon-user", "Διαθέσιμες θέσεις", input);
         panel.appendChild(result);
 
-        input = createInput("price", "", "Τιμή ανά άτομο", "number","");
+        input = createInput("program.["+counter.toString()+"].price", "", "Τιμή ανά άτομο", "number","");
         input.setAttribute("min","1");
         result = createField("glyphicon-euro", "Τιμή ανά άτομο", input);
         panel.appendChild(result);
+
+        counter++;
 
         var div = document.createElement("div");
         div.setAttribute("id", "timeslot"+counter.toString());
@@ -675,7 +677,27 @@ Licence URI: http://www.os-templates.com/template-terms
 
 
 </script>
-
+<script>
+    $('<form action="#"><select /></form>').appendTo("#mainav");
+    $("<option />", {selected: "selected", value: "", text: "Μενού"}).appendTo("#mainav select");
+    $("#mainav a").each(function () {
+        var e = $(this);
+        if ($(e).parents("ul ul ul").length >= 1) {
+            $("<option />", {value: e.attr("href"), text: "- - - " + e.text()}).appendTo("#mainav select")
+        } else if ($(e).parents("ul ul").length >= 1) {
+            $("<option />", {value: e.attr("href"), text: "- - " + e.text()}).appendTo("#mainav select")
+        } else if ($(e).parents("ul").length >= 1) {
+            $("<option />", {value: e.attr("href"), text: "" + e.text()}).appendTo("#mainav select")
+        } else {
+            $("<option />", {value: e.attr("href"), text: e.text()}).appendTo("#mainav select")
+        }
+    });
+    $("#mainav select").change(function () {
+        if ($(this).find("option:selected").val() !== "#") {
+            window.location = $(this).find("option:selected").val()
+        }
+    })
+</script>
 </body>
 
 </html>

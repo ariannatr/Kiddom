@@ -154,7 +154,7 @@ File: Layout CSS
 
 /* Transition Fade
 --------------------------------------------------------------------------------------------------------------- */
-*, *::before, *::after{transition:all .3s ease-in-out;}
+/**, *::before, *::after{transition:all .3s ease-in-out;}*/
 #mainav form *{transition:none !important;}
 
 
@@ -193,7 +193,7 @@ nav ul, nav ol{margin:0; padding:0; list-style:none;}
 
 #mainav form{display:none; margin:0; padding:0;}
 #mainav form select, #mainav form select option{display:block; cursor:pointer; outline:none;}
-#mainav form select{width:100%; padding:5px; border:1px solid;}
+#mainav form select{width:100%; padding:5px; border:0px solid;}
 #mainav form select option{margin:5px; padding:0; border:none;}
 
 /* Breadcrumb */
@@ -333,7 +333,7 @@ input:focus, textarea:focus, *:required:focus{border-color:#cc834f;}
 #mainav .active a, #mainav a:hover, #mainav li:hover > a{color:#cc834f; background-color:inherit;}
 #mainav li li a, #mainav .active li a{color:#FFFFFF; background-color:rgba(0,0,0,.6); border-color:rgba(0,0,0,.6);}
 #mainav li li:hover > a, #mainav .active .active > a{color:#FFFFFF; background-color:#cc834f;}
-#mainav form select{color:#FFFFFF; background-color:#000000; border-color:rgba(136,136,136,.5);/* #888888 */}
+#mainav form select{color:#FFFFFF; background-color:rgba(204, 131, 79, 1);; border-color:rgba(136,136,136,.5);/* #888888 */}
 
 #breadcrumb a{color:inherit; background-color:inherit;}
 #breadcrumb li:last-child a{color:#cc834f;}
@@ -491,6 +491,7 @@ table {
 --------------------------------------------------------------------------------------------------------------- */
 @media screen and (min-width:978px){
 	.hoc{max-width:978px;}
+	.mainbodyHoc{min-height:400px}
 }
 
 
@@ -530,9 +531,10 @@ table {
 }
 
 
-@media screen and (max-width:750px){
+@media screen and (max-width:768px){
 	.imgl, .imgr{display:inline-block; float:none; margin:0 0 10px 0;}
-	.fl_left, .fl_right{display:block; float:none;}
+	.fl_left{display:inline-block; float:left;}
+	.fl_right{display:inline-block; float:right;}
 	.one_half, .one_third, .two_third, .one_quarter, .two_quarter, .three_quarter{display:block; float:none; width:auto; margin:0 0 30px 0; padding:0;}
 
 	#topbar{text-align:center;}
@@ -544,9 +546,19 @@ table {
 
 	.container, #footer{padding-bottom:50px;}/* Not neccessary - just looks better */
 
+	.row0 .hoc .fl_right{margin-top:10px; display:block; float:none}
+
 	.cta > :first-child{margin-top:0;}
 }
 
+@media screen and (max-width:500px){
+	.fl_left{display:block; float:none; margin-left:0px!important; margin-right:0px!important}
+	.fl_right{display:block; float:none; margin-left:0px!important; margin-right:0px!important}
+
+	#mainav form {width:240px; margin:auto;}
+
+	.ro1 .hoc .fl_left{margin:auto;}
+}
 
 @media screen and (max-width:450px){
 	#topbar ul li{margin-bottom:2px; padding-right:0; border-right:none;}
@@ -567,8 +579,8 @@ table {
 	.inline li{display:block; margin-bottom:10px;}
 	.pushright li{margin-right:0;}
 
-	.font-x2{font-size:1.4rem;}
-	.font-x3{font-size:1.6rem;}
+	/*.font-x2{font-size:1.4rem;}*/
+	/*.font-x3{font-size:1.6rem;}*/
 
 	#pageintro li article{max-width:none; width:100%;}
 	#pageintro li .heading{font-size:1.6rem;}

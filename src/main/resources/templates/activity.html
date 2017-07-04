@@ -375,7 +375,7 @@
 
                 <!--Images preview for activity-->
                 <div id="act-imgs" class="content col-lg-7 col-md-12 col-sm-12 col-xs-12">
-
+                    <div style="height: 500px;">
                     <div class="row">
                         <a th:href="@{/images/activity/no_upload_image.jpg}" data-lightbox="image-1" data-title="My caption">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><div class="act-img"><img style="width: auto" th:src="@{images/activity/no_upload_image.jpg}" alt="img here"></div></div>
@@ -402,6 +402,7 @@
                         </a>
 
                     </div>
+                    </div>work
                 </div>
 
 
@@ -409,6 +410,7 @@
             
                 <!--Map-->
                 <div class="side-content col-lg-5 col-md-12 col-xs-12">
+                    <div style="height:500px">
                     <h1 style="font-size: large; text-decoration: none">Βρείτε μας στον Χάρτη</h1>
                     <div class="row">
                         <div class="col-lg-12 col-md-9">
@@ -422,6 +424,7 @@
                             <span th:text="${event.address}" , th:text="${event.number}"></span>
                             <span th:text="${event.town}" , th:text="${event.area}"></span>
                         </div>
+                    </div>
                     </div>
                 </div>
 
@@ -652,7 +655,27 @@
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLbijC5kVnnJ5kL_j8zRo-5afCMVrYFdE&callback=myMap"></script>
     <script th:src="@{/scripts/lightbox.js}" ></script>
-
+    <script>
+        $('<form action="#"><select /></form>').appendTo("#mainav");
+        $("<option />", {selected: "selected", value: "", text: "Μενού"}).appendTo("#mainav select");
+        $("#mainav a").each(function () {
+            var e = $(this);
+            if ($(e).parents("ul ul ul").length >= 1) {
+                $("<option />", {value: e.attr("href"), text: "- - - " + e.text()}).appendTo("#mainav select")
+            } else if ($(e).parents("ul ul").length >= 1) {
+                $("<option />", {value: e.attr("href"), text: "- - " + e.text()}).appendTo("#mainav select")
+            } else if ($(e).parents("ul").length >= 1) {
+                $("<option />", {value: e.attr("href"), text: "" + e.text()}).appendTo("#mainav select")
+            } else {
+                $("<option />", {value: e.attr("href"), text: e.text()}).appendTo("#mainav select")
+            }
+        });
+        $("#mainav select").change(function () {
+            if ($(this).find("option:selected").val() !== "#") {
+                window.location = $(this).find("option:selected").val()
+            }
+        })
+    </script>
 
 </body>
 </html>
