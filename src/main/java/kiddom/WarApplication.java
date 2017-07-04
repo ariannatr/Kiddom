@@ -1,6 +1,12 @@
 package kiddom;
 
 //import org.apache.catalina.security.SecurityConfig;
+
+import kiddom.service.ElasticService;
+import org.apache.http.annotation.Contract;
+import org.elasticsearch.client.Client;
+import org.elasticsearch.client.RestClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,6 +24,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EnableWebSecurity
 @ComponentScan//({"kiddom.kid.controller.model","kiddom.kid.controller.repository","kiddom.kid.controller.service"})
 public class WarApplication  extends SpringBootServletInitializer {
+
+	@Autowired
+	private ElasticService elasticService;
+
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {

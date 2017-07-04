@@ -4,6 +4,9 @@ package kiddom.model;
  * Created by eleni on 02-Jun-17.
 **/
 
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.security.access.method.P;
 
 import javax.persistence.*;
@@ -14,6 +17,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "single_event", schema = "mydb")
+@Document(indexName = "index", type = "event", shards = 1, replicas = 0, refreshInterval = "-1")
 public class SingleEventEntity implements Serializable {
 
     /*----------------------------Fields----------------------------*/
@@ -22,34 +26,49 @@ public class SingleEventEntity implements Serializable {
     @Column(name="event_id")
     private Integer id;
     @Column(name = "name")
+    @Field(type = FieldType.text, store = true)
     private String name;
     @Column(name = "description")
+    @Field(type = FieldType.text, store = true)
     private String description;
     @Column(name = "photos")
+    @Field(type = FieldType.text, store = true)
     private String photos;
+    @Field(type = FieldType.Integer, store = true)
     @Column(name = "price")
     private int price;
     @Column(name = "category")
+    @Field(type = FieldType.text, store = true)
     private String category;
     @Column(name = "sub1")
+    @Field(type = FieldType.text, store = true)
     private String sub1;
     @Column(name = "sub2")
+    @Field(type = FieldType.text, store = true)
     private String sub2;
     @Column(name = "sub3")
+    @Field(type = FieldType.text, store = true)
     private String sub3;
     @Column(name = "area")
+    @Field(type = FieldType.text, store = true)
     private String town;
     @Column (name = "town")
+    @Field(type = FieldType.text, store = true)
     private String area;
     @Column(name = "address")
+    @Field(type = FieldType.text, store = true)
     private String address;
     @Column(name = "number")
+    @Field(type = FieldType.Integer, store = true)
     private int number;
     @Column(name = "postcode")
+    @Field(type = FieldType.Integer, store = true)
     private int postcode;
     @Column(name = "ratings_sum")
+    @Field(type = FieldType.Float, store = true)
     private float ratings_sum;
     @Column(name = "ratings_number")
+    @Field(type = FieldType.Float, store = true)
     private float ratings_number;
     @Column(name = "canceled")
     private int canceled;

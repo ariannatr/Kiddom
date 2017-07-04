@@ -2,6 +2,8 @@ package kiddom.repository;
 
 import kiddom.model.ProgramEntity;
 import kiddom.model.SingleEventEntity;
+import kiddom.service.ElasticService;
+import org.elasticsearch.client.Client;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,6 +21,5 @@ import java.util.ArrayList;
 @Repository("activityRepository")
 public interface ActivityRepository extends JpaRepository<SingleEventEntity, Long> {
     SingleEventEntity findSingleEventById(Integer Id);
-    //Page<SingleEventEntity> findAllEvents(Pageable pageable);
 
 }

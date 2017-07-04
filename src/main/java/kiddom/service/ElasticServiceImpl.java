@@ -3,8 +3,7 @@ package kiddom.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kiddom.model.SingleEventEntity;
-import org.apache.http.HttpHost;
-import org.apache.http.util.EntityUtils;
+import kiddom.repository.ActivityRepository;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
@@ -15,7 +14,6 @@ import org.elasticsearch.client.IndicesAdminClient;
 import org.elasticsearch.client.Response;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.geo.GeoDistance;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.common.unit.DistanceUnit;
@@ -26,6 +24,8 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.net.InetAddress;
@@ -42,26 +42,19 @@ import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 @Service("elasticService")
 public class ElasticServiceImpl implements ElasticService {
 
+    private ElasticConf conf = new ElasticConf();
+    private Client client = conf.client();
+
+
     @Override
-    public Client getTransportClient(){
-
-        TransportClient client = null;
-        try {
-            client = new PreBuiltTransportClient(Settings.EMPTY)
-                    .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300))
-                    .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
-        }
-        catch (Exception e){
-            System.out.println("Exception at PreBuiltTransportClient");
-            System.out.println(e.getMessage());
-        }
-
+    public Client getClient(){
         return client;
     }
 
     @Override
     public void createRecord(Client client, String id, String name, String date, String descr, String cat, String subcat1, String subcat2, String subcat3
-            , String town, String area, String address, String number, String start, String end, String avail, String price, String postcode){
+            , String town, String area, String address, Integer number, String start, String end, Integer avail, Integer price, Integer postcode, String photos
+            , Float rating, Float rating_sum){
 
         try {
             IndexResponse response = client.prepareIndex("index", "event", id)
@@ -83,6 +76,9 @@ public class ElasticServiceImpl implements ElasticService {
                             .field("availability", avail)
                             .field("price", price)
                             .field("postcode", postcode)
+                            .field("photos", photos)
+                            .field("rating", rating)
+                            .field("rating_sum", rating_sum)
                             .endObject()
                     ).get();
         }
@@ -93,14 +89,14 @@ public class ElasticServiceImpl implements ElasticService {
     }
 
     @Override
-    public SingleEventEntity getEntry(Client client, String id){
+    public SingleEventEntity getEntry(Client client, Integer id){
         GetResponse response;
         Map<String, String> result = new HashMap<String, String>();
         ObjectMapper mapper = new ObjectMapper();
         SingleEventEntity singleEvent = null;
 
         try {
-            response = client.prepareGet("index", "event", id).get();
+            response = client.prepareGet("index", "event", id.toString()).get();
             result = mapper.readValue(response.getSourceAsString(), new TypeReference<HashMap<String, String>>(){});
 
             singleEvent.setName(result.get("name"));
@@ -268,16 +264,6 @@ public class ElasticServiceImpl implements ElasticService {
         return resultList;
     }
 
-    @Override
-    public void closeClient(RestClient restClient){
-        try {
-            restClient.close();
-        }
-        catch (Exception e){
-            System.out.println("Exception at restClient.close()");
-            System.out.println(e.getMessage());
-        }
-    }
 
     @Override
     public void closeClient(Client client){
@@ -289,17 +275,19 @@ public class ElasticServiceImpl implements ElasticService {
             System.out.println(e.getMessage());
         }
     }
-
+/*
     @Override
-    @Deprecated
-    public void createIndex(Client client){
+    public boolean createMyIndex(Client client){
 
         XContentBuilder settingsBuilder = null;
+        XContentBuilder mappingBuilder = null;
         try {
             settingsBuilder = XContentFactory.jsonBuilder()
                     .startObject()
+                    .startObject("index")
                     .field("number_of_shards", 1)
                     .field("number_of_replicas", 0)
+                    .endObject()
                     .startObject("analysis")
                     .startObject("filter")
                     .startObject("greek_stop")
@@ -333,7 +321,10 @@ public class ElasticServiceImpl implements ElasticService {
                     .endObject()
                     .endObject()
                     .endObject()
-                    .startObject("mappings")
+                    .endObject();
+
+            mappingBuilder = XContentFactory.jsonBuilder()
+                    .startObject()
                     .startObject("event")
                     .startObject("properties")
                     .startObject("name")
@@ -411,7 +402,6 @@ public class ElasticServiceImpl implements ElasticService {
                     .endObject()
                     .endObject()
                     .endObject()
-                    .endObject()
                     .endObject();
 
         }
@@ -424,6 +414,10 @@ public class ElasticServiceImpl implements ElasticService {
 
         client.admin().indices().prepareCreate("index")
                 .setSettings(settingsBuilder)
+                .addMapping("index", mappingBuilder)
                 .get();
-    }
+
+
+    return true;
+    }*/
 }
