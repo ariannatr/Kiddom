@@ -68,15 +68,15 @@ public class ParentEntity {
         this.event_timeslot = event_timeslot;
     }
 
-    /*--------------Many to Many relation with parent and event, for the comments-inverse mapping--------------*/
-    @ManyToMany(mappedBy = "comment_parent")
-    private Set<SingleEventEntity> comment_event = new HashSet<SingleEventEntity>(0);
+    /*--------------One to Many relation with parent and event, for the comments-inverse mapping--------------*/
+    @OneToMany(mappedBy = "parent_username",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private Set<CommentsEntity> comment_event = new HashSet<CommentsEntity>(0);
 
-    public Set<SingleEventEntity> getComment_event() {
+    public Set<CommentsEntity> getComment_event() {
         return comment_event;
     }
 
-    public void setComment_event(Set<SingleEventEntity> comment_event) {
+    public void setComment_event(Set<CommentsEntity> comment_event) {
         this.comment_event = comment_event;
     }
 
@@ -154,6 +154,12 @@ public class ParentEntity {
     public void setTotalPoints(int totalPoints) {
         this.totalPoints = totalPoints;
     }
+
+    public ParentPK getPk() { return pk;}
+    public void setPk(ParentPK pk) {this.pk = pk;}
+
+    @Transient
+    public String getParentUsername(){ return getPk().getUser().getUsername();}
 
     @Override
     public boolean equals(Object o) {

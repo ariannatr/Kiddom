@@ -100,17 +100,15 @@ public class SingleEventEntity implements Serializable {
     }
 
 
-    /*--------------Many to Many relation with parent->username and event->event_id, for the comments--------------*/
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "comments", joinColumns = @JoinColumn(name = "event_id", referencedColumnName = "event_id"),
-            inverseJoinColumns = @JoinColumn(name = "parent_username", referencedColumnName = "user_username"))
-    private Set<ParentEntity> comment_parent = new HashSet<ParentEntity>(0);
+    /*--------------One to Many relation with parent->username and event->event_id, for the comments--------------*/
+    @OneToMany(mappedBy = "event_id",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private Set<CommentsEntity> comment_parent = new HashSet<CommentsEntity>(0);
 
-    public Set<ParentEntity> getComment_parent() {
+    public Set<CommentsEntity> getComment_parent() {
         return comment_parent;
     }
 
-    public void setComment_parent(Set<ParentEntity> comment_parent) {
+    public void setComment_parent(Set<CommentsEntity> comment_parent) {
         this.comment_parent = comment_parent;
     }
 

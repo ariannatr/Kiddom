@@ -12,19 +12,51 @@ import java.io.Serializable;
 @Entity
 @Table(name = "comments", schema = "mydb")
 public class CommentsEntity implements Serializable {
-    
+
+    @Id
+    @Column
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int comment_id;
+    @Column(name="comment")
     private String comment;
+    @Column(name="reply")
     private String reply;
+    @Column(name="rating")
     private float rating;
+
   //  private String username;
     public CommentsEntity() {
         this.comment="";
         this.reply="";
     }
-    @Id
-    @Column
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int comment_id;
+
+    @ManyToOne
+    @JoinColumn(name="parent_username")
+    private ParentEntity parent_username;
+
+    public ParentEntity getParent_username() {
+        return parent_username;
+    }
+
+    public void setParent_username(ParentEntity parent_username) {
+        this.parent_username = parent_username;
+    }
+
+    @ManyToOne
+    @JoinColumn(name="event_id")
+    private SingleEventEntity event_id;
+
+    public SingleEventEntity getEvent_id() {
+        return event_id;
+    }
+
+    public void setEvent_id(SingleEventEntity event_id) {
+        this.event_id = event_id;
+    }
+
+
+ /*--------------Getters - Setters for table fields--------------*/
+
     public int getCommentId() {
         return comment_id;
     }
@@ -37,10 +69,6 @@ public class CommentsEntity implements Serializable {
     public String getComment() {
         return comment;
     }
-
-
-   /* @Column(name = "parent_username")
-    public String getParent() {return username;}*/
 
     public void setComment(String comment) {
         this.comment = comment;
