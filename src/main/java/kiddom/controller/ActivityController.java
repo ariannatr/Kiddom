@@ -11,6 +11,7 @@ import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.DateTimeFormatterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.method.P;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -123,11 +124,15 @@ public class ActivityController {
     @RequestMapping(value="/activity_reg", method = RequestMethod.GET)
     public ModelAndView activity_register(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, RedirectAttributes redirectAttributes){
         ModelAndView modelAndView = new ModelAndView();
+        Authentication authentication = authenticationFacade.getAuthentication();
+
         UserEntity userExists = userService.findByUsername(user.getUsername());
+        ProviderPK providerPk = new ProviderPK(authentication.getName());
+        ProviderEntity prov = userService.findProvider(providerPk);
         SingleEventEntity event = new SingleEventEntity();
         ProgramEntity daily_program = new ProgramEntity();
         HashSet<ProgramEntity> program = new HashSet<>();
-        Authentication authentication = authenticationFacade.getAuthentication();
+
         System.out.println("Authentication name is" + authentication.getName());
         if (!authentication.getName().equals("anonymousUser")) {
             modelAndView.addObject("uname", authentication.getName());
@@ -139,7 +144,8 @@ public class ActivityController {
             modelAndView.setViewName("redirect:/error?error_code=anon");
             return modelAndView;
         }
-        modelAndView.addObject("is_approved", provider.getApproved());
+        System.out.println("Provider status " + prov.getApproved() + " prov: " + prov.getUsername());
+        modelAndView.addObject("is_approved", prov.getApproved());
         modelAndView.addObject("categories",categoryService.getCategoriesNames());
         modelAndView.addObject("subcategories",categoryService.getALLSubCategoryNamesByCategory());
         modelAndView.setViewName("/activity_reg");
