@@ -74,13 +74,23 @@ public class PActivityController {
         return modelAndView;
     }
 
-    /*@RequestMapping(value="/event_cancelation{eventID}", method = RequestMethod.POST)
+    @RequestMapping(value="/event_cancelation/{eventID}", method = RequestMethod.POST)
     public  ModelAndView event_cancelation(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("single_event") @Valid SingleEventEntity event, @PathVariable String eventID) {
         System.out.println("Provider name: " + provider.getName());
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is " + authentication.getName());
-
+        if (!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            Integer eventID_ = Integer.parseInt(eventID);
+            SingleEventEntity eventEdit = eventService.findSingleEventById(eventID_);
+            System.out.println("Kanw update sto " + eventID_);
+            eventService.cancelSingleEvent(provider, eventEdit);
+            modelAndView.addObject("event", eventEdit);
+            modelAndView.addObject("provider", provider);
+            modelAndView.addObject("user", user);
+        }
+        modelAndView.setViewName("activityProvider");
         return modelAndView;
-    }*/
+    }
 }

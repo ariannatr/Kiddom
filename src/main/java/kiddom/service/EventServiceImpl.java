@@ -106,4 +106,10 @@ public class EventServiceImpl implements EventService {
         activityRepository.save(eventEdit);
     }
 
+    @Override
+    public void cancelSingleEvent(ProviderEntity provider, SingleEventEntity eventEdit) {
+        eventEdit.setCanceled(1);
+        activityRepository.save(eventEdit);
+    }
+
 }
