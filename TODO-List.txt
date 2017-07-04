@@ -8,7 +8,7 @@ SOS! --> Να κρατηθεί (και να βελτιωθεί) η δομή τη
 > Full reporting at the error page - TODO
 
 > Admin: create admin page - TODO
-> Admin: create providers approval form - TODO
+> Admin: create providers approval form - DONE
 > Admin: create admin interface to get statistics etc - TODO
 
 > Provider: not allowed to create activities if not approved - TODO
@@ -38,7 +38,7 @@ SOS! --> Να κρατηθεί (και να βελτιωθεί) η δομή τη
 
 > Login: remember me attribute - TODO
 > Login: show wrong password message in modal in case of failure - DONE
-> Login: fix the download problem - TODO
+> Login: fix the download problem - DONE
 
 > Register (provider and parent): put clear button and cancel button in form - TODO
 > Register : message when input username is already in use - DONE

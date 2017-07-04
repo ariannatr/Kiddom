@@ -50,63 +50,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .withUser("user").password("password").roles("USER");
         auth.userDetailsService(myDBAythenticationService).passwordEncoder(bCryptPasswordEncoder);
     }
-   // @formatter:off
-   /*     @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http.
-            authorizeRequests()
-                    .antMatchers("/").permitAll()
-                    .antMatchers("/index").permitAll()
-                    .antMatchers("/register").anonymous()
-                    .antMatchers("/usernameCheck").anonymous()
-                    .antMatchers("/register_prov").anonymous()
-                    .antMatchers("/about").permitAll()
-                    .antMatchers("/error").permitAll()
-                    .antMatchers("/activity").permitAll()
-                    .antMatchers("/google_map").permitAll()
-                    .antMatchers("/search").permitAll()
-                    .antMatchers("/faq").permitAll()
-                    .antMatchers("/activity_reg").hasRole("2")//be a provider
-                    //
-                    .antMatchers("/categories_form").permitAll()//has to be admin
-                    //
-                    .antMatchers("/category_submit").permitAll()//has t be admin
-                    //
-                    .antMatchers("/profile").hasRole("1")//hasAuthority("1")//be a parent
-                    .antMatchers("/profileProvider").hasRole("2")//be a Provider
-                    .antMatchers("/admin").permitAll()//.hasRole("0")
-                    .anyRequest()//be admin
-                    .authenticated().and().csrf().disable()
-                    .httpBasic();
-           /* http
-                    .formLogin()
-                    .loginPage("/index")
-                    .loginProcessingUrl("/login")
-                    .usernameParameter("username")
-                    .passwordParameter("password")
-                    .failureUrl("/index?success=false")
-                    .defaultSuccessUrl("/index")
-                    .and()
-                    .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/index").and().exceptionHandling()
-                    .accessDeniedPage("/error");
-            http.sessionManagement()//now added
-                    .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                    .maximumSessions(2)
-                    .expiredUrl("/index");
-            http.sessionManagement()
-                    .invalidSessionUrl("/index")
-                    .sessionFixation().migrateSession();
-            http.requiresChannel()
-                    .antMatchers("/index","/register","/register_prov","/about","error",
-                            "/activity","google_map","/search","/faq",
-                            "activity_reg","/categories_form","/category_submit","/profile","/profileProvider","/admin").requiresSecure();
-        }*/
-        // @formatter:on
-
-
-
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -118,18 +61,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/usernameCheck").anonymous()
                 .antMatchers("/register_prov").anonymous()
                 .antMatchers("/about").permitAll()
-                //.antMatchers("/error").permitAll()
+                .antMatchers("/error").permitAll()
                 .antMatchers("/activity").permitAll()
                 .antMatchers("/google_map").permitAll()
                 .antMatchers("/search").permitAll()
                 .antMatchers("/faq").permitAll()
                 .antMatchers("/activity_reg").hasRole("2")//be a provider
                 .antMatchers("/activityProvider").hasRole("2")
-                //
 				.antMatchers("/categories_form").permitAll()//has to be admin
-                //
 				.antMatchers("/category_submit").permitAll()//has t be admin
-				//
                 .antMatchers("/profile").hasRole("1")//hasAuthority("1")//be a parent
                 .antMatchers("/profileProvider").hasRole("2")//be a Provider
 				.antMatchers("/admin").hasRole("0")
