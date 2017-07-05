@@ -24,4 +24,5 @@ public interface EventService {
     public void saveActivity(UserEntity user, ProviderEntity provider, SingleEventEntity event, HashSet<ProgramEntity> program,String[] photos);
     public void updateSingleEvent(ProviderEntity provider, SingleEventEntity event, SingleEventEntity eventEdit);
     public void cancelSingleEvent(ProviderEntity provider, SingleEventEntity eventEdit);
+    public void cancelSlot(int slotID, SingleEventEntity eventEdit);
 }

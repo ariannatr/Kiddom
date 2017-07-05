@@ -7,6 +7,7 @@ package kiddom.controller;
 import kiddom.authentication.IAuthenticationFacade;
 import kiddom.model.*;
 import kiddom.service.EventService;
+import kiddom.service.ProgramService;
 import kiddom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -24,10 +25,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class PActivityController {
@@ -41,8 +39,11 @@ public class PActivityController {
     @Autowired
     private EventService eventService;
 
+    @Autowired
+    private ProgramService programService;
+
     @RequestMapping(value="/activityProvider/{eventID}", method = RequestMethod.GET)
-    public ModelAndView activity_show(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @PathVariable String eventID){
+    public ModelAndView activity_show(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @PathVariable("eventID") String eventID){
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
@@ -68,15 +69,17 @@ public class PActivityController {
             photos = event.getPhotos().split(";");
             int i = 0;
             for (String photo : photos) {
-                if (i < 2)
+                if (i < 2) {
                     photos1.add(photos[i]);
-                else if (i < 5)
+                }
+                else if (i < 5) {
                     photos2.add(photos[i]);
-                else
+                }
+                else {
                     photos3.add(photos[i]);
-                i+=1;
+                }
+                i +=1;
                 System.out.println("exw pragmata" + photo);
-
             }
 
 
@@ -108,14 +111,22 @@ public class PActivityController {
         else {
             modelAndView.addObject("eventStatus", 0);
         }
-
+        if (event.getProgram() == null) {
+            System.out.println("TA PIAME");
+            modelAndView.addObject("hasProgram", 0);
+        }
+        else {
+            System.out.println("DEN TA PIAME");
+            modelAndView.addObject("hasProgram", 1);
+            modelAndView.addObject("program", event.getProgram());
+        }
         modelAndView.addObject("event", event);
-        modelAndView.setViewName("/activityProvider");
+        modelAndView.setViewName("activityProvider");
         return modelAndView;
     }
 
     @RequestMapping(value="/edit_event/{eventID}", method = RequestMethod.POST)
-    public ModelAndView edit_event(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("single_event") @Valid SingleEventEntity event, @PathVariable String eventID)
+    public ModelAndView edit_event(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("single_event") @Valid SingleEventEntity event, @PathVariable("eventID") String eventID)
     {
         System.out.println("Provider name: " + provider.getName());
         ModelAndView modelAndView = new ModelAndView();
@@ -136,7 +147,7 @@ public class PActivityController {
     }
 
     @RequestMapping(value="/event_cancelation/{eventID}", method = RequestMethod.POST)
-    public  ModelAndView event_cancelation(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("single_event") @Valid SingleEventEntity event, @PathVariable String eventID) {
+    public  ModelAndView event_cancelation(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("single_event") @Valid SingleEventEntity event, @PathVariable("eventID") String eventID) {
         System.out.println("Provider name: " + provider.getName());
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
@@ -155,6 +166,25 @@ public class PActivityController {
         return modelAndView;
     }
 
-    //@RequestMapping(value="/slot_cancelation/{eventID}/{slotID}", method = RequestMethod.POST)
-    //public ModelAndView
+    @RequestMapping(value="/slot_cancelation/{slotID}", method = RequestMethod.POST)
+    public ModelAndView slot_cancelation(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("single_event") @Valid SingleEventEntity event, @PathVariable("slotID") String slotID) {
+        System.out.println("Provider name: " + provider.getName());
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication authentication = authenticationFacade.getAuthentication();
+        System.out.println("Authentication name is " + authentication.getName());
+        if (!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            System.out.println("Slot is " + slotID);
+            Integer slotID_ = Integer.parseInt(slotID);
+            ProgramEntity programEntity = programService.getProgramById(slotID_);
+            SingleEventEntity eventEdit = eventService.findSingleEventById(programEntity.getEvent().getId());
+            Set<ProgramEntity> program = eventEdit.getProgram();
+            if (program != null) {
+                eventService.cancelSlot(slotID_, eventEdit);
+            }
+            System.out.println("fw sto " + programEntity.getEvent().getId());
+            modelAndView.setViewName("activityProvider");
+        }
+        return modelAndView;
+    }
 }

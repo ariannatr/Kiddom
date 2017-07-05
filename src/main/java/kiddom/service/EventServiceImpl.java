@@ -147,11 +147,31 @@ public class EventServiceImpl implements EventService {
     @Override
     public void cancelSingleEvent(ProviderEntity provider, SingleEventEntity eventEdit) {
         eventEdit.setCanceled(1);
+        Set<ProgramEntity> program =eventEdit.getProgram(); //new HashSet<ProgramEntity>(eventEdit.getProgram());
+        for (ProgramEntity p : program) {
+            System.out.println("program event id " + p.getEvent().getId());
+            p.setCanceled(1);
+            programRepository.save(p);
+        }
+        //HashSet<ProgramEntity> newProgram = new HashSet<>();
+       /* for (ProgramEntity p : program) {
+            p.setEvent(eventEdit);
+            newProgram.add(p);
+        }*/
+        //eventEdit.setProgram(newProgram);
+        System.out.println("Event id is " + eventEdit.getId());
+       // activityRepository.save(eventEdit);
+    }
+
+    @Override
+    public void cancelSlot(int slotID, SingleEventEntity eventEdit) {
         Set<ProgramEntity> program = eventEdit.getProgram();
         for (ProgramEntity p : program) {
-            p.setCanceled(1);
+            if (p.getId() == slotID) {
+                p.setCanceled(1);
+                programRepository.save(p);
+                break;
+            }
         }
-        eventEdit.setProgram((HashSet<ProgramEntity>) program);
-        activityRepository.save(eventEdit);
     }
 }

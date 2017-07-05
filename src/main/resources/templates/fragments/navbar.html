@@ -37,13 +37,13 @@
                             <div style="font-size:13px;" th:if ="${(uname == null) or (type==null)} ">
                                 <li></li>
                                 <li>
-                                    <a style="font-size:13px;" data-toggle="modal" href="#login_overlay">Συνδεση</a>
+                                    <a style="font-size:13px;" data-toggle="modal" href="#login_overlay">Σύνδεση</a>
                                 </li>
                                 <li th:classappend="${module == 'register' ? 'active' : ''}">
-                                    <a style="font-size:13px;" th:href="@{/register}">Εγγραφη</a></li>
+                                    <a style="font-size:13px;" th:href="@{/register}">Εγγραφή</a></li>
                                 </li>
                                 <li th:classappend="${module == 'register_prov' ? 'active' : ''}">
-                                    <a style="font-size:13px;" th:href="@{/register_prov}">Παροχοι</a>
+                                    <a style="font-size:13px;" th:href="@{/register_prov}">Πάροχοι</a>
                                 </li>
                             </div >
                             <div style="font-size:13px;" th:if ="${(uname != null) } ">
@@ -74,9 +74,9 @@
                     <nav id="mainav" class="fl_right">
                         <ul class="clear">
                             <li th:classappend="${module == 'index' ? 'active' : ''}">
-                                <a  th:href="@{/index}"><i class="fa fa-lg fa-home"></i>&nbsp;Αρχικη</a>
+                                <a  th:href="@{/index}"><i class="fa fa-lg fa-home"></i>&nbsp;Αρχική</a>
                             </li>
-                            <li th:if ="${(uname != null) and (type=='2')}" th:classappend="${module == 'profile_prov' ? 'active' : ''}"><a class="drop" >Το προφιλ μου</a>
+                            <li th:if ="${(uname != null) and (type=='2')}" th:classappend="${module == 'profile_prov' ? 'active' : ''}"><a class="drop" >Το προφίλ μου</a>
                                 <ul >
                                     <li ><a th:href="@{/profileProvider(tab=elements)}">Στοιχεία Χρήστη</a></li>
                                     <li ><a th:href="@{/profileProvider(tab=wallet)}">Πορτοφόλι</a></li>
@@ -84,7 +84,7 @@
                                     <li ><a th:href="@{/profileProvider(tab=older_activities)}">&nbsp;Παλαιότερες Δραστηριότητες</a></li>
                                 </ul>
                             </li>
-                            <li th:if ="${(uname != null) and (type=='1')}" th:classappend="${module == 'profile' ? 'active' : ''}"><a class="drop" >Το προφιλ μου</a>
+                            <li th:if ="${(uname != null) and (type=='1')}" th:classappend="${module == 'profile' ? 'active' : ''}"><a class="drop" >Το προφίλ μου</a>
                                 <ul >
                                     <li><a th:href="@{/profile(tab=elements)}">&nbsp; Στοιχεία Χρήστη</a></li>
                                     <li><a th:href="@{/profile(tab=wallet)}">&nbsp; Πορτοφόλι</a></li>
@@ -93,14 +93,14 @@
                                 </ul>
                             </li>
                             <li th:if ="${(uname != null) and (type=='2')}" th:classappend="${module == 'activity_reg' ? 'active' : ''}">
-                                <a  th:href="@{/activity_reg}">Δημιουργια Δραστηριοτητας</a>
+                                <a  th:href="@{/activity_reg}">Δημιουργία Δραστηριότητας</a>
                             </li>
                             <li th:if ="${(uname != null) and (type=='1')}" th:classappend="${module == 'buypoints' ? 'active' : ''}">
                                 <a  th:href="@{/buypoints}">Αγορά Πόντων</a>
                             </li>
 
                             <li th:classappend="${module == 'about' ? 'active' : ''}">
-                                <a  th:href="@{/about}">Σχετικα με εμας</a>
+                                <a  th:href="@{/about}">Σχετικά με εμάς</a>
                             </li>
                             <li th:classappend="${module == 'faq' ? 'active' : ''}">
                                 <a  th:href="@{/faq}">FAQ</a>
@@ -113,47 +113,47 @@
                     <div id="breadcrumb" class="hoc clear">
                         <!-- ################################################################################################ -->
                         <ul>
-                            <li><a th:href="@{/index}">Αρχικη</a></li>
+                            <li><a th:href="@{/index}">Αρχική</a></li>
                             <span th:if ="${(module != null)} ">
                                  <span th:if="${(module=='admin')}">
-                                    <li>Σελιδα διαχειριστη</li>
+                                    <li>Σελίδα διαχειριστή</li>
                                 </span>
                                 <span th:if="${(module=='about')}">
-                                    <li>Σχετικα με εμας</li>
+                                    <li>Σχετικά με εμάς</li>
                                 </span>
                                 <span th:if="${(module=='faq')}">
                                     <li>FAQ</li>
                                 </span>
                                 <span th:if="${(module=='activity_reg')}">
-                                    <li>Δημιουργια Δραστηριοτητας</li>
+                                    <li>Δημιουργία Δραστηριότητας</li>
                                 </span>
                                 <span th:if="${(module=='activity')}">
-                                    <li>Δραστηριοτητα</li>
+                                    <li>Δραστηριότητα</li>
                                 </span>
                                 <span th:if="${(module=='register')}">
-                                    <li>Εγγραφη γονεα</li>
+                                    <li>Εγγραφή γονέα</li>
                                 </span>
                                 <span th:if="${(module=='register_prov')}">
-                                    <li>Εγγραφη παροχου</li>
+                                    <li>Εγγραφή παρόχου</li>
                                 </span>
                                 <span th:if="${(module=='search')}">
-                                    <li>Αναζητηση</li>
+                                    <li>Αναζήτηση</li>
                                 </span>
                                 <span th:if="${(module=='profile')}">
-                                    <li>Προφιλ γονεα</li>
+                                    <li>Προφίλ γονέα</li>
                                 </span>
                                 <span th:if="${(module=='profile_prov')}">
-                                    <li>Προφιλ παροχου</li>
+                                    <li>Προφίλ παρόχου</li>
                                 </span>
                                 <span th:if="${(module=='buypoints')}">
-                                    <li>Aγορα ποντων</li>
+                                    <li>Aγορά πόντων</li>
                                 </span>
                                 <span th:if="${(module=='error_page')}">
-                                    <li>Λαθος</li>
+                                    <li>Λάθος</li>
                                 </span>
                                 <span th:if="${(module=='activityProvider')}">
-                                    <li><a th:href="@{/profileProvider}">Προφιλ Παροχου</a></li>
-                                    <li>Επισκοπηση Δραστηριοτητας</li>
+                                    <li><a th:href="@{/profileProvider}">Προφίλ Παρόχου</a></li>
+                                    <li>Επισκόπηση Δραστηριότητας</li>
                                 </span>
                             </span>
 
@@ -174,7 +174,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Κλείσιμο</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Συνδεση στο KIDDOM</h4>
+                        <h4 class="modal-title" id="myModalLabel">Σύνδεση στο KIDDOM</h4>
 
                     </div>
                     <div class="modal-body">
@@ -202,7 +202,7 @@
 
                                             </div-->
                                         </div>
-                                        <button type="submit" class="btn btn-success btn-block">Συνδεση</button>
+                                        <button type="submit" class="btn btn-success btn-block">Σύνδεση</button>
 
                                     </form>
                                 </div>

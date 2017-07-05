@@ -97,7 +97,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.requiresChannel()
 				.antMatchers("/index","/register","/register_prov","/about",//"error",
 						"/activity","/activityProvider","google_map","/search","/faq",
-						"activity_reg","/categories_form","/category_submit","/profile","/profileProvider","/admin").requiresSecure();
+						"/activity_reg","/categories_form","/category_submit","/profile","/profileProvider","/admin").requiresSecure();
       //  servletContext.setSessionTrackingModes(EnumSet.of(SessionTrackingMode.COOKIE));
 	}
 

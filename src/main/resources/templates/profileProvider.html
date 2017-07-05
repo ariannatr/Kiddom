@@ -294,7 +294,10 @@ Licence URI: http://www.os-templates.com/template-terms
                             </article>
                         </div>
                         <div th:if="${(currEvents==null)}">
-                            <p> Δέν έχετε δημιουργήσει ακόμα κάποια δραστηριότητα!<br>Πατήστε <a th:href="@{/activity_reg}">εδώ</a> για να δημιουργήσετε μια καινούρια δραστηριότητα</p>
+                            <div class="alert alert-info" style="text-align: center;">
+                                <strong> Δεν έχετε δημιουργήσει ακόμα κάποια δραστηριότητα!</strong>
+                                <br>Πατήστε <a th:href="@{/activity_reg}">εδώ</a> για να δημιουργήσετε μια καινούρια δραστηριότητα.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -318,7 +321,10 @@ Licence URI: http://www.os-templates.com/template-terms
                             </article>
                         </div>
                         <div th:if="${(pastEvents==null)}">
-                            <p> Δέν έχετε δημιουργήσει ακόμα κάποια δραστηριότητα που έχει λήξει!</p>
+                            <div class="alert alert-info" style="text-align: center;">
+                                <strong> Δεν έχετε δημιουργήσει ακόμα κάποια δραστηριότητα που έχει λήξει!</strong>
+                                <br>Πατήστε <a th:href="@{/activity_reg}">εδώ</a> για να δημιουργήσετε μια καινούρια δραστηριότητα.
+                            </div>
                         </div>
                     </div>
                     </div>

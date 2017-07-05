@@ -59,7 +59,7 @@ Licence URI: http://www.os-templates.com/template-terms
     </div >
 
     <div th:if ="${(is_approved == 1)}">
-        <h1 align="center" style="font-weight: bold; color: lightslategrey;">Δημιουργηστε μια δραστηριοτητα!</h1>
+        <h1 align="center" style="font-weight: bold; color: lightslategrey;">Δημιουργήστε μια δραστηριότητα!</h1>
         <p/>
         <br/>
         <form class="well form-horizontal" enctype="multipart/form-data" th:action="@{/activity_reg}" method="POST"  id="contact_form">
@@ -106,7 +106,7 @@ Licence URI: http://www.os-templates.com/template-terms
                     <div class="col-md-4 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                            <input name="slotDuration" placeholder="Διάρκεια slot" class="form-control"  type="text">
+                            <input name="slotDuration" placeholder="Διάρκεια slot (σε λεπτά)" class="form-control"  type="text">
                         </div>
                     </div>
                 </div>
@@ -117,7 +117,7 @@ Licence URI: http://www.os-templates.com/template-terms
                     <div class="col-md-4 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                            <input name="startTime" placeholder="Ώρα έναρξης" class="form-control"  type="text">
+                            <input name="startTime" placeholder="Ώρα έναρξης (πχ. 18:00)" class="form-control"  type="text">
                         </div>
                     </div>
                 </div>
@@ -128,7 +128,7 @@ Licence URI: http://www.os-templates.com/template-terms
                     <div class="col-md-4 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                            <input name="endTime" placeholder="Ώρα λήξης" class="form-control"  type="text">
+                            <input name="endTime" placeholder="Ώρα λήξης (πχ. 22:00)" class="form-control"  type="text">
                         </div>
                     </div>
                 </div>
@@ -338,7 +338,7 @@ Licence URI: http://www.os-templates.com/template-terms
 
             <div class="form-group" align="center">
                 <p/>
-                <label  class="photo_upload" >Φωτογραφίες δραστηριότητας(εως 5)</label>
+                <label  class="photo_upload" >Φωτογραφίες δραστηριότητας (εώς 5)</label>
                 <input id="fileInput" type="file" name="uploadingFiles"  multiple>
                 <!--&lt;!&ndash;<label for="image0" class="photo_upload" >Φωτογραφίες δραστηριότητας</label>&ndash;&gt;-->
                 <!--&lt;!&ndash;<p/>&ndash;&gt;-->
@@ -362,7 +362,7 @@ Licence URI: http://www.os-templates.com/template-terms
                 <div class="form-group">
                     <label class="col-md-4 control-label"></label>
                     <div class="col-md-4">
-                        <button type="submit" class="btn btn-warning" >Αποθηκευση δραστηριοτητας <span class="glyphicon glyphicon-send"></span></button>
+                        <button type="submit" class="btn btn-warning" >Αποθήκευση δραστηριότητας <span class="glyphicon glyphicon-send"></span></button>
                     </div>
                 </div>
 
