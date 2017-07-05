@@ -223,6 +223,8 @@ public class SingleEventEntity implements Serializable {
     public float getRatings_sum(){return this.ratings_sum;}
     public void setRatings_sum(float sum){this.ratings_sum=sum;}
 
+    public float getRatings_num(){return this.ratings_number;}
+    public void setRatings_num(float number){this.ratings_number=number;}
 
     public float getRating() {
         return ratings_number;
