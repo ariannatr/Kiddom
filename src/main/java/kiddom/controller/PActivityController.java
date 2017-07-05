@@ -165,26 +165,4 @@ public class PActivityController {
         modelAndView.setViewName("activityProvider");
         return modelAndView;
     }
-
-    @RequestMapping(value="/slot_cancelation/{slotID}", method = RequestMethod.POST)
-    public ModelAndView slot_cancelation(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("single_event") @Valid SingleEventEntity event, @PathVariable("slotID") String slotID) {
-        System.out.println("Provider name: " + provider.getName());
-        ModelAndView modelAndView = new ModelAndView();
-        Authentication authentication = authenticationFacade.getAuthentication();
-        System.out.println("Authentication name is " + authentication.getName());
-        if (!authentication.getName().equals("anonymousUser")) {
-            modelAndView.addObject("uname", authentication.getName());
-            System.out.println("Slot is " + slotID);
-            Integer slotID_ = Integer.parseInt(slotID);
-            ProgramEntity programEntity = programService.getProgramById(slotID_);
-            SingleEventEntity eventEdit = eventService.findSingleEventById(programEntity.getEvent().getId());
-            Set<ProgramEntity> program = eventEdit.getProgram();
-            if (program != null) {
-                eventService.cancelSlot(slotID_, eventEdit);
-            }
-            System.out.println("fw sto " + programEntity.getEvent().getId());
-            modelAndView.setViewName("activityProvider");
-        }
-        return modelAndView;
-    }
 }
