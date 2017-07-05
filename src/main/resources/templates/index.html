@@ -45,70 +45,32 @@ Licence URI: http://www.os-templates.com/template-terms
 
       <div class="fl_right">
         <ul>
-            <div style="font-size:13px;" th:if ="${(uname != null) and (type=='1')} ">
-              <!--li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li-->
+            <div style="font-size:13px;" th:if ="${(uname != null) } ">
+
               <li></li>
               <li>
                 <strong><span th:text="${uname}"></span></strong>
               </li>
-              <li class="dropdown">
-                <a style="font-size:13px;" class="dropdown-toggle" data-toggle="dropdown" style="font-size:13px;">Το προφιλ μου <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu" style="text-transform: capitalize; font-size:12px;">
-                <!--style=" background-color:rgba(0,0,0,.6); " -->
-                  <li><a th:href="@{/profile(tab=elements)}">&nbsp; Στοιχεία Χρήστη</a></li>
-                  <li><a th:href="@{/profile(tab=wallet)}">&nbsp; Πορτοφόλι</a></li>
-                  <li><a th:href="@{/buypoints}">&nbsp; Αγορά Πόντων</a></li>
-                  <li><a th:href="@{/profile(tab=reservations)}">&nbsp; Κρατήσεις</a></li>
-                  <li><a th:href="@{/profile(tab=old_activities)}">&nbsp; Παλαιότερες Κρατήσεις</a></li>
-                </ul>
-              </li>
+
               <li>
                 <a style="font-size:13px;" href="logout">Αποσύνδεση</a></li>
               </li>
             </div >
-          <div style="font-size:13px;" th:if ="${(uname != null) and (type=='2')} ">
-            <!--li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li-->
-            <li></li>
-            <li>
-              <strong><span th:text="${uname}"></span></strong>
-            </li>
-            <li class="dropdown">
-              <a style="font-size:13px;" class="dropdown-toggle" data-toggle="dropdown">Το προφιλ μου <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu" style="text-transform: capitalize; font-size:12px;">
-                <!--style=" background-color:rgba(0,0,0,.6); " -->
-                <li ><a th:href="@{/profileProvider(tab=elements)}">&nbsp;Στοιχεία Χρήστη</a></li>
-                <li ><a th:href="@{/profileProvider(tab=wallet)}">&nbsp;Πορτοφόλι</a></li>
-                <li ><a th:href="@{/profileProvider(tab=current_activities)}">&nbsp;Επισκόπηση</a></li>
-                <li ><a th:href="@{/profileProvider(tab=older_activities)}">&nbsp;Παλαιότερες Δραστηριότητες</a></li>
-              </ul>
-            </li>
-            <li>
-              <a style="font-size:13px;" href="logout">Αποσύνδεση</a></li>
-            </li>
-          </div >
+
           <div style="font-size:13px;" th:if ="${(uname == null) or (type==null)} ">
-              <!--li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li-->
+
             <li></li>
             <li>
               <a class='' id="trial" style="font-size:13px;" data-toggle="modal" href="#login_overlay">Συνδεση</a>
             </li>
             <li>
-              <a style="font-size:13px;" th:href="register">Εγγραφη</a></li>
+              <a style="font-size:13px;" th:href="@{/register}">Εγγραφη</a></li>
             </li>
             <li>
-              <a style="font-size:13px;" th:href="register_prov">Πaροχοι</a>
+              <a style="font-size:13px;" th:href="@{/register_prov}">Πaροχοι</a>
             </li>
           </div >
-          <div style="font-size:13px;" th:if ="${(uname != null) and (type=='0')} ">
-            <!--li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li-->
-            <li></li>
-            <li>
-              <strong><span th:text="${uname}"></span></strong>
-            </li>
-            <li>
-              <a style="font-size:13px;" href="logout">Αποσύνδεση</a></li>
-            </li>
-          </div >
+
         </ul>
       </div>
       <!-- ################################################################################################ -->
@@ -127,20 +89,31 @@ Licence URI: http://www.os-templates.com/template-terms
       </div>
       <nav id="mainav" class="fl_right">
         <ul class="clear">
-          <li class="active"}">
-            <a  th:href="@{/index}"><i class="fa fa-lg fa-home"></i>Αρχικη</a>
+          <li class="active">
+            <a  th:href="@{/index}"><i class="fa fa-lg fa-home"></i>&nbsp;Αρχικη</a>
           </li>
-          <!--li ><a class="drop" >Δραστηριότητες</a>
-            <ul>`
-              <li th:classappend="${module == 'activity' ? 'active' : ''}">
-                <a  th:href="@{/activity}">Ενεργή Δραστηριότητα</a>
-              </li-->
-              <li th:if ="${(uname != null) and (type=='2')}" >
-                <a  th:href="@{/activity_reg}">Δημιουργία Δραστηριότητας</a>
-              </li>
-
-            <!--/ul>
-          </li-->
+          <li th:if ="${(uname != null) and (type=='2')}" ><a class="drop" >Το προφιλ μου</a>
+            <ul >`
+              <li ><a th:href="@{/profileProvider(tab=elements)}">Στοιχεία Χρήστη</a></li>
+              <li ><a th:href="@{/profileProvider(tab=wallet)}">Πορτοφόλι</a></li>
+              <li ><a th:href="@{/profileProvider(tab=current_activities)}">Επισκόπηση Δραστηριοτήτων</a></li>
+              <li ><a th:href="@{/profileProvider(tab=older_activities)}">&nbsp;Παλαιότερες Δραστηριότητες</a></li>
+            </ul>
+          </li>
+          <li th:if ="${(uname != null) and (type=='1')}"><a class="drop" >Το προφιλ μου</a>
+            <ul >
+              <li><a th:href="@{/profile(tab=elements)}">&nbsp; Στοιχεία Χρήστη</a></li>
+              <li><a th:href="@{/profile(tab=wallet)}">&nbsp; Πορτοφόλι</a></li>
+              <li><a th:href="@{/profile(tab=reservations)}">&nbsp; Κρατήσεις</a></li>
+              <li><a th:href="@{/profile(tab=old_activities)}">&nbsp; Παλαιότερες Κρατήσεις</a></li>
+            </ul>
+          </li>
+          <li th:if ="${(uname != null) and (type=='2')}" >
+            <a  th:href="@{/activity_reg}">Δημιουργία Δραστηριότητας</a>
+          </li>
+          <li th:if ="${(uname != null) and (type=='1')}" >
+            <a  th:href="@{/buypoints}">Αγορά Πόντων</a>
+          </li>
           <li><a th:href="@{/about}">Σχετικα με εμας</a></li>
           <li><a th:href="@{/faq}">FAQ</a></li>
         </ul>
@@ -157,21 +130,7 @@ Licence URI: http://www.os-templates.com/template-terms
   <!-- ################################################################################################ -->
   <!-- ################################################################################################ -->
   <div id="pageintro" class="hoc clear">
-    <!--<div th:if ="${(success != null) and (success == 'true')}">-->
-      <!--<div class="alert alert-success" style="text-align: center;"> Η εγγραφή σας ολοκληρώθηκε! <br>  <a  th:href="index">Πίσω στην Αρχική</a></div>-->
-    <!--</div >-->
-    <!--<div th:if ="${(success != null) and (success == 'false')}">-->
-      <!--<div class="alert alert-danger" style="text-align: center;"> Λυπούμαστε ,αλλά το username που χρησιμοποιήσατε δεν είναι διαθέσιμο! <br>  <a  th:href="index">Πίσω στην Αρχική</a></div>-->
-    <!--</div >-->
-    <!--<div th:if ="${(param.success != null) and (param.success[0] == 'false')}">-->
-      <!--&lt;!&ndash;<div class="alert alert-danger" style="text-align: center;"> Πληκτρολογήσατε λάθος ονομα ή κωδικό χρήστη.Παρακαλούμε επαναλάβετε τη διαδικασία.</div>&ndash;&gt;-->
-        <!--<script>-->
-<!--//        document.getElementById('trial').click();-->
-        <!--window.onload = function () {-->
-            <!--document.getElementById("trial").click();-->
-        <!--}-->
-        <!--</script>-->
-    <!--</div >-->
+
     <!-- ################################################################################################ -->
     <div class="flexslider basicslider">
       <ul class="slides">
@@ -398,7 +357,7 @@ Licence URI: http://www.os-templates.com/template-terms
 <!-- JAVASCRIPTS -->
 <script th:src="@{/scripts/jquery.min.js}"></script>
 <script th:src="@{/scripts/jquery.backtotop.js}"></script>
-<script th:src="@{/scripts/jquery.mobilemenu.js}"></script>
+<!--script th:src="@{/scripts/jquery.mobilemenu.js}"></script-->
 <script th:src="@{/scripts/jquery.flexslider-min.js}"></script>
 <script th:src="@{/scripts/jquery-ui.js}"></script>
 <script th:src="@{/scripts/datepicker.js}"></script>

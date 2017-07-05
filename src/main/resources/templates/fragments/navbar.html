@@ -34,50 +34,7 @@
                     <!-- ################################################################################################ -->
                     <div id="topmenu" class="fl_right">
                     <ul>
-                        <div style="font-size:13px;" th:if ="${(uname != null) and (type=='1')} ">
-                                <li></li>
-                                <li>
-                                    <strong><span th:text="${uname}"></span></strong>
-                                </li>
-                                <li class="dropdown">
-			                    <a class="dropdown-toggle" data-toggle="dropdown" style="font-size:13px;">Το προφιλ μου <span class="caret"></span></a>
-			                        <ul class="dropdown-menu" role="menu" style="text-transform: capitalize; font-size:12px;">
-                                        <!--style=" background-color:rgba(0,0,0,.6); " -->
-                                        <li><a th:href="@{/profile(tab=elements)}">&nbsp; Στοιχεία Χρήστη</a></li>
-                                        <li><a th:href="@{/profile(tab=wallet)}">&nbsp; Πορτοφόλι</a></li>
-                                        <li><a th:href="@{/buypoints}">&nbsp; Αγορά Πόντων</a></li>
-                                        <li><a th:href="@{/profile(tab=reservations)}">&nbsp; Κρατήσεις</a></li>
-                                        <li><a th:href="@{/profile(tab=old_activities)}">&nbsp; Παλαιότερες Κρατήσεις</a></li>
-                                    </ul>
-                                </li>
-
-                                <li>
-                                    <a style="font-size:13px;" th:href="@{/logout}">Αποσυνδεση</a></li>
-                                </li>
-
-                            </div >
-                            <div style="font-size:13px;" th:if ="${(uname != null) and (type=='2')} ">
-                                <!--li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li-->
-                                <li></li>
-                                <li>
-                                    <strong><span th:text="${uname}"></span></strong>
-                                </li>
-                                <li class="dropdown">
-                                    <a style="font-size:13px;" class="dropdown-toggle" data-toggle="dropdown">Το προφιλ μου <span class="caret"></span></a>
-                                    <ul class="dropdown-menu" role="menu" style="text-transform: capitalize; font-size:12px;">
-                                    <!--style=" background-color:rgba(0,0,0,.6); " -->
-                                        <li ><a th:href="@{/profileProvider(tab=elements)}">&nbsp;Στοιχεία Χρήστη</a></li>
-                                        <li ><a th:href="@{/profileProvider(tab=wallet)}">&nbsp;Πορτοφόλι</a></li>
-                                        <li ><a th:href="@{/profileProvider(tab=current_activities)}">&nbsp;Επισκόπηση</a></li>
-                                        <li ><a th:href="@{/profileProvider(tab=older_activities)}">&nbsp;Παλαιότερες Δραστηριότητες</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                <a style="font-size:13px;" href="logout">Αποσυνδεση</a></li>
-                                </li>
-                            </div >
                             <div style="font-size:13px;" th:if ="${(uname == null) or (type==null)} ">
-                                <!--li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li-->
                                 <li></li>
                                 <li>
                                     <a style="font-size:13px;" data-toggle="modal" href="#login_overlay">Συνδεση</a>
@@ -89,8 +46,7 @@
                                     <a style="font-size:13px;" th:href="@{/register_prov}">Παροχοι</a>
                                 </li>
                             </div >
-                            <div style="font-size:13px;" th:if ="${(uname != null) and (type=='0')} ">
-                                <!--li><a th:href="@{/index}"><i class="fa fa-lg fa-home"></i></a></li-->
+                            <div style="font-size:13px;" th:if ="${(uname != null) } ">
                                 <li></li>
                                 <li>
                                     <strong><span th:text="${uname}"></span></strong>
@@ -118,23 +74,31 @@
                     <nav id="mainav" class="fl_right">
                         <ul class="clear">
                             <li th:classappend="${module == 'index' ? 'active' : ''}">
-                                <a  th:href="@{/index}"><i class="fa fa-lg fa-home"></i>Αρχικη</a>
+                                <a  th:href="@{/index}"><i class="fa fa-lg fa-home"></i>&nbsp;Αρχικη</a>
                             </li>
-                            <!--li><a class="drop" >Δραστηριοτητες</a>
-                                <ul>
-                                    <li th:classappend="${module == 'activity' ? 'active' : ''}">
-                                        <a  th:href="@{/activity}">Ενεργη Δραστηριοτητα</a>
-                                    </li-->
-                                    <li th:classappend="${module == 'activity_reg' ? 'active' : ''}">
-                                        <a  th:href="@{/activity_reg}">Δημιουργια Δραστηριοτητας</a>
-                                    </li>
-                                    <!--li th:classappend="${module == 'activity_reg' ? 'active' : ''}">
-                                        <a  th:href="@{/activity_reg}">Παλαιοτερες δραστηριοτητες</a>
-                                    </li>
-
-
-                                </ul-->
+                            <li th:if ="${(uname != null) and (type=='2')}" th:classappend="${module == 'profile_prov' ? 'active' : ''}"><a class="drop" >Το προφιλ μου</a>
+                                <ul >
+                                    <li ><a th:href="@{/profileProvider(tab=elements)}">Στοιχεία Χρήστη</a></li>
+                                    <li ><a th:href="@{/profileProvider(tab=wallet)}">Πορτοφόλι</a></li>
+                                    <li ><a th:href="@{/profileProvider(tab=current_activities)}">Επισκόπηση Δραστηριοτήτων</a></li>
+                                    <li ><a th:href="@{/profileProvider(tab=older_activities)}">&nbsp;Παλαιότερες Δραστηριότητες</a></li>
+                                </ul>
                             </li>
+                            <li th:if ="${(uname != null) and (type=='1')}" th:classappend="${module == 'profile' ? 'active' : ''}"><a class="drop" >Το προφιλ μου</a>
+                                <ul >
+                                    <li><a th:href="@{/profile(tab=elements)}">&nbsp; Στοιχεία Χρήστη</a></li>
+                                    <li><a th:href="@{/profile(tab=wallet)}">&nbsp; Πορτοφόλι</a></li>
+                                    <li><a th:href="@{/profile(tab=reservations)}">&nbsp; Κρατήσεις</a></li>
+                                    <li><a th:href="@{/profile(tab=old_activities)}">&nbsp; Παλαιότερες Κρατήσεις</a></li>
+                                </ul>
+                            </li>
+                            <li th:if ="${(uname != null) and (type=='2')}" th:classappend="${module == 'activity_reg' ? 'active' : ''}">
+                                <a  th:href="@{/activity_reg}">Δημιουργια Δραστηριοτητας</a>
+                            </li>
+                            <li th:if ="${(uname != null) and (type=='1')}" th:classappend="${module == 'buypoints' ? 'active' : ''}">
+                                <a  th:href="@{/buypoints}">Αγορά Πόντων</a>
+                            </li>
+
                             <li th:classappend="${module == 'about' ? 'active' : ''}">
                                 <a  th:href="@{/about}">Σχετικα με εμας</a>
                             </li>
@@ -182,7 +146,6 @@
                                     <li>Προφιλ παροχου</li>
                                 </span>
                                 <span th:if="${(module=='buypoints')}">
-                                    <li><a th:href="@{/profile}">Προφιλ γονεα</a></li>
                                     <li>Aγορα ποντων</li>
                                 </span>
                                 <span th:if="${(module=='error_page')}">
