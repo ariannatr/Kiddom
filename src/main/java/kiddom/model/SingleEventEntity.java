@@ -4,6 +4,7 @@ package kiddom.model;
  * Created by eleni on 02-Jun-17.
 **/
 
+import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.security.access.method.P;
 
 import javax.persistence.*;
@@ -51,6 +52,8 @@ public class SingleEventEntity implements Serializable {
     private float ratings_sum;
     @Column(name = "ratings_number")
     private float ratings_number;
+    @Column(name = "date")
+    private String date;
     @Column(name = "canceled")
     private int canceled;
     @Transient
@@ -59,6 +62,18 @@ public class SingleEventEntity implements Serializable {
     private int slotDuration;
 
     private String owner;
+
+    @Transient
+    private int availability;
+    public int getAvailability(){
+        int max=0;
+        for(ProgramEntity pro:program)
+        {
+            if(pro.getAvailability()>max)
+                max=pro.getAvailability();
+        }
+        return max;
+    }
 
     /*----------------------Constructor----------------------*/
     //SingleEventEntity() {
@@ -218,6 +233,9 @@ public class SingleEventEntity implements Serializable {
     public void setPostcode(int postcode) {
         this.postcode = postcode;
     }
+
+    public String getDate(){return date;}
+    public void setDate(String date){this.date=date;}
 
 
     public float getRatings_sum(){return this.ratings_sum;}

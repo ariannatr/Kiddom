@@ -19,10 +19,17 @@ public interface EventService {
     public Set<ProgramEntity> findProgram(int eventID);
     public SingleEventEntity findSingleEvent(SingleEventEntity singleEventEntity);
     public SingleEventEntity findSingleEventById(int eventID);
-    public List<SingleEventEntity> findALLEvents();
+    //public List<SingleEventEntity> findALLEvents();
     //public Page<SingleEventEntity> getAllEvents(Pageable pageable);
     public void saveActivity(UserEntity user, ProviderEntity provider, SingleEventEntity event, HashSet<ProgramEntity> program,String[] photos);
     public void updateSingleEvent(ProviderEntity provider, SingleEventEntity event, SingleEventEntity eventEdit);
     public void cancelSingleEvent(ProviderEntity provider, SingleEventEntity eventEdit);
-    public void cancelSlot(int slotID, SingleEventEntity eventEdit);
+    public Page<SingleEventEntity> findAllPageable(Pageable pageable);
+    public Page<SingleEventEntity> findByTownOrAreaAndDate(String Town,String Area,String Date,Pageable pageable);
+    public Page<SingleEventEntity> findByDate(String Date,Pageable pageable);
+    public Page<SingleEventEntity> findByTownOrArea(String Town, String Area, Pageable pageable);
+    public Page<SingleEventEntity> findByAvailability(Integer max,Pageable pageable);
+    public Page<SingleEventEntity> findByTownOrAreaAndDateAndAvailability(String Town,String Area,String Date,Integer max,Pageable pageable);
+    public Page<SingleEventEntity> findByTownOrAreaAndAvailability(String Town,String Area,Integer max,Pageable pageable);
+    public Page<SingleEventEntity> findByDateAndAvailability(String Date,Integer max,Pageable pageable);
 }
