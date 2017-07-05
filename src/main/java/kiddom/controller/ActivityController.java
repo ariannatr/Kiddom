@@ -83,6 +83,12 @@ public class ActivityController {
             comments.add(showComment);
         }
         float finalRating = event.getRatings_sum()/event.getRatings_num();
+        if (event.getRatings_num() == 0) {
+            modelAndView.addObject("numOfRatings", 0);
+        }
+        else {
+            modelAndView.addObject("numOfRatings", 1);
+        }
         modelAndView.addObject("rating", finalRating);
         modelAndView.addObject("comments", comments);
         modelAndView.addObject("program", program);

@@ -373,7 +373,12 @@
                     <h1><span th:text="${event.name}"></span></h1>
                 </div>
             <div class="col-lg-12">
-                <h1>Βαθμολογία εκδήλωσης:&nbsp;<span th:text="${rating}"></span></h1>
+                <div th:if ="${(numOfRatings == 0)}">
+                    <h1>Δεν υπάρχουν βαθμολογίες για αυτή την εκδήλωση ακόμα.</h1>
+                </div>
+                <div th:if ="${(numOfRatings == 1)}">
+                    <h1>Βαθμολογία εκδήλωσης:&nbsp;<span th:text="${rating}"></span></h1>
+                </div>
             </div>
 
                 <!--Images preview for activity-->
