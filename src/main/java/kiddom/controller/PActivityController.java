@@ -127,4 +127,7 @@ public class PActivityController {
         modelAndView.setViewName("activityProvider");
         return modelAndView;
     }
+
+    //@RequestMapping(value="/slot_cancelation/{eventID}/{slotID}", method = RequestMethod.POST)
+    //public ModelAndView
 }

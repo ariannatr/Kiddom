@@ -147,6 +147,11 @@ public class EventServiceImpl implements EventService {
     @Override
     public void cancelSingleEvent(ProviderEntity provider, SingleEventEntity eventEdit) {
         eventEdit.setCanceled(1);
+        Set<ProgramEntity> program = eventEdit.getProgram();
+        for (ProgramEntity p : program) {
+            p.setCanceled(1);
+        }
+        eventEdit.setProgram((HashSet<ProgramEntity>) program);
         activityRepository.save(eventEdit);
     }
 }
