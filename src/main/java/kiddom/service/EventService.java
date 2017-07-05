@@ -1,5 +1,6 @@
 package kiddom.service;
 
+import kiddom.controller.Views;
 import kiddom.model.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,4 +33,8 @@ public interface EventService {
     public Page<SingleEventEntity> findByTownOrAreaAndDateAndAvailability(String Town,String Area,String Date,Integer max,Pageable pageable);
     public Page<SingleEventEntity> findByTownOrAreaAndAvailability(String Town,String Area,Integer max,Pageable pageable);
     public Page<SingleEventEntity> findByDateAndAvailability(String Date,Integer max,Pageable pageable);
+ public Page<SingleEventEntity> findByCategoryAndSub1OrSub2OrSub3(String cat,String subcat,String subcat2,String subcat3,Pageable pageable);
+ public Page<SingleEventEntity> findByCategory(String cat,Pageable pageable);
+ public Page<SingleEventEntity> findBySub1OrSub2OrSub3(String subcat,String subcat2,String subcat3,Pageable pageable);
+//  public Page<SingleEventEntity> freetext(String text,Pageable pageable);
 }

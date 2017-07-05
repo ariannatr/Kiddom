@@ -64,7 +64,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/error").permitAll()
                 .antMatchers("/activity").permitAll()
                 .antMatchers("/google_map").permitAll()
-                .antMatchers("/search").permitAll()
+                .antMatchers("/search","/search2").permitAll()
                 .antMatchers("/faq").permitAll()
                 .antMatchers("/activity_reg").hasRole("2")//be a provider
                 .antMatchers("/activityProvider").hasRole("2")
@@ -97,7 +97,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.requiresChannel()
 				.antMatchers("/index","/register","/register_prov","/about",//"error",
 						"/activity","/activityProvider","google_map","/search","/faq",
-						"/activity_reg","/categories_form","/category_submit","/profile","/profileProvider","/admin").requiresSecure();
+						"/activity_reg","/categories_form","/category_submit","/profile","/profileProvider","/admin","/search2"
+				).requiresSecure();
       //  servletContext.setSessionTrackingModes(EnumSet.of(SessionTrackingMode.COOKIE));
 	}
 

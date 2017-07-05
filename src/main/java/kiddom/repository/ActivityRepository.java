@@ -25,9 +25,12 @@ public interface ActivityRepository extends PagingAndSortingRepository<SingleEve
     Page<SingleEventEntity> findByTownOrAreaAndDate(String Town,String Area,String Date,Pageable pageable);
     Page<SingleEventEntity> findByTownOrAreaAndAvailability(String Town,String Area,Integer max,Pageable pageable);
     Page<SingleEventEntity> findByDateAndAvailability(String Date,Integer max,Pageable pageable);
-    @Query("select p from SingleEventEntity p where p.date=?1")
-    Page<SingleEventEntity> findByDate(String Date,Pageable pageable);
+    Page<SingleEventEntity> findAllByDateContaining(String Date,Pageable pageable);
     Page<SingleEventEntity> findByTownOrArea(String Town, String Area, Pageable pageable);
     Page<SingleEventEntity> findByAvailability(Integer max,Pageable pageable);
+    Page<SingleEventEntity> findByCategoryAndSub1OrSub2OrSub3(String cat,String subcat,String subcat2,String subcat3,Pageable pageable);
+    Page<SingleEventEntity> findByCategory(String cat,Pageable pageable);
+    Page<SingleEventEntity> findBySub1OrSub2OrSub3(String subcat,String subcat2,String subcat3,Pageable pageable);
     Page<SingleEventEntity> findByTownOrAreaAndDateAndAvailability(String Town,String Area,String Date,Integer max,Pageable pageable);
+//    Page<SingleEventEntity> findAllByDateContainingOrAddressContainingOrAreaContainingOrCategoryContainingOrDescriptionContainingOrComment_parentContainingOrNameContainingOrProviderContaining(String text,Pageable pageable);
 }
