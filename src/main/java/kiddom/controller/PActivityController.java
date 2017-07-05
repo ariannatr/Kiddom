@@ -24,8 +24,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 
 @Controller
 public class PActivityController {
@@ -58,6 +60,31 @@ public class PActivityController {
         LocalDate localDate = LocalDate.now();
         System.out.println(dtf.format(localDate));
         String currDate1 = dtf.format(localDate).toString();
+        List<String> photos1 = new ArrayList<>();
+        List<String> photos2 = new ArrayList<>();
+        List<String> photos3 = new ArrayList<>();
+        String[] photos = null;
+        if (event.getPhotos() != null) {
+            photos = event.getPhotos().split(";");
+            int i = 0;
+            for (String photo : photos) {
+                if (i < 2)
+                    photos1.add(photos[i]);
+                else if (i < 5)
+                    photos2.add(photos[i]);
+                else
+                    photos3.add(photos[i]);
+                i+=1;
+                System.out.println("exw pragmata" + photo);
+
+            }
+
+
+            modelAndView.addObject("photos", photos);
+            modelAndView.addObject("photos1", photos1);
+            modelAndView.addObject("photos2", photos2);
+            modelAndView.addObject("photos3", photos3);
+        }
         if (event.getProgram() != null) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             for (ProgramEntity program : event.getProgram()) {
