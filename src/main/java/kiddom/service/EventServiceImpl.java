@@ -50,12 +50,6 @@ public class EventServiceImpl implements EventService {
         return activityRepository.findSingleEventById(1/*singleEventEntity.getId()*/);
     }
 
-   /* @Override
-    public Set<CommentsEntity> findAllCommentsByEvent(Integer eventID_)
-    {
-        return commentRepository.findAllByEventId(eventID_);
-    }*/
-
     @Override
     public void addComment(ParentEntity parentEntity, CommentsEntity commentsEntity, SingleEventEntity singleEventEntity)
     {
@@ -159,7 +153,7 @@ public class EventServiceImpl implements EventService {
        // activityRepository.save(eventEdit);
     }
 
-    @Override
+    /*@Override
     public void cancelSlot(int slotID, SingleEventEntity eventEdit) {
         Set<ProgramEntity> program = eventEdit.getProgram();
         for (ProgramEntity p : program) {
@@ -169,7 +163,7 @@ public class EventServiceImpl implements EventService {
                 break;
             }
         }
-    }
+    }*/
 
     @Transactional
     @Override
@@ -186,11 +180,19 @@ public class EventServiceImpl implements EventService {
     }
 
 
+    /*@Transactional
+    @Override
+    public Page<SingleEventEntity> freetext(String text,Pageable pageable)
+    {
+        return activityRepository.findAllByDateContainingOrAddressContainingOrAreaContainingOrCategoryContainingOrDescriptionContainingOrComment_parentContainingOrNameContainingOrProviderContaining(text,pageable);
+    }*/
+
+
     @Transactional
     @Override
     public Page<SingleEventEntity> findByDate(String Date,Pageable pageable)
     {
-        return activityRepository.findByDate(Date,pageable);
+        return activityRepository.findAllByDateContaining(Date,pageable);
     }
     @Transactional
     @Override
@@ -220,5 +222,21 @@ public class EventServiceImpl implements EventService {
     @Override
     public Page<SingleEventEntity> findByDateAndAvailability(String Date,Integer max,Pageable pageable){
         return activityRepository.findByDateAndAvailability(Date,max,pageable);
+    }
+
+    @Transactional
+    @Override
+    public Page<SingleEventEntity> findByCategoryAndSub1OrSub2OrSub3(String cat,String subcat,String subcat2,String subcat3,Pageable pageable){
+        return activityRepository.findByCategoryAndSub1OrSub2OrSub3(cat,subcat,subcat2,subcat3,pageable);
+    }
+    @Transactional
+    @Override
+    public Page<SingleEventEntity> findByCategory(String cat,Pageable pageable){
+        return activityRepository.findByCategory(cat,pageable);
+    }
+    @Transactional
+    @Override
+    public Page<SingleEventEntity> findBySub1OrSub2OrSub3(String subcat,String subcat2,String subcat3,Pageable pageable){
+        return activityRepository.findBySub1OrSub2OrSub3(subcat,subcat2,subcat3,pageable);
     }
 }

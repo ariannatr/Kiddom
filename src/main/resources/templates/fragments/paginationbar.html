@@ -7,26 +7,26 @@
 <div class="row">
     <div class="form-group col-md-1">
         <select class="form-control pagination" id="pageSizeSelect">
-            <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}" th:selected="${pageSize} == ${selectedPageSize}"></option>
+        <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}" th:selected="${pageSize} == ${selectedPageSize}"></option>
         </select>
     </div>
     <div th:if="${items.totalPages != 1}" class="form-group col-md-11 pagination-centered">
         <ul class="pagination">
             <li th:class="${items.number == 0} ? disabled">
-                <a class="pageLink" th:href="@{${url}(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+                <a class="pageLink" th:href="@{${url}(pageSize=${selectedPageSize}, page=1,date=${date},town=${town},text=${text})}">&laquo;</a>
             </li>
             <li th:class="${items.number == 0} ? disabled">
-                <a class="pageLink" th:href="@{${url}(pageSize=${selectedPageSize}, page=${items.number})}">&larr;</a>
+                <a class="pageLink" th:href="@{${url}(pageSize=${selectedPageSize}, page=${items.number},date=${date},town=${town},text=${text})}">&larr;</a>
             </li>
             <li th:class="${items.number == (page - 1)} ? 'active pointer-disabled'"
                 th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
-                <a class="pageLink" th:href="@{${url}(pageSize=${selectedPageSize}, page=${page})}" th:text="${page}"></a>
+                <a class="pageLink" th:href="@{${url}(pageSize=${selectedPageSize}, page=${page},date=${date},town=${town},text=${text})}" th:text="${page}"></a>
             </li>
             <li th:class="${items.number + 1 == items.totalPages} ? disabled">
-                <a class="pageLink" th:href="@{${url}(pageSize=${selectedPageSize}, page=${items.number + 2})}">&rarr;</a>
+                <a class="pageLink" th:href="@{${url}(pageSize=${selectedPageSize}, page=${items.number + 2},date=${date},town=${town},text=${text})}">&rarr;</a>
             </li>
             <li th:class="${items.number + 1 == items.totalPages} ? disabled">
-                <a class="pageLink" th:href="@{${url}(pageSize=${selectedPageSize}, page=${items.totalPages})}">&raquo;</a>
+                <a class="pageLink" th:href="@{${url}(pageSize=${selectedPageSize}, page=${items.totalPages},date=${date},town=${town},text=${text})}">&raquo;</a>
             </li>
         </ul>
     </div>
