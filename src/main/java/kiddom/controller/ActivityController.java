@@ -24,7 +24,9 @@ import javax.validation.Valid;
 import java.lang.reflect.Array;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -77,6 +79,31 @@ public class ActivityController {
         Set<ProgramEntity> program= eventService.findProgram(eventID_);
         Set<CommentsEntity> comment =event.getComment_parent();
         modelAndView.addObject("event", event);
+        List<String> photos1 = new ArrayList<>();
+        List<String> photos2 = new ArrayList<>();
+        List<String> photos3 = new ArrayList<>();
+        String[] photos = null;
+        if (event.getPhotos() != null) {
+            photos = event.getPhotos().split(";");
+            int i = 0;
+            for (String photo : photos) {
+                if (i < 2)
+                    photos1.add(photos[i]);
+                else if (i < 5)
+                    photos2.add(photos[i]);
+                else
+                    photos3.add(photos[i]);
+                i+=1;
+                System.out.println("exw pragmata" + photo);
+
+            }
+
+
+            modelAndView.addObject("photos", photos);
+            modelAndView.addObject("photos1", photos1);
+            modelAndView.addObject("photos2", photos2);
+            modelAndView.addObject("photos3", photos3);
+        }
         Set<ShowComment> comments=new HashSet<>();
         for (CommentsEntity com:comment){
             ShowComment showComment=new ShowComment(com.getParent_username().getParentUsername(),com.getComment(),com.getRating());
