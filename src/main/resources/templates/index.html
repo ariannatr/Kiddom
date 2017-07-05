@@ -93,7 +93,7 @@ Licence URI: http://www.os-templates.com/template-terms
             <a  th:href="@{/index}"><i class="fa fa-lg fa-home"></i>&nbsp;Αρχική</a>
           </li>
           <li th:if ="${(uname != null) and (type=='2')}" ><a class="drop" >Το προφίλ μου</a>
-            <ul >`
+            <ul >
               <li ><a th:href="@{/profileProvider(tab=elements)}">Στοιχεία Χρήστη</a></li>
               <li ><a th:href="@{/profileProvider(tab=wallet)}">Πορτοφόλι</a></li>
               <li ><a th:href="@{/profileProvider(tab=current_activities)}">Επισκόπηση Δραστηριοτήτων</a></li>

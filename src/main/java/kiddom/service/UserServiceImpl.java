@@ -86,6 +86,7 @@ public class UserServiceImpl implements UserService {
 		//if (request.getParameter("image") != null) {
 		//	parent.setPhoto(request.getParameter("image"));
 		//}
+        System.out.println("exw parei san area " + parent.getArea());
         userRepository.save(user);
         //CookiesEntity cookie = new CookiesEntity();
         System.out.println("Creating parent user...");

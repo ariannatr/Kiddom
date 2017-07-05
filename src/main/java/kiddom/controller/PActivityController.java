@@ -59,8 +59,23 @@ public class PActivityController {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate localDate = LocalDate.now();
-        System.out.println(dtf.format(localDate));
+        System.out.println("-----------" + dtf.format(localDate));
         String currDate1 = dtf.format(localDate).toString();
+        String eventDate1 = event.getDate();
+        System.out.println("-----------event " + eventDate1);
+
+        int cancelationApproved = 0;
+        if (currDate1.substring(6,10).equals(eventDate1.substring(6,10)) && currDate1.substring(3,5).equals(eventDate1.substring(3,5))) {
+            Integer dayNow = Integer.parseInt(currDate1.substring(0,2));
+            Integer dayEvent = Integer.parseInt(eventDate1.substring(0,2));
+            System.out.println("--- NOW " + dayNow + " EVENT " + dayEvent);
+            if ((dayEvent - dayNow) > 1) {
+                cancelationApproved = 1;
+            }
+        }
+
+        modelAndView.addObject("cancelation", cancelationApproved);
+
         List<String> photos1 = new ArrayList<>();
         List<String> photos2 = new ArrayList<>();
         List<String> photos3 = new ArrayList<>();
@@ -88,32 +103,51 @@ public class PActivityController {
             modelAndView.addObject("photos2", photos2);
             modelAndView.addObject("photos3", photos3);
         }
-        if (event.getProgram() != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            for (ProgramEntity program : event.getProgram()) {
-                try {
-                    Date currDate = sdf.parse(currDate1);
-                    Date eventDate = sdf.parse(program.getDate());
-                    if (eventDate.after(currDate)) {
-                    //    currEvent
-                        modelAndView.addObject("eventStatus", 1);
-                    }
-                    else {
-                    //    pastEvent
-                        modelAndView.addObject("eventStatus", 2);
-                    }
-                }
-                catch (ParseException e) {
-                }
-                break;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date currDate = sdf.parse(currDate1);
+            Date eventDate = sdf.parse(event.getDate());
+            if (eventDate.after(currDate)) {
+                //    currEvent
+                modelAndView.addObject("eventStatus", 1);
+            }
+            else {
+                //    pastEvent
+                modelAndView.addObject("eventStatus", 2);
             }
         }
-        else {
-            modelAndView.addObject("eventStatus", 0);
+        catch (ParseException e) {
         }
+
+        //if (event.getProgram() != null) {
+        //    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        //    for (ProgramEntity program : event.getProgram()) {
+        //        try {
+        //            Date currDate = sdf.parse(currDate1);
+        //            Date eventDate = sdf.parse(program.getDate());
+        //            if (eventDate.after(currDate)) {
+                    //    currEvent
+        //                modelAndView.addObject("eventStatus", 1);
+        //            }
+        //            else {
+                    //    pastEvent
+        //                modelAndView.addObject("eventStatus", 2);
+        //            }
+        //        }
+        //        catch (ParseException e) {
+        //        }
+        //        break;
+        //    }
+        //}
+        //else {
+        //    modelAndView.addObject("eventStatus", 0);
+        //}
+
         if (event.getProgram() == null) {
             System.out.println("TA PIAME");
             modelAndView.addObject("hasProgram", 0);
+            modelAndView.addObject("eventStatus", 0);
         }
         else {
             System.out.println("DEN TA PIAME");
@@ -147,7 +181,7 @@ public class PActivityController {
     }
 
     @RequestMapping(value="/event_cancelation/{eventID}", method = RequestMethod.POST)
-    public  ModelAndView event_cancelation(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("single_event") @Valid SingleEventEntity event, @PathVariable("eventID") String eventID) {
+    public  ModelAndView event_cancelation(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("single_event") @Valid SingleEventEntity event, @PathVariable("eventID") String eventID) throws ParseException {
         System.out.println("Provider name: " + provider.getName());
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();

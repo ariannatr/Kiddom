@@ -325,10 +325,10 @@ public class LoginController {
                 for (SingleEventEntity event : providerEvents) {
                     if (event.getProgram() != null) {
                         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                        for (ProgramEntity program : event.getProgram()) {
+                        //for (ProgramEntity program : event.getProgram()) {
                             try {
                                 Date currDate = sdf.parse(currDate1);
-                                Date eventDate = sdf.parse(program.getDate());
+                                Date eventDate = sdf.parse(event.getDate());
                                 String photo = "@{images/demo/event1.jpg}";
                                 if (event.getPhotos() != null) {
                                     String[] photos = event.getPhotos().split(";");
@@ -348,7 +348,7 @@ public class LoginController {
                             }
                             catch (ParseException e) {
                             }
-                        }
+                        //}
                     }
                     else {
                         modelAndView.addObject("eventsStatus", 0);
