@@ -30,19 +30,19 @@ SOS! --> Να κρατηθεί (και να βελτιωθεί) η δομή τη
 
 > HTML: fix activity form - TODO
 > HTML: fix provider profile - DONE
-> HTML: fix tabs for create activity etc - TODO
+> HTML: fix tabs for create activity etc - DONE
 > HTML: fix buypoints - DONE
 
 > SQL: create script to insert all data to db - TODO
 > SQL: connect Elastic to project - TODO
 
-> Login: remember me attribute - TODO
+> Login: remember me attribute - TODO --too much
 > Login: show wrong password message in modal in case of failure - DONE
 > Login: fix the download problem - DONE
 
 > Register (provider and parent): put clear button and cancel button in form - TODO
 > Register : message when input username is already in use - DONE
 
-> Password Change : Confirm user before changing password? - TODO
+> Password Change : Confirm user before changing password? - TODO --too much
 
 > Unit testing!
