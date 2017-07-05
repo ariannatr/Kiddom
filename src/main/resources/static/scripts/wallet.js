@@ -111,6 +111,7 @@ function calculate() {
     var quantity5 = (quantity * 50) + (quantity2 * 100) + (quantity3 * 200) + (quantity4 / 5);
     var points = (quantity * 260) + (quantity2 * 530) + (quantity3 * 1070) + (quantity4);
     document.getElementById("cost").innerText = quantity5 + "€";
+    document.getElementById("totalcost").setAttribute("value", quantity5.toString());
     document.getElementById("points").innerText = points;
     document.getElementById('totalPoints').value = points;
     document.getElementById("points2").innerText =quantity5;

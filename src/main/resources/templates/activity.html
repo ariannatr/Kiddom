@@ -181,9 +181,9 @@
         }
 
 
-        #datetime{
-            display: none;
-        }
+        /*#datetime{*/
+            /*display: none;*/
+        /*}*/
 
 
     /*---------------------Ratings----------------------------------*/
@@ -465,8 +465,8 @@
 
 
         <div class="row">
-            <div id="calendar" class="col-lg-6 col-md-12 col-sm-12 col-xs-12 "></div>
-            <div id="datetime" class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <div id="calendar" class="col-lg-6 col-md-12 col-sm-12 col-xs-12 " style="display: none"></div>
+            <div id="datetime" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div th:if ="${(program!=null)}">
                 <table style="text-align: center">
                     <thead>
@@ -475,6 +475,7 @@
                             <th>Ώρα λήξης</th>
                             <th>Ελεύθερες θέσεις</th>
                             <th>Κόστος-Πόντοι</th>
+                            <th>Θέσεις</th>
                             <th></th>
                         </tr>
 
