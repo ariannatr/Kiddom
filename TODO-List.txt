@@ -40,6 +40,19 @@ SOS! --> Να κρατηθεί (και να βελτιωθεί) η δομή τη
 > Login: show wrong password message in modal in case of failure - DONE
 > Login: fix the download problem - DONE
 
+********Important*****************
+1.Να ολοκληρώσουμε cancelation και διαχείριση πόντων !(καταχωρησεις-επιστροφες)
+2.Εγγραφη δραστηριοτητας (δεν παιζιε γ καποιο λογο) να βγει η λήξη δρατσηριοτητας
+3.Ιδια γραμματοσειρά παντού και pattern
+4.αναζητησεις  ΚΑΙ ΜΕ ΒΑΣΗ ΤΟΠΟΘΕΣΙΑ
+5.πιο ξεκαθαρο buy ποιντς (δεν έχει νόημα το αριθμός πακέτων)
+6.ADMIN
+7.εκδοση απόδειξης
+8.περιορισμούς για κράτηση αν δεν έχουμε λεφτά
+9.σχολιασμός σε όσες έχουμε παρευρεθεί εκτός αν ακολουθούμε άλλη πολιτική
+10.είπε ότι θα μπορούσαμε να έχουμε clone παλιού event για ν μην κάνουμε αυτό με τα slot
+
+
 > Register (provider and parent): put clear button and cancel button in form - TODO
 > Register : message when input username is already in use - DONE
 
