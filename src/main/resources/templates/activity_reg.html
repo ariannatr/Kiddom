@@ -95,7 +95,7 @@ Licence URI: http://www.os-templates.com/template-terms
                     <div class="col-md-4 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-plus"></i></span>
-                            <input name="numOfSlots" placeholder="Αριθμός slots" class="form-control"  type="text">
+                            <input name="numOfSlots" placeholder="Αριθμός slots" class="form-control"  type="number" min="1">
                         </div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@ Licence URI: http://www.os-templates.com/template-terms
                     <div class="col-md-4 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                            <input name="slotDuration" placeholder="Διάρκεια slot (σε λεπτά)" class="form-control"  type="text">
+                            <input name="slotDuration" placeholder="Διάρκεια slot-λεπτά" class="form-control"  type="number" min="10">
                         </div>
                     </div>
                 </div>
@@ -117,7 +117,7 @@ Licence URI: http://www.os-templates.com/template-terms
                     <div class="col-md-4 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                            <input name="startTime" placeholder="Ώρα έναρξης (πχ. 18:00)" class="form-control"  type="text">
+                            <input name="startTime" placeholder="09:00" class="form-control"  type="text">
                         </div>
                     </div>
                 </div>
@@ -128,7 +128,7 @@ Licence URI: http://www.os-templates.com/template-terms
                     <div class="col-md-4 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                            <input name="endTime" placeholder="Ώρα λήξης (πχ. 22:00)" class="form-control"  type="text">
+                            <input name="endTime" placeholder="10:00" class="form-control"  type="text">
                         </div>
                     </div>
                 </div>
@@ -139,7 +139,7 @@ Licence URI: http://www.os-templates.com/template-terms
                     <div class="col-md-4 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
-                            <input name="price" placeholder="Τιμή" class="form-control"  type="text">
+                            <input name="price" placeholder="5 (πόντοι)" min="1" class="form-control"  type="number">
                         </div>
                     </div>
                 </div>
@@ -150,7 +150,7 @@ Licence URI: http://www.os-templates.com/template-terms
                     <div class="col-md-4 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input name="availability" placeholder="Διαθεσιμότητα" class="form-control"  type="text">
+                            <input name="availability" placeholder="Διαθεσιμότητα" class="form-control"  type="number" min="1">
                         </div>
                     </div>
                 </div>
@@ -161,7 +161,7 @@ Licence URI: http://www.os-templates.com/template-terms
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input id="datepicker" name="date" placeholder="Ημερομηνία" class="form-control"  type="text">
+                        <input id="datepicker" name="date" placeholder="Ημερομηνία" class="form-control" pattern="[0-2]+[0-9]+[:]+[0-6]+[0-9]" type="text">
                     </div>
                 </div>
             </div>
