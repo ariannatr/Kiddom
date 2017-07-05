@@ -114,6 +114,9 @@ Licence URI: http://www.os-templates.com/template-terms
           <li th:if ="${(uname != null) and (type=='1')}" >
             <a  th:href="@{/buypoints}">Αγορά Πόντων</a>
           </li>
+          <li th:if ="${(uname != null) and (type=='0')}">
+            <a  th:href="@{/admin}">Σελίδα διαχείρισης</a>
+          </li>
           <li><a th:href="@{/about}">Σχετικά με εμάς</a></li>
           <li><a th:href="@{/faq}">FAQ</a></li>
         </ul>

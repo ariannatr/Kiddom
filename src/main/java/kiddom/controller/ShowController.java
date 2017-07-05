@@ -52,74 +52,23 @@ public class ShowController {
     @Autowired
     private ParentReportsService reportsService;
 
-
-    public class parentReport{
-        private String username;
-        private String date;
-        private Integer points;
-        private Integer cost;
-
-        public parentReport(UserEntity user, ParentReportsEntity report){
-            this.username = user.getUsername();
-            this.date = report.getDate();
-            this.points = report.getBoughtPoints();
-            this.cost = report.getCost();
-        }
-
-        public parentReport(){}
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public String getDate() {
-            return date;
-        }
-
-        public void setDate(String date) {
-            this.date = date;
-        }
-
-        public Integer getPoints() {
-            return points;
-        }
-
-        public void setPoints(Integer points) {
-            this.points = points;
-        }
-
-        public Integer getCost() {
-            return cost;
-        }
-
-        public void setCost(Integer cost) {
-            this.cost = cost;
-        }
-    }
-
-
     @GetMapping("/admin")
    // @RequestMapping(value="/admin", method = RequestMethod.GET)
     public ModelAndView showPersonsPage(@RequestParam("pageSize") Optional<Integer> pageSize,
                                         @RequestParam("page") Optional<Integer> page) {
+
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
-        System.out.println("Authentication name is"+authentication.getName());
         if(!authentication.getName().equals("anonymousUser")) {
             modelAndView.addObject("uname", authentication.getName());
             UserEntity userS = userService.findByUsername(authentication.getName());
+
             modelAndView.addObject("type", String.valueOf(userS.getType()));
         }
-        // Evaluate page size. If requested parameter is null, return initial
-        // page size
+
+        // Evaluate page size. If requested parameter is null, return initial page size
         int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
-        // Evaluate page. If requested parameter is null or less than 0 (to
-        // prevent exception), return initial size. Otherwise, return value of
-        // param. decreased by 1.
+        // Evaluate page. If requested parameter is null or less than 0 (to prevent exception), return initial size. Otherwise, return value of param. decreased by 1.
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 
         Page<ProviderEntity> persons = adminService.findAllPageable(new PageRequest(evalPage, evalPageSize));
@@ -131,26 +80,17 @@ public class ShowController {
             modelAndView.addObject("pager", pager);
         }
 
+         /*Get list of all parents*/
+        List<ParentEntity> parentList = userService.getParents();
 
-        List<UserEntity> users = userService.findUsers();
-        ArrayList<List<parentReport>> reportsPerUser = new ArrayList<List<parentReport>>(users.size());
-
-        for (int i=0; i< users.size(); i++){
-            ParentEntity tempparent = new ParentEntity();
-            tempparent.setUser(users.get(i));
-            ArrayList<ParentReportsEntity> parentreports = reportsService.getReportsByUser(tempparent);
-            ArrayList<parentReport> preports = new ArrayList<>(parentreports.size());
-            for (int j=0; j < preports.size(); j++)
-                preports.add(new parentReport(users.get(i), parentreports.get(j)));
-            reportsPerUser.add(preports);
+        /*Create list of parent reports lists, one for each parent*/
+        ArrayList<List<ParentReportsEntity>> parentReportsList = new ArrayList<>(parentList.size());
+        for (ParentEntity parent : parentList){
+            parentReportsList.add(reportsService.getReportsByUser(parent));
         }
 
-
-        for (int i=0; i< users.size(); i++) {
-            for (int j = 0; j < reportsPerUser.get(i).size(); j++){
-                System.out.println(reportsPerUser.get(i).get(j).getUsername());
-            }
-        }
+        modelAndView.addObject("parentsList", parentList);
+        modelAndView.addObject("parentReportsList", parentReportsList);
 
         modelAndView.addObject("url", "admin");
         modelAndView.setViewName("/admin");

@@ -158,6 +158,11 @@ public class UserServiceImpl implements UserService {
         parentRepository.save(parenton);
     }
 
+    public List<ParentEntity> getParents(){
+        return parentRepository.findAll();
+    }
+
+
  /****** Update Provider's Profile ******/
     @Override
     public void updateUserProvider(ProviderEntity provideron,ProviderEntity provider,UserEntity useron,UserEntity user){

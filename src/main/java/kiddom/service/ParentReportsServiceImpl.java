@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Stathis on 7/5/2017.
@@ -29,7 +30,12 @@ public class ParentReportsServiceImpl implements ParentReportsService {
     }
 
     @Override
-    public ArrayList<ParentReportsEntity> getReportsByUser(ParentEntity user){
-        return  parentReportRepository.findParentReportsEntitiesByParent(user);
+    public List<ParentReportsEntity> getReportsByUser(ParentEntity user){
+        return  parentReportRepository.getParentReportsEntityByParent(user);
+    }
+
+    @Override
+    public List<ParentReportsEntity> getAll(){
+        return parentReportRepository.findAll();
     }
 }

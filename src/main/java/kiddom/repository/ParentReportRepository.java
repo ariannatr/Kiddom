@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Stathis on 7/5/2017.
@@ -16,6 +17,6 @@ import java.util.ArrayList;
  */
 @Repository("parentReportsRepo")
 public interface ParentReportRepository extends JpaRepository<ParentReportsEntity, Integer> {
-    public ArrayList<ParentReportsEntity> findParentReportsEntitiesByParent(ParentEntity user);
+    public List<ParentReportsEntity> getParentReportsEntityByParent(ParentEntity parent);
 
 }

@@ -14,6 +14,7 @@ public interface UserService {
 	public void saveUserProvider(UserEntity user, ProviderEntity provider);
 	public UserEntity findByUsernamePassword(String username, String Password);
 	public List<UserEntity> findUsers();
+	public List<ParentEntity> getParents();
 	public  ParentEntity findParent(ParentPK parentPk);
 	public ProviderEntity findProvider(ProviderPK providerPk);
 	public void updateUserParent(ParentEntity parenton,ParentEntity parent,UserEntity useron,UserEntity user);

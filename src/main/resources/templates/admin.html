@@ -4,6 +4,43 @@
 
     <title>Admin</title>
     <meta th:replace="fragments/head :: head">
+    <style>
+        .panel-table .panel-body{
+            padding:0;
+        }
+
+        .panel-table .panel-body .table-bordered{
+            border-style: none;
+            margin:0;
+        }
+
+        .panel-table .panel-body .table-bordered > thead > tr > th:first-of-type {
+            text-align:center;
+            width: 100px;
+        }
+
+        .panel-table .panel-body .table-bordered > thead > tr > th:last-of-type,
+        .panel-table .panel-body .table-bordered > tbody > tr > td:last-of-type {
+            border-right: 0px;
+        }
+
+        .panel-table .panel-body .table-bordered > thead > tr > th:first-of-type,
+        .panel-table .panel-body .table-bordered > tbody > tr > td:first-of-type {
+            border-left: 0px;
+        }
+
+        .panel-table .panel-body .table-bordered > tbody > tr:first-of-type > td{
+            border-bottom: 0px;
+        }
+
+        .panel-table .panel-body .table-bordered > thead > tr:first-of-type > th{
+            border-top: 0px;
+        }
+
+        .panel-table .panel-footer .pagination{
+            margin:0;
+        }
+    </style>
 </head>
 <body id="top">
 <div th:replace="fragments/navbar :: navbar('admin')"></div>
@@ -12,6 +49,159 @@
     <div class="row">
         <h1>Providers</h1>
     </div>
+    <!--<table class="table">-->
+    <!--&lt;!&ndash;<tr th:each="index : ${#numbers.sequence( 0, #arrays.length(List1)-1)}">&ndash;&gt;-->
+        <!--&lt;!&ndash;<td th:text="${List1[index]}">List1Elm1</td>&ndash;&gt;-->
+        <!--&lt;!&ndash;<td th:text="${List2[index]}">List2Elm1</td>&ndash;&gt;-->
+    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+
+        <!--<tr th:each="list,iterStat : ${List1}">-->
+            <!--<td th:text="${list.username}">ID</td>-->
+            <!--<td th:text="${List2[iterStat.index].username}">Emp Account</td>-->
+        <!--</tr>.-->
+    <!--</table>-->
+
+    <!--<div th:if ="${(parent!=null)}">-->
+        <!--&lt;!&ndash;/*@thymesVar id="parent" type="kiddom.model.ParentEntity"*/&ndash;&gt;-->
+        <!--<span th:text="${parent.pk.user.username}"></span>-->
+    <!--</div>-->
+
+    <!--<div th:each="parent,iterStat : ${parentsList}">-->
+        <!--<span th:text="${parent.pk.user.username}"></span>-->
+        <!--<div th:each="report : ${parentReportsList[iterStat.index]}">-->
+            <!--<p th:text="${report.date}">Some text in the modal.</p>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div th:each="parent,iterStat : ${parentsList}">
+        <!--/*@thymesVar id="parent" type="kiddom.model.ParentEntity"*/-->
+        <div class="modal fade" th:id="${parent.pk.user.username}" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Πληροφορίες Συναλλαγών</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table>
+                            <tr>
+                                <th>Όνομα Χρήστη</th>
+                                <th>Ημερομηνία αγοράς</th>
+                                <th>Πόντοι</th>
+                                <th>Ποσό</th>
+                            </tr>
+                            <!--/*@thymesVar id="report" type="kiddom.model.ParentReportsEntity"*/-->
+                            <tr th:each="report : ${parentReportsList[iterStat.index]}">
+                                <td th:text="${parent.pk.user.username}"></td>
+                                <td th:text="${report.date}"></td>
+                                <td th:text="${report.cost}"></td>
+                                <td th:text="${report.boughtPoints}"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Κλείσιμο</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 600px; overflow: auto; margin:20px 20px 20px 20px;">
+        <table class="table">
+            <tr>
+                <th>Όνομα Χρήστη</th>
+                <th>Όνομα</th>
+                <th>Επώνυμο</th>
+                <th>E-Mail</th>
+                <th>Πόλη</th>
+                <th>Περιοχή</th>
+                <th>Τηλέφωνο</th>
+                <th>Διαθέσιμοι Πόντοι</th>
+                <th>Ξοδεμένοι Πόντοι</th>
+                <th>Συναλλαγές</th>
+            </tr>
+            <tr th:each="parent,iterStat : ${parentsList}">
+                <td th:text="${parent.pk.user.username}">Όνομα Χρήστη</td>
+                <td th:text="${parent.name}">Όνομα</td>
+                <td th:text="${parent.surname}">Επώνυμο</td>
+                <td th:text="${parent.email}">E-Mail</td>
+                <td th:text="${parent.town}">Πόλη</td>
+                <td th:text="${parent.area}">Περιοχή</td>
+                <td th:text="${parent.telephone}">Τηλέφωνο</td>
+                <td th:text="${parent.availPoints}">Διαθέσιμοι Πόντοι</td>
+                <td th:text="${parent.totalPoints}">Ξοδεμένοι Πόντοι</td>
+                <td>
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" th:attr="data-target='#'+${parent.pk.user.username}">Περισσότερα</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+    <div class="col-md-10 col-md-offset-1">
+
+        <div class="panel panel-default panel-table">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col col-xs-6">
+                        <h3 class="panel-title">Panel Heading</h3>
+                    </div>
+                    <div class="col col-xs-6 text-right">
+                        <button type="button" class="btn btn-sm btn-primary btn-create">Create New</button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped table-bordered table-list">
+                    <thead>
+                    <tr>
+                        <th><em class="fa fa-cog"></em></th>
+                        <th class="hidden-xs">ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td align="center">
+                            <a class="btn btn-default"><em class="fa fa-pencil"></em></a>
+                            <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
+                        </td>
+                        <td class="hidden-xs">1</td>
+                        <td>John Doe</td>
+                        <td>johndoe@example.com</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col col-xs-4">Page 1 of 5
+                    </div>
+                    <div class="col col-xs-8">
+                        <ul class="pagination hidden-xs pull-right">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                        <ul class="pagination visible-xs pull-right">
+                            <li><a href="#">«</a></li>
+                            <li><a href="#">»</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div></div></div>
+
+
     <div class="wrapper row3">
         <main class="mainbodyHoc hoc container clear">
             <!-- main body -->
