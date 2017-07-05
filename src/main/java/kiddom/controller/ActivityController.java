@@ -109,6 +109,14 @@ public class ActivityController {
             ShowComment showComment=new ShowComment(com.getParent_username().getParentUsername(),com.getComment(),com.getRating());
             comments.add(showComment);
         }
+        float finalRating = event.getRatings_sum()/event.getRatings_num();
+        if (event.getRatings_num() == 0) {
+            modelAndView.addObject("numOfRatings", 0);
+        }
+        else {
+            modelAndView.addObject("numOfRatings", 1);
+        }
+        modelAndView.addObject("rating", finalRating);
         modelAndView.addObject("comments", comments);
         modelAndView.addObject("program", program);
         modelAndView.setViewName("/activity");
@@ -116,7 +124,7 @@ public class ActivityController {
     }
 
     @RequestMapping(value="/comment/{eventID}", method = RequestMethod.POST)
-    public ModelAndView comment(@ModelAttribute("user") @Valid UserEntity user, @PathVariable String eventID,@RequestParam("comment") String Comment){
+    public ModelAndView comment(@ModelAttribute("user") @Valid UserEntity user, @PathVariable String eventID, @RequestParam("comment") String Comment, @RequestParam("rate") float rate){
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         modelAndView.addObject("uname", authentication.getName());
@@ -128,8 +136,13 @@ public class ActivityController {
         ParentEntity parenton = userService.findParent(new ParentPK(authentication.getName()));
         CommentsEntity commentsEntity=new CommentsEntity();
         commentsEntity.setComment(Comment);
+        float rating = event.getRatings_sum() + rate;
+        event.setRatings_sum(rating);
+        event.setRatings_num(event.getRatings_num() + (float)1);
         eventService.addComment(parenton,commentsEntity,event);
         System.out.println("to prosthesa");
+        float finalRating = event.getRatings_sum()/event.getRatings_num();
+        modelAndView.addObject("rating", finalRating);
         modelAndView.setViewName("redirect:/activity/"+eventID);
         return modelAndView;
     }
