@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/KiddomFFS.iml" filepath="$PROJECT_DIR$/.idea/KiddomFFS.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/KiddomFFS_main.iml" filepath="$PROJECT_DIR$/.idea/modules/KiddomFFS_main.iml" group="KiddomFFS" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/KiddomFFS_test.iml" filepath="$PROJECT_DIR$/.idea/modules/KiddomFFS_test.iml" group="KiddomFFS" />
+      <module fileurl="file://D:\Git\war\.idea\KiddomFFS.iml" filepath="D:\Git\war\.idea\KiddomFFS.iml" />
+      <module fileurl="file://D:\Git\war\.idea\modules\KiddomFFS_main.iml" filepath="D:\Git\war\.idea\modules\KiddomFFS_main.iml" group="KiddomFFS" />
+      <module fileurl="file://D:\Git\war\.idea\modules\KiddomFFS_test.iml" filepath="D:\Git\war\.idea\modules\KiddomFFS_test.iml" group="KiddomFFS" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/war.iml" filepath="$PROJECT_DIR$/.idea/modules/war.iml" />
       <module fileurl="file://E:\KiddomFFS\.idea\modules\war2.iml" filepath="E:\KiddomFFS\.idea\modules\war2.iml" />
       <module fileurl="file://E:\KiddomFFS\.idea\modules\war2_main.iml" filepath="E:\KiddomFFS\.idea\modules\war2_main.iml" group="war2" />
       <module fileurl="file://E:\KiddomFFS\.idea\modules\war2_test.iml" filepath="E:\KiddomFFS\.idea\modules\war2_test.iml" group="war2" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/war_main.iml" filepath="$PROJECT_DIR$/.idea/modules/war_main.iml" group="war" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/war_test.iml" filepath="$PROJECT_DIR$/.idea/modules/war_test.iml" group="war" />
     </modules>
   </component>
 </project>

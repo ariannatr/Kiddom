@@ -80,7 +80,20 @@ public class ParentEntity {
         this.comment_event = comment_event;
     }
 
-    /*--------------Getters - Setters for table fields--------------*/
+
+    /*--------------One to Many relation with parent and reports--------------*/
+    @OneToMany(mappedBy = "parent",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private Set<ParentReportsEntity> parentReports = new HashSet<ParentReportsEntity>(0);
+
+    public Set<ParentReportsEntity> getParentReports() {
+        return parentReports;
+    }
+
+    public void setParentReports(Set<ParentReportsEntity> parentReports) {
+        this.parentReports = parentReports;
+    }
+
+   /*--------------Getters - Setters for table fields--------------*/
 
     @Transient
     public void setUser(UserEntity user){ this.pk.setUser(user);}

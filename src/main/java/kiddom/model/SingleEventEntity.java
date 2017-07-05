@@ -4,8 +4,8 @@ package kiddom.model;
  * Created by eleni on 02-Jun-17.
 **/
 
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.security.access.method.P;
+//import org.springframework.data.elasticsearch.annotations.Document;
+//import org.springframework.security.access.method.P;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -9,10 +9,7 @@ import org.springframework.stereotype.Service;
 import kiddom.model.*;
 
 import java.security.Provider;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 //import com.example.model.Role;
 
 //import com.example.repository.RoleRepository;
@@ -102,6 +99,11 @@ public class UserServiceImpl implements UserService {
 		parentRepository.save(parent);
         //cookieRepository.save(cookie);
         System.out.println("Done.");
+    }
+
+    @Override
+    public List<UserEntity> findUsers(){
+        return userRepository.findAll();
     }
 
     @Override

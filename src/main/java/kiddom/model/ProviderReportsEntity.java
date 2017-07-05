@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Table(name = "provider_reports", schema = "mydb")
 public class ProviderReportsEntity implements Serializable {
     private int reportId;
-    private String report;
+    //private String report;
     private String user_username;
 
     @Id
@@ -24,15 +24,15 @@ public class ProviderReportsEntity implements Serializable {
         this.reportId = reportId;
     }
 
-    @Basic
-    @Column(name = "report")
-    public String getReport() {
-        return report;
-    }
-
-    public void setReport(String report) {
-        this.report = report;
-    }
+//    @Basic
+//    @Column(name = "report")
+//    public String getReport() {
+//        return report;
+//    }
+//
+//    public void setReport(String report) {
+//        this.report = report;
+//    }
 
     @Basic
     @Column(name = "user_username")
@@ -52,7 +52,7 @@ public class ProviderReportsEntity implements Serializable {
         ProviderReportsEntity that = (ProviderReportsEntity) o;
 
         if (reportId != that.reportId) return false;
-        if (report != null ? !report.equals(that.report) : that.report != null) return false;
+        //if (report != null ? !report.equals(that.report) : that.report != null) return false;
 
         return true;
     }
@@ -60,7 +60,7 @@ public class ProviderReportsEntity implements Serializable {
     @Override
     public int hashCode() {
         int result = reportId;
-        result = 31 * result + (report != null ? report.hashCode() : 0);
+        //result = 31 * result + (report != null ? report.hashCode() : 0);
         return result;
     }
 

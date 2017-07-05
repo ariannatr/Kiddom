@@ -40,6 +40,32 @@
                     <div th:replace="fragments/paginationbar :: paginationbar"></div>
                 </div>
             </div>
+
+            <div class="center">
+                <div th:if ="${(reports==null)}">
+                    <div class="alert alert-success" style="text-align: center;"> Δεν υπάρχουν ετοίματα Παρόχων</span>! <br>  </div>
+                </div >
+                <div th:if ="${(reports!=null)}">
+                    <div class="row">
+                        <table class="table">
+                            <tr>
+                                <th>First name</th>
+                                <th>Last name</th>
+                                <th>Email</th>
+                            </tr>
+                            <tr th:each="report : ${reports}">
+                                <td th:text="${report.name}"></td>
+                                <td th:text="${report date}"></td>
+                                <td th:text="${reports.points}"></td>
+                                <td th:text="${report.cost}"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div th:replace="fragments/paginationbar :: paginationbar"></div>
+                </div>
+            </div>
+
+
         </main>
     </div>
 </div>
