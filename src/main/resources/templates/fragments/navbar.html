@@ -99,7 +99,7 @@
                                 <a  th:href="@{/buypoints}">Αγορά Πόντων</a>
                             </li>
                             <li th:if ="${(uname != null) and (type=='0')}">
-                                <a  th:href="@{/admin}">Σελίδα διαχείρισης</a>
+                                <a  th:href="@{/admin(tab=parentsView)}">Σελίδα διαχείρισης</a>
                             </li>
                             <li th:classappend="${module == 'about' ? 'active' : ''}">
                                 <a  th:href="@{/about}">Σχετικά με εμάς</a>

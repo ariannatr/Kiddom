@@ -93,7 +93,7 @@ Licence URI: http://www.os-templates.com/template-terms
             <a  th:href="@{/index}"><i class="fa fa-lg fa-home"></i>&nbsp;Αρχική</a>
           </li>
           <li th:if ="${(uname != null) and (type=='2')}" ><a class="drop" >Το προφίλ μου</a>
-            <ul >
+            <ul>
               <li ><a th:href="@{/profileProvider(tab=elements)}">Στοιχεία Χρήστη</a></li>
               <li ><a th:href="@{/profileProvider(tab=wallet)}">Πορτοφόλι</a></li>
               <li ><a th:href="@{/profileProvider(tab=current_activities)}">Επισκόπηση Δραστηριοτήτων</a></li>
@@ -115,7 +115,7 @@ Licence URI: http://www.os-templates.com/template-terms
             <a  th:href="@{/buypoints}">Αγορά Πόντων</a>
           </li>
           <li th:if ="${(uname != null) and (type=='0')}">
-            <a  th:href="@{/admin}">Σελίδα διαχείρισης</a>
+            <a  th:href="@{/admin(tab=parentsView)}">Σελίδα διαχείρισης</a>
           </li>
           <li><a th:href="@{/about}">Σχετικά με εμάς</a></li>
           <li><a th:href="@{/faq}">FAQ</a></li>

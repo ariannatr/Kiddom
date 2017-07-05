@@ -163,6 +163,9 @@ public class UserServiceImpl implements UserService {
         return parentRepository.findAll();
     }
 
+    public List<ProviderEntity> getProviders(){
+        return (List<ProviderEntity>) providerRepository.findAll();
+    }
 
  /****** Update Provider's Profile ******/
     @Override

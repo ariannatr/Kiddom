@@ -62,36 +62,44 @@ public class ShowController {
         if(!authentication.getName().equals("anonymousUser")) {
             modelAndView.addObject("uname", authentication.getName());
             UserEntity userS = userService.findByUsername(authentication.getName());
-
             modelAndView.addObject("type", String.valueOf(userS.getType()));
         }
 
-        // Evaluate page size. If requested parameter is null, return initial page size
-        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
-        // Evaluate page. If requested parameter is null or less than 0 (to prevent exception), return initial size. Otherwise, return value of param. decreased by 1.
-        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+//        // Evaluate page size. If requested parameter is null, return initial page size
+//        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+//        // Evaluate page. If requested parameter is null or less than 0 (to prevent exception), return initial size. Otherwise, return value of param. decreased by 1.
+//        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+//
+//        Page<ProviderEntity> persons = adminService.findAllPageable(new PageRequest(evalPage, evalPageSize));
+//        if(persons.getTotalPages()!=0) {
+//            Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
+//            modelAndView.addObject("items", persons);
+//            modelAndView.addObject("selectedPageSize", evalPageSize);
+//            modelAndView.addObject("pageSizes", PAGE_SIZES);
+//            modelAndView.addObject("pager", pager);
+//        }
 
-        Page<ProviderEntity> persons = adminService.findAllPageable(new PageRequest(evalPage, evalPageSize));
-        if(persons.getTotalPages()!=0) {
-            Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
-            modelAndView.addObject("items", persons);
-            modelAndView.addObject("selectedPageSize", evalPageSize);
-            modelAndView.addObject("pageSizes", PAGE_SIZES);
-            modelAndView.addObject("pager", pager);
-        }
+        /*----------------------Parent view------------------------------*/
 
          /*Get list of all parents*/
-        List<ParentEntity> parentList = userService.getParents();
+        List<ParentEntity> parentsList = userService.getParents();
 
         /*Create list of parent reports lists, one for each parent*/
-        ArrayList<List<ParentReportsEntity>> parentReportsList = new ArrayList<>(parentList.size());
-        for (ParentEntity parent : parentList){
+        ArrayList<List<ParentReportsEntity>> parentReportsList = new ArrayList<>(parentsList.size());
+        for (ParentEntity parent : parentsList){
             parentReportsList.add(reportsService.getReportsByUser(parent));
         }
 
-        modelAndView.addObject("parentsList", parentList);
+        modelAndView.addObject("parentsList", parentsList);
         modelAndView.addObject("parentReportsList", parentReportsList);
 
+        /*----------------------Provider view------------------------------*/
+
+        List<ProviderEntity> providersList = userService.getProviders();
+
+        modelAndView.addObject("providersList", providersList);
+
+        /*----------------------------------------------------------------*/
         modelAndView.addObject("url", "admin");
         modelAndView.setViewName("/admin");
         return modelAndView;
