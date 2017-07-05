@@ -61,13 +61,13 @@ Licence URI: http://www.os-templates.com/template-terms
 
             <li></li>
             <li>
-              <a class='' id="trial" style="font-size:13px;" data-toggle="modal" href="#login_overlay">Συνδεση</a>
+              <a class='' id="trial" style="font-size:13px;" data-toggle="modal" href="#login_overlay">Σύνδεση</a>
             </li>
             <li>
-              <a style="font-size:13px;" th:href="@{/register}">Εγγραφη</a></li>
+              <a style="font-size:13px;" th:href="@{/register}">Εγγραφή</a></li>
             </li>
             <li>
-              <a style="font-size:13px;" th:href="@{/register_prov}">Πaροχοι</a>
+              <a style="font-size:13px;" th:href="@{/register_prov}">Πάροχοι</a>
             </li>
           </div >
 
@@ -90,9 +90,9 @@ Licence URI: http://www.os-templates.com/template-terms
       <nav id="mainav" class="fl_right">
         <ul class="clear">
           <li class="active">
-            <a  th:href="@{/index}"><i class="fa fa-lg fa-home"></i>&nbsp;Αρχικη</a>
+            <a  th:href="@{/index}"><i class="fa fa-lg fa-home"></i>&nbsp;Αρχική</a>
           </li>
-          <li th:if ="${(uname != null) and (type=='2')}" ><a class="drop" >Το προφιλ μου</a>
+          <li th:if ="${(uname != null) and (type=='2')}" ><a class="drop" >Το προφίλ μου</a>
             <ul >`
               <li ><a th:href="@{/profileProvider(tab=elements)}">Στοιχεία Χρήστη</a></li>
               <li ><a th:href="@{/profileProvider(tab=wallet)}">Πορτοφόλι</a></li>
@@ -100,7 +100,7 @@ Licence URI: http://www.os-templates.com/template-terms
               <li ><a th:href="@{/profileProvider(tab=older_activities)}">&nbsp;Παλαιότερες Δραστηριότητες</a></li>
             </ul>
           </li>
-          <li th:if ="${(uname != null) and (type=='1')}"><a class="drop" >Το προφιλ μου</a>
+          <li th:if ="${(uname != null) and (type=='1')}"><a class="drop" >Το προφίλ μου</a>
             <ul >
               <li><a th:href="@{/profile(tab=elements)}">&nbsp; Στοιχεία Χρήστη</a></li>
               <li><a th:href="@{/profile(tab=wallet)}">&nbsp; Πορτοφόλι</a></li>
@@ -114,7 +114,7 @@ Licence URI: http://www.os-templates.com/template-terms
           <li th:if ="${(uname != null) and (type=='1')}" >
             <a  th:href="@{/buypoints}">Αγορά Πόντων</a>
           </li>
-          <li><a th:href="@{/about}">Σχετικα με εμας</a></li>
+          <li><a th:href="@{/about}">Σχετικά με εμάς</a></li>
           <li><a th:href="@{/faq}">FAQ</a></li>
         </ul>
       </nav>
@@ -137,7 +137,7 @@ Licence URI: http://www.os-templates.com/template-terms
         <li>
           <article>
            <!-- <p>Tincidunt</p>-->
-            <h3 class="heading">Καλως ηρθατε </h3>
+            <h3 class="heading">Καλώς ήρθατε </h3>
             <p>Περάστε χρόνο με το παιδί σας με ένα click !</p>
             <footer>
               <form class="group" method="post" th:action="@{/search}">
@@ -184,25 +184,25 @@ Licence URI: http://www.os-templates.com/template-terms
     </div>
     <!-- ################################################################################################ -->
     <div class="center btmspace-80">
-      <h3 class="heading">H Διασκεδαση ειναι ενα κλικ μακρυα !</h3>
+      <h3 class="heading">H Διασκέδαση είναι ενα κλικ μακρυά !</h3>
       <p class="nospace">Περιηγηθείτε βρίσκοντας διάφορες δραστηριότητες κοντά στην περιοχή σας.</p>
     </div>
     <ul class="nospace group center">
       <li class="one_third first">
         <article><a class="inverse" href="#"><i class="btmspace-30 icon fa fa-info"></i></a>
-          <h6 class="heading font-x1">Δειτε τις Δραστηριοτητες</h6>
+          <h6 class="heading font-x1">Δείτε τις Δραστηριοτητες</h6>
           <p>Θέλεις να χαρίσεις στο παιδί σου μια αξέχαστη εμπειρία παίζοντας; Δες τις διαθέσιμες δραστηριότητες στην περιοχή σου και διάλεξε!</p>
         </article>
       </li>
       <li class="one_third">
         <article><a class="inverse" href="#"><i class="btmspace-30 icon fa fa-shopping-bag "></i></a>
-          <h6 class="heading font-x1">Καντε Κρατηση σε καποια Δραστηριοτητα</h6>
+          <h6 class="heading font-x1">Κάντε κράτηση σε κάποια δραστηριοτητα</h6>
           <p>Όποια ώρα επιθυμείς, από όπου κι αν βρίσκεσαι μπορείς να κάνεις την κράτηση σου online. Γρήγορα και εύκολα από το pc, το tablet ή το κινητό σου. </p>
         </article>
       </li>
       <li class="one_third">
         <article><a class="inverse" href="#"><i class="btmspace-30 icon fa fa-thumbs-up "></i></a>
-          <h6 class="heading font-x1">Δειτε τις αξιολογησεις </h6>
+          <h6 class="heading font-x1">Δειτε τις αξιολογήσεις </h6>
           <p>Ποια είναι η γνώμη των πελατών που επισκεύτηκαν τον χώρο ή πήραν μέρος στην δραστηριότητα; Διάβασε όλες τις αξιολογήσεις και βρες το χώρο ή τη δραστηριότητα που ταιριάζει στην οικογένειά σου.</p>
         </article>
       </li>
