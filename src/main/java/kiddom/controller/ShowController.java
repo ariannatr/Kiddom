@@ -243,3 +243,65 @@ public class ShowController {
         return modelAndView;
     }
 }
+
+
+/////////////THIS BEFORE THE IF ELSES/////////
+
+//    List<SingleEventEntity> events2 = eventService.findALLEvents(/*new PageRequest(evalPage, evalPageSize)*/); THIS LINE NEEDS TO BE IMPLEMENTED
+//        String[] backupphotos= new String[events2.size()];
+//        int counter = 0;
+//        for (SingleEventEntity event : events2) {
+//            String photo = "@{images/demo/event1.jpg}";
+//            if (event.getPhotos() != null) {
+//                String[] photos = event.getPhotos().split(";");
+//                if (photos[0] != null) {
+//
+//                    photo = photos[0];
+//                }
+//                backupphotos[counter] = event.getPhotos();
+//                event.setPhotos(photo);
+//                eventService.updateSingleEvent(null,event,event);
+//                ++counter;
+//            }
+//        }
+////////////////THIS AFTER THE IF ELSES////////
+//        counter = 0;
+//        for (SingleEventEntity event : events2 ) {
+//            event.setPhotos(backupphotos[counter]);
+//            eventService.updateSingleEvent(null,event,event);
+//            ++counter;
+//        }
+
+
+
+//////////THIS IS JUST A LIST OF THE PHOTOS IN THE CORRECT ORDER.USE IT IF YOU FIND THE THYMELEAF WAY
+
+
+// List<String> Photos= new ArrayList<>();
+//
+//        for(SingleEventEntity event : events){
+//            String photo = "@{images/demo/event1.jpg}";
+//            if (event.getPhotos() != null) {
+//                String[] photos = event.getPhotos().split(";");
+//                if (photos[0] != null) {
+////                    System.out.println("exw pragmata" + photos[0]);
+//                    photo = photos[0];
+//                }
+//            }
+//
+//            Photos.add(photo);
+//
+//        }
+
+/////////// THIS IS JUST A HELPER CLASS.WONT BE NEEDED PROBABLY
+
+
+//public class searchevent {
+//        SingleEventEntity event;
+//        String photo;
+//
+//        searchevent(SingleEventEntity event,String photo) {this.event = event;this.photo = photo;}
+//
+//        public SingleEventEntity getEvent() {return event;}
+//        public String getPhoto() {return photo;}
+//    }
