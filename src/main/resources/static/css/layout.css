@@ -24,7 +24,7 @@ File: Layout CSS
 
 /* Top Bar
 --------------------------------------------------------------------------------------------------------------- */
-#topbar{padding:15px 0; border-bottom:1px solid; font-size:.8rem; text-transform:uppercase;}
+#topbar{padding:15px 0; border-bottom:1px solid; font-size:.8rem; /*text-transform:uppercase;*/}
 
 #topbar *{margin:0; padding:0; list-style:none;}
 #topbar ul li{display:inline-block; margin-right:10px; padding-right:15px; border-right:1px solid;}
@@ -37,7 +37,7 @@ File: Layout CSS
 #header{}
 
 #header #logo{margin:30px 0 0 0;}
-#header #logo h1{margin:0; padding:0; font-size:30px; text-transform:uppercase;}
+#header #logo h1{margin:0; padding:0; font-size:30px; /*text-transform:uppercase;*/}
 
 
 /* Page Intro
@@ -67,7 +67,7 @@ File: Layout CSS
 .latest article figure{display:block; position:relative; margin-bottom:30px;}
 .latest article figure img{width:450px; height:250px;}
 .latest article figure figcaption{position:absolute; bottom:10px; left:10px; width:50px;}
-.latest article figure figcaption *{display:block; margin:0; padding:0; text-align:center; text-transform:uppercase; font-style:normal; line-height:1;}
+.latest article figure figcaption *{display:block; margin:0; padding:0; text-align:center; /*text-transform:uppercase;*/ font-style:normal; line-height:1;}
 .latest article figure figcaption time{width:100%;}
 .latest article figure figcaption time strong{padding:12px 0; font-size:18px;}
 .latest article figure figcaption time em{padding:8px 0;}
@@ -175,7 +175,7 @@ nav ul, nav ol{margin:0; padding:0; list-style:none;}
 
 /* Top Navigation */
 #mainav{}
-#mainav ul{text-transform:uppercase;}
+#mainav ul{/*text-transform:uppercase;*/}
 #mainav ul ul{z-index:9999; position:absolute; width:180px; text-transform:none;}
 #mainav ul ul ul{left:180px; top:0;}
 #mainav li{display:inline-block; position:relative; margin:0 15px 0 0; padding:0;}
@@ -198,7 +198,7 @@ nav ul, nav ol{margin:0; padding:0; list-style:none;}
 
 /* Breadcrumb */
 #breadcrumb{padding:15px 0;}
-#breadcrumb ul{margin:0; padding:0; list-style:none; text-transform:uppercase;}
+#breadcrumb ul{margin:0; padding:0; list-style:none; /*ext-transform:uppercase;*/}
 #breadcrumb li{display:inline-block; margin:0 6px 0 0; padding:0;}
 #breadcrumb li a{display:block; position:relative; margin:0; padding:0 12px 0 0; font-size:12px;}
 #breadcrumb li a::after{top:3px; right:0; content:"\f101";}
@@ -383,12 +383,12 @@ table {
 }
 
 .calendar h2 {
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
 }
 
 .calendar thead {
 	font-weight: 600;
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
 }
 
 .calendar tbody {
