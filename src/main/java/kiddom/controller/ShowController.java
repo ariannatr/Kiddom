@@ -101,7 +101,7 @@ public class ShowController {
 
     @PostMapping("/search")
     public ModelAndView showevents(@ModelAttribute("user") @Valid UserEntity user,@RequestParam("pageSize") Optional<Integer> pageSize,
-                                        @RequestParam("page") Optional<Integer> page) {
+                                        @RequestParam("page") Optional<Integer> page,@RequestParam(value="date",required = false) String date,@RequestParam(value="town",required =false) String town,@RequestParam(value="places",required = false) Integer places) {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
@@ -119,13 +119,51 @@ public class ShowController {
         // prevent exception), return initial size. Otherwise, return value of
         // param. decreased by 1.
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+        System.out.println("pira poli "+town+" atoma "+places+" imerominia "+date);
+        Page<SingleEventEntity> events=null;
+        Pager pager=null;
+        if(date.replaceAll(" ","").equals("") && town.replaceAll(" ","").equals("") && places==null) {
+             events= eventService.findAllPageable(new PageRequest(evalPage, evalPageSize));
+             pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+        }
+        else if(!date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").replaceAll(" ","").equals("") && places==null){
+            events= eventService.findByTownOrAreaAndDate(town,town,date,new PageRequest(evalPage, evalPageSize));
+            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+        }
+        else if(!date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").equals("") && places!=null){
+            events= eventService.findByTownOrAreaAndDateAndAvailability(town,town,date,places,new PageRequest(evalPage, evalPageSize));
+            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+        }
+        else if(date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").equals("") && places!=null){
+            events= eventService.findByTownOrAreaAndAvailability(town,town,places,new PageRequest(evalPage, evalPageSize));
+            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+        }
+        else if(!date.replaceAll(" ","").equals("") && town.replaceAll(" ","").equals("") && places!=null){
+            events= eventService.findByDateAndAvailability(date,places,new PageRequest(evalPage, evalPageSize));
+            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+        }
+        else if( date.replaceAll(" ","").equals("") &&  town.replaceAll(" ","").equals("") && places!=null)
+        {
+            events= eventService.findByAvailability(places,new PageRequest(evalPage, evalPageSize));
+            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+        }
+        else if(!date.replaceAll(" ","").equals("") && town.replaceAll(" ","").equals("") && places==null)
+        {
+            System.out.println("psaxnw mono g tn imerominia ");
+            events= eventService.findByDate(date,new PageRequest(evalPage, evalPageSize));
+            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+        }
+        else if(date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").equals("")  && places==null)
+        {
+            events= eventService.findByTownOrArea(town,town,new PageRequest(evalPage, evalPageSize));
+            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+        }
 
-        List<SingleEventEntity> events = eventService.findALLEvents(/*new PageRequest(evalPage, evalPageSize)*/);
-        Page<SingleEventEntity> page_events = new PageImpl<>(events,new PageRequest(evalPage, evalPageSize),events.size());
-        Pager pager = new Pager(page_events.getTotalPages(), page_events.getNumber(), BUTTONS_TO_SHOW);
+        //Page<SingleEventEntity> page_events = new PageImpl<>(events,new PageRequest(evalPage, evalPageSize),events.size());
 
+        System.out.println("vrika "+events.getTotalElements());
         modelAndView.addObject("url", "search");
-        modelAndView.addObject("items", page_events);
+        modelAndView.addObject("items", events);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pageSizes", PAGE_SIZES);
         modelAndView.addObject("pager", pager);
@@ -135,10 +173,9 @@ public class ShowController {
 
     @GetMapping("/search")
     public ModelAndView showevents2(@ModelAttribute("user") @Valid UserEntity user,@RequestParam("pageSize") Optional<Integer> pageSize,
-                                   @RequestParam("page") Optional<Integer> page) {
+                                   @RequestParam("page") Optional<Integer> page,@RequestParam(value="date",required = false) String date,@RequestParam(value="town",required =false) String town,@RequestParam(value="places",required = false) Integer places) {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
-        System.out.println("Authentication name is"+authentication.getName());
         if(!authentication.getName().equals("anonymousUser")) {
             modelAndView.addObject("uname", authentication.getName());
             UserEntity userS = userService.findByUsername(authentication.getName());
@@ -153,16 +190,52 @@ public class ShowController {
         // prevent exception), return initial size. Otherwise, return value of
         // param. decreased by 1.
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+        System.out.println("pira poli "+town+" atoma "+places+" imerominia "+date);
+        Page<SingleEventEntity> events=null;
+        Pager pager=null;
+        if(date.replaceAll(" ","").equals("") && town.replaceAll(" ","").equals("") && places==null) {
+            events= eventService.findAllPageable(new PageRequest(evalPage, evalPageSize));
+            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+        }
+        else if(!date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").replaceAll(" ","").equals("") && places==null){
+            events= eventService.findByTownOrAreaAndDate(town,town,date,new PageRequest(evalPage, evalPageSize));
+            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+        }
+        else if(!date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").equals("") && places!=null){
+            events= eventService.findByTownOrAreaAndDateAndAvailability(town,town,date,places,new PageRequest(evalPage, evalPageSize));
+            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+        }
+        else if(date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").equals("") && places!=null){
+            events= eventService.findByTownOrAreaAndAvailability(town,town,places,new PageRequest(evalPage, evalPageSize));
+            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+        }
+        else if(!date.replaceAll(" ","").equals("") && town.replaceAll(" ","").equals("") && places!=null){
+            events= eventService.findByDateAndAvailability(date,places,new PageRequest(evalPage, evalPageSize));
+            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+        }
+        else if( date.replaceAll(" ","").equals("") &&  town.replaceAll(" ","").equals("") && places!=null)
+        {
+            events= eventService.findByAvailability(places,new PageRequest(evalPage, evalPageSize));
+            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+        }
+        else if(!date.replaceAll(" ","").equals("") && town.replaceAll(" ","").equals("") && places==null)
+        {
+            events= eventService.findByDate(date,new PageRequest(evalPage, evalPageSize));
+            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+        }
+        else if(date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").equals("")  && places==null)
+        {
+            events= eventService.findByTownOrArea(town,town,new PageRequest(evalPage, evalPageSize));
+            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+        }
+        System.out.println("vrika "+events.getTotalElements());
 
-        List<SingleEventEntity> events = eventService.findALLEvents(/*new PageRequest(evalPage, evalPageSize)*/);
-        Page<SingleEventEntity> page_events = new PageImpl<>(events,new PageRequest(evalPage, evalPageSize),events.size());
-        System.out.println("Exw elements "+page_events.getTotalElements()+" kai selides "+page_events.getTotalPages()
-                +" kai number of elements"+page_events.getNumberOfElements());
-        System.out.println("evalPage "+evalPage+" evalPageSize "+evalPageSize);
-        Pager pager = new Pager(page_events.getTotalPages(), page_events.getNumber(), BUTTONS_TO_SHOW);
+        for(SingleEventEntity singleEventEntity :events){
 
+        }
+        //Page<SingleEventEntity> page_events = new PageImpl<>(events,new PageRequest(evalPage, evalPageSize),events.size());
         modelAndView.addObject("url", "search");
-        modelAndView.addObject("items", page_events);
+        modelAndView.addObject("items", events);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pageSizes", PAGE_SIZES);
         modelAndView.addObject("pager", pager);

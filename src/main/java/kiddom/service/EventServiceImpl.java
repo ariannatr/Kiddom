@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.OneToOne;
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -47,11 +48,6 @@ public class EventServiceImpl implements EventService {
     @Override
     public SingleEventEntity findSingleEvent(SingleEventEntity singleEventEntity) {
         return activityRepository.findSingleEventById(1/*singleEventEntity.getId()*/);
-    }
-
-    @Override
-    public List<SingleEventEntity> findALLEvents(){
-        return activityRepository.findAll();
     }
 
    /* @Override
@@ -129,7 +125,7 @@ public class EventServiceImpl implements EventService {
         }
         event.setPhotos(photo);
         event.setProgram(program);
-        activityRepository.saveAndFlush(event);
+        activityRepository.save(event);
         System.out.println("Done.");
     }
 
@@ -153,5 +149,56 @@ public class EventServiceImpl implements EventService {
         }
         eventEdit.setProgram((HashSet<ProgramEntity>) program);
         activityRepository.save(eventEdit);
+    }
+
+    @Transactional
+    @Override
+    public Page<SingleEventEntity> findAllPageable(Pageable pageable)
+    {
+        return activityRepository.findAll(pageable);
+    }
+
+    @Transactional
+    @Override
+    public Page<SingleEventEntity> findByTownOrAreaAndDate(String Town,String Area,String Date,Pageable pageable)
+    {
+        return activityRepository.findByTownOrAreaAndDate(Town,Area,Date,pageable);
+    }
+
+
+    @Transactional
+    @Override
+    public Page<SingleEventEntity> findByDate(String Date,Pageable pageable)
+    {
+        return activityRepository.findByDate(Date,pageable);
+    }
+    @Transactional
+    @Override
+    public Page<SingleEventEntity> findByTownOrArea(String Town, String Area, Pageable pageable)
+    {
+        return activityRepository.findByTownOrArea(Town,Area,pageable);
+    }
+    @Transactional
+    @Override
+    public Page<SingleEventEntity> findByAvailability(Integer max,Pageable pageable){
+        return activityRepository.findByAvailability(max,pageable);
+    }
+
+    @Transactional
+    @Override
+    public Page<SingleEventEntity> findByTownOrAreaAndDateAndAvailability(String Town,String Area,String Date,Integer max,Pageable pageable){
+        return activityRepository.findByTownOrAreaAndDateAndAvailability(Town,Area,Date,max,pageable);
+    }
+
+    @Transactional
+    @Override
+    public Page<SingleEventEntity> findByTownOrAreaAndAvailability(String Town,String Area,Integer max,Pageable pageable){
+        return activityRepository.findByTownOrAreaAndAvailability(Town,Area,max,pageable);
+    }
+
+    @Transactional
+    @Override
+    public Page<SingleEventEntity> findByDateAndAvailability(String Date,Integer max,Pageable pageable){
+        return activityRepository.findByDateAndAvailability(Date,max,pageable);
     }
 }

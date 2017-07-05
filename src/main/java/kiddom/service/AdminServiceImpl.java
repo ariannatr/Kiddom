@@ -26,3 +26,4 @@ public class AdminServiceImpl implements AdminService{
         return providerRepository.findAllByApproved(0,pageable);
     }
 }
+
