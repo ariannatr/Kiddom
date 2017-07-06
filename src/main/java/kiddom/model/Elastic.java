@@ -24,7 +24,9 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.stereotype.Component;
 
+import javax.persistence.Column;
 import javax.persistence.criteria.CriteriaBuilder;
 
 import static org.elasticsearch.common.xcontent.XContentFactory.*;
@@ -205,17 +207,17 @@ public class Elastic {
 
             JSONArray array = obj2.getJSONArray("hits");
             for(int i = 0 ; i < array.length() ; i++){
-                list.add(array.getJSONObject(i).getString("_id"));
+                results.add(Integer.parseInt(array.getJSONObject(i).getString("_id")));
             }
-            System.out.println(list);
+            System.out.println(results);
+            return results;
 
         }
-        catch (Exception e){
+        catch (Exception e) {
             System.out.println("Exception at restClient.performRequest()");
             System.out.println(e.getMessage());
         }
-
-        return results;
+       return results;
     }
 
 
@@ -249,21 +251,20 @@ public class Elastic {
 
             JSONObject obj = new JSONObject(s);
 
-            List<String> list = new ArrayList<String>();
+            //List<String> list = new ArrayList<String>();
             JSONObject obj2=obj.getJSONObject("hits");
-
             JSONArray array = obj2.getJSONArray("hits");
             for(int i = 0 ; i < array.length() ; i++){
-                list.add(array.getJSONObject(i).getString("_id"));
+                results.add(Integer.parseInt(array.getJSONObject(i).getString("_id")));
             }
-            System.out.println(list);
+            System.out.println(results);
 
         }
         catch (Exception e){
             System.out.println("Exception at restClient.performRequest()");
             System.out.println(e.getMessage());
         }
-
+        System.out.println("epistrefw"+results);
         return results;
     }
 
@@ -434,5 +435,167 @@ public class Elastic {
         }
     }
 
+    public List<Integer> searchDate(RestClient restClient, String from, String to){
+
+        List<Integer> results = new ArrayList<Integer>();
+        try {
+
+            HttpEntity entity2=new NStringEntity("{"+
+                    "\"query\": {"+
+                    "\"range\" : {"+
+                    "\"date\" : {"+
+                    "\"gte\": \""+from+"\","+
+                    "\"lte\": \""+to+"\""+
+                    "} } } }", ContentType.APPLICATION_JSON);
+
+            Response response = restClient.performRequest(
+                    "GET",
+                    "/index/_search",
+                    Collections.<String, String>emptyMap(),
+                    entity2);
+
+            String s = getResponse(response);
+
+            JSONObject obj = new JSONObject(s);
+
+            JSONObject obj2=obj.getJSONObject("hits");
+
+            JSONArray array = obj2.getJSONArray("hits");
+            for(int i = 0 ; i < array.length() ; i++){
+                results.add(Integer.parseInt(array.getJSONObject(i).getString("_id")));
+            }
+
+        }
+        catch (Exception e){
+            System.out.println("Exception at restClient.performRequest()");
+            System.out.println(e.getMessage());
+        }
+
+        return results;
+    }
+
+    public List<Integer> searchDateAndQuery(RestClient restClient, String query, String from, String to){
+
+        List<Integer> results = new ArrayList<Integer>();
+        try {
+
+            HttpEntity entity2=new NStringEntity("{"+
+                    "\"query\": {"+
+                    "\"bool\"  : {"+
+                    "\"must\" : ["+
+                    "{"+
+                    "\"multi_match\": {"+
+                    "\"query\": \""+query+"\","+
+                    "\"analyzer\": \"search\","+
+                    "\"fields\": ["+
+                    "\"name\","+
+                    "\"description\","+
+                    "\"category\","+
+                    "\"subCat1\","+
+                    "\"subCat2\","+
+                    "\"subCat3\""+
+                    "]"+
+                    "}"+
+                    "},"+
+                    "{"+
+                    "\"range\" : {"+
+                    "\"date\" : {"+
+                    "\"gte\": \""+from+"\","+
+                    "\"lte\": \""+to+"\""+
+                    "}"+
+                    "} } ] } } }", ContentType.APPLICATION_JSON);
+
+            Response response = restClient.performRequest(
+                    "GET",
+                    "/index/_search",
+                    Collections.<String, String>emptyMap(),
+                    entity2);
+
+            String s = getResponse(response);
+
+            JSONObject obj = new JSONObject(s);
+
+            List<String> list = new ArrayList<String>();
+            JSONObject obj2=obj.getJSONObject("hits");
+
+            JSONArray array = obj2.getJSONArray("hits");
+            for(int i = 0 ; i < array.length() ; i++){
+                list.add(array.getJSONObject(i).getString("_id"));
+            }
+            System.out.println(list);
+
+        }
+        catch (Exception e){
+            System.out.println("Exception at restClient.performRequest()");
+            System.out.println(e.getMessage());
+        }
+
+        return results;
+    }
+
+
+    public List<Integer> searchDateAndRangeAndQuery(RestClient restClient, String query, String from, String to, float lat, float lon, float dist){
+
+        List<Integer> results = new ArrayList<Integer>();
+        try {
+
+            HttpEntity entity2=new NStringEntity("{"+
+                    "\"query\": {"+
+                    "\"bool\"  : {"+
+                    "\"must\" : ["+
+                    "{"+
+                    "\"multi_match\": {"+
+                    "\"query\": \""+query+"\","+
+                    "\"analyzer\": \"search\","+
+                    "\"fields\": ["+
+                    "\"name\","+
+                    "\"description\","+
+                    "\"category\","+
+                    "\"subCat1\","+
+                    "\"subCat2\","+
+                    "\"subCat3\""+
+                    "]"+
+                    "}"+
+                    "},"+
+                    "{"+
+                    "\"range\" : {"+
+                    "\"date\" : {"+
+                    "\"gte\": \""+from+"\","+
+                    "\"lte\": \""+to+"\""+
+                    "}"+
+                    "} } ],"+
+                    "\"filter\" : {"+
+                    "\"geo_distance\" : {"+
+                    "\"distance\" : \""+dist+"km\","+
+                    "\"geolocation\" : {"+
+                    "\"lat\" : "+lat+","+
+                    "\"lon\" :"+lon+
+                    "} } } } } }", ContentType.APPLICATION_JSON);
+
+            Response response = restClient.performRequest(
+                    "GET",
+                    "/index/_search",
+                    Collections.<String, String>emptyMap(),
+                    entity2);
+
+            String s = getResponse(response);
+
+            JSONObject obj = new JSONObject(s);
+
+            JSONObject obj2=obj.getJSONObject("hits");
+
+            JSONArray array = obj2.getJSONArray("hits");
+            for(int i = 0 ; i < array.length() ; i++){
+                results.add(Integer.parseInt(array.getJSONObject(i).getString("_id")));
+            }
+
+        }
+        catch (Exception e){
+            System.out.println("Exception at restClient.performRequest()");
+            System.out.println(e.getMessage());
+        }
+
+        return results;
+    }
 
 }

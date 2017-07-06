@@ -20,8 +20,8 @@ import java.util.List;
  * Created by Arianna on 3/6/2017.
  */
 @Repository("activityRepository")
-public interface ActivityRepository extends PagingAndSortingRepository<SingleEventEntity, Long> {
-    Page<SingleEventEntity> findSingleEventEntitiesById(List<Integer> list ,Pageable pageable);
+public interface ActivityRepository extends PagingAndSortingRepository<SingleEventEntity, Integer> {
+    Page<SingleEventEntity> findByIdIn(List<Integer> list ,Pageable pageable);
     SingleEventEntity findSingleEventById(Integer Id);
     //Page<SingleEventEntity> findAllByApproved(Integer approved, Pageable pageable);
   //  Page<SingleEventEntity> findAllEvents(Pageable pageable);

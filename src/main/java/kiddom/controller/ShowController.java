@@ -66,20 +66,6 @@ public class ShowController {
             modelAndView.addObject("type", String.valueOf(userS.getType()));
         }
 
-//        // Evaluate page size. If requested parameter is null, return initial page size
-//        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
-//        // Evaluate page. If requested parameter is null or less than 0 (to prevent exception), return initial size. Otherwise, return value of param. decreased by 1.
-//        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
-//
-//        Page<ProviderEntity> persons = adminService.findAllPageable(new PageRequest(evalPage, evalPageSize));
-//        if(persons.getTotalPages()!=0) {
-//            Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
-//            modelAndView.addObject("items", persons);
-//            modelAndView.addObject("selectedPageSize", evalPageSize);
-//            modelAndView.addObject("pageSizes", PAGE_SIZES);
-//            modelAndView.addObject("pager", pager);
-//        }
-
         /*----------------------Parent view------------------------------*/
 
          /*Get list of all parents*/
@@ -110,8 +96,7 @@ public class ShowController {
 
 
     @RequestMapping(value="/accept/{provID}", method = RequestMethod.POST)
-    public ModelAndView approve(/*@RequestParam("pageSize") Optional<Integer> pageSize,
-                                        @RequestParam("page") Optional<Integer> page,*/@PathVariable String provID) {
+    public ModelAndView approve(@PathVariable("provID") String provID) {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         modelAndView.addObject("uname", authentication.getName());
@@ -126,7 +111,7 @@ public class ShowController {
 
     @PostMapping("/search")
     public ModelAndView showevents(@ModelAttribute("user") @Valid UserEntity user,@RequestParam("pageSize") Optional<Integer> pageSize,
-                                        @RequestParam("page") Optional<Integer> page,@RequestParam(value="date",required = false) String date,@RequestParam(value="town",required =false) String town,@RequestParam(value="places",required = false) Integer places) {
+                                        @RequestParam("page") Optional<Integer> page,@RequestParam(value="date",required = false) String date,@RequestParam(value="town",required =false) String town) {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
@@ -144,63 +129,50 @@ public class ShowController {
         // prevent exception), return initial size. Otherwise, return value of
         // param. decreased by 1.
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
-        System.out.println("pira poli "+town+" atoma "+places+" imerominia "+date);
         Page<SingleEventEntity> events=null;
         Pager pager=null;
-        if(date.replaceAll(" ","").equals("") && town.replaceAll(" ","").equals("") && places==null) {
+        date=date.replaceAll("/","-");
+        if(date.replaceAll(" ","").equals("") && town.replaceAll(" ","").equals("")) {
              events= eventService.findAllPageable(new PageRequest(evalPage, evalPageSize));
              pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
         }
-        else if(!date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").replaceAll(" ","").equals("") && places==null){
+        else if(!date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").replaceAll(" ","").equals("")){
             events= eventService.findByTownOrAreaAndDate(town,town,date,new PageRequest(evalPage, evalPageSize));
             pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
         }
-        else if(!date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").equals("") && places!=null){
-            events= eventService.findByTownOrAreaAndDateAndAvailability(town,town,date,places,new PageRequest(evalPage, evalPageSize));
-            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
-        }
-        else if(date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").equals("") && places!=null){
-            events= eventService.findByTownOrAreaAndAvailability(town,town,places,new PageRequest(evalPage, evalPageSize));
-            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
-        }
-        else if(!date.replaceAll(" ","").equals("") && town.replaceAll(" ","").equals("") && places!=null){
-            events= eventService.findByDateAndAvailability(date,places,new PageRequest(evalPage, evalPageSize));
-            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
-        }
-        else if( date.replaceAll(" ","").equals("") &&  town.replaceAll(" ","").equals("") && places!=null)
-        {
-            events= eventService.findByAvailability(places,new PageRequest(evalPage, evalPageSize));
-            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
-        }
-        else if(!date.replaceAll(" ","").equals("") && town.replaceAll(" ","").equals("") && places==null)
+        else if(!date.replaceAll(" ","").equals("") && town.replaceAll(" ","").equals(""))
         {
             System.out.println("psaxnw mono g tn imerominia ");
             events= eventService.findByDate(date,new PageRequest(evalPage, evalPageSize));
             pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
         }
-        else if(date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").equals("")  && places==null)
+        else if(date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").equals(""))
         {
             events= eventService.findByTownOrArea(town,town,new PageRequest(evalPage, evalPageSize));
             pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
         }
 
         //Page<SingleEventEntity> page_events = new PageImpl<>(events,new PageRequest(evalPage, evalPageSize),events.size());
-
+        if(events.getTotalElements()!=0){
+            modelAndView.addObject("pager", pager);
+            modelAndView.addObject("items", events);
+        }
         System.out.println("vrika "+events.getTotalElements());
         modelAndView.addObject("url", "search");
-        modelAndView.addObject("items", events);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pageSizes", PAGE_SIZES);
-        modelAndView.addObject("pager", pager);
+        modelAndView.addObject("date",date);
+        modelAndView.addObject("town",town);
         modelAndView.setViewName("/search");
         return modelAndView;
     }
 
     @GetMapping("/search")
     public ModelAndView showevents2(@ModelAttribute("user") @Valid UserEntity user,@RequestParam("pageSize") Optional<Integer> pageSize,
-                                   @RequestParam("page") Optional<Integer> page,@RequestParam(value="date",required = false) String date,@RequestParam(value="town",required =false) String town,@RequestParam(value="places",required = false) Integer places) {
+                                   @RequestParam("page") Optional<Integer> page,@RequestParam(value="date",required = false) String date,@RequestParam(value="town",required =false) String town) {
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
+        System.out.println("Authentication name is"+authentication.getName());
         if(!authentication.getName().equals("anonymousUser")) {
             modelAndView.addObject("uname", authentication.getName());
             UserEntity userS = userService.findByUsername(authentication.getName());
@@ -215,56 +187,80 @@ public class ShowController {
         // prevent exception), return initial size. Otherwise, return value of
         // param. decreased by 1.
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
-        System.out.println("pira poli "+town+" atoma "+places+" imerominia "+date);
         Page<SingleEventEntity> events=null;
         Pager pager=null;
-        if(date.replaceAll(" ","").equals("") && town.replaceAll(" ","").equals("") && places==null) {
-            events= eventService.findAllPageable(new PageRequest(evalPage, evalPageSize));
-            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+        date=date.replaceAll("/","-");
+        if(date.replaceAll(" ","").equals("") && town.replaceAll(" ","").equals("")) {//anonymous ,noone option show all
+            if(authentication.getName().equals("anonymousUser")) {
+                events = eventService.findAllPageable(new PageRequest(evalPage, evalPageSize));
+                pager = new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+            }
+            else
+            {
+                ParentPK parentPk = new ParentPK(authentication.getName());
+                ParentEntity parenton = userService.findParent(parentPk);
+                Elastic elastic = new Elastic();
+                RestClient client = elastic.getRestClient();
+                List<Integer> ints= elastic.searchRange(client,parenton.getLatitude(),parenton.getLongitude(),5);
+                events= eventService.findAllByID(ints,new PageRequest(evalPage, evalPageSize));
+            }
         }
-        else if(!date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").replaceAll(" ","").equals("") && places==null){
-            events= eventService.findByTownOrAreaAndDate(town,town,date,new PageRequest(evalPage, evalPageSize));
-            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
-        }
-        else if(!date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").equals("") && places!=null){
-            events= eventService.findByTownOrAreaAndDateAndAvailability(town,town,date,places,new PageRequest(evalPage, evalPageSize));
-            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
-        }
-        else if(date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").equals("") && places!=null){
-            events= eventService.findByTownOrAreaAndAvailability(town,town,places,new PageRequest(evalPage, evalPageSize));
-            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
-        }
-        else if(!date.replaceAll(" ","").equals("") && town.replaceAll(" ","").equals("") && places!=null){
-            events= eventService.findByDateAndAvailability(date,places,new PageRequest(evalPage, evalPageSize));
-            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
-        }
-        else if( date.replaceAll(" ","").equals("") &&  town.replaceAll(" ","").equals("") && places!=null)
+        else if(!date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").replaceAll(" ","").equals(""))
         {
-            events= eventService.findByAvailability(places,new PageRequest(evalPage, evalPageSize));
-            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+            Elastic elastic = new Elastic();
+            RestClient client = elastic.getRestClient();
+            String postcode=town;
+            try
+            {
+                String pos[] =LatLng.getLatLongPositions(postcode);
+                List<Integer> ints= elastic.searchDateAndRangeAndQuery(client,town,date,date,Float.parseFloat(pos[0]),Float.parseFloat(pos[1]),5);//change that
+                events= eventService.findAllByID(ints,new PageRequest(evalPage, evalPageSize));
+                pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        else if(!date.replaceAll(" ","").equals("") && town.replaceAll(" ","").equals("") && places==null)
+        else if(!date.replaceAll(" ","").equals("") && town.replaceAll(" ","").equals(""))
         {
-            events= eventService.findByDate(date,new PageRequest(evalPage, evalPageSize));
-            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+            if(authentication.getName().equals("anonymousUser")) {//find all the events a specific one date
+                events= eventService.findByDate(date,new PageRequest(evalPage, evalPageSize));
+                pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+            }
+            else//find the ones near me the specific date
+            {
+                ParentPK parentPk = new ParentPK(authentication.getName());
+                ParentEntity parenton = userService.findParent(parentPk);
+                Elastic elastic = new Elastic();
+                RestClient client = elastic.getRestClient();
+                List<Integer> ints= elastic.searchDateAndRangeAndQuery(client,town,date,date,parenton.getLatitude(),parenton.getLongitude(),5);//change that
+                events= eventService.findAllByID(ints,new PageRequest(evalPage, evalPageSize));
+            }
         }
-        else if(date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").equals("")  && places==null)
+        else if(date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").equals(""))
         {
-            events= eventService.findByTownOrArea(town,town,new PageRequest(evalPage, evalPageSize));//px auto paei kai psaxnei s oli ti vasi mas den dimiourgei kapoia eggraffi
-            //wrea opote kai gw edw tha kanw kati san elastic.search() kai tha s t gyrnaei ston typo p einai t events
-            pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+            Elastic elastic = new Elastic();
+            RestClient client = elastic.getRestClient();
+            String postcode=town;
+            try
+            {
+                String pos[] =LatLng.getLatLongPositions(postcode);
+                List<Integer> ints= elastic.searchRange(client,Float.parseFloat(pos[0]),Float.parseFloat(pos[1]),5);
+                events= eventService.findAllByID(ints,new PageRequest(evalPage, evalPageSize));
+                pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        System.out.println("vrika "+events.getTotalElements());
 
-        for(SingleEventEntity singleEventEntity :events){
-
+        if(events.getTotalElements()!=0){
+            modelAndView.addObject("pager", pager);
+            modelAndView.addObject("items", events);
         }
-        //Page<SingleEventEntity> page_events = new PageImpl<>(events,new PageRequest(evalPage, evalPageSize),events.size());
         modelAndView.addObject("url", "search");
-        modelAndView.addObject("items", events);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pageSizes", PAGE_SIZES);
-        modelAndView.addObject("pager", pager);
+        modelAndView.addObject("date",date);
+        modelAndView.addObject("town",town);
         modelAndView.setViewName("/search");
         return modelAndView;
     }
@@ -272,7 +268,6 @@ public class ShowController {
     @PostMapping("/search2")
     public ModelAndView freetext(@ModelAttribute("user") @Valid UserEntity user,@RequestParam("pageSize") Optional<Integer> pageSize,
                                  @RequestParam("page") Optional<Integer> page,@RequestParam(value="text",required = false) String text) {
-        System.out.println("bika edw");
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
@@ -295,20 +290,57 @@ public class ShowController {
         Elastic elastic = new Elastic();
         RestClient client = elastic.getRestClient();
         List<Integer> ints= elastic.search(client, text);
-        events= eventService.findAllByID(ints,new PageRequest(evalPage, evalPageSize));//px auto paei kai psaxnei s oli ti vasi mas den dimiourgei kapoia eggraffi
-        //wrea opote kai gw edw tha kanw kati san elastic.search() kai tha s t gyrnaei ston typo p einai t events
+        System.out.println("tha psaksw gia ta events"+ints);
+        events= eventService.findAllByID(ints,new PageRequest(evalPage, evalPageSize));
         pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
-
-        // System.out.println("vrika "+events.getTotalElements());
+        System.out.println("i iterable "+events);
         modelAndView.addObject("url", "/search2");
         modelAndView.addObject("text", text);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pageSizes", PAGE_SIZES);
-        if(events.getTotalElements()>=0){
+        if(events.getTotalElements()>0){
             modelAndView.addObject("items", events);
             modelAndView.addObject("pager", pager);
         }
-        //
+        modelAndView.setViewName("/search");
+        return modelAndView;
+    }
+
+    @GetMapping("/search2")
+    public ModelAndView freetext2(@ModelAttribute("user") @Valid UserEntity user,@RequestParam("pageSize") Optional<Integer> pageSize,
+                                 @RequestParam("page") Optional<Integer> page,@RequestParam(value="text",required = false) String text) {
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication authentication = authenticationFacade.getAuthentication();
+        System.out.println("Authentication name is"+authentication.getName());
+        if(!authentication.getName().equals("anonymousUser")) {
+            modelAndView.addObject("uname", authentication.getName());
+            UserEntity userS = userService.findByUsername(authentication.getName());
+            modelAndView.addObject("type", String.valueOf(userS.getType()));
+        }
+        modelAndView.addObject("categories",categoryService.getCategoriesNames());
+        modelAndView.addObject("subcategories",categoryService.getALLSubCategoryNamesByCategory());
+        // Evaluate page size. If requested parameter is null, return initial
+        // page size
+        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+        // Evaluate page. If requested parameter is null or less than 0 (to
+        // prevent exception), return initial size. Otherwise, return value of
+        // param. decreased by 1.
+        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+        Page<SingleEventEntity> events=null;
+        Pager pager=null;
+        Elastic elastic = new Elastic();
+        RestClient client = elastic.getRestClient();
+        List<Integer> ints= elastic.search(client, text);
+        events= eventService.findAllByID(ints,new PageRequest(evalPage, evalPageSize));
+        pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+        modelAndView.addObject("url", "/search2");
+        modelAndView.addObject("text", text);
+        modelAndView.addObject("selectedPageSize", evalPageSize);
+        modelAndView.addObject("pageSizes", PAGE_SIZES);
+        if(events.getTotalElements()>0){
+            modelAndView.addObject("items", events);
+            modelAndView.addObject("pager", pager);
+        }
         modelAndView.setViewName("/search");
         return modelAndView;
     }

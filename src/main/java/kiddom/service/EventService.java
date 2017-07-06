@@ -18,11 +18,12 @@ import java.util.Set;
 public interface EventService {
    // public Set<CommentsEntity> findAllCommentsByEvent(Integer eventID_);
     public Page<SingleEventEntity> findAllByID(List<Integer> list,Pageable pageable);
-    public void addComment(ParentEntity parentEntity,CommentsEntity commentsEntity,SingleEventEntity singleEventEntity);
+   public Iterable<SingleEventEntity> findAllByID(Iterable<Integer> list,Pageable pageable);
+   public void addComment(ParentEntity parentEntity,CommentsEntity commentsEntity,SingleEventEntity singleEventEntity);
     public Set<ProgramEntity> findProgram(int eventID);
     public SingleEventEntity findSingleEvent(SingleEventEntity singleEventEntity);
     public SingleEventEntity findSingleEventById(int eventID);
-    //public List<SingleEventEntity> findALLEvents();
+   // public List<SingleEventEntity> findALLEvents(List<Integer> ids);
     //public Page<SingleEventEntity> getAllEvents(Pageable pageable);
     public void saveActivity(UserEntity user, ProviderEntity provider, SingleEventEntity event, HashSet<ProgramEntity> program,String[] photos);
     public void updateSingleEvent(ProviderEntity provider, SingleEventEntity event, SingleEventEntity eventEdit);

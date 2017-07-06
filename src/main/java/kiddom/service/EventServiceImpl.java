@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.OneToOne;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -53,8 +54,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     @Transactional
-    public Page<SingleEventEntity> findAllByID(List<Integer> list,Pageable pageable){
-        return activityRepository.findSingleEventEntitiesById(list,pageable);
+    public Iterable<SingleEventEntity> findAllByID(Iterable<Integer> list,Pageable pageable){
+        return activityRepository.findAll(list);
     }
 
 
@@ -249,4 +250,12 @@ public class EventServiceImpl implements EventService {
     public Page<SingleEventEntity> findBySub1OrSub2OrSub3(String subcat,String subcat2,String subcat3,Pageable pageable){
         return activityRepository.findBySub1OrSub2OrSub3(subcat,subcat2,subcat3,pageable);
     }
+
+    @Transactional
+    @Override
+    public Page<SingleEventEntity> findAllByID(List<Integer> list,Pageable pageable)
+    {
+       return activityRepository.findByIdIn(list,pageable);
+    }
+
 }
