@@ -279,17 +279,17 @@ Licence URI: http://www.os-templates.com/template-terms
                     <!--change is needed here-->
                     <h3 style="text-transform: capitalize; text-align: center;"> Επισκόπηση Δραστηριοτήτων</h3>
                     <div class="table-responsive" >
-                        <div th:if="${(currEvents != null)}">
-                            <article style="background-color:white;" th:each="currEvent : ${currEvents}" class="one_third">
+                        <div th:if="${(currEventsPhotos != null)}">
+                            <article style="background-color:white;" th:each="currEvent, iterStat : ${currEvents}" class="one_third">
                                 <figure>
-                                    <a href="#"><img th:src="${currEvent.photo}" alt=""></a>
+                                    <a href="#"><img th:src="${currEventsPhotos[iterStat.index].photo}" alt=""></a>
                                 </figure>
                                 <div class="txtwrap">
                                     <br/>
-                                    <h4 class="heading" style="font-size: 16px; text-align: center;"><a th:href="@{/activityProvider/{eventID}(eventID=${currEvent.id})}">
+                                    <h4 class="heading" style="text-transform: capitalize; font-size: 16px; text-align: center;"><a th:href="@{/activityProvider/{eventID}(eventID=${currEvent.id})}">
                                         <span th:text="${currEvent.name}"></span></a>
                                     </h4>
-                                    <h6 style="font-size: 14px;  text-align: center;" th:text="${currEvent.description}"></h6>
+                                    <h6 style="text-transform: capitalize; font-size: 14px;  text-align: center;" th:text="${currEvent.description}"></h6>
                                 </div>
                             </article>
                         </div>
@@ -306,10 +306,10 @@ Licence URI: http://www.os-templates.com/template-terms
                     <!--change is needed here-->
                     <h3 style="text-transform: capitalize; text-align: center;"> Παλαιότερες Δραστηριότητες</h3>
                     <div class="table-responsive" >
-                        <div th:if="${(pastEvents != null)}">
-                            <article style="background-color:white;" th:each="pastEvent : ${pastEvents}" class="one_third">
+                        <div th:if="${(pastEventsPhotos != null)}">
+                            <article style="background-color:white;" th:each="pastEvent, iterStat : ${pastEvents}" class="one_third">
                                 <figure>
-                                    <a href="#"><img th:src="${pastEvent.photo}" alt=""></a>
+                                    <a href="#"><img th:src="${pastEventsPhotos[iterStat.index].photo}" alt=""></a>
                                 </figure>
                                 <div class="txtwrap">
                                     <br/>

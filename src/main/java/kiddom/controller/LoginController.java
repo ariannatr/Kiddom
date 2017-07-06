@@ -306,23 +306,20 @@ public class LoginController {
             modelAndView.addObject("gotten_points", useron.getGottenPoints());
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
-            Set events = useron.getEvents();
-            List<SingleEventEntity> providerEvents = new ArrayList<>(events);
+            Set<SingleEventEntity> events = useron.getEvents();
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate localDate = LocalDate.now();
             System.out.println(dtf.format(localDate));
             String currDate1 = dtf.format(localDate).toString();
-            if (providerEvents != null) {
+            if (events != null) {
                 System.out.println("With events");
-                List<profevent> currEvents = new ArrayList<>();
-                List<profevent> pastEvents = new ArrayList<>();
-                //if (currEvents == null) {
-                //    System.out.println("eimai adeio akomaaa");
-                //}
-                //else {
-                //    System.out.println("exw pragmata");
-                //}
-                for (SingleEventEntity event : providerEvents) {
+                List<profevent> currEventsPhotos = new ArrayList<>();
+                List<profevent> pastEventsPhotos = new ArrayList<>();
+
+                List<SingleEventEntity> currEvents = new ArrayList<>();
+                List<SingleEventEntity> pastEvents = new ArrayList<>();
+
+                for (SingleEventEntity event : events) {
                     if (event.getProgram() != null) {
                         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                         //for (ProgramEntity program : event.getProgram()) {
@@ -338,12 +335,16 @@ public class LoginController {
                                     }
                                 }
                                 profevent ev = new profevent(event.getName(),event.getId(),event.getDescription(),photo);
+                                System.out.println("--EVENT " + ev.getId() + " date " + eventDate + " - " + currDate);
                                 if (eventDate.after(currDate)) {
-
-                                    currEvents.add(ev);
+                                    System.out.println("META");
+                                    currEventsPhotos.add(ev);
+                                    currEvents.add(event);
                                 }
                                 else {
-                                    pastEvents.add(ev);
+                                    System.out.println("PRIN");
+                                    pastEventsPhotos.add(ev);
+                                    pastEvents.add(event);
                                 }
                             }
                             catch (ParseException e) {
@@ -360,6 +361,10 @@ public class LoginController {
                     modelAndView.addObject("pastEvents", pastEvents);
                 if(currEvents.size()>0)
                     modelAndView.addObject("currEvents", currEvents);
+                if(pastEventsPhotos.size()>0)
+                    modelAndView.addObject("pastEventsPhotos", pastEventsPhotos);
+                if(currEventsPhotos.size()>0)
+                    modelAndView.addObject("currEventsPhotos", currEventsPhotos);
             }
             else {
                 System.out.println("Without events");

@@ -69,7 +69,7 @@ public class PActivityController {
             Integer dayNow = Integer.parseInt(currDate1.substring(0,2));
             Integer dayEvent = Integer.parseInt(eventDate1.substring(0,2));
             System.out.println("--- NOW " + dayNow + " EVENT " + dayEvent);
-            if ((dayEvent - dayNow) > 1) {
+            if ((dayEvent - dayNow) > 2) {
                 cancelationApproved = 1;
             }
         }
@@ -154,7 +154,20 @@ public class PActivityController {
             modelAndView.addObject("hasProgram", 1);
             modelAndView.addObject("program", event.getProgram());
         }
+
+        if (event.getComment_parent() != null) {
+            modelAndView.addObject("hasComments", 1);
+            modelAndView.addObject("comments", event.getComment_parent());
+        }
+        else {
+            modelAndView.addObject("hasComments", 0);
+        }
+
         modelAndView.addObject("event", event);
+
+        //APPEND OLES TIS KRATISEIS TOY EVENT POY EIMASTE
+        //eventService.
+
         modelAndView.setViewName("activityProvider");
         return modelAndView;
     }
