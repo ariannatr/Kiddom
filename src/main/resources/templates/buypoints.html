@@ -234,6 +234,7 @@
                                 <li style="text-align: center" class="active" ><a>Τελική πληρωμή &ensp;<span id="points2" class="glyphicon glyphicon-euro"> </span></a></li>
                             </ul>
                             <br/>
+
                                 <div class=" col-md-4"  >
                                 <br><br>
                                 <div style="position: relative;padding:5em; background:#f1a700; text-align: center">
@@ -256,6 +257,7 @@
                                     </div-->
                                     <div class="panel-body">
                                         <form class="well form-horizontal" role="form" method="POST" th:action="@{/pointsBuy}" autocomplete="on">
+                                            <input id="totalcost" name="totalcost" type="number" hidden/>
                                             <div id="paypal_payment" style="display: none"> <!---->
                                                 <div class="form-group">
                                                     <label for="username"> Όνομα Χρήστη</label>

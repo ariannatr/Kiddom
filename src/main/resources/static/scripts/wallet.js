@@ -128,6 +128,7 @@ function calculate() {
     document.getElementById("cost").innerText = quantity5 + "€";
     document.getElementById("points").innerText = points;
     document.getElementById('totalPoints').value = points;
+    document.getElementById("totalcost").setAttribute("value", quantity5.toString());
     document.getElementById("points2").innerText =quantity5;
     document.getElementById("points3").innerText =quantity5;
 }

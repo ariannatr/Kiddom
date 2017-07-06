@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -251,11 +252,12 @@ public class LoginController {
     }
 
     @RequestMapping(value="/pointsBuy", method = RequestMethod.POST)
-    public ModelAndView pointsBuy(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("parent") @Valid ParentEntity parent, @RequestParam(value="totalcost") int total, @RequestParam(value="totalPoints") int totalpoints, RedirectAttributes redirectAttributes){
+    public ModelAndView pointsBuy(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("parent") @Valid ParentEntity parent, @RequestParam(name="totalcost") int totalcost, @RequestParam(name="totalPoints") int totalPoints , RedirectAttributes redirectAttributes){
         System.out.println("zitise "+parent.getTotalPoints()+" ");
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         //System.out.println("Authentication name is " + authentication.getName());
+
         if (!authentication.getName().equals("anonymousUser")) {
             /*Setup Parent entity*/
             modelAndView.addObject("uname", authentication.getName());
@@ -263,6 +265,7 @@ public class LoginController {
             /*Find user to update*/
             UserEntity useron = userService.findByUsername(authentication.getName());
             /*Save purchased user points*/
+
             userService.updateUserPoints(parenton,parent,useron,user);
 
             DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
@@ -272,7 +275,7 @@ public class LoginController {
             LocalDate localDate = LocalDate.now();
             String currDate1 = dtf.format(localDate).toString();
 
-           ParentReportsEntity parentReport= new ParentReportsEntity(currDate1, total, totalpoints, parenton);
+           ParentReportsEntity parentReport= new ParentReportsEntity(currDate1, totalcost,  totalPoints, parenton);
            parentReportsService.saveParentReport(parentReport);
 
             System.out.println("Tha agorasw "+parent.getTotalPoints());
