@@ -273,46 +273,51 @@ public class LoginController {
 
     @RequestMapping(value="/pointsBuy", method = RequestMethod.POST)
     public ModelAndView pointsBuy(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("parent") @Valid ParentEntity parent, @RequestParam(name="totalcost") int totalcost, @RequestParam(name="totalPoints") int totalPoints , RedirectAttributes redirectAttributes){
-        System.out.println("zitise "+parent.getTotalPoints()+" ");
+
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
-        //System.out.println("Authentication name is " + authentication.getName());
 
-        if (!authentication.getName().equals("anonymousUser")) {
-            /*Setup Parent entity*/
-            modelAndView.addObject("uname", authentication.getName());
-            ParentEntity parenton = userService.findParent(new ParentPK(authentication.getName()));
-            /*Find user to update*/
-            UserEntity useron = userService.findByUsername(authentication.getName());
-            /*Save purchased user points*/
-
-            userService.updateUserPoints(parenton,parent,useron,user);
-
-            DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
-            Date date = new Date();
-
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            LocalDate localDate = LocalDate.now();
-            String currDate1 = dtf.format(localDate).toString();
-
-           ParentReportsEntity parentReport= new ParentReportsEntity(currDate1, totalcost,  totalPoints, parenton);
-           parentReportsService.saveParentReport(parentReport);
-
-            System.out.println("Tha agorasw "+parent.getTotalPoints());
-            ParentPK parentonPK = new ParentPK(authentication.getName());
-            parenton = userService.findParent(parentonPK);
-            modelAndView.addObject("parent", parentonPK.getUser());
-            modelAndView.addObject("user",parenton);
-            System.out.println("Avail points are " + parenton.getAvailPoints());
-            modelAndView.addObject("total_points",parenton.getTotalPoints());
-            modelAndView.addObject("restr_points",parenton.getRestrPoints());
-            modelAndView.addObject("avail_points",parenton.getAvailPoints());
-            modelAndView.addObject("type",String.valueOf(useron.getType()));
-
+        if (authentication.getName().equals("anonymousUser")) {
+            modelAndView.setViewName("redirect:/error?error_code=anon");
+            return modelAndView;
         }
-        else{
 
-        }
+
+        /*Setup Parent entity*/
+
+        modelAndView.addObject("uname", authentication.getName());
+
+        ParentEntity parenton = userService.findParent(new ParentPK(authentication.getName()));
+        System.out.println("\n\n\n"+ parenton.getPk().getUser().getUsername()+"\n\n\n");
+        /*Find user to update*/
+
+        UserEntity useron = userService.findByUsername(authentication.getName());
+        /*Save purchased user points*/
+
+        userService.updateUserPoints(parenton,parent,useron,user);
+
+        DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+        Date date = new Date();
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate localDate = LocalDate.now();
+        String currDate1 = dtf.format(localDate).toString();
+
+       ParentReportsEntity parentReport= new ParentReportsEntity(currDate1, totalcost,  totalPoints, parenton);
+       parentReportsService.saveParentReport(parentReport);
+
+        System.out.println("Tha agorasw "+parent.getTotalPoints());
+        ParentPK parentonPK = new ParentPK(authentication.getName());
+        parenton = userService.findParent(parentonPK);
+        modelAndView.addObject("parent", parentonPK.getUser());
+        modelAndView.addObject("user",parenton);
+        System.out.println("Avail points are " + parenton.getAvailPoints());
+        modelAndView.addObject("total_points",parenton.getTotalPoints());
+        modelAndView.addObject("restr_points",parenton.getRestrPoints());
+        modelAndView.addObject("avail_points",parenton.getAvailPoints());
+        modelAndView.addObject("type",String.valueOf(useron.getType()));
+
+
 //        modelAndView.setViewName("redirect:/buypoints");
         redirectAttributes.addFlashAttribute("success","true");
 //        modelAndView.setViewName("buypoints");
