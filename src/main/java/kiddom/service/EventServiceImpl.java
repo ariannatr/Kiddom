@@ -119,15 +119,10 @@ public class EventServiceImpl implements EventService {
 
         Elastic elastic = new Elastic();
         RestClient client = elastic.getRestClient();
+        elastic.indexer(client);
         elastic.create(client, event.getId().toString(), event.getName(), event.getDate() ,event.getDescription(), event.getCategory(), event.getSub1(),
                 event.getSub2(), event.getSub3(), event.getTown(), event.getArea(), event.getAddress(), event.getNumber(),
                 Integer.toString(event.getPostcode()),event.getLatitude(),event.getLongitude());
-        try {
-            client.close();
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-        }
     }
 
     @Override

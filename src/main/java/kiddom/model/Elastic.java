@@ -64,8 +64,8 @@ public class Elastic {
                     "\"number\" : \""+number+"\"," +
                     "\"postcode\" : \""+postcode+"\","+
                     "\"geolocation\" : {"+
-                        "\"lat\" : \""+lat+"\","+
-                        "\"lon\" : \""+lon+"\""+
+                        "\"lat\" : \""+Float.toString(lat)+"\","+
+                        "\"lon\" : \""+Float.toString(lon)+"\""+
                             "}"+
                     "}", ContentType.APPLICATION_JSON);
 
