@@ -57,15 +57,15 @@ public class ParentEntity {
     /*--------------Relations with other tables--------------*/
 
     /*--------------Many to Many relation with parent and program, for the reservations-inverse mapping--------------*/
-    @ManyToMany(mappedBy = "parents")
-    private Set<ProgramEntity> event_timeslot = new HashSet<ProgramEntity>(0);
+    @OneToMany(mappedBy = "parent")
+    private Set<ReservationsEntity> reservations = new HashSet<ReservationsEntity>(0);
 
-    public Set<ProgramEntity> getEvents() {
-        return event_timeslot;
+    public Set<ReservationsEntity> getReservations() {
+        return reservations;
     }
 
-    public void setEvents(Set<ProgramEntity> event_timeslot) {
-        this.event_timeslot = event_timeslot;
+    public void setReservations(Set<ReservationsEntity> reservations) {
+        this.reservations = reservations;
     }
 
     /*--------------One to Many relation with parent and event, for the comments-inverse mapping--------------*/

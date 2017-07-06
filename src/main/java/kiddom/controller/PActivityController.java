@@ -6,6 +6,7 @@ package kiddom.controller;
 
 import kiddom.authentication.IAuthenticationFacade;
 import kiddom.model.*;
+import kiddom.service.ActivityService;
 import kiddom.service.EventService;
 import kiddom.service.ProgramService;
 import kiddom.service.UserService;
@@ -42,8 +43,11 @@ public class PActivityController {
     @Autowired
     private ProgramService programService;
 
+    @Autowired
+    private ActivityService activityService;
+
     @RequestMapping(value="/activityProvider/{eventID}", method = RequestMethod.GET)
-    public ModelAndView activity_show(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @PathVariable("eventID") String eventID){
+    public ModelAndView activity_show(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @PathVariable("eventID") int eventID){
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
@@ -53,9 +57,11 @@ public class PActivityController {
             modelAndView.addObject("type", String.valueOf(userS.getType()));
         }
         System.out.println("Phra " + eventID);
-        Integer eventID_ = Integer.parseInt(eventID);
-        System.out.println("Diavasa " + eventID_);
-        SingleEventEntity event = eventService.findSingleEventById(eventID_);
+        //Integer eventID_ = Integer.parseInt(eventID);
+        System.out.println("Diavasa " + eventID);
+        SingleEventEntity event = eventService.findSingleEventById(eventID);
+
+        activityService.getReservationsByEventId(event);
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate localDate = LocalDate.now();
@@ -166,7 +172,8 @@ public class PActivityController {
         modelAndView.addObject("event", event);
 
         //APPEND OLES TIS KRATISEIS TOY EVENT POY EIMASTE
-        //eventService.
+        //
+
 
         modelAndView.setViewName("activityProvider");
         return modelAndView;

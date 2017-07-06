@@ -1,8 +1,10 @@
 package kiddom.controller;
 
 
+import jdk.internal.cmm.SystemResourcePressureImpl;
 import kiddom.authentication.IAuthenticationFacade;
 import kiddom.model.*;
+import kiddom.service.EventService;
 import kiddom.service.UserService;
 import kiddom.service.ParentReportsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +95,9 @@ public class LoginController {
     @Autowired
     private ParentReportsService parentReportsService;
 
+    @Autowired
+    private EventService eventService;
+
     @RequestMapping(value={"/", "/index"}, method = RequestMethod.GET, produces= "application/javascript")
     public ModelAndView index(@ModelAttribute("user") UserEntity user){
         ModelAndView modelAndView = new ModelAndView();
@@ -157,7 +162,12 @@ public class LoginController {
             modelAndView.addObject("avail_points",useron.getAvailPoints());
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
-            Set<ProgramEntity> events =useron.getEvents();
+
+            Set<ProgramEntity> events =null;//=useron.getEvents();
+            Set<ReservationsEntity> reservations = useron.getReservations();
+//            Set<ProgramEntity> events =eventService;
+
+
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate localDate = LocalDate.now();
             String currDate1 = dtf.format(localDate).toString();
