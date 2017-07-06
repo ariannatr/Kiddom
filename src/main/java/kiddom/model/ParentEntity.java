@@ -36,6 +36,10 @@ public class ParentEntity {
     private int restrPoints;
     @Column(name = "total_points")
     private int totalPoints;
+    @Column(name = "longitude")
+    private Float longitude;
+    @Column(name = "latitude")
+    private Float latitude;
 
     /*----------------------Constructor----------------------*/
     //ParentEntity() {
@@ -57,15 +61,15 @@ public class ParentEntity {
     /*--------------Relations with other tables--------------*/
 
     /*--------------Many to Many relation with parent and program, for the reservations-inverse mapping--------------*/
-    @ManyToMany(mappedBy = "parents")
-    private Set<ProgramEntity> event_timeslot = new HashSet<ProgramEntity>(0);
+    @OneToMany(mappedBy = "parent")
+    private Set<ReservationsEntity> reservations = new HashSet<ReservationsEntity>(0);
 
-    public Set<ProgramEntity> getEvents() {
-        return event_timeslot;
+    public Set<ReservationsEntity> getReservations() {
+        return reservations;
     }
 
-    public void setEvents(Set<ProgramEntity> event_timeslot) {
-        this.event_timeslot = event_timeslot;
+    public void setReservations(Set<ReservationsEntity> reservations) {
+        this.reservations = reservations;
     }
 
     /*--------------One to Many relation with parent and event, for the comments-inverse mapping--------------*/
@@ -166,6 +170,22 @@ public class ParentEntity {
     }
     public void setTotalPoints(int totalPoints) {
         this.totalPoints = totalPoints;
+    }
+
+    public Float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
+    }
+
+    public Float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
     }
 
     public ParentPK getPk() { return pk;}

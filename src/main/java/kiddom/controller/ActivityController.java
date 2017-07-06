@@ -65,7 +65,7 @@ public class ActivityController {
     public static final String uploadingdir = System.getProperty("user.dir") + "/uploadingdir/";
 
     @RequestMapping(value="/activity/{eventID}", method = RequestMethod.GET)
-    public ModelAndView activityshow(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @PathVariable String eventID){
+    public ModelAndView activityshow(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @PathVariable int eventID){
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
@@ -74,9 +74,9 @@ public class ActivityController {
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
         }
-        Integer eventID_ = Integer.parseInt(eventID);
-        SingleEventEntity event = eventService.findSingleEventById(eventID_);
-        Set<ProgramEntity> program= eventService.findProgram(eventID_);
+        //Integer eventID_ = Integer.parseInt(eventID);
+        SingleEventEntity event = eventService.findSingleEventById(eventID);
+        Set<ProgramEntity> program= eventService.findProgram(eventID);
         Set<CommentsEntity> comment =event.getComment_parent();
         modelAndView.addObject("event", event);
         List<String> photos1 = new ArrayList<>();
@@ -148,18 +148,41 @@ public class ActivityController {
     }
 
     @RequestMapping(value="/reserve/{programID}", method = RequestMethod.POST)
-    public ModelAndView reservation(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @PathVariable("programID") String programID, @RequestParam("num") int places){
+    public ModelAndView reservation(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @PathVariable("programID") int programID, @RequestParam("num") int slots){
         ModelAndView modelAndView = new ModelAndView();
-        System.out.println("bika st reservation");
+        //System.out.println("bika st reservation");
         Authentication authentication = authenticationFacade.getAuthentication();
-        modelAndView.addObject("uname", authentication.getName());
+       //modelAndView.addObject("uname", authentication.getName());
         UserEntity userS = userService.findByUsername(authentication.getName());
         modelAndView.addObject("type", String.valueOf(userS.getType()));
-        ParentEntity parenton = userService.findParent(new ParentPK(authentication.getName()));
-        ProgramEntity programEntity=programService.getProgramById(Integer.parseInt(programID)); //slot of event
-        ProviderEntity providerEntity=  programEntity.getEvent().getProviders(); //provider of event
-        programService.makeReservation(parenton,places,programEntity,providerEntity);
-        modelAndView.setViewName("redirect:/activity/"+programEntity.getEvent().getId());
+
+
+        System.out.println(provider.getName()+ provider.getUsername());
+        ProgramEntity program = programService.getProgramById(programID);
+        System.out.println("\n\n\nAvailability is " + program.getAvailability() + " for program " + program.getId() + "\nfor " + slots);
+
+        if (program.getAvailability() < slots){
+            modelAndView.addObject("availability", 0);
+            modelAndView.setViewName("redirect:/activity/"+program.getEvent().getId());
+            return modelAndView;
+        }
+
+        SingleEventEntity event = eventService.findSingleEvent(program.getEvent());
+//        System.out.println(user.getUsername());
+        ParentEntity parent = userService.findParent(new ParentPK(userS.getUsername()));
+        ReservationsEntity reservation = new ReservationsEntity();
+        reservation.setParent(parent);
+        reservation.setTimeslot_id(program);
+        reservation.setSlots(slots);
+
+
+
+//        ParentEntity parenton = userService.findParent(new ParentPK(authentication.getName()));
+//        ProgramEntity programEntity=programService.getProgramById(Integer.parseInt(programID)); //slot of event
+//        ProviderEntity providerEntity=  programEntity.getEvent().getProviders(); //provider of event
+
+        programService.makeReservation(reservation, program.getEvent().getProviders(), parent, program);
+        modelAndView.setViewName("redirect:/activity/"+program.getEvent().getId());
         System.out.println("vgainw apo to st reservation");
         return modelAndView;
     }
@@ -214,6 +237,7 @@ public class ActivityController {
                 int slotDuration = event.getSlotDuration();
                 int price = daily_program.getPrice();
                 int availability = daily_program.getAvailability();
+                daily_program.setCapacity(daily_program.getAvailability());
                 int capacity = daily_program.getCapacity();
 
                 String timeValue = startTime;

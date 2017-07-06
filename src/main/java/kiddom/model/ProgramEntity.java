@@ -61,19 +61,17 @@ public class ProgramEntity implements Serializable{
 
 
     /*--------------Many to Many relation with parent->username and event->event_id, for the reservations--------------*/
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "reservations", joinColumns = @JoinColumn(name = "timeslot_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "parent", referencedColumnName = "user_username"))
-    private Set<ParentEntity> parents = new HashSet<ParentEntity>(0);
+    @OneToMany
+    @JoinColumn(name = "timeslot_id")
+    private Set<ReservationsEntity> reservations = new HashSet<ReservationsEntity>(0);
 
-    public Set<ParentEntity> getParents() {
-        return parents;
+    public Set<ReservationsEntity> getReservations() {
+        return reservations;
     }
 
-    public void setParents(Set<ParentEntity> parents) {
-        this.parents = parents;
+    public void setReservations(Set<ReservationsEntity> reservations) {
+        this.reservations = reservations;
     }
-
 
     /*--------------Getters - Setters for table fields--------------*/
 

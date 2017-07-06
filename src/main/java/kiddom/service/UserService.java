@@ -23,5 +23,4 @@ public interface UserService {
 	public void updateUserProvider(ProviderEntity provideron,ProviderEntity provider,UserEntity useron,UserEntity user);
 	public void approveProvider(ProviderEntity providerEntity);
 	public void uploadPhoto(ParentEntity parenton,ParentEntity parent,UserEntity useron,UserEntity user,String photopath);
-
 }

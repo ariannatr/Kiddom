@@ -56,6 +56,10 @@ public class SingleEventEntity implements Serializable {
     private String date;
     @Column(name = "canceled")
     private int canceled;
+    @Column(name = "longitude")
+    private Float longitude;
+    @Column(name = "latitude")
+    private Float latitude;
     @Transient
     private int numOfSlots;
     @Transient
@@ -259,6 +263,22 @@ public class SingleEventEntity implements Serializable {
 
     public int getSlotDuration() { return slotDuration; }
     public void setSlotDuration(int slotDuration) { this.slotDuration = slotDuration; }
+
+    public Float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
+    }
+
+    public Float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
+    }
 
     @Override
     public boolean equals(Object o) {

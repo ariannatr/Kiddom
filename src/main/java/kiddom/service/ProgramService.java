@@ -3,6 +3,7 @@ package kiddom.service;
 import kiddom.model.ParentEntity;
 import kiddom.model.ProgramEntity;
 import kiddom.model.ProviderEntity;
+import kiddom.model.ReservationsEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,5 +12,5 @@ import org.springframework.stereotype.Service;
 @Service("programService")
 public interface ProgramService {
     public ProgramEntity getProgramById(Integer id);
-    public void makeReservation(ParentEntity parentEntity, Integer num, ProgramEntity programEntity, ProviderEntity providerEntity);
+    public void makeReservation(ReservationsEntity reservation, ProviderEntity provider, ParentEntity parent, ProgramEntity program);
 }
