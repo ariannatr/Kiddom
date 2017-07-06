@@ -94,6 +94,16 @@ public class EventServiceImpl implements EventService {
         for (String file : photos) {
             photo = photo + file +";";
         }
+        String postcode=Integer.toString(event.getPostcode());
+        try
+        {
+            String pos[] =LatLng.getLatLongPositions(postcode);
+            System.out.print(pos[0]+ pos[1]);
+            event.setLatitude(Float.parseFloat(pos[0]));
+            event.setLongitude(Float.parseFloat(pos[1]));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         event.setPhotos(photo);
         event.setProgram(program);
         activityRepository.save(event);
