@@ -331,8 +331,10 @@ public class ShowController {
         Elastic elastic = new Elastic();
         RestClient client = elastic.getRestClient();
         List<Integer> ints= elastic.search(client, text);
+        System.out.println("tha psaksw gia ta events"+ints);
         events= eventService.findAllByID(ints,new PageRequest(evalPage, evalPageSize));
         pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+        System.out.println("i iterable "+events);
         modelAndView.addObject("url", "/search2");
         modelAndView.addObject("text", text);
         modelAndView.addObject("selectedPageSize", evalPageSize);

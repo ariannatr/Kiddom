@@ -201,8 +201,6 @@ public class Elastic {
             String s = getResponse(response);
 
             JSONObject obj = new JSONObject(s);
-
-            List<String> list = new ArrayList<String>();
             JSONObject obj2=obj.getJSONObject("hits");
 
             JSONArray array = obj2.getJSONArray("hits");
@@ -210,8 +208,6 @@ public class Elastic {
                 results.add(Integer.parseInt(array.getJSONObject(i).getString("_id")));
             }
             System.out.println(results);
-            return results;
-
         }
         catch (Exception e) {
             System.out.println("Exception at restClient.performRequest()");

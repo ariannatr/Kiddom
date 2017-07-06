@@ -179,23 +179,40 @@ public class   ActivityController {
         //System.out.println("bika st reservation");
         Authentication authentication = authenticationFacade.getAuthentication();
        //modelAndView.addObject("uname", authentication.getName());
-        UserEntity userS = userService.findByUsername(authentication.getName());
-        modelAndView.addObject("type", String.valueOf(userS.getType()));
-
-
-        System.out.println(provider.getName()+ provider.getUsername());
         ProgramEntity program = programService.getProgramById(programID);
-        System.out.println("\n\n\nAvailability is " + program.getAvailability() + " for program " + program.getId() + "\nfor " + slots);
-
-        if (program.getAvailability() < slots){
+        if(authentication.getName().equals("anonymousUser"))
+        {
             modelAndView.addObject("availability", 0);
             modelAndView.setViewName("redirect:/activity/"+program.getEvent().getId());
             return modelAndView;
         }
+        UserEntity userS = userService.findByUsername(authentication.getName());
+        modelAndView.addObject("type", String.valueOf(userS.getType()));
+        if(user.getType()==2)
+        {
+            modelAndView.addObject("availability", 1);
+            modelAndView.setViewName("redirect:/activity/"+program.getEvent().getId());
+            return modelAndView;
+        }
+        System.out.println(provider.getName()+ provider.getUsername());
+        System.out.println("\n\n\nAvailability is " + program.getAvailability() + " for program " + program.getId() + "\nfor " + slots);
 
-        SingleEventEntity event = eventService.findSingleEvent(program.getEvent());
-//        System.out.println(user.getUsername());
+        if (program.getAvailability() < slots){
+            modelAndView.addObject("availability", 2);
+            modelAndView.setViewName("redirect:/activity/"+program.getEvent().getId());
+            return modelAndView;
+        }
         ParentEntity parent = userService.findParent(new ParentPK(userS.getUsername()));
+        SingleEventEntity event = eventService.findSingleEvent(program.getEvent());
+        if(parent.getAvailPoints()<event.getPrice()*slots)
+        {
+            modelAndView.addObject("availability", 3);
+            modelAndView.setViewName("redirect:/activity/"+program.getEvent().getId());
+            return modelAndView;
+        }
+
+//        System.out.println(user.getUsername());
+
         ReservationsEntity reservation = new ReservationsEntity();
         reservation.setParent(parent);
         reservation.setTimeslot_id(program);

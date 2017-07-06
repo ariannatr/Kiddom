@@ -144,10 +144,10 @@ Licence URI: http://www.os-templates.com/template-terms
                     </div>
                 </div>
 
-
+                <div th:replace="fragments/paginationbar :: paginationbar"></div>
                 <div th:if ="${(items==null)}">
                     <span type="">Δεν υπάρχουν δραστηριότητες με αυτά τα κριτήρια..</span>
-                    <div th:replace="fragments/paginationbar :: paginationbar"></div>
+
                 </div>
                 </div>
 

@@ -14,13 +14,22 @@
 
     <div th:replace="/fragments/navbar :: navbar('activity')"></div>
 
-    <div id="activity">
+    <div id="activity" style="max-width: 80%;margin: auto">
         <div class="row">
                 <!--Title-->
                 <div class="col-lg-12">
                     <h1><span th:text="${event.name}"></span></h1>
                 </div>
             <div class="col-lg-12">
+                <div th:if="${(availability==1)}">
+                    <span class="alert alert-warning">Εγγραφείτε πρώτα για να κάνετα κράτηση ..</span>
+                </div>
+                <div th:if="${(availability==2)}">
+                    <span class="alert alert-warning">Εγγραφείτε ως γονέας πρώτα ..</span>
+                </div>
+                <div th:if="${(availability==3)}">
+                    <span class="alert alert-danger">Το υπόλοιπό σας δεν είναι επαρκές ..</span>
+                </div>
                 <div th:if ="${(numOfRatings == 0)}">
                     <h1>Δεν υπάρχουν βαθμολογίες για αυτή την εκδήλωση ακόμα.</h1>
                 </div>

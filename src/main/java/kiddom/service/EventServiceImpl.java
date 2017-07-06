@@ -120,7 +120,6 @@ public class EventServiceImpl implements EventService {
 
         Elastic elastic = new Elastic();
         RestClient client = elastic.getRestClient();
-        elastic.deleteIndex(client);
         elastic.indexer(client);
         elastic.create(client, event.getId().toString(), event.getName(), event.getDate() ,event.getDescription(), event.getCategory(), event.getSub1(),
                 event.getSub2(), event.getSub3(), event.getTown(), event.getArea(), event.getAddress(), event.getNumber(),
@@ -135,6 +134,12 @@ public class EventServiceImpl implements EventService {
         if (!event.getDescription().replaceAll(" ", "").equals("")) {
             eventEdit.setDescription(event.getDescription());
         }
+        Elastic elastic = new Elastic();
+        RestClient client = elastic.getRestClient();
+        elastic.indexer(client);
+        elastic.create(client, eventEdit.getId().toString(), eventEdit.getName(), eventEdit.getDate() ,eventEdit.getDescription(), eventEdit.getCategory(), eventEdit.getSub1(),
+                eventEdit.getSub2(), eventEdit.getSub3(), eventEdit.getTown(), eventEdit.getArea(), eventEdit.getAddress(), eventEdit.getNumber(),
+                Integer.toString(eventEdit.getPostcode()),eventEdit.getLatitude(),eventEdit.getLongitude());
         activityRepository.save(eventEdit);
     }
 
