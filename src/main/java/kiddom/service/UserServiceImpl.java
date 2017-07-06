@@ -97,7 +97,18 @@ public class UserServiceImpl implements UserService {
         //cookie.setCategory("none");
         //cookie.setParentByParentId(parent);
         //cookie.setUsername(user.getUsername());
-		parentRepository.save(parent);
+
+		String postcode=parent.getArea()+","+parent.getTown();
+		try
+        {
+            String pos[] =LatLng.getLatLongPositions(postcode);
+            System.out.print(pos[0]+ pos[1]);
+            parent.setLatitude(Float.parseFloat(pos[0]));
+            parent.setLongitude(Float.parseFloat(pos[1]));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        parentRepository.save(parent);
         //cookieRepository.save(cookie);
         System.out.println("Done.");
     }
