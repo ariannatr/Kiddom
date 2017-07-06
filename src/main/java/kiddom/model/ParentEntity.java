@@ -36,6 +36,10 @@ public class ParentEntity {
     private int restrPoints;
     @Column(name = "total_points")
     private int totalPoints;
+    @Column(name = "longitude")
+    private float longitude;
+    @Column(name = "latitude")
+    private float latitude;
 
     /*----------------------Constructor----------------------*/
     //ParentEntity() {
@@ -166,6 +170,22 @@ public class ParentEntity {
     }
     public void setTotalPoints(int totalPoints) {
         this.totalPoints = totalPoints;
+    }
+
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
     }
 
     public ParentPK getPk() { return pk;}
