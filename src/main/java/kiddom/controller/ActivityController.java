@@ -2,10 +2,7 @@ package kiddom.controller;
 
 import kiddom.authentication.IAuthenticationFacade;
 import kiddom.model.*;
-import kiddom.service.CategoryService;
-import kiddom.service.EventService;
-import kiddom.service.ProgramService;
-import kiddom.service.UserService;
+import kiddom.service.*;
 import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.DateTimeFormatterBuilder;
@@ -59,6 +56,9 @@ public class ActivityController {
     @Autowired
     private ProgramService programService;
 
+    @Autowired
+    private ReservationService reservationService;
+
     @Qualifier("categoryService")
     @Autowired
     private CategoryService categoryService;
@@ -97,8 +97,6 @@ public class ActivityController {
                 System.out.println("exw pragmata" + photo);
 
             }
-
-
             modelAndView.addObject("photos", photos);
             modelAndView.addObject("photos1", photos1);
             modelAndView.addObject("photos2", photos2);
@@ -120,6 +118,23 @@ public class ActivityController {
         modelAndView.addObject("comments", comments);
         modelAndView.addObject("program", program);
         modelAndView.setViewName("/activity");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/reservation_cancel/{slotID}", method = RequestMethod.POST)
+    public ModelAndView reservation_cancelation(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("parent") @Valid ParentEntity parent, @PathVariable("slotID") int slotID) {
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication authentication = authenticationFacade.getAuthentication();
+        modelAndView.addObject("uname", authentication.getName());
+        UserEntity userS = userService.findByUsername(authentication.getName());
+        ParentPK parentPK = new ParentPK(authentication.getName());
+        ParentEntity parentLocal = userService.findParent(parentPK);
+        ReservationsEntity reservation = reservationService.getReservationsEntityById(slotID);
+        SingleEventEntity event = eventService.findSingleEventById(reservation.getTimeslot_id().getId());
+        ProviderEntity provider = userService.findProvider(new ProviderPK(event.getProviders().getPk().getUser().getUsername()));
+        ProgramEntity slot = reservation.getTimeslot_id();
+        programService.cancelReservation(provider, parentLocal, reservation, slot);
+        modelAndView.setViewName("profile");
         return modelAndView;
     }
 

@@ -282,33 +282,43 @@ Licence URI: http://www.os-templates.com/template-terms
 
                     <div class="group results">
                         <!--article class="one_third first"-->
-                        <div th:if ="${(curr!=null)}">
-                            <div th:each="event : ${curr} " class=" borderedbox inspace-5">
+                        <div th:if ="${(currRes!=null)}">
+                            <div th:each="curr, iterStat : ${currRes} " class=" borderedbox inspace-5">
                                 <div class=" borderedbox inspace-5">
                                     <article >
                                         <div class="txtwrap">
-                                            <h4 class="heading"><span th:text="${event.date}"></span></h4>
+                                            <h4 class="heading"><span th:text="${currEvents[iterStat.index].date}"></span></h4>
                                             <ul class="nospace meta">
-                                                <li><i class="fa fa-user"></i> <a href="#"><span th:text="${ event.owner }"></span></a></li>
-                                                <li><i class="fa fa-tag"></i> <a href="#"><span th:text="${event.category}"></span></a></li>
+                                                <li><i class="fa fa-user"></i> <a href="#"><span th:text="${currEvents[iterStat.index].name}"></span></a></li>
+                                                <li><i class="fa fa-tag"></i> <a href="#"><span th:text="${currEvents[iterStat.index].category}"></span></a></li>
                                             </ul>
                                             <table>
                                                 <tr>
                                                     <td>Τιμή:</td>
-                                                <td><span th:text="${event.price}"></span></td>
+                                                <td><span th:text="${currEvents[iterStat.index].price}"></span></td>
                                                </tr>
                                                 <tr>
                                                     <td>Έναρξη:</td>
-                                                    <td><span th:text="${event.startTime}"></span></td>
+                                                    <td><span th:text="${curr.timeslot_id.startTime}"></span></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Λήξη:</td>
-                                                    <td><span th:text="${event.endTime}"></span></td>
+                                                    <td><span th:text="${curr.timeslot_id.endTime}"></span></td>
                                                 </tr>
                                             </table>
-                                            <footer><a th:href="@{/activity/{eventID}(eventID=${event.id})}">Διαβάστε Περισσότερα &raquo;</a></footer>
+
+                                            <form class="form-horizontal" method="POST" th:action="@{/reservation_cancel/{slotID}(slotID=${curr.reservation_id})}" style="alignment: left;">
+                                                <div class="form-group">
+                                                    <div class=" col-sm-offset-2 col-sm-1">
+                                                        <button type="submit" class="btn btn-default" style="alignment: center;">Ακύρωση κράτησης</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+
+                                            <footer><a th:href="@{/activity/{eventID}(eventID=${currEvents[iterStat.index].id})}">Διαβάστε Περισσότερα &raquo;</a></footer>
                                             <div class="col-sm-offset-4">
-                                                <button type="button" class="btn btn-default"  >Ακυρωση</button>
+                                                <button type="button" class="btn btn-default" >Ακύρωση</button>
                                             </div>
                                         </div>
                                      </article>
@@ -316,8 +326,8 @@ Licence URI: http://www.os-templates.com/template-terms
                             </div>
                         </div>
                         </br>
-                        <div th:if="${(curr==null)}">
-                            <p> Δέν έχετε κάνει ακόμα κάποια κρατηση !</p>
+                        <div th:if="${(currRes==null)}">
+                            <p> Δεν έχετε κάνει ακόμα κάποια κρατηση!</p>
                         </div>
                     </div>
 
@@ -340,8 +350,8 @@ Licence URI: http://www.os-templates.com/template-terms
 
                     <div class="group results">
                         <!--article class="one_third first"-->
-                        <div th:if ="${(items!=null)}">
-                            <div th:each="event : ${items} " class=" borderedbox inspace-5">
+                        <div th:if ="${(pastRes!=null)}">
+                            <div th:each="past, iterStat1 : ${pastRes} " class=" borderedbox inspace-5">
                                 <div class=" borderedbox inspace-5">
                                     <article >
                                         <figure><img  src="../images/demo/event1.jpg"   style=" width:200px; height:190px;float: left; margin: 0px 15px 15px 0px;" alt=""></a>
@@ -350,24 +360,19 @@ Licence URI: http://www.os-templates.com/template-terms
                                             </figcaption>
                                         </figure>
                                         <div class="txtwrap">
-                                            <h4 class="heading"><span th:text="${event.name}"></span></h4>
+                                            <h4 class="heading"><span th:text="${pastEvents[iterStat1.index].name}"></span></h4>
                                             <ul class="nospace meta">
-                                                <li><i class="fa fa-user"></i> <a href="#"><span th:text="${ event.owner }"></span></a></li>
-                                                <li><i class="fa fa-tag"></i> <a href="#"><span th:text="${event.category}"></span></a></li>
+                                                <li><i class="fa fa-tag"></i> <a href="#"><span th:text="${pastEvents[iterStat1.index].category}"></span></a></li>
                                             </ul>
-                                            <p><span th:text="${event.description}">Εδω κατοικεί η περιγραφή της δρααστηριοτητας</span></p>
-                                            <footer><a th:href="@{/activity/{eventID}(eventID=${event.id})}">Διαβάστε Περισσότερα &raquo;</a></footer>
-                                            <div class="col-sm-offset-4">
-                                                <button type="button" class="btn btn-default"  >Ακυρωση</button>
-                                            </div>
                                         </div>
+                                        <footer><a th:href="@{/activity/{eventID}(eventID=${currEvents[iterStat.index].id})}">Διαβάστε Περισσότερα &raquo;</a></footer>
                                     </article>
                                 </div>
                             </div>
                         </div>
                         </br>
-                        <div th:if="${(items==null)}">
-                            <p> Δέν έχετε κάνει ακόμα κάποια κρατηση !</p>
+                        <div th:if="${(pastRes==null)}">
+                            <p> Δεν έχετε κάνει ακόμα κάποια κρατηση!</p>
                         </div>
 
                     </div>

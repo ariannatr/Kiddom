@@ -164,41 +164,67 @@ public class LoginController {
             UserEntity userS = userService.findByUsername(authentication.getName());
             modelAndView.addObject("type", String.valueOf(userS.getType()));
 
-            Set<ProgramEntity> events =null;//=useron.getEvents();
             Set<ReservationsEntity> reservations = useron.getReservations();
-//            Set<ProgramEntity> events =eventService;
-
 
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate localDate = LocalDate.now();
             String currDate1 = dtf.format(localDate).toString();
-            if(events!=null)
-            {
-                List<Show> currEvents = new ArrayList<>();
+            if (reservations != null) {
+                //List<Show> currEvents = new ArrayList<>();
+                //for (ProgramEntity event : events)
+                //{
+                //    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                //    try {
+                //        Date currDate = sdf.parse(currDate1);
+                //        Date eventDate = sdf.parse(event.getDate());
+                //        if (eventDate.after(currDate)) {
+                //            Show show = new Show(event.getDate(),event.getStartTime(),event.getEndTime(),
+                //                    event.getEvent().getName(),event.getEvent().getPrice(),event.getEvent().getId(),event.getEvent().getCategory());
+                //            currEvents.add(show);
+                //        }
+                //        else {
+                //            SingleEventEntity singleEventEntity=event.getEvent();
+                //            pastEvents.add(singleEventEntity);
+                //        }
+                //    }
+                //    catch (ParseException e) {
+                //    }
+                //}
+
+                List<ReservationsEntity> currReservations = new ArrayList<>();
+                List<SingleEventEntity> currEvents = new ArrayList<>();
+                List<ReservationsEntity> pastReservations = new ArrayList<>();
                 List<SingleEventEntity> pastEvents = new ArrayList<>();
-                for (ProgramEntity event : events)
-                {
+
+                for (ReservationsEntity res : reservations) {
+                    ProgramEntity slot = res.getTimeslot_id();
                     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                     try {
+                        SingleEventEntity event = slot.getEvent();
                         Date currDate = sdf.parse(currDate1);
-                        Date eventDate = sdf.parse(event.getDate());
-                        if (eventDate.after(currDate)) {
-                            Show show = new Show(event.getDate(),event.getStartTime(),event.getEndTime(),
-                                    event.getEvent().getName(),event.getEvent().getPrice(),event.getEvent().getId(),event.getEvent().getCategory());
-                            currEvents.add(show);
+                        Date reservationDate = sdf.parse(slot.getDate());
+                        if (reservationDate.after(currDate)) {
+                            currEvents.add(event);
+                            currReservations.add(res);
                         }
                         else {
-                            SingleEventEntity singleEventEntity=event.getEvent();
-                            pastEvents.add(singleEventEntity);
+                            pastEvents.add(event);
+                            pastReservations.add(res);
                         }
                     }
                     catch (ParseException e) {
+
                     }
                 }
-                if(pastEvents.size()>0)
-                    modelAndView.addObject("items" , pastEvents);
-                if(currEvents.size()>0)
-                     modelAndView.addObject("curr", currEvents);
+
+                if (pastReservations.size() > 0)
+                    modelAndView.addObject("pastRes" , pastReservations);
+                if (currReservations.size() > 0)
+                     modelAndView.addObject("currRes", currReservations);
+                if (pastEvents.size() > 0)
+                    modelAndView.addObject("pastEvents" , pastEvents);
+                if (currEvents.size() > 0)
+                    modelAndView.addObject("currEvents", currEvents);
             }
         }
 

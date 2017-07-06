@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -37,6 +38,25 @@ public class ProgramServiceImpl implements ProgramService {
     public ProgramEntity getProgramById(Integer id)
     {
         return programRepository.findById(id);
+    }
+
+    @Override
+    public void cancelReservation(ProviderEntity provider, ParentEntity parent, ReservationsEntity reservation, ProgramEntity program) {
+        int moneyFromProv = program.getPrice();
+        provider.setOwedPoints(provider.getOwedPoints() - moneyFromProv);
+        providerRepository.save(provider);
+        parent.setAvailPoints(parent.getAvailPoints() + moneyFromProv);
+        Set<ReservationsEntity> res = parent.getReservations();
+        for (ReservationsEntity r : res) {
+            if (r.getReservation_id() == reservation.getReservation_id()) {
+                res.remove(r);
+            }
+        }
+        parent.setReservations(res);
+        parentRepository.saveAndFlush(parent);
+        int slots = reservation.getSlots();
+        program.setAvailability(program.getAvailability() + slots);
+        programRepository.save(program);
     }
 
     @Override

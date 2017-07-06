@@ -13,4 +13,5 @@ import org.springframework.stereotype.Service;
 public interface ProgramService {
     public ProgramEntity getProgramById(Integer id);
     public void makeReservation(ReservationsEntity reservation, ProviderEntity provider, ParentEntity parent, ProgramEntity program);
+    public void cancelReservation(ProviderEntity provider, ParentEntity parent, ReservationsEntity reservation, ProgramEntity program);
 }
