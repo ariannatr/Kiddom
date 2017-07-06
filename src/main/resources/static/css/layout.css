@@ -8,7 +8,7 @@ Licence URI: http://www.os-templates.com/template-terms
 File: Layout CSS
 */
 
-@import url("fontawesome-4.6.3.min.css");
+@import url("font-awesome.min.css");
 @import url("custom.flexslider.css");
 @import url("framework.css");
 
@@ -171,7 +171,7 @@ nav ul, nav ol{margin:0; padding:0; list-style:none;}
 
 #mainav, #breadcrumb, .sidebar nav{line-height:normal;}
 #mainav .drop::after, #mainav li li .drop::after, #breadcrumb li a::after, .sidebar nav a::after{position:absolute;
-	font-family: "FontAwesome", serif; font-size:10px; line-height:10px;}
+	font-family: Verdana, Geneva, sans-serif; font-size:10px; line-height:10px;}
 
 /* Top Navigation */
 #mainav{}
@@ -185,7 +185,7 @@ nav ul, nav ol{margin:0; padding:0; list-style:none;}
 #mainav li li a{border:solid; border-width:0 0 1px 0;}
 #mainav .drop{padding-left:15px;}
 #mainav li li a, #mainav li li .drop{display:block; margin:0; padding:10px 15px;}
-#mainav .drop::after, #mainav li li .drop::after{content:"\f0d7";}
+/*#mainav .drop::after, #mainav li li .drop::after{content:"\f0d7";}*/
 #mainav .drop::after{top:35px; left:5px;}
 #mainav li li .drop::after{top:15px; left:5px;}
 #mainav ul ul{visibility:hidden; opacity:0;}
@@ -201,7 +201,7 @@ nav ul, nav ol{margin:0; padding:0; list-style:none;}
 #breadcrumb ul{margin:0; padding:0; list-style:none; /*ext-transform:uppercase;*/}
 #breadcrumb li{display:inline-block; margin:0 6px 0 0; padding:0;}
 #breadcrumb li a{display:block; position:relative; margin:0; padding:0 12px 0 0; font-size:12px;}
-#breadcrumb li a::after{top:3px; right:0; content:"\f101";}
+#breadcrumb li a::after{top:3px; right:0; content:">";}
 #breadcrumb li:last-child a{margin:0; padding:0;}
 #breadcrumb li:last-child a::after{display:none;}
 

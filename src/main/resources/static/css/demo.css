@@ -1,5 +1,5 @@
 @font-face {
-    font-family: 'BebasNeueRegular';
+    /*font-family: 'BebasNeueRegular';*/
     /*src: url('../fonts/BebasNeue-webfont.eot');
     src: url('../fonts/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
          url('../fonts/BebasNeue-webfont.woff') format('woff'),
@@ -50,7 +50,7 @@ footer, header, hgroup, menu, nav, section {
 }
 /* General Demo Style */
 body{
-	font-family: Cambria, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+	font-family: Verdana, Geneva, sans-serif!important;
 	background: #fff url('../images/bg.jpg') repeat top left;
 	font-weight: 400;
 	font-size: 15px;
@@ -79,7 +79,7 @@ a{
     text-align: center;
 }
 .container > header h1{
-	font-family: 'BebasNeueRegular', 'Arial Narrow', Verdana, Geneva, sans-serif;
+	font-family:  Verdana, Geneva, sans-serif;
 	font-size: 35px;
 	line-height: 35px;
 	position: relative;
