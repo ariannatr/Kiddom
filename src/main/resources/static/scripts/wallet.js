@@ -49,6 +49,9 @@ window.onclick = function(event) {
 }
 
 
+
+
+
 function hidediv(id){$('#'+id).css('display','none');}
 function showdiv(id){$('#'+id).css('display','block');}
 
@@ -100,18 +103,29 @@ function pr() {
 
 function calculate() {
     var cost = 10;
-    var quantity = parseInt(document.getElementById("quantity").value);
-    var quantity2 = parseInt(document.getElementById("quantity2").value);
-    var quantity3 = parseInt(document.getElementById("quantity3").value);
+    var package1 = document.getElementById("quantity");
+    var package2 = document.getElementById("quantity2");
+    var package3 = document.getElementById("quantity3");
     var quantity4 = parseInt(document.getElementById("quantity4").value);
     if (quantity4 < 0) {
         alert("Πληκτρολογειστε μια τιμη μεγαλύτερη ή ιση με το 0");
         return;
     }
+    var quantity = 0;
+    var quantity2 = 0;
+    var quantity3 = 0;
+    if (package1.checked) {
+        quantity = 1
+    }
+    if (package2.checked) {
+        quantity2 = 1
+    }
+    if (package3.checked) {
+        quantity3 = 1
+    }
     var quantity5 = (quantity * 50) + (quantity2 * 100) + (quantity3 * 200) + (quantity4 / 5);
     var points = (quantity * 260) + (quantity2 * 530) + (quantity3 * 1070) + (quantity4);
     document.getElementById("cost").innerText = quantity5 + "€";
-    document.getElementById("totalcost").setAttribute("value", quantity5.toString());
     document.getElementById("points").innerText = points;
     document.getElementById('totalPoints').value = points;
     document.getElementById("points2").innerText =quantity5;
@@ -128,3 +142,4 @@ function reset() {
     document.getElementById("quantity4").value = 0;
     calculate();
 }
+

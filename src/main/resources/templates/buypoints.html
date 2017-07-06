@@ -101,11 +101,16 @@
             color: black;
         }
 
-        .form-group input{
-            margin:auto
-        }
-        .form-group{
-            text-align: center;
+        /*.form-group input{*/
+            /*margin:auto*/
+        /*}*/
+        /*.form-group{*/
+            /*text-align: center;*/
+        /*}*/
+
+        input{
+            float:left;
+            /*margin-right:30px;*/
         }
 
     </style>
@@ -150,27 +155,52 @@
 
 
                             <div class="col-md-4">
-                                <form  class="well form-horizontal" id="pointsForm" action="#" method="post"   >
+                                <form  class="form-horizontal" id="pointsForm" action="#" method="post"   >
                                     <!--form class="form" action="#" method="post"-->
-
                                     <div class="form-group">
-                                        <label for="quantity"> Πακέτο 1 (260 πόντοι - 50€)</label>
+                                        <!--<label for="quantity"> Πακέτο 1 (260 πόντοι - 50€)</label>-->
                                         <!--<div class="col-sm-8">-->
-                                        <input type="number" value="0" id="quantity" min="0" required="" oninput="calculate()"><br>
+                                        <label for = "quantity" >
+                                            <input type="radio"  id="quantity" class="radios"  onchange="calculate()"> &nbsp;&nbsp;&nbsp; Πακέτο 1
+                                        </label>
+                                        <label> 260 πόντοι - 50€</label>
+                                        <label> Κέρδος: 10 πόντοι </label>
                                         <!--</div>-->
                                     </div>
                                     <div class="form-group">
-                                        <label for="quantity2"> Πακέτο 2 (530 πόντοι - 100€)</label>
                                         <!--<div class="col-sm-8">-->
-                                        <input type="number" value="0" id="quantity2" min="0" required="" oninput="calculate()"><br>
+                                        <label for = "quantity2" >
+                                            <input type="radio"  id="quantity2" class="radios"  onchange="calculate()"> &nbsp;&nbsp;&nbsp; Πακέτο 2
+                                        </label>
+                                        <label> 530 πόντοι - 100€</label>
+                                        <label> Κέρδος: 30 πόντοι </label>
                                         <!--</div>-->
                                     </div>
                                     <div class="form-group">
-                                        <label for="quantity3"> Πακέτο 3 (1070 πόντοι - 200€)</label>
-                                        <!--<div class="col-sm-8">-->
-                                        <input type="number" value="0" id="quantity3" min="0" required="" oninput="calculate()"><br>
-                                        <!--</div>-->
+                                        <label for = "quantity3" >
+                                            <input type="radio"  id="quantity3" class="radios"  onchange="calculate()"> &nbsp;&nbsp;&nbsp; Πακέτο 3
+                                        </label>
+                                        <label> 1070 πόντοι - 200€</label>
+                                        <label> Κέρδος: 70 πόντοι </label>
                                     </div>
+                                    <!--<div class="form-group">-->
+                                        <!--<label for="quantity"> Πακέτο 1 (260 πόντοι - 50€)</label>-->
+                                        <!--&lt;!&ndash;<div class="col-sm-8">&ndash;&gt;-->
+                                        <!--<input type="number" value="0" id="quantity" min="0" required="" oninput="calculate()"><br>-->
+                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                    <!--</div>-->
+                                    <!--<div class="form-group">-->
+                                        <!--<label for="quantity2"> Πακέτο 2 (530 πόντοι - 100€)</label>-->
+                                        <!--&lt;!&ndash;<div class="col-sm-8">&ndash;&gt;-->
+                                        <!--<input type="number" value="0" id="quantity2" min="0" required="" oninput="calculate()"><br>-->
+                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                    <!--</div>-->
+                                    <!--<div class="form-group">-->
+                                        <!--<label for="quantity3"> Πακέτο 3 (1070 πόντοι - 200€)</label>-->
+                                        <!--&lt;!&ndash;<div class="col-sm-8">&ndash;&gt;-->
+                                        <!--<input type="number" value="0" id="quantity3" min="0" required="" oninput="calculate()"><br>-->
+                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                    <!--</div>-->
 
                                     <div class="form-group">
                                         <label for="Points">Πληκτρολογήστε αριθμό πόντων</label>
@@ -234,7 +264,6 @@
                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                                                     </div>
                                                 </div>
-                                                <input id="totalcost" name="totalcost" type="number" hidden/>
                                                 <div class="form-group">
                                                     <label for="Email"> Email</label>
                                                     <div class="input-group">
@@ -327,6 +356,29 @@
     </div>
 
 </div>
+
+<script>
+    var allRadios = document.getElementsByClassName("radios")
+    var booRadio;
+    var x = 0;
+    for(x = 0; x < allRadios.length; x++){
+
+        allRadios[x].onclick = function(){
+
+            if(booRadio == this){
+                this.checked = false;
+
+                booRadio = null;
+                calculate();
+            }else{
+                booRadio = this;
+            }
+        };
+    }
+
+</script>
+
+
 
 <div th:replace="/fragments/foot :: foot"></div>
 
