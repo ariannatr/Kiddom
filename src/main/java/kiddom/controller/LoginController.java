@@ -251,7 +251,7 @@ public class LoginController {
     }
 
     @RequestMapping(value="/pointsBuy", method = RequestMethod.POST)
-    public ModelAndView pointsBuy(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("parent") @Valid ParentEntity parent, @RequestParam(value="totalcost") int total,RedirectAttributes redirectAttributes){
+    public ModelAndView pointsBuy(@ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("parent") @Valid ParentEntity parent, @RequestParam(value="totalcost") int total, @RequestParam(value="totalPoints") int totalpoints, RedirectAttributes redirectAttributes){
         System.out.println("zitise "+parent.getTotalPoints()+" ");
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
@@ -272,7 +272,7 @@ public class LoginController {
             LocalDate localDate = LocalDate.now();
             String currDate1 = dtf.format(localDate).toString();
 
-           ParentReportsEntity parentReport= new ParentReportsEntity(currDate1, total, parenton.getTotalPoints(), parenton);
+           ParentReportsEntity parentReport= new ParentReportsEntity(currDate1, total, totalpoints, parenton);
            parentReportsService.saveParentReport(parentReport);
 
             System.out.println("Tha agorasw "+parent.getTotalPoints());
