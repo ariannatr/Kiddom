@@ -150,8 +150,8 @@ public class LoginController {
             modelAndView.addObject("uname", authentication.getName());
             ParentPK parentPk = new ParentPK(authentication.getName());
             ParentEntity useron = userService.findParent(parentPk);
-            modelAndView.addObject("parent", parentPk.getUser());
-            modelAndView.addObject("user",useron);
+            modelAndView.addObject("parent", useron);
+            modelAndView.addObject("user", parentPk.getUser());
             modelAndView.addObject("total_points",useron.getTotalPoints());
             modelAndView.addObject("restr_points",useron.getRestrPoints());
             modelAndView.addObject("avail_points",useron.getAvailPoints());

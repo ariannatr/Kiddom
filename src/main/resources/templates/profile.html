@@ -74,8 +74,9 @@ Licence URI: http://www.os-templates.com/template-terms
                         <div class="panel-body inf-content">
                             <div class="row">
                                 <div class="col-md-3 col-lg-3 " style='width: 180px' align="center">
-                                    <div th:if="${(parent.photo!= null)}">
-                                    <img alt="User Pic"  th:src ="${parent.photo}" class="img-circle img-responsive">
+                                    <!--<div th:if="${(parent.photo!= null)}">-->
+                                        <!--<p>KALISPERA</p>-->
+                                        <!--img alt="User Pic"  th:src ="${parent.photo}" class="img-circle img-responsive"-->
                                     </div>
                                 </div>
                                 <h3 style="text-transform: capitalize; text-align: left;"> Στοιχεία Χρήστη</h3>
@@ -92,7 +93,7 @@ Licence URI: http://www.os-templates.com/template-terms
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    <span th:text="${user.name}"></span>
+                                                    <span th:text="${parent.name}"></span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -103,7 +104,7 @@ Licence URI: http://www.os-templates.com/template-terms
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    <span th:text="${user.surname}"></span>
+                                                    <span th:text="${parent.surname}"></span>
                                                 </td>
                                             </tr>
 
@@ -115,7 +116,7 @@ Licence URI: http://www.os-templates.com/template-terms
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    <span th:text="${parent.username}"></span>
+                                                    <span th:text="${user.username}"></span>
                                                 </td>
                                             </tr>
 
@@ -128,7 +129,7 @@ Licence URI: http://www.os-templates.com/template-terms
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    <span th:text="${user.email}"></span>
+                                                    <span th:text="${parent.email}"></span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -139,7 +140,7 @@ Licence URI: http://www.os-templates.com/template-terms
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    <span th:text="${user.telephone}"></span>
+                                                    <span th:text="${parent.telephone}"></span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -150,7 +151,7 @@ Licence URI: http://www.os-templates.com/template-terms
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    <span th:text="${user.area}"></span>
+                                                    <span th:text="${parent.area}"></span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -161,7 +162,7 @@ Licence URI: http://www.os-templates.com/template-terms
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    <span th:text="${user.town}"></span>
+                                                    <span th:text="${parent.town}"></span>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -171,7 +172,7 @@ Licence URI: http://www.os-templates.com/template-terms
                             </div>
                         </div>
                         <div style='text-align: center'>
-                            <button class="btn btn-default"  onclick="openCity(event, 'change_form')"> ΑΛΛΑΓΗ </button>
+                            <button class="btn btn-default"  onclick="openCity(event, 'change_form')"> Αλλαγή</button>
                         </div>
 
 
@@ -187,38 +188,38 @@ Licence URI: http://www.os-templates.com/template-terms
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="name">Όνομα:</label>
                             <div class="col-sm-10">
-                                <input type="name" class="form-control" id="name" th:placeholder="${user.name}" name="name">
+                                <input type="name" class="form-control" id="name" th:placeholder="${parent.name}" name="name">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="surname">Επώνυμο:</label>
                             <div class="col-sm-10">
-                                <input type="name" class="form-control" id="surname" th:placeholder="${user.surname}" name="surname">
+                                <input type="name" class="form-control" id="surname" th:placeholder="${parent.surname}" name="surname">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="email">Email:</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="email" th:placeholder="${user.email}" name="email">
+                                <input type="email" class="form-control" id="email" th:placeholder="${parent.email}" name="email">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="area">Περιοχή:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="area" th:placeholder="${user.area}" name="area">
+                                <input type="text" class="form-control" id="area" th:placeholder="${parent.area}" name="area">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="area">Πόλη:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="town" th:placeholder="${user.town}" name="town">
+                                <input type="text" class="form-control" id="town" th:placeholder="${parent.town}" name="town">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="telephone">Τηλέφωνο:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="telephone" th:placeholder="${user.telephone}" name="telephone">
+                                <input type="text" class="form-control" id="telephone" th:placeholder="${parent.telephone}" name="telephone">
                             </div>
                         </div>
                         <div class="form-group">
@@ -255,21 +256,19 @@ Licence URI: http://www.os-templates.com/template-terms
                             <tr>
 
                                 <th > Πληρωθέντες πόντοι </th>
-                                <th> Δεσμευμένοι πόντοι </th>
                                 <th> Διαθέσιμοι ποντοι </th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td class="text-primary"> <a th:text="${total_points}"></a></td>
-                                <td class="text-primary"> <a th:text="${restr_points}"></a></td>
                                 <td class="text-primary"> <a th:text="${avail_points}"></a></td>
                             </tr>
                             </tbody>
                         </table>
                         <div style='text-align: center'>
                             <a th:href="buypoints">
-                                <button class="btn btn-default"  onclick="openCity(event, 'change_form')"> ΑΓΟΡΑ ΠΟΝΤΩΝ </button>
+                                <button class="btn btn-default"  onclick="openCity(event, 'change_form')"> Αγορά πόντων</button>
                             </a>
                         </div>
                     </div>

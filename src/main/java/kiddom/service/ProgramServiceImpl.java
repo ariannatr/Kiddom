@@ -56,12 +56,12 @@ public class ProgramServiceImpl implements ProgramService {
             }
         }
         if (toRemove != null) {
+            int slots = reservation.getSlots();
+            program.setAvailability(program.getAvailability() + slots);
             res.remove(toRemove);
         }
         parent.setReservations(res);
         parentRepository.saveAndFlush(parent);
-        int slots = reservation.getSlots();
-        program.setAvailability(program.getAvailability() + slots);
         programRepository.save(program);
     }
 

@@ -137,10 +137,11 @@ public class   ActivityController {
         System.out.println("Provider pk " + providerPK.getUser().getUsername());
         ProviderEntity provider = userService.findProvider(providerPK);
         ProgramEntity slot = reservation.getTimeslot_id();
+        System.out.println("Reservation " + reservation.getReservation_id());
         programService.cancelReservation(provider, parentLocal, reservation, slot);
         modelAndView.addObject("parent", parentLocal);
         modelAndView.addObject("user", userS);
-        modelAndView.setViewName("profile");
+        modelAndView.setViewName("/profile");
         return modelAndView;
     }
 
