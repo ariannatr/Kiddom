@@ -8,12 +8,17 @@
 	<link th:href="@{/css/register_new.css}" rel="stylesheet" type="text/css" media="all">
 	<script th:src="@{/scripts/register_new.js}"></script>
 </head>
+<style>
+	#loginForm{
+		background-color: rgba(250, 235, 215, 0.17);
+	}
+</style>
 
 <body id="top">
 <div th:replace="/fragments/navbar :: navbar('register_prov')"></div>
 
 
-<div class="wrapper row3" style="background-color:#b7c1ae" >
+<div class="wrapper row3" >
 	<main class="mainbodyHoc hoc container clear" >
 		<div th:if ="${(success != null) and (success == 'true')}">
 			<div class="alert alert-success" style="text-align: center;"> Η εγγραφή σας ολοκληρώθηκε! <br>  <a  th:href="@{/index}">Πίσω στην Αρχική</a></div>

@@ -38,6 +38,9 @@
             font-size: inherit;
             vertical-align:middle;
         }
+        #loginForm{
+            background-color: rgba(250, 235, 215, 0.17);
+        }
     </style>
 </head>
 
@@ -46,7 +49,7 @@
 <div th:replace="/fragments/navbar :: navbar('register')"></div>
 
 
-<div class="wrapper row3" style="background-color:#b7c1ae" >
+<div class="wrapper row3" >
 
     <main class="mainbodyHoc hoc container clear" >
         <div th:if ="${(success != null) and (success == 'true')}">

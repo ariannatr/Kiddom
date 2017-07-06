@@ -64,18 +64,6 @@
             animation-name: animatetop;
             animation-duration: 0.4s
         }
-
-        /* Add Animation */
-        /*@-webkit-keyframes animatetop {*/
-        /*from {top:-300px; opacity:0}*/
-        /*to {top:0; opacity:1}*/
-        /*}*/
-
-        /*@keyframes animatetop {*/
-        /*from {top:-300px; opacity:0}*/
-        /*to {top:0; opacity:1}*/
-        /*}*/
-
         /* The Close Button */
         .close {
             color: grey;
@@ -101,16 +89,18 @@
             color: black;
         }
 
-        /*.form-group input{*/
-            /*margin:auto*/
-        /*}*/
-        /*.form-group{*/
-            /*text-align: center;*/
-        /*}*/
 
         input{
             float:left;
             /*margin-right:30px;*/
+        }
+
+        .form-group{
+            text-align: inherit;
+            background-color: rgba(250, 235, 215, 0.39);
+            padding: 20px;
+            width: 100%;
+            margin: 30px;
         }
 
     </style>
@@ -132,7 +122,7 @@
     </script>
 </div>
 
-<div class="wrapper row3" style="background-color:#ccc" >
+<div class="wrapper row3" >
     <main class="mainbodyHoc hoc container clear" >
         <div id="pageintro" class="hoc clear" style="padding:1% 0 1% 0 ">
             <div id="container"  >
@@ -148,13 +138,18 @@
 
 
                     <div class="row setup-content" id="step-1">
-
                         <div class="col-md-12">
                             <h1 align="center" style="font-weight: bold; color: lightslategrey;">Βημα 1 :Επιλέξτε πακέτο ή πληκτρολογείστε τον επιθυμητό αριθμό πόντων</h1>
                             <br/>
 
 
                             <div class="col-md-4">
+
+                                <div class="form-group">
+                                    <label for="Points">Επιλέξτε εσείς πόσους πόντους θέλετε! Με κάθε 1 ευρώ αγοράζεται 5 πόντους</label>
+                                    <input type="number" min="0" value="0" name="Points" id="quantity4" min="0"  placeholder="Aριθμός πόντων" required="" oninput="calculate()">
+                                </div>
+
                                 <form  class="form-horizontal" id="pointsForm" action="#" method="post"   >
                                     <!--form class="form" action="#" method="post"-->
                                     <div class="form-group">
@@ -182,29 +177,6 @@
                                         </label>
                                         <label> 1070 πόντοι - 200€</label>
                                         <label> Κέρδος: 70 πόντοι </label>
-                                    </div>
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="quantity"> Πακέτο 1 (260 πόντοι - 50€)</label>-->
-                                        <!--&lt;!&ndash;<div class="col-sm-8">&ndash;&gt;-->
-                                        <!--<input type="number" value="0" id="quantity" min="0" required="" oninput="calculate()"><br>-->
-                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="quantity2"> Πακέτο 2 (530 πόντοι - 100€)</label>-->
-                                        <!--&lt;!&ndash;<div class="col-sm-8">&ndash;&gt;-->
-                                        <!--<input type="number" value="0" id="quantity2" min="0" required="" oninput="calculate()"><br>-->
-                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="quantity3"> Πακέτο 3 (1070 πόντοι - 200€)</label>-->
-                                        <!--&lt;!&ndash;<div class="col-sm-8">&ndash;&gt;-->
-                                        <!--<input type="number" value="0" id="quantity3" min="0" required="" oninput="calculate()"><br>-->
-                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                                    <!--</div>-->
-
-                                    <div class="form-group">
-                                        <label for="Points">Πληκτρολογήστε αριθμό πόντων</label>
-                                        <input type="text" value="0" name="Points" id="quantity4" min="0"  placeholder="Aριθμός πόντων" required="" oninput="calculate()">
                                     </div>
                                 </form>
                             </div>

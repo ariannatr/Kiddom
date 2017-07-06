@@ -271,7 +271,7 @@ td{border-width:0 1px;}
 
 /* Colours
 --------------------------------------------------------------------------------------------------------------- */
-body{color:#7F7F7F; background-color:#141414;}
+body{color:#7F7F7F; background-image: url(https://sandbergwallpaper.com/wp-content/uploads/2014/09/577-31_image2-300x300.jpg);}
 a{color:#cc834f;}
 a:active, a:focus{background:transparent;}/* IE10 + 11 Bugfix - prevents grey background */
 hr, .borderedbox{border-color:#D7D7D7;}
@@ -288,10 +288,10 @@ input:focus, textarea:focus, *:required:focus{border-color:#cc834f;}
 .row0, .row0 a{color:#CBCBCB;}
 .row1, .row1 a{}
 .row2{color:#474747; background-color:#F7F7F7;}
-.row3{color:#474747; background-color:#f3f3f5;}
+.row3{color:#474747; background-image: url(https://sandbergwallpaper.com/wp-content/uploads/2014/09/577-31_image2-300x300.jpg);}
 .row4{color:#CBCBCB; background-color:#252525;}
 .row5, .row5 a{color:#7F7F7F; background-color:#141414;}
-
+.row3{min-height:500px!important}
 .coloured{color:#FFFFFF; background:linear-gradient(to top,#B7135C,#cc834f);}
 .coloured .btn{color:inherit; background-color:transparent; border-color:inherit;}
 .coloured .btn:hover{color:#cc834f; background-color:#FFFFFF;} 

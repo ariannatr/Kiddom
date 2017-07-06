@@ -12,13 +12,6 @@ Primary style
 *::after, *::before {
   content: '';
 }
-
-body {
-  font-size: 100%;
-  /*//font-family: "Open Sans", sans-serif;*/
-  color: #4e5359;
-  background-color: #f3f3f5;
-}
 body::after {
   /* overlay layer visible on small devices when the right panel slides in */
   position: fixed;
@@ -343,7 +336,7 @@ Main components
   font-size: 12px;
   font-size: large;
   font-weight: 700;
-  color: rgba(187, 187, 199, 0.71);
+
 }
 .no-js .cd-faq-group {
   display: block;
