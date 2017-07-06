@@ -148,13 +148,10 @@ public class LoginController {
         System.out.println("Authentication name is" + authentication.getName());
         if (!authentication.getName().equals("anonymousUser")) {
             modelAndView.addObject("uname", authentication.getName());
-            System.out.println("username " + authentication.getName());
             ParentPK parentPk = new ParentPK(authentication.getName());
-            System.out.println("username in PK is :" + parentPk.getUser().getUsername());
             ParentEntity useron = userService.findParent(parentPk);
             modelAndView.addObject("parent", parentPk.getUser());
             modelAndView.addObject("user",useron);
-            System.out.println("Avail points are " + useron.getAvailPoints());
             modelAndView.addObject("total_points",useron.getTotalPoints());
             modelAndView.addObject("restr_points",useron.getRestrPoints());
             modelAndView.addObject("avail_points",useron.getAvailPoints());

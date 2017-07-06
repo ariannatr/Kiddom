@@ -70,12 +70,14 @@ Licence URI: http://www.os-templates.com/template-terms
             <div class="content three_quarter">
 
                 <div id="user_elements"  class="tabcontent">
-
-
                     <div class="container2">
                         <div class="panel-body inf-content">
                             <div class="row">
-                                <div class="col-md-3 col-lg-3 " style='width: 180px' align="center"> <img alt="User Pic" th:src ="${user.photo}" class="img-circle img-responsive"> </div>
+                                <div class="col-md-3 col-lg-3 " style='width: 180px' align="center">
+                                    <div th:if="${(parent.photo!= null)}">
+                                    <img alt="User Pic"  th:src ="${parent.photo}" class="img-circle img-responsive">
+                                    </div>
+                                </div>
                                 <h3 style="text-transform: capitalize; text-align: left;"> Στοιχεία Χρήστη</h3>
                                 <!--</br>-->
                                 <div class=" col-md-9 col-lg-9 ">

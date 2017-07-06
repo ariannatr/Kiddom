@@ -138,6 +138,7 @@ public class   ActivityController {
         ProviderEntity provider = userService.findProvider(providerPK);
         ProgramEntity slot = reservation.getTimeslot_id();
         programService.cancelReservation(provider, parentLocal, reservation, slot);
+        modelAndView.addObject("parent", parentLocal);
         modelAndView.addObject("user", userS);
         modelAndView.setViewName("profile");
         return modelAndView;
