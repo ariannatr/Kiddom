@@ -21,6 +21,7 @@ import java.util.List;
  */
 @Repository("activityRepository")
 public interface ActivityRepository extends PagingAndSortingRepository<SingleEventEntity, Long> {
+    Page<SingleEventEntity> findSingleEventEntitiesById(List<Integer> list ,Pageable pageable);
     SingleEventEntity findSingleEventById(Integer Id);
     //Page<SingleEventEntity> findAllByApproved(Integer approved, Pageable pageable);
   //  Page<SingleEventEntity> findAllEvents(Pageable pageable);

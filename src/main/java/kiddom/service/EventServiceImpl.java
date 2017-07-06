@@ -2,6 +2,7 @@ package kiddom.service;
 
 import kiddom.model.*;
 import kiddom.repository.*;
+import org.elasticsearch.client.RestClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -49,6 +50,13 @@ public class EventServiceImpl implements EventService {
     public SingleEventEntity findSingleEvent(SingleEventEntity singleEventEntity) {
         return activityRepository.findSingleEventById(1/*singleEventEntity.getId()*/);
     }
+
+    @Override
+    @Transactional
+    public Page<SingleEventEntity> findAllByID(List<Integer> list,Pageable pageable){
+        return activityRepository.findSingleEventEntitiesById(list,pageable);
+    }
+
 
     @Override
     public void addComment(ParentEntity parentEntity, CommentsEntity commentsEntity, SingleEventEntity singleEventEntity)
@@ -108,6 +116,18 @@ public class EventServiceImpl implements EventService {
         event.setProgram(program);
         activityRepository.save(event);
         System.out.println("Done.");
+
+        Elastic elastic = new Elastic();
+        RestClient client = elastic.getRestClient();
+        elastic.create(client, event.getId().toString(), event.getName(), event.getDate() ,event.getDescription(), event.getCategory(), event.getSub1(),
+                event.getSub2(), event.getSub3(), event.getTown(), event.getArea(), event.getAddress(), event.getNumber(),
+                Integer.toString(event.getPostcode()),event.getLatitude(),event.getLongitude());
+        try {
+            client.close();
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

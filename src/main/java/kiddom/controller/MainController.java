@@ -85,7 +85,7 @@ public class MainController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/freetext_form", method = RequestMethod.POST)
+  /*  @RequestMapping(value="/freetext_form", method = RequestMethod.POST)
     public ModelAndView freetext_form(@ModelAttribute("user") @Valid UserEntity user){
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
@@ -97,7 +97,7 @@ public class MainController {
         }
         modelAndView.setViewName("/error");
         return modelAndView;
-    }
+    }*/
 
   /*  @RequestMapping(value="/search", method = RequestMethod.POST)
     public ModelAndView search(@ModelAttribute("user") @Valid UserEntity user){

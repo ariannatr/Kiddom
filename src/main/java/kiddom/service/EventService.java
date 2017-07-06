@@ -4,6 +4,7 @@ import kiddom.controller.Views;
 import kiddom.model.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -16,6 +17,7 @@ import java.util.Set;
 @Service("eventService")
 public interface EventService {
    // public Set<CommentsEntity> findAllCommentsByEvent(Integer eventID_);
+    public Page<SingleEventEntity> findAllByID(List<Integer> list,Pageable pageable);
     public void addComment(ParentEntity parentEntity,CommentsEntity commentsEntity,SingleEventEntity singleEventEntity);
     public Set<ProgramEntity> findProgram(int eventID);
     public SingleEventEntity findSingleEvent(SingleEventEntity singleEventEntity);

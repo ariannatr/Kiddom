@@ -31,7 +31,7 @@ import java.util.Set;
  * Created by Arianna on 6/6/2017.
  */
 @Controller
-public class ActivityController {
+public class   ActivityController {
 
     public class ShowComment
     {

@@ -4,6 +4,7 @@ import kiddom.authentication.IAuthenticationFacade;
 import kiddom.model.*;
 import kiddom.service.*;
 import org.apache.catalina.User;
+import org.elasticsearch.client.RestClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -249,7 +250,8 @@ public class ShowController {
         }
         else if(date.replaceAll(" ","").equals("") && !town.replaceAll(" ","").equals("")  && places==null)
         {
-            events= eventService.findByTownOrArea(town,town,new PageRequest(evalPage, evalPageSize));
+            events= eventService.findByTownOrArea(town,town,new PageRequest(evalPage, evalPageSize));//px auto paei kai psaxnei s oli ti vasi mas den dimiourgei kapoia eggraffi
+            //wrea opote kai gw edw tha kanw kati san elastic.search() kai tha s t gyrnaei ston typo p einai t events
             pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
         }
         System.out.println("vrika "+events.getTotalElements());
@@ -269,7 +271,8 @@ public class ShowController {
 
     @PostMapping("/search2")
     public ModelAndView freetext(@ModelAttribute("user") @Valid UserEntity user,@RequestParam("pageSize") Optional<Integer> pageSize,
-                                   @RequestParam("page") Optional<Integer> page,@RequestParam(value="text",required = false) String text) {
+                                 @RequestParam("page") Optional<Integer> page,@RequestParam(value="text",required = false) String text) {
+        System.out.println("bika edw");
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is"+authentication.getName());
@@ -287,12 +290,25 @@ public class ShowController {
         // prevent exception), return initial size. Otherwise, return value of
         // param. decreased by 1.
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
-       // System.out.println("vrika "+events.getTotalElements());
-        modelAndView.addObject("url", "search");
-        //modelAndView.addObject("items", events);
+        Page<SingleEventEntity> events=null;
+        Pager pager=null;
+        Elastic elastic = new Elastic();
+        RestClient client = elastic.getRestClient();
+        List<Integer> ints= elastic.search(client, text);
+        events= eventService.findAllByID(ints,new PageRequest(evalPage, evalPageSize));//px auto paei kai psaxnei s oli ti vasi mas den dimiourgei kapoia eggraffi
+        //wrea opote kai gw edw tha kanw kati san elastic.search() kai tha s t gyrnaei ston typo p einai t events
+        pager= new Pager(events.getTotalPages(), events.getNumber(), BUTTONS_TO_SHOW);
+
+        // System.out.println("vrika "+events.getTotalElements());
+        modelAndView.addObject("url", "/search2");
+        modelAndView.addObject("text", text);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pageSizes", PAGE_SIZES);
-        //modelAndView.addObject("pager", pager);
+        if(events.getTotalElements()>=0){
+            modelAndView.addObject("items", events);
+            modelAndView.addObject("pager", pager);
+        }
+        //
         modelAndView.setViewName("/search");
         return modelAndView;
     }
