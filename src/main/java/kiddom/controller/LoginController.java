@@ -368,7 +368,9 @@ public class LoginController {
                         modelAndView.addObject("eventsStatus", 0);
                     }
                     //break;
+                    //Reservations
                 }
+
                 modelAndView.addObject("eventsStatus", 1);
                 if(pastEvents.size()>0)
                     modelAndView.addObject("pastEvents", pastEvents);
@@ -383,6 +385,7 @@ public class LoginController {
                 System.out.println("Without events");
             }
         }
+
         modelAndView.setViewName("/profileProvider");
         return modelAndView;
     }

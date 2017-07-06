@@ -39,6 +39,8 @@ public class ActivityServiceImpl implements ActivityService {
         System.out.println("-----------ME KALESATE");
         for (ReservationsEntity res : allReservations) {
             System.out.println(res);
+            if (res.getReservation_id() == eventID)
+                myReservations.add(res);
         }
         return myReservations;
     }

@@ -541,6 +541,30 @@ https://bootsnipp.com/snippets/featured/ui-comments
             <div class="page-header">
                 <h3 class="reviews" style="text-transform: capitalize; font-size: 16px; align-content: center;">&nbsp;&nbsp;&nbsp; Διαχείριση Κρατήσεων</h3>
             </div>
+
+            <div th:if="${(hasReservations == 0)}">
+                <div class="form-group">
+                    <div class=" col-sm-offset-2 col-sm-1">
+                        <h3 style="alignment: left;" >Δεν υπάρχουν κρατήσεις για αυτή την εκδήλωση</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div th:if="${(hasReservations == 1)}">
+                <div class="form-group">
+
+                    <article style="background-color:white;" th:each="res : ${reservations}">
+                        <div class="txtwrap">
+                            <span style="font-size: 14px;  text-align: center;" th:text="${res.reservation_id}">Κράτηση: </span>
+                            <span style="font-size: 14px;  text-align: center;" th:text="${res.slots}">Αριθμός θέσεων: </span>
+                            <span style="font-size: 14px;  text-align: center;" th:text="${res.parent.pk.user.username}">Από τον: </span>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+
+
         </div>
         <div style="clear: both;"></div>
     </div>
@@ -554,25 +578,22 @@ https://bootsnipp.com/snippets/featured/ui-comments
             <div th:if="${(hasComments == 0)}">
                 <div class="form-group">
                     <div class=" col-sm-offset-2 col-sm-1">
-                        <h3 style="alignment: left;" >Δεν υπάρχουν σχόλια και αξιολογήσεις για αυτή την εκδήλωση</h3>
+                        <h6 style="alignment: left;" >Δεν υπάρχουν σχόλια και αξιολογήσεις για αυτή την εκδήλωση</h6>
                     </div>
                 </div>
             </div>
 
             <div th:if="${(hasComments == 1)}">
                 <div class="form-group">
-                    <div class=" col-sm-offset-2 col-sm-1">
-
-                        <article style="background-color:white;" th:each="commentP : ${comments}" class="one_third">
-                            <div class="txtwrap">
-                                <h6 style="font-size: 14px;  text-align: center;" th:text="${commentP.comment}">Σχόλιο: </h6>
-                                <br/>
-                                <h6 style="font-size: 14px;  text-align: center;" th:text="${commentP.rating}">Βαθμολογία: </h6>
-                                <br/>
-                                <h6 style="font-size: 14px;  text-align: center;" th:text="${commentP.parent_username}">Από τον: </h6>
-                            </div>
-                        </article>
-                    </div>
+                    <article style="background-color:white;" th:each="com : ${comments}">
+                        <div class="txtwrap">
+                            <h6 style="font-size: 14px;  text-align: center;" th:text="${com.comment}">Σχόλιο: </h6>
+                            <br/>
+                            <h6 style="font-size: 14px;  text-align: center;" th:text="${com.rating}">Βαθμολογία: </h6>
+                            <br/>
+                            <h6 style="font-size: 14px;  text-align: center;" th:text="${com.parent_username}">Από τον: </h6>
+                        </div>
+                    </article>
                 </div>
             </div>
 

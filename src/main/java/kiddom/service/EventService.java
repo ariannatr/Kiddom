@@ -24,7 +24,10 @@ public interface EventService {
     //public Page<SingleEventEntity> getAllEvents(Pageable pageable);
     public void saveActivity(UserEntity user, ProviderEntity provider, SingleEventEntity event, HashSet<ProgramEntity> program,String[] photos);
     public void updateSingleEvent(ProviderEntity provider, SingleEventEntity event, SingleEventEntity eventEdit);
+
     public void cancelSingleEvent(ProviderEntity provider, SingleEventEntity eventEdit);
+    public void cancelSingleEvent(ProviderEntity provider, SingleEventEntity eventEdit, List<ReservationsEntity> eventReservations);
+
     public Page<SingleEventEntity> findAllPageable(Pageable pageable);
     public Page<SingleEventEntity> findByTownOrAreaAndDate(String Town,String Area,String Date,Pageable pageable);
     public Page<SingleEventEntity> findByDate(String Date,Pageable pageable);

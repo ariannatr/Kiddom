@@ -61,7 +61,20 @@ public class PActivityController {
         System.out.println("Diavasa " + eventID);
         SingleEventEntity event = eventService.findSingleEventById(eventID);
 
-        activityService.getReservationsByEventId(event);
+        List<ReservationsEntity> eventReservations = activityService.getReservationsByEventId(event);
+        for (ReservationsEntity res : eventReservations) {
+            System.out.println("ID " + res.getReservation_id());
+        }
+        if (eventReservations.size() == 0) {
+            System.out.println("DEN EXEI KRATISEIS");
+            modelAndView.addObject("hasReservations", 0);
+        }
+        else {
+            System.out.println("EXEI KRATISEIS");
+            System.out.println(eventReservations.size());
+            modelAndView.addObject("hasReservations", 1);
+            modelAndView.addObject("reservations", eventReservations);
+        }
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate localDate = LocalDate.now();
@@ -150,7 +163,7 @@ public class PActivityController {
         //    modelAndView.addObject("eventStatus", 0);
         //}
 
-        if (event.getProgram() == null) {
+        if (event.getProgram().isEmpty()) {
             System.out.println("TA PIAME");
             modelAndView.addObject("hasProgram", 0);
             modelAndView.addObject("eventStatus", 0);
@@ -161,7 +174,7 @@ public class PActivityController {
             modelAndView.addObject("program", event.getProgram());
         }
 
-        if (event.getComment_parent() != null) {
+        if (!event.getComment_parent().isEmpty()) {
             modelAndView.addObject("hasComments", 1);
             modelAndView.addObject("comments", event.getComment_parent());
         }
@@ -201,19 +214,30 @@ public class PActivityController {
     }
 
     @RequestMapping(value="/event_cancelation/{eventID}", method = RequestMethod.POST)
-    public  ModelAndView event_cancelation(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("single_event") @Valid SingleEventEntity event, @PathVariable("eventID") String eventID) throws ParseException {
+    public  ModelAndView event_cancelation(@ModelAttribute("provider") @Valid ProviderEntity provider, @ModelAttribute("user") @Valid UserEntity user, @ModelAttribute("single_event") @Valid SingleEventEntity event, @PathVariable("eventID") int eventID) throws ParseException {
         System.out.println("Provider name: " + provider.getName());
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = authenticationFacade.getAuthentication();
         System.out.println("Authentication name is " + authentication.getName());
         if (!authentication.getName().equals("anonymousUser")) {
             modelAndView.addObject("uname", authentication.getName());
-            Integer eventID_ = Integer.parseInt(eventID);
-            SingleEventEntity eventEdit = eventService.findSingleEventById(eventID_);
-            System.out.println("Kanw update sto " + eventID_);
-            eventService.cancelSingleEvent(provider, eventEdit);
+            //Integer eventID_ = Integer.parseInt(eventID);
+            SingleEventEntity eventEdit = eventService.findSingleEventById(eventID);
+            System.out.println("Kanw update sto " + eventID);
+
+            ProviderPK providerPK = new ProviderPK(authentication.getName());
+            ProviderEntity prov = userService.findProvider(providerPK);
+
+            SingleEventEntity event_ = eventService.findSingleEventById(eventID);
+            List<ReservationsEntity> eventReservations = activityService.getReservationsByEventId(event_);
+            if (eventReservations.size() != 0) {
+                eventService.cancelSingleEvent(prov, eventEdit, eventReservations);
+            }
+            else {
+                eventService.cancelSingleEvent(prov, eventEdit);
+            }
             modelAndView.addObject("event", eventEdit);
-            modelAndView.addObject("provider", provider);
+            modelAndView.addObject("provider", prov);
             modelAndView.addObject("user", user);
         }
         modelAndView.setViewName("activityProvider");

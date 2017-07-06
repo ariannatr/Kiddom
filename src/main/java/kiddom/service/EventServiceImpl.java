@@ -82,29 +82,6 @@ public class EventServiceImpl implements EventService {
     @Override
     public void saveActivity(UserEntity user, ProviderEntity provider, SingleEventEntity event, HashSet<ProgramEntity> program,String[] photos)
     {
-        /*
-        String photos = null;
-        if (request.getParameter("image1") != null) {
-			photos += request.getParameter("image1");
-			photos += "\n";
-		}
-        if (request.getParameter("image2") != null) {
-			photos += request.getParameter("image2");
-			photos += "\n";
-		}
-        if (request.getParameter("image3") != null) {
-			photos += request.getParameter("image3");
-			photos += "\n";
-		}
-        if (request.getParameter("image4") != null) {
-			photos += request.getParameter("image4");
-			photos += "\n";
-		}
-        if (request.getParameter("image5") != null) {
-			photos += request.getParameter("image5");
-			photos += "\n";
-		}
-		event.setPhotos(photos);*/
         event.setProviders(provider);
         System.out.println("Event id is " + event.getId());
         System.out.println("Event by " + provider.getPk().getUser().getUsername());
@@ -137,7 +114,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public void cancelSingleEvent(ProviderEntity provider, SingleEventEntity eventEdit) {
         eventEdit.setCanceled(1);
-        Set<ProgramEntity> program =eventEdit.getProgram(); //new HashSet<ProgramEntity>(eventEdit.getProgram());
+        Set<ProgramEntity> program = eventEdit.getProgram(); //new HashSet<ProgramEntity>(eventEdit.getProgram());
         for (ProgramEntity p : program) {
             System.out.println("program event id " + p.getEvent().getId());
             p.setCanceled(1);
@@ -153,17 +130,24 @@ public class EventServiceImpl implements EventService {
        // activityRepository.save(eventEdit);
     }
 
-    /*@Override
-    public void cancelSlot(int slotID, SingleEventEntity eventEdit) {
+    @Override
+    public void cancelSingleEvent(ProviderEntity provider, SingleEventEntity eventEdit, List<ReservationsEntity> eventReservations) {
+        eventEdit.setCanceled(1);
         Set<ProgramEntity> program = eventEdit.getProgram();
         for (ProgramEntity p : program) {
-            if (p.getId() == slotID) {
-                p.setCanceled(1);
-                programRepository.save(p);
-                break;
-            }
+            System.out.println("program event id " + p.getEvent().getId());
+            p.setCanceled(1);
+            programRepository.save(p);
         }
-    }*/
+        for (ReservationsEntity r : eventReservations) {
+            ParentEntity parent = r.getParent();
+            parent.setAvailPoints(parent.getAvailPoints() + eventEdit.getPrice());
+            parentRepository.saveAndFlush(parent);
+        }
+        int providerPoints = (eventReservations.size())*eventEdit.getPrice();
+        provider.setOwedPoints(provider.getOwedPoints() - providerPoints);
+        providerRepository.save(provider);
+    }
 
     @Transactional
     @Override
