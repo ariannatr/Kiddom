@@ -1,5 +1,6 @@
 package kiddom.controller;
 
+import ch.qos.logback.core.boolex.EvaluationException;
 import kiddom.authentication.IAuthenticationFacade;
 import kiddom.model.*;
 import kiddom.service.*;
@@ -130,10 +131,14 @@ public class ActivityController {
         ParentPK parentPK = new ParentPK(authentication.getName());
         ParentEntity parentLocal = userService.findParent(parentPK);
         ReservationsEntity reservation = reservationService.getReservationsEntityById(slotID);
-        SingleEventEntity event = eventService.findSingleEventById(reservation.getTimeslot_id().getId());
-        ProviderEntity provider = userService.findProvider(new ProviderPK(event.getProviders().getPk().getUser().getUsername()));
+        SingleEventEntity event = eventService.findSingleEventById(reservation.getTimeslot_id().getEvent().getId());
+        System.out.println("Event is " + event.getId());
+        ProviderPK providerPK = new ProviderPK(event.getProviders().getPk().getUser().getUsername());
+        System.out.println("Provider pk " + providerPK.getUser().getUsername());
+        ProviderEntity provider = userService.findProvider(providerPK);
         ProgramEntity slot = reservation.getTimeslot_id();
         programService.cancelReservation(provider, parentLocal, reservation, slot);
+        modelAndView.addObject("user", userS);
         modelAndView.setViewName("profile");
         return modelAndView;
     }

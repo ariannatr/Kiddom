@@ -20,7 +20,7 @@ public class ReservationServiceImpl implements ReservationService {
     private ReservationRepository reservationRepository;
 
     @Override
-    public ReservationsEntity getReservationsEntityById(long id) {
+    public ReservationsEntity getReservationsEntityById(Integer id) {
         return reservationRepository.findOne(id);
     }
 }

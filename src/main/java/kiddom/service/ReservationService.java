@@ -11,6 +11,6 @@ import kiddom.model.ReservationsEntity;
  */
 
 @Service("reservationService")
-public interface ReservationService {
-    public ReservationsEntity getReservationsEntityById(long id);
+public interface ReservationService{
+    public ReservationsEntity getReservationsEntityById(Integer id);
 }

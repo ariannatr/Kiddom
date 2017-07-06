@@ -12,6 +12,6 @@ import java.util.List;
  */
 
 @Repository("reservationRepository")
-public interface ReservationRepository  extends JpaRepository<ReservationsEntity,Long>{
+public interface ReservationRepository  extends JpaRepository<ReservationsEntity,Integer>{
 
 }

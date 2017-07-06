@@ -47,10 +47,15 @@ public class ProgramServiceImpl implements ProgramService {
         providerRepository.save(provider);
         parent.setAvailPoints(parent.getAvailPoints() + moneyFromProv);
         Set<ReservationsEntity> res = parent.getReservations();
+        ReservationsEntity toRemove = null;
         for (ReservationsEntity r : res) {
             if (r.getReservation_id() == reservation.getReservation_id()) {
-                res.remove(r);
+                toRemove = r;
+                break;
             }
+        }
+        if (toRemove != null) {
+            res.remove(toRemove);
         }
         parent.setReservations(res);
         parentRepository.saveAndFlush(parent);
