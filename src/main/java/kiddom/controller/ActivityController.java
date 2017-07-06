@@ -57,6 +57,10 @@ public class   ActivityController {
     @Autowired
     private ProgramService programService;
 
+    @Qualifier("townService")
+    @Autowired
+    private TownsService townsService;
+
     @Autowired
     private ReservationService reservationService;
 
@@ -237,6 +241,10 @@ public class   ActivityController {
         modelAndView.addObject("is_approved", prov.getApproved());
         modelAndView.addObject("categories",categoryService.getCategoriesNames());
         modelAndView.addObject("subcategories",categoryService.getALLSubCategoryNamesByCategory());
+        System.out.println("\n\n\n\n"+townsService.GetAllTowns());
+        modelAndView.addObject("towns", townsService.GetAllTowns());
+        modelAndView.addObject("areas", townsService.GetAllAreasByCategory());
+
         modelAndView.setViewName("/activity_reg");
         return modelAndView;
     }

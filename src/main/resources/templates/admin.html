@@ -15,11 +15,11 @@
         <!--<div class="tab">-->
         <div class="tab">
             <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'parentsView')"  th:id="${((param.tab != null) and (param.tab[0] == 'parentsView')) ? 'my_active' : ''}">
-                <i class="fa fa-user" id="my_active" style="color:#cc834f "></i> Στοιχεια Χρήστη</button>
+                <i class="fa fa-user" id="my_active" style="color:#cc834f "></i> Στοιχεια Γονέων</button>
             <button type="button" class="tablinks list-group-item" onclick="openCity(event, 'providersView')" th:id="${((param.tab != null) and (param.tab[0] == 'providersView')) ? 'my_active' : ''}">
-                <i class="fa fa-university" style="color:#cc834f"></i> Πορτοφόλι</button>
+                <i class="fa fa-university" style="color:#cc834f"></i>Στοιχεία Παρόχων</button>
             <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'statistics')" th:id="${((param.tab != null)and (param.tab[0] == 'statistics')) ? 'my_active' : ''}">
-                <i class="fa fa-calendar-check-o" style="color:#cc834f"></i> Kρατήσεις<span class="badge"></span></button>
+                <i class="fa fa-calendar-check-o" style="color:#cc834f"></i> Κρατήσεις γονέα<span class="badge"></span></button>
         </div>
         <!--</div>-->
 
@@ -52,7 +52,7 @@
                 <td th:text="${parent.area}">Περιοχή</td>
                 <td th:text="${parent.telephone}">Τηλέφωνο</td>
                 <td th:text="${parent.availPoints}">Διαθέσιμοι Πόντοι</td>
-                <td th:text="${parent.totalPoints}">Ξοδεμένοι Πόντοι</td>
+                <td th:text="${parent.totalPoints}-${parent.availPoints}">Ξοδεμένοι Πόντοι</td>
                 <td>
                     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" th:attr="data-target='#'+${parent.pk.user.username}">Περισσότερα</button>
                 </td>
